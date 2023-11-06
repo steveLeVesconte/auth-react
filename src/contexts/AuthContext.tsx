@@ -8,12 +8,14 @@ interface IAuthProviderProps {
 
 const AuthContext = React.createContext({});
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useAuth():any {
     return useContext(AuthContext)
 }
 
 
 export function AuthProvider({ children }: IAuthProviderProps) :JSX.Element {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [currentUser, setCurrentUser] = useState<any>();
 
     function signup(email:string, password:string) {
