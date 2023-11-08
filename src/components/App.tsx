@@ -46,7 +46,11 @@ function App() {
     </Routes>
     </AuthProvider>
     </Router>
+    <div className='w-100 text-center mt-2'>
+                        ver 1.0.0
+                    </div>
     </div>
+
     </Container>
   )
   // const [count, setCount] = useState(0)
