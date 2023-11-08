@@ -63,6 +63,9 @@ console.log('got match', passwordRef.current?.value, emailRef.current?.value)
                     <div className='w-100 text-center mt-2'>
                         Already have an account? <Link to= "/login">Log In</Link>
                     </div>
+                    <div className='w-100 text-center mt-2'>
+                        ver 1.0.0
+                    </div>
 
         </>
     )
