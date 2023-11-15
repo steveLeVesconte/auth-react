@@ -1,12 +1,22 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { useContext } from 'react';
+import {PlayerContext} from '../contexts/PlayerContext';
 //import DashNavbar from './DashNavbar'
 
 export default function PrivateRoutes() {
-  const { currentUser } = useAuth()
+  const { currentUser } = useAuth();
+  const player=useContext(PlayerContext);
+  const loc=useLocation();
   console.log('in private: ', currentUser);
+  if(!currentUser){
 
-if(currentUser){
+    console.log('in private false: ', currentUser);
+    return   (<Navigate to="/login" />);
+
+  }
+
+if(player || loc.pathname!=="/player-profile"){
     console.log('in private true: ', currentUser);
 
 
@@ -17,10 +27,22 @@ if(currentUser){
         </>)
 
 }else{
-    console.log('in private false: ', currentUser);
-    return   (<Navigate to="/login" />);
+ 
+    console.log('in no profile: ', player, loc);
 
-}
+  //  if(loc.pathname!=="/player-profile"){
+    return   (<Navigate to="/player-profile" />);
+    }
+    // else
+    // {
+    //   return (
+    //     <>
+    //      {/*  <DashNavbar /> */}
+    //       <Outlet />
+    //     </>)
+    // }
+
+//}
 
 /*   return currentUser ? (
     <>

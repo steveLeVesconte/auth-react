@@ -15,13 +15,16 @@ const Login = () => {
 
     async function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
-
+console.log('in hanld submit');
         try {
             setError('');
             setLoading(true);
+            console.log('in hanld submit values: ',emailRef.current?.value, passwordRef.current?.value);
             await login(emailRef.current?.value, passwordRef.current?.value)
             navigate("/");
         } catch {
+            console.log('in hanld submit error!!!!!!!!!!!!!!!: ',emailRef.current?.value, passwordRef.current?.value);
+         
             setError('Failed to log in')
         }
         setLoading(false);

@@ -13,6 +13,8 @@ import { Container } from "react-bootstrap";
 import PrivateRoutes from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
+import PlayerProfile from "./PlayerProfile";
+import PlayerContextProvider from "../contexts/PlayerContext";
 
 function App() {
   return (
@@ -23,10 +25,13 @@ function App() {
     <div className="w-100" style={{ maxWidth: "400px" }}>
     <Router>
     <AuthProvider>
+      <PlayerContextProvider>
       <Routes>
       <Route element={<PrivateRoutes />}>
             <Route element={<Dashboard />} path="/" />
             <Route element={<UpdateProfile />} path="/update-profile" />
+            <Route element={<PlayerProfile />} path="/player-profile" />
+
 {/*             <Route path="/update-profile" element={<UpdateProfile />} />
             <Route path="projects" element={<Projects />} /> */}
           </Route>
@@ -44,6 +49,7 @@ function App() {
         
     </Container> */}
     </Routes>
+    </PlayerContextProvider>
     </AuthProvider>
     </Router>
     <div className='w-100 text-center mt-2'>

@@ -45,7 +45,10 @@ export function AuthProvider({ children }: IAuthProviderProps) :JSX.Element {
     useEffect(() => {
 
         const unsubscribe = auth.onAuthStateChanged((user) => {
+            console.log('setting currnt user: ',user);
             setCurrentUser(user);
+            console.log('setting currnt user uid: ',user?.uid);
+            
             setLoading(false);
         })
         return unsubscribe;// unsubscribe from onAuthStateChanged when unmounted
