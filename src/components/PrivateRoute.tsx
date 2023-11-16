@@ -16,8 +16,8 @@ export default function PrivateRoutes() {
 
   }
 
-if(player || loc.pathname!=="/player-profile"){
-    console.log('in private true: ', currentUser);
+if(player || loc.pathname=="/player-profile"){
+    console.log('has player or is player profile route: ', currentUser);
 
 
     return   (

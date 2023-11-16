@@ -15,6 +15,7 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import PlayerProfile from "./PlayerProfile";
 import PlayerContextProvider from "../contexts/PlayerContext";
+import CreateMatch from "./CreateMatch";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route element={<Dashboard />} path="/" />
             <Route element={<UpdateProfile />} path="/update-profile" />
             <Route element={<PlayerProfile />} path="/player-profile" />
+            <Route element={<CreateMatch />} path="/create-match" />
 
 {/*             <Route path="/update-profile" element={<UpdateProfile />} />
             <Route path="projects" element={<Projects />} /> */}
