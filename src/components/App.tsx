@@ -16,6 +16,8 @@ import UpdateProfile from "./UpdateProfile";
 import PlayerProfile from "./PlayerProfile";
 import PlayerContextProvider from "../contexts/PlayerContext";
 import CreateMatch from "./CreateMatch";
+import GoBoard from "./GoBoard";
+import MatchList from "./MatchList";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
             <Route element={<UpdateProfile />} path="/update-profile" />
             <Route element={<PlayerProfile />} path="/player-profile" />
             <Route element={<CreateMatch />} path="/create-match" />
+            <Route element={<MatchList />} path="/match-list" />
+            <Route element={<GoBoard />} path="/go-board" />
 
 {/*             <Route path="/update-profile" element={<UpdateProfile />} />
             <Route path="projects" element={<Projects />} /> */}

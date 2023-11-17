@@ -1,4 +1,4 @@
-import {addDoc, collection, doc, getDocs, orderBy, query, setDoc, where} from 'firebase/firestore';
+import {addDoc, and, collection, doc, getDocs, getFirestore, limit, or, orderBy, query, setDoc, where} from 'firebase/firestore';
 import {db} from './firebase';
 
 const PLAYER_COLLECTION='go-players';
@@ -15,6 +15,21 @@ export interface Player{
     status: string;
     uid: string;
     createDate: string;
+}
+
+
+export interface Match{
+    id: string
+    nextTurnPlayer: string;
+    playerBlackId:string; 
+    playerWhiteId:string; 
+    playerBlackName:string; 
+    playerWhiteName:string;
+    turnNumber:number;
+    status:string; 
+    createDate:string;
+    updateDate:string;
+
 }
 
 export interface Turn{
@@ -111,6 +126,90 @@ export async function getPlayer(uid:string):Promise<Player|null>{
     // }
     // return players;
 }
+
+
+
+export async function getLatestTurnForMatchId(matchId:string):Promise<Turn|null>{
+    console.log('turn querySnapshot matchId',matchId);
+    const turnQuery=query(collection(db,TURN_COLLECTION), where("matchId","==",matchId) , orderBy("createDate", "desc"),limit(1) );
+    const querySnapshot= await getDocs(turnQuery);
+
+   console.log('turn querySnapshot',querySnapshot);
+  // const player:Player=null as Player;
+    if(querySnapshot?.docs.length>0)
+    {
+
+        const turn:Turn = querySnapshot.docs[0].data() as Turn;
+       // turn.id=querySnapshot.docs[0].id;
+        //const player:Player = documentSnapshot.data() as Player;
+        return turn;
+   }
+   else return null;
+
+    // const players: Player[] = [];
+
+    // for(const documentSnapshot of querySnapshot.docs){
+    //         const player:Player = documentSnapshot.data() as Player;
+    //         console.log('player', player);
+    //         await players.push({
+    //             ...(player)
+    //         })
+
+    // }
+    // return players;
+}
+
+
+
+export async function getActiveMatchesForPlayerId(playerId:string):Promise<Match[]|null>{
+    console.log('getActiveMatchesForPlayerId - playerId in:', playerId);
+    //const matchQuery=query(collection(db,MATCH_COLLECTION), and( where("status","==","active") ,or( where("playerBlackId","==",playerId),where("playerWhitId","==",playerId))) , orderBy("dateCreated", "desc") );
+    const matchQuery=query(collection(db,MATCH_COLLECTION), and( where("status","==","active") ,or( where("playerBlackId","==",playerId),where("playerWhitId","==",playerId))) , orderBy("createDate", "desc") );
+    //const matchQuery=query(collection(db,MATCH_COLLECTION),where("playerBlackId","==",playerId)  );
+    const querySnapshot= await getDocs(matchQuery);
+
+   console.log('match list querySnapshot',querySnapshot);
+  // const player:Player=null as Player;
+
+
+  const matches: Match[] = [];
+
+  for(const documentSnapshot of querySnapshot.docs){
+          const match:Match = documentSnapshot.data() as Match;
+          match.id=documentSnapshot.id;
+          console.log('match in for each#######', match);
+          await matches.push({
+              ...(match)
+          })
+
+  }
+  return matches;
+
+//     if(querySnapshot?.docs.length>0)
+//     {
+
+//         const matches:Match[] = querySnapshot.docs.data() as Match[];
+//        // turn.id=querySnapshot.docs[0].id;
+//         //const player:Player = documentSnapshot.data() as Player;
+//         return turn;
+//    }
+//    else return null;
+
+    // const players: Player[] = [];
+
+    // for(const documentSnapshot of querySnapshot.docs){
+    //         const player:Player = documentSnapshot.data() as Player;
+    //         console.log('player', player);
+    //         await players.push({
+    //             ...(player)
+    //         })
+
+    // }
+    // return players;
+}
+
+
+
 
 export function addMatch(
     nextTurnPlayer: string, 
