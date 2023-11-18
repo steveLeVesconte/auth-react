@@ -4,7 +4,7 @@ import { useContext, useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { GameState, Player, Turn, addMatch, addTurn } from '../firestore';
-import PlayerSelectList from './PlayerSelectList';
+import PlayerSelectList from '../components/PlayerSelectList';
 import {PlayerContext} from '../contexts/PlayerContext';
 import { Alert, Button, Card, CardBody, FormControl, FormLabel, Select } from '@chakra-ui/react';
 

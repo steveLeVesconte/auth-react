@@ -54,12 +54,12 @@ console.log('in hanld submit');
 
                             </form>
                             <div className='w-100 text-center mt-2'>
-                        <Link to= "/forgot-password">Forgot Password?</Link>
+                        <Link to= "/auth/forgot-password">Forgot Password?</Link>
                     </div>
                         </CardBody>
                     </Card>
                     <div className='w-100 text-center mt-2'>
-                        Need to Sign Up?  <Link to= "/signup">Sign Up</Link>
+                        Need to Sign Up?  <Link to= "/auth/signup">Sign Up</Link>
                     </div>
 
         </>

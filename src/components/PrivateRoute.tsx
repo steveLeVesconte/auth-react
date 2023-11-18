@@ -12,7 +12,7 @@ export default function PrivateRoutes() {
   if(!currentUser){
 
     console.log('in private false: ', currentUser);
-    return   (<Navigate to="/login" />);
+    return   (<Navigate to="/auth/login" />);
 
   }
 

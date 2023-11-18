@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 //import { Alert, Button, Card} from 'react-bootstrap'
 import {useAuth} from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
-import PlayerList from './PlayerList';
+import PlayerList from '../components/PlayerList';
 import { PlayerContext } from '../contexts/PlayerContext';
 import { Alert, Button, Card, CardBody } from '@chakra-ui/react';
 
@@ -16,7 +16,7 @@ const navigate = useNavigate()
   setError('');
   try{
     await logout();
-    navigate("/login");
+    navigate("/auth/login");
   }catch{
     setError('failed to log out')
   }

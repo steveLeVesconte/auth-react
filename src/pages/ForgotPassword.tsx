@@ -50,12 +50,12 @@ const ForgotPassword = () => {
 
                             </form>
                             <div className='w-100 text-center mt-2'>
-                        <Link to= "/login">Login</Link>
+                        <Link to= "/auth/login">Login</Link>
                     </div>
                         </CardBody>
                     </Card>
                     <div className='w-100 text-center mt-2'>
-                        Need to Sign Up?  <Link to= "/signup">Sign Up</Link>
+                        Need to Sign Up?  <Link to= "/auth/signup">Sign Up</Link>
                     </div>
 
         </>
