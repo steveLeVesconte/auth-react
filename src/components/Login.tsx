@@ -1,8 +1,9 @@
 
 import { useRef, useState } from 'react'
-import { Form, Button, Card, Alert} from 'react-bootstrap';
+//import { Form, Button, Card, Alert} from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
+import { Alert, Button, Card, CardBody, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
 const Login = () => {
     const emailRef = useRef<HTMLInputElement>(null);
@@ -35,27 +36,27 @@ console.log('in hanld submit');
 
                     <Card>
 
-                        <Card.Body>
+                        <CardBody>
                             <h2 className='text-center mb-4'>Log In</h2>
                             <div>{currentUser?.email}</div>{/*  currentUser starts as undefined and is then set. */}
-                            {error && <Alert variant="danger"  >{error}</Alert>}
-                            <Form onSubmit={handleSubmit}>
-                                <Form.Group id="emial">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" ref={emailRef} required></Form.Control>
-                                </Form.Group>
-                                <Form.Group id="password">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" ref={passwordRef} required></Form.Control>
-                                </Form.Group>
+                            {error && <Alert status="error"  >{error}</Alert>}
+                            <form onSubmit={handleSubmit}>
+                                <FormControl id="emial">
+                                    <FormLabel>Email</FormLabel>
+                                    <Input type="email" ref={emailRef} required></Input>
+                                </FormControl>
+                                <FormControl id="password">
+                                    <FormLabel>Password</FormLabel>
+                                    <Input type="password" ref={passwordRef} required></Input>
+                                </FormControl>
 
                                 <Button disabled={loading} className='w-100 mt-4' type="submit">Log In</Button>
 
-                            </Form>
+                            </form>
                             <div className='w-100 text-center mt-2'>
                         <Link to= "/forgot-password">Forgot Password?</Link>
                     </div>
-                        </Card.Body>
+                        </CardBody>
                     </Card>
                     <div className='w-100 text-center mt-2'>
                         Need to Sign Up?  <Link to= "/signup">Sign Up</Link>

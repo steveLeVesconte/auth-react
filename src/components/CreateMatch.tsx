@@ -1,11 +1,12 @@
 
 import { useContext, useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from 'react-bootstrap';
+//import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { GameState, Player, Turn, addMatch, addTurn } from '../firestore';
 import PlayerSelectList from './PlayerSelectList';
 import {PlayerContext} from '../contexts/PlayerContext';
+import { Alert, Button, Card, CardBody, FormControl, FormLabel, Select } from '@chakra-ui/react';
 
        
 
@@ -177,37 +178,37 @@ console.log('in submit!!!!!!!!!!!!!!!!!!!!!')
 
                 <Card>
 
-                    <Card.Body>
+                    <CardBody>
                         <h2 className='text-center mb-4'>Create New Match</h2>
                         <div>{currentUser?.email}</div>{/*  currentUser starts as undefined and is then set. */}
-                        {error && <Alert variant="danger"  >{error}</Alert>}
-                        <Form onSubmit={handleSubmit} >
-                            {/* <Form.Group id="my-name">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" ref={myNameRef} required readOnly ></Form.Control>{/* //defaultValue={currentUser.email} */}
-                        {/*     </Form.Group> */}
+                        {error && <Alert status="error"  >{error}</Alert>}
+                        <form onSubmit={handleSubmit} >
+                            {/* <FormControl id="my-name">
+                                <FormLabel>Name</FormLabel>
+                                <Input type="text" ref={myNameRef} required readOnly ></Input>{/* //defaultValue={currentUser.email} */}
+                        {/*     </FormControl> */}
 
-       {/*                      <Form.Group id="my-id">
-                                <Form.Label>My Id</Form.Label>
-                                <Form.Control type="text" ref={myIdRef} readOnly  ></Form.Control>
-                            </Form.Group>  */}
+       {/*                      <FormControl id="my-id">
+                                <FormLabel>My Id</FormLabel>
+                                <Input type="text" ref={myIdRef} readOnly  ></Input>
+                            </FormControl>  */}
 
 
-                            <Form.Group id="myStoneColor">
-                                <Form.Label>My Stone Color</Form.Label>
-                                <Form.Select  ref={myStoneColorRef}  >
+                            <FormControl id="myStoneColor">
+                                <FormLabel>My Stone Color</FormLabel>
+                                <Select  ref={myStoneColorRef}  >
                                 <option value="b" >Black</option>
                                 <option value="w" >White</option>
-                                  </Form.Select>
-                            </Form.Group>
+                                  </Select>
+                            </FormControl>
                 
 
 
                             <Button disabled={loading} className='w-100 mt-4' type="submit">Save</Button>
 
-                        </Form>
+                        </form>
 <PlayerSelectList selectPlayer={onSelectPlayer}></PlayerSelectList>
-                    </Card.Body>
+                    </CardBody>
                 </Card>
                 <div className='w-100 text-center mt-2'>
                     <Link to="/">Cancel</Link>

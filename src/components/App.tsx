@@ -9,7 +9,7 @@ import {AuthProvider} from "../contexts/AuthContext"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Dashboard from "./Dashboard"
 import Login from "./Login";
-import { Container } from "react-bootstrap";
+//import { Container } from "react-bootstrap";
 import PrivateRoutes from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
@@ -18,6 +18,7 @@ import PlayerContextProvider from "../contexts/PlayerContext";
 import CreateMatch from "./CreateMatch";
 import GoBoard from "./GoBoard";
 import MatchList from "./MatchList";
+import { Container } from "@chakra-ui/react";
 
 function App() {
   return (

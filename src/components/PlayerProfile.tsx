@@ -1,9 +1,10 @@
 
 import { useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from 'react-bootstrap';
+//import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { addPlayerProfile } from '../firestore';
+import { Alert, Button, Card, CardBody, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
        
 
@@ -87,37 +88,37 @@ const PlayerProfile
 
                 <Card>
 
-                    <Card.Body>
+                    <CardBody>
                         <h2 className='text-center mb-4'>Update Game Player Profile</h2>
                         <div>{currentUser?.email}</div>{/*  currentUser starts as undefined and is then set. */}
-                        {error && <Alert variant="danger"  >{error}</Alert>}
-                        <Form onSubmit={handleSubmit} >
-                            <Form.Group id="name">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" ref={nameRef} required placeholder='required as game handle' ></Form.Control>{/* //defaultValue={currentUser.email} */}
-                            </Form.Group>
+                        {error && <Alert status="error"  >{error}</Alert>}
+                        <form onSubmit={handleSubmit} >
+                            <FormControl id="name">
+                                <FormLabel>Name</FormLabel>
+                                <Input type="text" ref={nameRef} required placeholder='required as game handle' ></Input>{/* //defaultValue={currentUser.email} */}
+                            </FormControl>
 
-                            <Form.Group id="location">
-                                <Form.Label>Location</Form.Label>
-                                <Form.Control type="text" ref={locationRef}  placeholder='optional city or country'></Form.Control>{/* //defaultValue={currentUser.email} */}
-                            </Form.Group>
-                            <Form.Group id="bio">
-                                <Form.Label>Bio</Form.Label>
-                                <Form.Control type="text" ref={bioRef} placeholder='optional inroduction information' ></Form.Control>{/* //defaultValue={currentUser.email} */}
-                            </Form.Group>
-                            <Form.Group id="rank">
-                                <Form.Label>Rank Information</Form.Label>
-                                <Form.Control type="text" ref={rankInfoRef} placeholder='optional rank information' ></Form.Control>{/* //defaultValue={currentUser.email} */}
-                            </Form.Group>
+                            <FormControl id="location">
+                                <FormLabel>Location</FormLabel>
+                                <Input type="text" ref={locationRef}  placeholder='optional city or country'></Input>{/* //defaultValue={currentUser.email} */}
+                            </FormControl>
+                            <FormControl id="bio">
+                                <FormLabel>Bio</FormLabel>
+                                <Input type="text" ref={bioRef} placeholder='optional inroduction information' ></Input>{/* //defaultValue={currentUser.email} */}
+                            </FormControl>
+                            <FormControl id="rank">
+                                <FormLabel>Rank Information</FormLabel>
+                                <Input type="text" ref={rankInfoRef} placeholder='optional rank information' ></Input>{/* //defaultValue={currentUser.email} */}
+                            </FormControl>
                 
 
 
 
                             <Button disabled={loading} className='w-100 mt-4' type="submit">Save</Button>
 
-                        </Form>
+                        </form>
 
-                    </Card.Body>
+                    </CardBody>
                 </Card>
                 <div className='w-100 text-center mt-2'>
                     <Link to="/">Cancel</Link>

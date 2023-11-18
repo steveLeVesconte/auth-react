@@ -1,8 +1,9 @@
 
 import { useRef, useState } from 'react'
-import { Form, Button, Card, Alert} from 'react-bootstrap';
+//import { Form, Button, Card, Alert} from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext'
 import { Link} from 'react-router-dom';
+import { Alert, Button, Card, CardBody, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
 const ForgotPassword = () => {
     const emailRef = useRef<HTMLInputElement>(null);
@@ -33,25 +34,25 @@ const ForgotPassword = () => {
 
                     <Card>
 
-                        <Card.Body>
+                        <CardBody>
                             <h2 className='text-center mb-4'>Password Reset</h2>
                             <div>{currentUser?.email}</div>{/*  currentUser starts as undefined and is then set. */}
-                            {error && <Alert variant="danger"  >{error}</Alert>}
+                            {error && <Alert status="error"  >{error}</Alert>}
                             {message && <Alert variant="success"   >{message}</Alert>}
-                            <Form onSubmit={handleSubmit}>
-                                <Form.Group id="emial">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" ref={emailRef} required></Form.Control>
-                                </Form.Group>
+                            <form onSubmit={handleSubmit}>
+                                <FormControl id="emial">
+                                    <FormLabel>Email</FormLabel>
+                                    <Input type="email" ref={emailRef} required></Input>
+                                </FormControl>
 
 
                                 <Button disabled={loading} className='w-100 mt-4' type="submit">Reset Password</Button>
 
-                            </Form>
+                            </form>
                             <div className='w-100 text-center mt-2'>
                         <Link to= "/login">Login</Link>
                     </div>
-                        </Card.Body>
+                        </CardBody>
                     </Card>
                     <div className='w-100 text-center mt-2'>
                         Need to Sign Up?  <Link to= "/signup">Sign Up</Link>
