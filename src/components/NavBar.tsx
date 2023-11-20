@@ -27,7 +27,7 @@ const NavBar = () => {
     const player=useContext(PlayerContext)
   return (
    <HStack  justifyContent={'space-between'} maxW={{ xl: "100%", "2xl": "1280px" }}>
-    <Image src={logo} boxSize='60px'></Image>
+    <Image onClick={()=>{navigate("/")}} src={logo} boxSize='60px'></Image>
     <HStack>
        
 {/*     <Text fontWeight="bold" >{player?.name}  </Text> */}
@@ -38,10 +38,8 @@ const NavBar = () => {
   </MenuButton>
   <MenuList>
     <MenuItem   onClick={handleLogout}>Logout</MenuItem>
-    <MenuItem>Create a Copy</MenuItem>
-    <MenuItem>Mark as Draft</MenuItem>
-    <MenuItem>Delete</MenuItem>
-    <MenuItem>Attend a Workshop</MenuItem>
+    <MenuItem  onClick={()=>{navigate("/update-profile")}}>Change Password</MenuItem>
+
   </MenuList>
 </Menu>
     </HStack>

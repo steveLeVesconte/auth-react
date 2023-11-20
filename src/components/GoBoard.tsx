@@ -1,9 +1,12 @@
 //import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { Match, Turn, getLatestTurnForMatchId } from "../firestore";
-import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { GameAction, Match, Turn, getLatestTurnForMatchId } from "../firestore";
+import { useContext, useEffect, useState } from "react";
 
 import BoardRow from "./GoBoard/BoardRow";
+import { Submission, evaluateSubmission } from "../services/moveProcessor";
+import submissionFactory from "../services/submissionFactory";
+import {PlayerContext} from "../contexts/PlayerContext";
 
 
 
@@ -11,6 +14,7 @@ const GoBoard
     = () => {
         const [turn, setTurn] = useState<Turn|null>()
         const location = useLocation();
+        const player=useContext(PlayerContext)
       //  const [match, setMatch] = useState<Match|null>()
       
 
@@ -57,6 +61,28 @@ const GoBoard
         getData();
         },[location.state.match]
         );
+
+
+        const onSelectIntersection=(row:number,col:number):void=>{
+
+            console.log('onSelectIntersection  row col: ', row,col)
+            handleStonePlay(turn,player?.id??"",row,col)
+               
+            }
+        
+    
+        const handleStonePlay=(turn:Turn|null|undefined,userId:string, row:number, col:number)=>{
+            if(turn){
+            const submission: Submission =
+            submissionFactory.createSubmission(turn, userId, row, col);
+          const evaluation = evaluateSubmission(submission);
+          console.log ('5234523452345324  evaluation: ',evaluation);
+            }
+        }
+
+
+
+
     //     console.log(' turn  --  yxxxxxxxxxxxxxxxxxxx',turn);
       
     //    //const turnString='_bwbw_wbbwbwbwb____,bw__b__w_____w_____,___w_______________,__b________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________';
@@ -74,14 +100,18 @@ const GoBoard
 
         <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} {location.state.match?.turnNumber}</h1>
         <h1> {turn?.playerBlackName} {turn?.playerWhiteName} {turn?.turnNumber} x {turn?.initialState.board}x</h1>
-        {createRows(turn)}
+        {createRows(turn,onSelectIntersection)}
+        <Link to="/">Home</Link>
         </>
-       )
+       );
+
+
+       
 
     }
 
 
-    const createRows=(turn:Turn|null|undefined):JSX.Element[]=>{
+    const createRows=(turn:Turn|null|undefined,onSelectIntersection:(row:number, col:number)=>void):JSX.Element[]=>{
         console.log(' turn turn turn xxxxxxxxxxxxxxxxxxx   xxxxxxxxxxxxxxxxx',turn);
         const content:JSX.Element[] = [];
       if(turn){
@@ -93,11 +123,30 @@ const GoBoard
        // rowStringsArray.forEach(r=>{content.push(<BoardRow row={x} content="_________b_________"/>);})
 
         for(let x=0; x<19; x++) {
-          content.push(<BoardRow key={x} row={x} content={rowStringsArray[x]}/>);
+          content.push(<BoardRow key={x} row={x} content={rowStringsArray[x]} onSelectIntersection={onSelectIntersection}/>);
         }
     }
         return content;
     }
+
+    // const onSelectIntersection=(row:number,col:number):void=>{
+    //     const [turn] = useState<Turn|null>()
+    //      const player=useContext(PlayerContext)
+    //     console.log('onSelectIntersection  row col: ', row,col)
+    //     handleStonePlay(turn,player?.id??"",row,col)
+           
+    //     }
+    
+
+    // const handleStonePlay=(turn:Turn|null|undefined,userId:string, row:number, col:number)=>{
+    //     if(turn){
+    //     const submission: Submission =
+    //     submissionFactory.createSubmission(turn, userId, row, col);
+    //   const evaluation = evaluateSubmission(submission);
+    //   console.log ('5234523452345324  evaluation: ',evaluation);
+    //     }
+    // }
+
 
 
     export default GoBoard

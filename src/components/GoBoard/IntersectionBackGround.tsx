@@ -21,12 +21,14 @@ interface Props {
     row:number;
     col:number;
     content:string;
+    onSelectIntersection:(row:number, col:number)=>void;
     // 👇️ turn off type checking
    // playerId: (params: string) => void;
   }
 
 const handlePlay=(row:number,col:number)=>{
-    console.log("intersection click: ",row.toString() + '-' + col)
+    console.log("intersection click: ",row.toString() + '-' + col);
+    
 }
 
 const IntersectionBackGround = (props:Props) => {
@@ -39,7 +41,7 @@ const IntersectionBackGround = (props:Props) => {
     if(props.content=='w') stoneImage=whiteStone;
 
     if(props.content !== 'b' && props.content !== 'w') return (<>
-<Image onClick={()=>handlePlay(props.row,props.col)} className='image1' src={x}/> 
+<Image onClick={()=>props.onSelectIntersection(props.row,props.col)} className='image1' src={x}/> 
 </>
     );
 

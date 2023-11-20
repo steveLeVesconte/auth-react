@@ -43,7 +43,7 @@ export interface Turn{
     koCompareState:GameState;
     initialState: GameState;
     resultState: GameState;
-    action:Action;
+    action:GameAction;
     
     isValid: boolean;
     isKo:boolean;
@@ -58,7 +58,7 @@ export interface GameState{
     prisonersOfWhite: number;
 }
 
-export interface Action{
+export interface GameAction{
     actionType:string;
     location:{row:number,col:number}|null;
 }

@@ -7,6 +7,8 @@ interface Props {
     row:number;
     col:number;
     content:string;
+    onSelectIntersection:(row:number, col:number)=>void;
+  
     // 👇️ turn off type checking
    // playerId: (params: string) => void;
   }
@@ -17,7 +19,7 @@ console.log('intersection: ',props)
 
   <div key={props.row.toString() +'-'+ props.col.toString()}>
 
-    <IntersectionBackGround row={props.row} col={props.col} content={props.content} />
+    <IntersectionBackGround onSelectIntersection={props.onSelectIntersection} row={props.row} col={props.col} content={props.content} />
 {/* 
     <GoStone content={props.content}/> */}
 {/*     </IntersectionBackGround> */}
