@@ -68,3 +68,42 @@ button:focus-visible {
   }
 }
  */
+
+ xnonEdge{
+  background-image:url(assets/intersection.png);
+  position:relative;
+  z-index:5;
+  }
+
+  .nonEdge{
+    background-image:url(assets/blackStoneTrans.png);
+  /*  position:absolute; */
+    z-index:5;
+    }
+  .yourDiv{
+    position: absolute;
+    z-index: 10;
+}
+
+.test3{position:absolute; z-index: 1000;}
+
+.parent {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+}
+.image1 {
+  position: relative;
+  top: 0;
+/*  border: 1px solid #000000; */
+}
+.image2 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin:5px;
+  height:80%;
+  width:80%;
+/*   border: 1px solid #000000; */
+}

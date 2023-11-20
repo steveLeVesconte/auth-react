@@ -4,7 +4,8 @@ import {useAuth} from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
 import PlayerList from '../components/PlayerList';
 import { PlayerContext } from '../contexts/PlayerContext';
-import { Alert, Button, Card, CardBody } from '@chakra-ui/react';
+import { Alert, Button, Card, CardBody, Heading } from '@chakra-ui/react';
+import MatchList from '../components/MatchList';
 
 
 const Dashboard = () => {
@@ -23,7 +24,10 @@ const navigate = useNavigate()
 }
   return (
     <>
-
+        <Heading as="h1" marginY={5} fontSize="5xl">
+      Games
+    </Heading>
+<MatchList></MatchList>
      <Card>
 <CardBody>
   {player&&<h1>{player.name}</h1>}

@@ -24,12 +24,14 @@ import GameBoardLayout from "../layouts/GameBoardLayout";
 import AuthLayout from "../layouts/AuthLayout";
 
 function App() {
-  return (
-    <Container
+  return (<>
+  <Container maxW={{ lg: "100%", xl: "1280px" }} >
+{/*   <Container  width={{ xl: "100%", "2xl": "1280px" }}> */}
+{/*     <Container
     className="d-flex align-items-center justify-content-center"
     style={{ minHeight: "100vh" }}
-  >
-    <div className="w-100" style={{ maxWidth: "400px" }}>
+  > */}
+   {/*  <div className="w-100" style={{ maxWidth: "400px" }}> */}
     <Router>
     <AuthProvider>
       <PlayerContextProvider>
@@ -71,10 +73,12 @@ function App() {
     <div className='w-100 text-center mt-2'>
                         ver 1.0.0
                     </div>
-    </div>
-
-    </Container>
-  )
+    {/* </div>
+ */}
+{/*     </Container> */}
+{/* </Container> */}
+</Container>
+</> )
   // const [count, setCount] = useState(0)
 
   // return (

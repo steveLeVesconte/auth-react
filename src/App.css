@@ -41,3 +41,13 @@
   color: #888;
 }
  */
+
+ nonEdge{
+  background-image:url(assets/intersection.png);
+  position:relative;
+  z-index:5;
+  }
+  #yourDiv{
+    position: absolute;
+    z-index: 10;
+};

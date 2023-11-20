@@ -3,6 +3,8 @@ import {Match, getActiveMatchesForPlayerId} from "../firestore"
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import {PlayerContext} from "../contexts/PlayerContext";
+import GameCard from "./GameCard";
+import { SimpleGrid } from "@chakra-ui/react";
 
 // interface ListProps {
 
@@ -43,7 +45,8 @@ getData();
 );
 
 const handleSelect=(selectedMatch:Match)=>{
-    navigate('/go-board', {state:{...selectedMatch}})
+    console.log("in handleSelect=(selectedMatch:Match)", selectedMatch)
+    navigate('/go-board', {state:{match: selectedMatch}})
 //selectMatch(selectedMatch);
 }
 
@@ -53,11 +56,18 @@ return (
     {
         console.log("in return - matches", matches)
     }
+          <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        spacing={6}
+        padding="10px"
+      >
     {matches && matches.map((match)=>(
         <div key={match.id}>
-           {match.playerBlackId} {match.playerBlackName} {match.playerWhiteName} {match.createDate} <button  onClick={()=>handleSelect(match)}>Select</button>
+           {/*  <GameCard  match={match}></GameCard> */}
+<button  onClick={()=>handleSelect(match)}><GameCard  match={match}></GameCard></button>
         </div>
     ))}
+    </SimpleGrid>
     </>
 )
 
