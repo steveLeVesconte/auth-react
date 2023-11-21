@@ -164,7 +164,7 @@ export async function getLatestTurnForMatchId(matchId:string):Promise<Turn|null>
 export async function getActiveMatchesForPlayerId(playerId:string):Promise<Match[]|null>{
     console.log('getActiveMatchesForPlayerId - playerId in:', playerId);
     //const matchQuery=query(collection(db,MATCH_COLLECTION), and( where("status","==","active") ,or( where("playerBlackId","==",playerId),where("playerWhitId","==",playerId))) , orderBy("dateCreated", "desc") );
-    const matchQuery=query(collection(db,MATCH_COLLECTION), and( where("status","==","active") ,or( where("playerBlackId","==",playerId),where("playerWhitId","==",playerId))) , orderBy("createDate", "desc") );
+    const matchQuery=query(collection(db,MATCH_COLLECTION), and( where("status","==","active") ,or( where("playerBlackId","==",playerId),where("playerWhiteId","==",playerId))) , orderBy("createDate", "desc") );
     //const matchQuery=query(collection(db,MATCH_COLLECTION),where("playerBlackId","==",playerId)  );
     const querySnapshot= await getDocs(matchQuery);
 

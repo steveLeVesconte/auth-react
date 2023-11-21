@@ -1,5 +1,5 @@
 
-import { Turn } from "../../firestore";
+import { Player, Turn } from "../../firestore";
 //import { TurnDto } from "../repositories/dtos/turnDto";
 import { StoneColor } from "./constants";
 
@@ -7,24 +7,34 @@ function getStoneColorOfCurrentTurn(lastTurn: Turn): string {
   return lastTurn.turnPlayerColor[0] == StoneColor.White ? StoneColor.Black : StoneColor.White;
 }
 
-function getIsMyTurn(oldTurn: Turn, userId: string): boolean {
+function getIsMyTurn(oldTurn: Turn|null|undefined, player:Player|null): boolean {
+
+  if(!player){
+    return false;
+  }
+
+  console.log('xxxxxxxxxx old turn: ',oldTurn);
+  if(oldTurn){
   const stoneColorOfCurrentPlayer = getStoneColorOfCurrentPlayer(
-    userId,
+    player.id,
     oldTurn
   );
   const isMyturn: boolean =
     stoneColorOfCurrentPlayer === oldTurn.turnPlayerColor ? false : true;
-  return isMyturn;
+  return isMyturn;}
+  else{
+    return false;
+  }
 }
 
 function getStoneColorOfCurrentPlayer(
   userId: string,
   lastTurn: Turn
-): StoneColor {
+): string {
   if (userId == lastTurn.playerBlackId) {
-    return StoneColor.Black;
+    return 'b';
   }
-  return StoneColor.White;
+  return 'w';
 }
 
 function boardArrayToString(boardArray: string[][]): string {

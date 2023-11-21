@@ -86,6 +86,10 @@ button:focus-visible {
 }
 
 .test3{position:absolute; z-index: 1000;}
+.intersectionHover  img:hover {
+  opacity: 0.5;
+   /* margin-bottom: 5px; */
+  }
 
 .parent {
   position: relative;
@@ -93,12 +97,12 @@ button:focus-visible {
   left: 0;
   display: flex;
 }
-.image1 {
+.emptyIntersection {
   position: relative;
   top: 0;
 /*  border: 1px solid #000000; */
 }
-.image2 {
+.stone {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -106,4 +110,10 @@ button:focus-visible {
   height:80%;
   width:80%;
 /*   border: 1px solid #000000; */
+}
+
+.intersection-hover{
+  img:hover {
+    opacity:0.5 !important;
+  }
 }

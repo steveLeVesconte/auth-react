@@ -7,6 +7,7 @@ interface Props {
     row:number;
 
     content:string;
+    isMyTurn:boolean;
 
     onSelectIntersection: (row:number, col:number) => void;
     // 👇️ turn off type checking
@@ -24,7 +25,7 @@ const BoardRow = (props:Props) => {
     //   if(props.row==14 && x==14) tcont='w';
      const thisKey=props.row.toString()+'-'+x.toString();
     console.log('col item:  xxxxxx  ',x, stringArray[x])
-      content.push(<Intersection key={thisKey} row={props.row} col={x} content={stringArray[x]} onSelectIntersection={props.onSelectIntersection}/>);
+      content.push(<Intersection key={thisKey} row={props.row} col={x} content={stringArray[x]} isMyTurn={props.isMyTurn} onSelectIntersection={props.onSelectIntersection}/>);
     }
   return (
     <HStack gap={0}>{content}</HStack>

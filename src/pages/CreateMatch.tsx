@@ -70,7 +70,7 @@ console.log('in submit!!!!!!!!!!!!!!!!!!!!!')
             const createDate=(new Date).toISOString();
         console.log('before add match')
                 addMatch(
-                    "black",
+                    "b",
                     playerBlackId??"",
                     playerWhiteId,
                     playerBlackName??"",
@@ -105,7 +105,7 @@ console.log('in submit!!!!!!!!!!!!!!!!!!!!!')
 
                     const startTurn:Turn ={
                         matchId:refDoc.id,
-                        turnPlayerColor:"black",
+                        turnPlayerColor:"b",
                         turnNumber:0,
                         playerBlackId:playerBlackId??"missing",
                         playerWhiteId:playerWhiteId,

@@ -21,6 +21,7 @@ interface Props {
     row:number;
     col:number;
     content:string;
+    isMyTurn:boolean;
     onSelectIntersection:(row:number, col:number)=>void;
     // 👇️ turn off type checking
    // playerId: (params: string) => void;
@@ -36,28 +37,44 @@ const IntersectionBackGround = (props:Props) => {
     console.log('BG - intersection: ',props)
     console.log('image: ',getIntersctionImage(props.row, props.col));
 
+    let intersctionClass="emptyIntersection ";
+   // let intersctionActive=false;
+
+
+    if(props.isMyTurn) {
+        intersctionClass=intersctionClass+" intersectionHover";
+
+    }
+
     let stoneImage =blackStone;
 
     if(props.content=='w') stoneImage=whiteStone;
+    if(props.content == 'b' || props.content == 'w')
+    return(
+        <div className='parent'>
+            <Image onClick={()=>handlePlay(props.row,props.col)}  className='emptyIntersection' src={x}/> 
+        
+            <Image  className='stone' src={stoneImage}/> 
+        
+          </div>
+        
+        );
 
-    if(props.content !== 'b' && props.content !== 'w') return (<>
-<Image onClick={()=>props.onSelectIntersection(props.row,props.col)} className='image1' src={x}/> 
+if(!props.isMyTurn)
+{
+ return (<>
+<Image  className={intersctionClass} src={x}/> 
 </>
     );
-
-return(
-<div className='parent'>
-    <Image onClick={()=>handlePlay(props.row,props.col)}  className='image1' src={x}/> 
-
-    <Image  className='image2' src={stoneImage}/> 
-
-  </div>
-
-);
+ }else{
+ return (<>
+        <Image onClick={()=>props.onSelectIntersection(props.row,props.col)} className={intersctionClass} src={x}/> 
+        </>
+            );
 
      
 
-
+ }
 
     // if(props.row==0)
     // {

@@ -1,12 +1,14 @@
 //import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { GameAction, Match, Turn, getLatestTurnForMatchId } from "../firestore";
+import { GameAction, Match, Turn, addTurn, getLatestTurnForMatchId } from "../firestore";
 import { useContext, useEffect, useState } from "react";
 
 import BoardRow from "./GoBoard/BoardRow";
 import { Submission, evaluateSubmission } from "../services/moveProcessor";
 import submissionFactory from "../services/submissionFactory";
 import {PlayerContext} from "../contexts/PlayerContext";
+import turnFactory from "../services/turnFactory";
+import utilities from "../services/moveProcessor/UtilityFunctions"
 
 
 
@@ -59,7 +61,7 @@ const GoBoard
             }
         }
         getData();
-        },[location.state.match]
+        },[]
         );
 
 
@@ -76,6 +78,13 @@ const GoBoard
             const submission: Submission =
             submissionFactory.createSubmission(turn, userId, row, col);
           const evaluation = evaluateSubmission(submission);
+          if(evaluation.isLegalPlay){
+            const newTurn = turnFactory.createTurn(turn,evaluation,submission);
+            setTurn(newTurn);
+            console.log('new turn: ', newTurn)
+            addTurn(newTurn);
+
+          }
           console.log ('5234523452345324  evaluation: ',evaluation);
             }
         }
@@ -98,10 +107,11 @@ const GoBoard
     //     }
        return(<>
 
-        <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} {location.state.match?.turnNumber}</h1>
-        <h1> {turn?.playerBlackName} {turn?.playerWhiteName} {turn?.turnNumber} x {turn?.initialState.board}x</h1>
-        {createRows(turn,onSelectIntersection)}
+        <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} turn number {location.state.match?.turnNumber}</h1>
+        <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.turnPlayerColor} x {turn?.resultState.board}x</h1>
+        {createRows(turn,onSelectIntersection, utilities.getIsMyTurn(turn,player))}
         <Link to="/">Home</Link>
+        <div>{utilities.getIsMyTurn(turn,player)?"myturn":"notMyTurn"}</div>
         </>
        );
 
@@ -111,7 +121,7 @@ const GoBoard
     }
 
 
-    const createRows=(turn:Turn|null|undefined,onSelectIntersection:(row:number, col:number)=>void):JSX.Element[]=>{
+    const createRows=(turn:Turn|null|undefined,onSelectIntersection:(row:number, col:number)=>void,isMyTurn:boolean):JSX.Element[]=>{
         console.log(' turn turn turn xxxxxxxxxxxxxxxxxxx   xxxxxxxxxxxxxxxxx',turn);
         const content:JSX.Element[] = [];
       if(turn){
@@ -123,7 +133,7 @@ const GoBoard
        // rowStringsArray.forEach(r=>{content.push(<BoardRow row={x} content="_________b_________"/>);})
 
         for(let x=0; x<19; x++) {
-          content.push(<BoardRow key={x} row={x} content={rowStringsArray[x]} onSelectIntersection={onSelectIntersection}/>);
+          content.push(<BoardRow key={x} row={x} content={rowStringsArray[x]} isMyTurn={isMyTurn} onSelectIntersection={onSelectIntersection}/>);
         }
     }
         return content;
