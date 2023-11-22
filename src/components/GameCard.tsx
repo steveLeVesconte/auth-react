@@ -9,6 +9,7 @@ import {
   //import { Link } from 'react-router-dom';
   import { Match } from '../firestore';
   import defaultImage from '../assets/igo.jpg';
+import GoGameBoard from './GoArena/GoGameBoard';
   //import getCroppedImageUrl from '../services/image-url';
   //import CriticScore from './CriticScore';
   //import Emoji from './Emoji';
@@ -21,8 +22,10 @@ import {
   const GameCard = ({ match }: Props) => {
     return (
       <Card>
+      <CardBody>
         <Image src={defaultImage} boxSize='300px' />
-        <CardBody>
+         <GoGameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={()=>{}} />
+
 {/*           <HStack justifyContent="space-between" marginBottom={3}>
             <PlatformIconList
               platforms={game.parent_platforms?.map(

@@ -19,7 +19,8 @@ export interface Player{
 
 
 export interface Match{
-    id: string
+    id: string;
+    board:string;
     nextTurnPlayer: string;
     playerBlackId:string; 
     playerWhiteId:string; 
@@ -189,42 +190,30 @@ export async function getActiveMatchesForPlayerId(playerId:string):Promise<Match
     const docData = {...match,turnNumber:turnNumber,updateDate:(new Date).toISOString()
     }
     const docRef = doc(db, MATCH_COLLECTION, match.id);
-   // const data = { province: "ON" }; 
     updateDoc(docRef, docData)
      .then(docRef => { 
         console.log("Value of an Existing Document Field has been updated", docRef); 
     }) .catch(error => { console.log(error); })
 
-    //return db.collection(MATCH_COLLECTION).doc(doc.id).update({foo: "bar"});
-    
-    //setDoc(doc(db,MATCH_COLLECTION),docData);
-  
-   //return addDoc(collection(db, PLAYER_COLLECTION), {uid, name, rankInfo, bio, status, createDate })
 }
 
-//     if(querySnapshot?.docs.length>0)
-//     {
+export function updateMatch(match:Match, turn:Turn ){
+    console.log('in setMatchTurnNumber   -------- ', match, turn);
+    const docData = {...match,
+        turnPlayerColor:turn.turnPlayerColor,
+        turnNumber:turn.turnNumber,
+        board:turn.resultState.board, 
+        prisonersOfBlack: turn.resultState.prisonersOfBlack,
+        prisonersOfWhite: turn.resultState.prisonersOfWhite,
+        updateDate:(new Date).toISOString()
+    }
+    const docRef = doc(db, MATCH_COLLECTION, match.id);
+    updateDoc(docRef, docData)
+     .then(docRef => { 
+        console.log("Value of an Existing Document Field has been updated", docRef); 
+    }) .catch(error => { console.log(error); })
 
-//         const matches:Match[] = querySnapshot.docs.data() as Match[];
-//        // turn.id=querySnapshot.docs[0].id;
-//         //const player:Player = documentSnapshot.data() as Player;
-//         return turn;
-//    }
-//    else return null;
-
-    // const players: Player[] = [];
-
-    // for(const documentSnapshot of querySnapshot.docs){
-    //         const player:Player = documentSnapshot.data() as Player;
-    //         console.log('player', player);
-    //         await players.push({
-    //             ...(player)
-    //         })
-
-    // }
-    // return players;
-
-
+}
 
 
 

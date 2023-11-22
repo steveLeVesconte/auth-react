@@ -67,6 +67,7 @@ function createStartingTurn(creatingPlayer: Player, opponent: Player, creatorSto
   const dateStamp = new Date().toISOString();
 
   const newTurn:Turn={
+    id:"",
     playerBlackId:creatorChoseBlack?creatingPlayer.id:opponent.id ,
     playerBlackName:creatorChoseBlack?creatingPlayer.name:opponent.name ,
     playerWhiteId:creatorChoseBlack?opponent.id:creatingPlayer.id ,
