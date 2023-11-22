@@ -1,9 +1,9 @@
-import {addDoc, and, collection, doc, getDocs, getFirestore, limit, or, orderBy, query, setDoc, where} from 'firebase/firestore';
+import {addDoc, and, collection, doc, getDocs, getFirestore, limit, or, orderBy, query, setDoc, updateDoc, where} from 'firebase/firestore';
 import {db} from './firebase';
 
 const PLAYER_COLLECTION='go-players';
-const MATCH_COLLECTION='go-matches';
-const TURN_COLLECTION="go-turn";
+export const MATCH_COLLECTION='go-matches';
+export const TURN_COLLECTION="go-turn";
 
 
 
@@ -33,6 +33,7 @@ export interface Match{
 }
 
 export interface Turn{
+    id:string;
     matchId:string;
     turnPlayerColor:string;
     turnNumber:number;
@@ -135,31 +136,27 @@ export async function getLatestTurnForMatchId(matchId:string):Promise<Turn|null>
     const querySnapshot= await getDocs(turnQuery);
 
    console.log('turn querySnapshot',querySnapshot);
-  // const player:Player=null as Player;
     if(querySnapshot?.docs.length>0)
     {
-
         const turn:Turn = querySnapshot.docs[0].data() as Turn;
-       // turn.id=querySnapshot.docs[0].id;
-        //const player:Player = documentSnapshot.data() as Player;
         return turn;
    }
    else return null;
-
-    // const players: Player[] = [];
-
-    // for(const documentSnapshot of querySnapshot.docs){
-    //         const player:Player = documentSnapshot.data() as Player;
-    //         console.log('player', player);
-    //         await players.push({
-    //             ...(player)
-    //         })
-
-    // }
-    // return players;
 }
 
+// export async function getLatestTurnForMatchId(matchId:string):Promise<Turn|null>{
+//     console.log('turn querySnapshot matchId',matchId);
+//     const turnQuery=query(collection(db,TURN_COLLECTION), where("matchId","==",matchId) , orderBy("createDate", "desc"),limit(1) );
+//     const querySnapshot= await getDocs(turnQuery);
 
+//    console.log('turn querySnapshot',querySnapshot);
+//     if(querySnapshot?.docs.length>0)
+//     {
+//         const turn:Turn = querySnapshot.docs[0].data() as Turn;
+//         return turn;
+//    }
+//    else return null;
+// }
 
 export async function getActiveMatchesForPlayerId(playerId:string):Promise<Match[]|null>{
     console.log('getActiveMatchesForPlayerId - playerId in:', playerId);
@@ -184,6 +181,26 @@ export async function getActiveMatchesForPlayerId(playerId:string):Promise<Match
 
   }
   return matches;
+}
+
+
+  export function setMatchTurnNumber(match:Match, turnNumber:number ){
+    console.log('in setMatchTurnNumber   -------- ', match, turnNumber);
+    const docData = {...match,turnNumber:turnNumber,updateDate:(new Date).toISOString()
+    }
+    const docRef = doc(db, MATCH_COLLECTION, match.id);
+   // const data = { province: "ON" }; 
+    updateDoc(docRef, docData)
+     .then(docRef => { 
+        console.log("Value of an Existing Document Field has been updated", docRef); 
+    }) .catch(error => { console.log(error); })
+
+    //return db.collection(MATCH_COLLECTION).doc(doc.id).update({foo: "bar"});
+    
+    //setDoc(doc(db,MATCH_COLLECTION),docData);
+  
+   //return addDoc(collection(db, PLAYER_COLLECTION), {uid, name, rankInfo, bio, status, createDate })
+}
 
 //     if(querySnapshot?.docs.length>0)
 //     {
@@ -206,7 +223,7 @@ export async function getActiveMatchesForPlayerId(playerId:string):Promise<Match
 
     // }
     // return players;
-}
+
 
 
 
