@@ -9,6 +9,7 @@ import utilities from "../services/moveProcessor/UtilityFunctions"
 import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/firestore";
 import { db } from "../firebase";
 import GoGameBoard from "./GoArena/GoGameBoard";
+import Chat from "./Chat";
 
 const GoArena
   = () => {
@@ -52,7 +53,7 @@ const GoArena
       <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} turn number {location.state.match?.turnNumber}</h1>
       <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.turnPlayerColor} x {turn?.resultState.board}x</h1>
       <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} />
-
+      <Chat match={location.state.match}></Chat>
       <Link to="/">Home</Link>
       <div>{utilities.getIsMyTurn(turn, player) ? "myturn" : "notMyTurn"}</div>
     </>

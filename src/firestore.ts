@@ -16,7 +16,13 @@ export interface Player{
     uid: string;
     createDate: string;
 }
-
+export interface Message{
+    id: string;
+    message: string;
+    matchId: string;
+    speakerName: string;
+    createDate: string;
+}
 
 export interface Match{
     id: string;
