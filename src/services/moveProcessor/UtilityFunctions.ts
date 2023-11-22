@@ -1,28 +1,27 @@
 
 import { Player, Turn } from "../../firestore";
-//import { TurnDto } from "../repositories/dtos/turnDto";
 import { StoneColor } from "./constants";
 
 function getStoneColorOfCurrentTurn(lastTurn: Turn): string {
   return lastTurn.turnPlayerColor[0] == StoneColor.White ? StoneColor.Black : StoneColor.White;
 }
 
-function getIsMyTurn(oldTurn: Turn|null|undefined, player:Player|null): boolean {
+function getIsMyTurn(oldTurn: Turn | null | undefined, player: Player | null): boolean {
 
-  if(!player){
+  if (!player) {
     return false;
   }
 
-  console.log('xxxxxxxxxx old turn: ',oldTurn);
-  if(oldTurn){
-  const stoneColorOfCurrentPlayer = getStoneColorOfCurrentPlayer(
-    player.id,
-    oldTurn
-  );
-  const isMyturn: boolean =
-    stoneColorOfCurrentPlayer === oldTurn.turnPlayerColor ? false : true;
-  return isMyturn;}
-  else{
+  if (oldTurn) {
+    const stoneColorOfCurrentPlayer = getStoneColorOfCurrentPlayer(
+      player.id,
+      oldTurn
+    );
+    const isMyturn: boolean =
+      stoneColorOfCurrentPlayer === oldTurn.turnPlayerColor ? false : true;
+    return isMyturn;
+  }
+  else {
     return false;
   }
 }

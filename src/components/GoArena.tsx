@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { TURN_COLLECTION, Turn, addTurn, setMatchTurnNumber, updateMatch } from "../firestore";
+import { TURN_COLLECTION, Turn, addTurn,  updateMatch } from "../firestore";
 import { useContext, useEffect, useState } from "react";
 import { Submission, evaluateSubmission } from "../services/moveProcessor";
 import submissionFactory from "../services/submissionFactory";

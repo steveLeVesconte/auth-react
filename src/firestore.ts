@@ -1,4 +1,4 @@
-import {addDoc, and, collection, doc, getDocs, getFirestore, limit, or, orderBy, query, setDoc, updateDoc, where} from 'firebase/firestore';
+import {addDoc, and, collection, doc, getDocs,  limit, or, orderBy, query, setDoc, updateDoc, where} from 'firebase/firestore';
 import {db} from './firebase';
 
 const PLAYER_COLLECTION='go-players';

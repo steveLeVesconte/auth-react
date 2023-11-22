@@ -1,6 +1,4 @@
-
 import { useRef, useState } from 'react'
-//import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { Alert, Button, Card, CardBody, FormControl, FormLabel, Input } from '@chakra-ui/react';
@@ -21,9 +19,6 @@ const UpdateProfile
             if (passwordRef.current?.value !== confirmRef.current?.value) {
                 return setError('Passwords do not match')
             }
-            console.log('got match', passwordRef.current?.value, emailRef.current?.value)
-
-
             const promises = [];
             setLoading(true);
             setError('');
@@ -46,12 +41,9 @@ const UpdateProfile
                 })
         }
 
-
         return (
             <>
-
                 <Card>
-
                     <CardBody>
                         <h2 className='text-center mb-4'>Update Profile</h2>
                         <div>{currentUser?.email}</div>{/*  currentUser starts as undefined and is then set. */}
@@ -69,17 +61,13 @@ const UpdateProfile
                                 <FormLabel>Confirm Password</FormLabel>
                                 <Input type="password" ref={confirmRef} placeholder='Leave blank to keep the same'></Input>
                             </FormControl>
-
                             <Button disabled={loading} className='w-100 mt-4' type="submit">Update</Button>
-
                         </form>
-
                     </CardBody>
                 </Card>
                 <div className='w-100 text-center mt-2'>
                     <Link to="/">Cancel</Link>
                 </div>
-
             </>
         )
     }

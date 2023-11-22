@@ -1,8 +1,3 @@
-// import { BaseSubmissionResult } from "go-game-move-processor";
-// import { GameState, TurnDto } from "../../repositories/dtos/turnDto";
-// import utilities from "../UtilityFunctions";
-// import { StoneColor } from "../../constants";
-
 import { GameState, Turn } from "../firestore";
 import { BaseSubmissionResult } from "./moveProcessor";
 import utilities from "./moveProcessor/UtilityFunctions";
@@ -11,13 +6,12 @@ import { StoneColor } from "./moveProcessor/constants";
 function createGameState(evaluation: BaseSubmissionResult, oldTurn: Turn) {
 
     evaluation.stoneColorOfNextTurn
-    //const newState: GameState={
+
     const board =
         utilities.boardArrayToString(evaluation.newBoard);
-        console.log('new board xxxxxxxxxxxxxx: ',board);
     let prisonersOfBlack = oldTurn.resultState.prisonersOfBlack;
     let prisonersOfWhite = oldTurn.resultState.prisonersOfWhite;
-    
+
     if (evaluation.capturedStones > 0) {
         if (evaluation.stoneColorOfNextTurn == StoneColor.White) {
             prisonersOfBlack += evaluation.capturedStones;
@@ -27,9 +21,11 @@ function createGameState(evaluation: BaseSubmissionResult, oldTurn: Turn) {
         }
     }
 
-    const newState: GameState={ board: board,
-                               prisonersOfBlack:prisonersOfBlack,
-                               prisonersOfWhite:prisonersOfWhite}
+    const newState: GameState = {
+        board: board,
+        prisonersOfBlack: prisonersOfBlack,
+        prisonersOfWhite: prisonersOfWhite
+    }
     return newState;
 }
 
@@ -55,10 +51,10 @@ function createStartingGameState() {
         "___________________," +//16
         "___________________," +//17
         "___________________";//18
-    const gameState:GameState={
-    board : emptyBoard,
-    prisonersOfBlack : 0,
-    prisonersOfWhite : 0
+    const gameState: GameState = {
+        board: emptyBoard,
+        prisonersOfBlack: 0,
+        prisonersOfWhite: 0
     };
     return gameState;
 }
