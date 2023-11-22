@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { GameAction, Match, TURN_COLLECTION, Turn, addTurn, getLatestTurnForMatchId, setMatchTurnNumber} from "../firestore";
 import { useContext, useEffect, useState } from "react";
 
-import BoardRow from "./GoBoard/BoardRow";
+import BoardRow from "./GoArena/BoardRow";
 import { Submission, evaluateSubmission } from "../services/moveProcessor";
 import submissionFactory from "../services/submissionFactory";
 import {PlayerContext} from "../contexts/PlayerContext";
@@ -11,10 +11,11 @@ import turnFactory from "../services/turnFactory";
 import utilities from "../services/moveProcessor/UtilityFunctions"
 import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/firestore";
 import { db } from "../firebase";
+import GoGameBoard from "./GoArena/GoGameBoard";
 
 
 
-const GoBoard
+const GoArena
     = () => {
         const [turn, setTurn] = useState<Turn|null>()
         const location = useLocation();
@@ -114,8 +115,11 @@ const GoBoard
 
         <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} turn number {location.state.match?.turnNumber}</h1>
         <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.turnPlayerColor} x {turn?.resultState.board}x</h1>
-        {createRows(turn,onSelectIntersection, utilities.getIsMyTurn(turn,player))}
-        <Link to="/">Home</Link>
+        <GoGameBoard boardString={turn?.resultState.board??""} isMyTurn={utilities.getIsMyTurn(turn,player)} onSelectIntersection={onSelectIntersection}/>
+     
+       {/*  {createRows(turn,onSelectIntersection, utilities.getIsMyTurn(turn,player))}
+       */}  
+       <Link to="/">Home</Link>
         <div>{utilities.getIsMyTurn(turn,player)?"myturn":"notMyTurn"}</div>
         </>
        );
@@ -164,4 +168,4 @@ const GoBoard
 
 
 
-    export default GoBoard
+    export default GoArena

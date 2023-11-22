@@ -16,7 +16,7 @@ import UpdateProfile from "../pages/UpdateProfile";
 import PlayerProfile from "../pages/PlayerProfile";
 import PlayerContextProvider from "../contexts/PlayerContext";
 import CreateMatch from "../pages/CreateMatch";
-import GoBoard from "./GoBoard";
+import GoArena from "./GoArena";
 import MatchList from "./MatchList";
 import { Container } from "@chakra-ui/react";
 import MainLayout from "../layouts/MainLayout";
@@ -46,7 +46,7 @@ function App() {
         </Route>
         <Route element={<GameBoardLayout  />} path="/go-board"  >
        
-            <Route element={<GoBoard />} index />
+            <Route element={<GoArena />} index />
         </Route>
 {/*             <Route path="/update-profile" element={<UpdateProfile />} />
             <Route path="projects" element={<Projects />} /> */}

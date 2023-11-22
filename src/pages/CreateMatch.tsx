@@ -104,6 +104,7 @@ console.log('in submit!!!!!!!!!!!!!!!!!!!!!')
 
 
                     const startTurn:Turn ={
+                        id:"",
                         matchId:refDoc.id,
                         turnPlayerColor:"b",
                         turnNumber:0,
