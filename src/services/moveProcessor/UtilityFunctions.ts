@@ -28,12 +28,15 @@ function getIsMyTurn(oldTurn: Turn | null | undefined, player: Player | null): b
 
 function getStoneColorOfCurrentPlayer(
   userId: string,
-  lastTurn: Turn
+  lastTurn: Turn|null|undefined
 ): string {
-  if (userId == lastTurn.playerBlackId) {
+  if (userId == lastTurn?.playerBlackId) {
     return 'b';
   }
-  return 'w';
+    if (userId == lastTurn?.playerWhiteId) {
+    return 'w';
+  }
+  return '_';
 }
 
 function boardArrayToString(boardArray: string[][]): string {

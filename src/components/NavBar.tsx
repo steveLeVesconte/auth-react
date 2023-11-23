@@ -1,19 +1,24 @@
-import {Text, HStack,Image, Menu, MenuList, MenuButton, MenuItem, Button } from '@chakra-ui/react'
+import { HStack,Image, Menu, MenuList, MenuButton, MenuItem, Button, Icon, useColorMode, useColorModeValue } from '@chakra-ui/react'
 //import logo from "../assets/logo.webp";
 import ColorModeSwitch from './ColorModeSwitch';
 import {PlayerContext} from '../contexts/PlayerContext';
 import { useContext, useState } from 'react';
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Player } from '../firestore';
+//import { Player } from '../firestore';
 import { useAuth } from '../contexts/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png'
+import { TbGoGame } from "react-icons/tb";
 
 const NavBar = () => {
-    const {currentUser, logout}=useAuth();
-    const [error, setError]=useState("");
+   const {currentUser, logout}=useAuth();
+   const [error, setError]=useState("");
+   const bg = useColorModeValue('red.500', 'red.200')
+   const color = useColorModeValue('white', 'gray.800')
     const navigate = useNavigate()
     async function handleLogout(){
+      console.log('currentUser: ',currentUser);
+      console.log('error: ',error);
         setError('');
         try{
           await logout();
@@ -22,15 +27,14 @@ const NavBar = () => {
           setError('failed to log out')
         }
       }
-
-
     const player=useContext(PlayerContext)
   return (
    <HStack  justifyContent={'space-between'} maxW={{ xl: "100%", "2xl": "1280px" }}>
-    <Image onClick={()=>{navigate("/")}} src={logo} boxSize='60px'></Image>
+    <Icon  onClick={()=>{navigate("/")}} as={TbGoGame} className="goIcon"  w={8} h={8}   bg={bg} color={color} />
+{/*    <TbGoGame onClick={()=>{navigate("/")}}  className="goIcon"/>
+    <Image onClick={()=>{navigate("/")}} src={logo} boxSize='60px'></Image> */}
     <HStack>
        
-{/*     <Text fontWeight="bold" >{player?.name}  </Text> */}
     <ColorModeSwitch></ColorModeSwitch>
     <Menu>
   <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>

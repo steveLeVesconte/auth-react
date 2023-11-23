@@ -224,6 +224,7 @@ export function updateMatch(match:Match, turn:Turn ){
 
 
 export function addMatch(
+    board:string,
     nextTurnPlayer: string, 
     playerBlackId:string, 
     playerWhiteId:string, 
@@ -236,6 +237,7 @@ export function addMatch(
 
     const updateDate=createDate;
     return addDoc(collection(db, MATCH_COLLECTION), {
+        board,
         nextTurnPlayer, 
         playerBlackId, 
         playerWhiteId, 

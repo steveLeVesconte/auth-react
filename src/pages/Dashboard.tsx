@@ -27,6 +27,7 @@ const navigate = useNavigate()
         <Heading as="h1" marginY={5} fontSize="5xl">
       Games
     </Heading>
+    <Button onClick={()=>navigate("/create-match")}>New Match</Button>
 <MatchList></MatchList>
      <Card>
 <CardBody>
