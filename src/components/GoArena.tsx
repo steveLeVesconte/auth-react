@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { TURN_COLLECTION, Turn, addTurn,  updateMatch } from "../firestore";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Submission, evaluateSubmission } from "../services/moveProcessor";
 import submissionFactory from "../services/submissionFactory";
 import { PlayerContext } from "../contexts/PlayerContext";
@@ -10,10 +10,15 @@ import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/f
 import { db } from "../firebase";
 import GoGameBoard from "./GoArena/GoGameBoard";
 import Chat from "./Chat";
-import { Button } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from "@chakra-ui/react";
 
 const GoArena
   = () => {
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const cancelRef =useRef<HTMLButtonElement>(null);
+    const [play, setPlay]=useState<{row:number, col:number}|null>(null)
+
     const [turn, setTurn] = useState<Turn | null>()
     const location = useLocation();
     const player = useContext(PlayerContext)
@@ -37,10 +42,55 @@ const GoArena
     );
 
     const onSelectIntersection = (row: number, col: number): void => {
-      handleStonePlay(turn, player?.id ?? "", row, col);
+     // handleStonePlay(turn, player?.id ?? "", row, col);
+     setPlay({row:row,col:col});
+     onOpen();
+     // handleStonePlay(turn, player?.id ?? "", row, col);
+    }
+    // const handleStonePlay = (turn: Turn | null | undefined, userId: string, row: number, col: number) => {
+    //   if (turn) {
+    //     const submission: Submission =
+    //       submissionFactory.createSubmission(turn, userId, row, col);
+    //     const evaluation = evaluateSubmission(submission);
+    //     if (evaluation.isLegalPlay) {
+    //       const newTurn = turnFactory.createTurn(turn, evaluation, submission);
+    //       setTurn(newTurn);
+    //       addTurn(newTurn).then(() => {
+    //        // setMatchTurnNumber(location.state.match, turn?.turnNumber);
+    //         updateMatch(location.state.match, newTurn);
+    //       });
+    //     }
+    //     else{
+
+    //     }
+    //   }
+    // }
+    // const handleStonePlay = (turn: Turn | null | undefined, userId: string, row: number, col: number) => {
+    //   if (turn) {
+    //     onOpen();
+    //   }
+      //   const submission: Submission =
+      //     submissionFactory.createSubmission(turn, userId, row, col);
+      //   const evaluation = evaluateSubmission(submission);
+      //   if (evaluation.isLegalPlay) {
+      //     const newTurn = turnFactory.createTurn(turn, evaluation, submission);
+      //     setTurn(newTurn);
+      //     addTurn(newTurn).then(() => {
+      //      // setMatchTurnNumber(location.state.match, turn?.turnNumber);
+      //       updateMatch(location.state.match, newTurn);
+      //     });
+      //   }
+      //   else{
+
+      //   }
+      // }
+   // }
+    const executeStonePlay=()=>{
+       doStonePlay(turn,player?.id??"",play?.row??-1, play?.col??-1);
+       onClose();
     }
 
-    const handleStonePlay = (turn: Turn | null | undefined, userId: string, row: number, col: number) => {
+    const doStonePlay = (turn: Turn | null | undefined, userId: string, row: number, col: number) => {
       if (turn) {
         const submission: Submission =
           submissionFactory.createSubmission(turn, userId, row, col);
@@ -53,9 +103,9 @@ const GoArena
             updateMatch(location.state.match, newTurn);
           });
         }
-        else{
-          
-        }
+        // else{//    TBD      put alert here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TBD
+
+        // }
       }
     }
 
@@ -85,6 +135,37 @@ const GoArena
       {utilities.getIsMyTurn(turn, player) && <Button onClick={()=>handlePass(turn,player?.id??"")}>Pass</Button>}
       {utilities.getStoneColorOfCurrentPlayer(player?.id??"", turn)}
       <div>{utilities.getIsMyTurn(turn, player) ? "myturn" : "notMyTurn"}</div>
+
+      <Button colorScheme='red' onClick={onOpen}>
+          Delete Customer
+        </Button>
+  
+        <AlertDialog
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                Delete Customer
+              </AlertDialogHeader>
+  
+              <AlertDialogBody>
+                Are you sure? You can't undo this action afterwards.{play?.row} {play?.col}
+              </AlertDialogBody>
+  
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={onClose}>
+                  Cancel
+                </Button>
+                <Button colorScheme='red' onClick={executeStonePlay} ml={3}>
+                  Delete
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
     </>
     );
   }

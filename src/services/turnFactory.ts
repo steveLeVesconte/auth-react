@@ -31,7 +31,7 @@ function createTurn(oldTurn: Turn, evaluation: BaseSubmissionResult, submission:
   return newTurn;
 }
 
-function createPassTurn(oldTurn: Turn,userId): Turn {
+function createPassTurn(oldTurn: Turn,userId:string): Turn {
 
   /// create new turn record to save   ////////
   //// evaluation, turn, submission

@@ -1,4 +1,4 @@
-import { HStack,Image, Menu, MenuList, MenuButton, MenuItem, Button, Icon, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { HStack, Menu, MenuList, MenuButton, MenuItem, Button, Icon, useColorModeValue } from '@chakra-ui/react'
 //import logo from "../assets/logo.webp";
 import ColorModeSwitch from './ColorModeSwitch';
 import {PlayerContext} from '../contexts/PlayerContext';
@@ -7,7 +7,7 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 //import { Player } from '../firestore';
 import { useAuth } from '../contexts/AuthContext';
 import {  useNavigate } from 'react-router-dom';
-import logo from '../assets/logo.png'
+//import logo from '../assets/logo.png'
 import { TbGoGame } from "react-icons/tb";
 
 const NavBar = () => {
