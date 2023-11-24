@@ -5,7 +5,7 @@ import { StoneColor } from "./moveProcessor/constants";
 
 function createGameState(evaluation: BaseSubmissionResult, oldTurn: Turn) {
 
-    evaluation.stoneColorOfNextTurn
+    //evaluation.stoneColorOfNextTurn
 
     const board =
         utilities.boardArrayToString(evaluation.newBoard);
@@ -13,7 +13,7 @@ function createGameState(evaluation: BaseSubmissionResult, oldTurn: Turn) {
     let prisonersOfWhite = oldTurn.resultState.prisonersOfWhite;
 
     if (evaluation.capturedStones > 0) {
-        if (evaluation.stoneColorOfNextTurn == StoneColor.White) {
+        if (oldTurn.turnPlayerColor == StoneColor.White) {
             prisonersOfBlack += evaluation.capturedStones;
         }
         else {

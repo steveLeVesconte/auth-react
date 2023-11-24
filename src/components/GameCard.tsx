@@ -28,7 +28,7 @@ const GameCard = ({ match }: Props) => {
           <div>
             <Text align="left" >Black: {match.playerBlackName} </Text></div>
           <div>  <Text align="left">White: {match.playerWhiteName} </Text></div>
-   {/*        <Text align="left">Turn Of: {match.nextTurnPlayer} </Text> */}
+          <Text align="left">Turn Of: {match.nextTurnPlayer==="b"?"Black":"White"} </Text>
            <HStack>
             <Text align="left">Date: {match.createDate.substring(0,10)} </Text>
             <Text align="left">Move: {match.turnNumber} </Text>

@@ -206,7 +206,7 @@ export async function getActiveMatchesForPlayerId(playerId:string):Promise<Match
 export function updateMatch(match:Match, turn:Turn ){
     console.log('in setMatchTurnNumber   -------- ', match, turn);
     const docData = {...match,
-        turnPlayerColor:turn.turnPlayerColor,
+        nextTurnPlayer:turn.turnPlayerColor==="b"?"w":"b",
         turnNumber:turn.turnNumber,
         board:turn.resultState.board, 
         prisonersOfBlack: turn.resultState.prisonersOfBlack,

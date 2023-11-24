@@ -75,7 +75,7 @@ const CreateMatch
                     const startTurn: Turn = {
                         id: "",
                         matchId: refDoc.id,
-                        turnPlayerColor: "b",
+                        turnPlayerColor: "w",
                         turnNumber: 0,
                         playerBlackId: playerBlackId ?? "missing",
                         playerWhiteId: playerWhiteId,

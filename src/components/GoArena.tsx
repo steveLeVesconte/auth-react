@@ -129,7 +129,7 @@ const GoArena
     return (<>
 
 {/*       <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} turn number {location.state.match?.turnNumber}</h1>
-      <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.turnPlayerColor} x {turn?.resultState.board}x</h1> */}
+      <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.playerStoneColor} x {turn?.resultState.board}x</h1> */}
       {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} />}
     
       <HStack spacing='24px'>
@@ -137,7 +137,8 @@ const GoArena
 {/*       <Link to="/">Home</Link> */}
       {utilities.getIsMyTurn(turn, player) && <Button onClick={()=>handlePass(turn,player?.id??"")}>Pass</Button>}
      <div> {utilities.getStoneColorOfCurrentPlayer(player?.id??"", turn)}</div>
-      <div>{utilities.getIsMyTurn(turn, player) ? "myturn" : "notMyTurn"}</div>
+     <div>{utilities.getIsMyTurn(turn, player) ? "myturn" : "notMyTurn"}</div>
+     <div>{(turn?.turnNumber??0)+1}</div>
       </HStack >
       <Chat match={location.state.match}></Chat>
       {/* <Button colorScheme='red' onClick={onOpen}>
