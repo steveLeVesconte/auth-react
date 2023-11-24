@@ -24,7 +24,7 @@ interface Props {
 // }
 
 const IntersectionBackGround = (props: Props) => {
-    const x = getIntersctionImage(props.row, props.col);
+    const boardImage = getIntersctionImage(props.row, props.col);
 
     let intersctionClass = "emptyIntersection ";
     if (props.isMyTurn) {
@@ -35,19 +35,19 @@ const IntersectionBackGround = (props: Props) => {
     if (props.content == 'b' || props.content == 'w')
         return (
             <div className='parent'>
-                <Image className='emptyIntersection' src={x} />
-                <Image className='stone' src={stoneImage} />
+                <Image className='emptyIntersection' src={boardImage} />
+                <Image m={{ base: .4, md:1 }} className='stone' src={stoneImage} />
             </div>
         );
 
     if (!props.isMyTurn) {
         return (<>
-            <Image className={intersctionClass} src={x} />
+            <Image className={intersctionClass} src={boardImage} />
         </>
         );
     } else {
         return (<>
-            <Image onClick={() => props.onSelectIntersection(props.row, props.col)} className={intersctionClass} src={x} />
+            <Image onClick={() => props.onSelectIntersection(props.row, props.col)} className={intersctionClass} src={boardImage} />
         </>
         );
     }
