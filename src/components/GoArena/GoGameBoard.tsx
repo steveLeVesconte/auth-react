@@ -8,9 +8,9 @@ interface Props {
 
 const GoGameBoard = (props: Props) => {
     console.log("go game board: ",props)
-    return (<>
+    return (<div className='gameBoard'>
         {createRows(props.boardString, props.onSelectIntersection, props.isMyTurn)}
-    </>
+    </div>
     );
 }
 

@@ -111,11 +111,13 @@ button:focus-visible {
 /*   border: 1px solid #000000; */
 }
 
-.intersection-hover{
-  img:hover {
-    opacity:0.5 !important;
+div.intersection-hover:hover {
+    opacity:0.8 !important;
+    background-color: rgb(184, 190, 175);
+    cursor: pointer;
+    border-radius: 50px;
   }
-}
+
 
 
 .goIcon{
@@ -123,4 +125,23 @@ button:focus-visible {
   background-color: rgb(255, 255, 255);
   max-height: 50px;
   max-width: 50px;
+}
+
+
+.svgBack{
+ /*  background-color: #EAC77B; */
+  height: 100%;
+  width: 100%;
+}
+
+
+.gameBoard{
+
+  background-color: #EAC77B;
+}
+
+.boardContainer{
+  width:calc(100vh);
+  height:calc(100vh);
+  background-color: #EAC77B;
 }

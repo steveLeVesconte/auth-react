@@ -24,31 +24,49 @@ interface Props {
 // }
 
 const IntersectionBackGround = (props: Props) => {
-    const boardImage = getIntersctionImage(props.row, props.col);
+    // const boardImage = getIntersctionImage(props.row, props.col);
 
     let intersctionClass = "emptyIntersection ";
-    if (props.isMyTurn) {
-        intersctionClass = intersctionClass + " intersectionHover";
-    }
+    /*     if (props.isMyTurn) {
+            intersctionClass = intersctionClass + " intersectionHover";
+        } */
     let stoneImage = blackStone;
     if (props.content == 'w') stoneImage = whiteStone;
+    // occupied cell
     if (props.content == 'b' || props.content == 'w')
         return (
             <div className='parent'>
-                <Image className='emptyIntersection' src={boardImage} />
+                {/*  <Image className='emptyIntersection' src={boardImage} /> */}
+                <svg viewBox="0 0 100 100" className="svgBack emptyIntersection" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="50" x2="100" y2="50" stroke="black" />
+                    <line x1="50" y1="0" x2="50" y2="100" stroke="black" />
+
+                </svg>
                 <Image m="10%" className='stone' src={stoneImage} />
             </div>
         );
-
+//NOT  my turn and empty cell
     if (!props.isMyTurn) {
         return (<>
-            <Image className={intersctionClass} src={boardImage} />
+            <svg viewBox="0 0 100 100" className="svgBack emptyIntersection" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="50" x2="100" y2="50" stroke="black" />
+                <line x1="50" y1="0" x2="50" y2="100" stroke="black" />
+
+            </svg>
+            {/*  <Image className={intersctionClass} src={boardImage} /> */}
         </>
         );
     } else {
-        return (<>
-            <Image onClick={() => props.onSelectIntersection(props.row, props.col)} className={intersctionClass} src={boardImage} />
-        </>
+        // my turn and empty cell
+        return (<div onClick={() => props.onSelectIntersection(props.row, props.col)} className="intersctionClass intersection-hover" >
+            <svg viewBox="0 0 100 100" className="svgBack emptyIntersection" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="50" x2="100" y2="50" stroke="black" />
+                <line x1="50" y1="0" x2="50" y2="100" stroke="black" />
+
+            </svg>
+        </div>
+
+
         );
     }
 }

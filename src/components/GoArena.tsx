@@ -130,8 +130,9 @@ const GoArena
 
 {/*       <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} turn number {location.state.match?.turnNumber}</h1>
       <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.playerStoneColor} x {turn?.resultState.board}x</h1> */}
+      <div className="boardContainer">
       {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} />}
-    
+      </div>
       <HStack spacing='24px'>
         <Button onClick={()=>{navigate("/")}}>Home</Button>
 {/*       <Link to="/">Home</Link> */}
