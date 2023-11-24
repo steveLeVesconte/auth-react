@@ -1,9 +1,13 @@
 import {
   Card,
   CardBody,
-  Heading,
+  HStack,
 
-  Text
+
+
+
+  Text,
+
 } from '@chakra-ui/react';
 import { Match } from '../firestore';
 
@@ -19,14 +23,21 @@ const GameCard = ({ match }: Props) => {
       <CardBody>
    {/*      <Image src={defaultImage} boxSize='300px' /> */}
         <GoGameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={() => { }} />
-        <Heading fontSize="2xl">
+
+          <div >
           <div>
-            <Text>Black: {match.playerBlackName} </Text></div>
-          <div>  <Text>White: {match.playerWhiteName} </Text></div>
-          <div>  <Text>Date: {match.createDate} </Text></div>
-          <div>  <Text>Move: {match.turnNumber} </Text></div>
-          <div>  <Text>Move: {match.id} </Text></div>
-        </Heading>
+            <Text align="left" >Black: {match.playerBlackName} </Text></div>
+          <div>  <Text align="left">White: {match.playerWhiteName} </Text></div>
+   {/*        <Text align="left">Turn Of: {match.nextTurnPlayer} </Text> */}
+           <HStack>
+            <Text align="left">Date: {match.createDate.substring(0,10)} </Text>
+            <Text align="left">Move: {match.turnNumber} </Text>
+
+           </HStack>
+
+{/*           <div>  <Text>Move: {match.id} </Text></div> */}
+</div>
+
       </CardBody>
     </Card>
   );
