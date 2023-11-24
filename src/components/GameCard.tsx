@@ -2,11 +2,11 @@ import {
   Card,
   CardBody,
   Heading,
-  Image,
+
   Text
 } from '@chakra-ui/react';
 import { Match } from '../firestore';
-import defaultImage from '../assets/igo.jpg';
+
 import GoGameBoard from './GoArena/GoGameBoard';
 
 interface Props {
@@ -17,7 +17,7 @@ const GameCard = ({ match }: Props) => {
   return (
     <Card>
       <CardBody>
-        <Image src={defaultImage} boxSize='300px' />
+   {/*      <Image src={defaultImage} boxSize='300px' /> */}
         <GoGameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={() => { }} />
         <Heading fontSize="2xl">
           <div>

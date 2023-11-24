@@ -52,9 +52,9 @@ const handleSelect=(selectedMatch:Match)=>{
 
 return (
     <>
-    <div>Match List</div>
+{/*     <div>Match List</div> */}
     {
-        console.log("in return - matches", matches)
+       // console.log("in return - matches", matches)
     }
           <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}

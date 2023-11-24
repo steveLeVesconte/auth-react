@@ -1,4 +1,5 @@
 import {
+    Button,
     Card,
     CardBody,
     CardHeader,
@@ -55,7 +56,7 @@ const Chat = ({ match }: Props) => {
                 <div>{messages.map((thisMessage) => (<div key={thisMessage.id}>{thisMessage.createDate} {thisMessage.speakerName} says: {thisMessage.message}</div>))}</div>
                 <form onSubmit={handleSubmit}>
                     <input onChange={(e) => setNewMessage(e.target.value)} value={newMessage}></input>
-                    <button type="submit">Send</button>
+                    <Button type="submit">Send</Button>
                 </form>
             </CardBody>
         </Card>

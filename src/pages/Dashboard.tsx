@@ -1,19 +1,19 @@
-import { useContext, useState } from 'react'
+//import { useContext, useState } from 'react'
 //import { Alert, Button, Card} from 'react-bootstrap'
-import {useAuth} from '../contexts/AuthContext'
-import { Link, useNavigate } from 'react-router-dom';
-import PlayerList from '../components/PlayerList';
-import { PlayerContext } from '../contexts/PlayerContext';
-import { Alert, Button, Card, CardBody, Heading } from '@chakra-ui/react';
+//import {useAuth} from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom';
+//import PlayerList from '../components/PlayerList';
+//import { PlayerContext } from '../contexts/PlayerContext';
+import {  Button,  Heading } from '@chakra-ui/react';
 import MatchList from '../components/MatchList';
 
 
 const Dashboard = () => {
-  const {currentUser, logout}=useAuth();
-  const player=useContext(PlayerContext)
-const [error, setError]=useState("");
+  //const { logout}=useAuth();
+/*   const player=useContext(PlayerContext)
+const [error, setError]=useState(""); */
 const navigate = useNavigate()
-  async function handleLogout(){
+/*   async function handleLogout(){
   setError('');
   try{
     await logout();
@@ -21,7 +21,7 @@ const navigate = useNavigate()
   }catch{
     setError('failed to log out')
   }
-}
+} */
   return (
     <>
         <Heading as="h1" marginY={5} fontSize="5xl">
@@ -29,7 +29,7 @@ const navigate = useNavigate()
     </Heading>
     <Button onClick={()=>navigate("/create-match")}>New Match</Button>
 <MatchList></MatchList>
-     <Card>
+{/*      <Card>
 <CardBody>
   {player&&<h1>{player.name}</h1>}
   <h2 className='text-center mb-4'>Profile</h2>
@@ -40,8 +40,8 @@ const navigate = useNavigate()
      </Card>
 <div className='w-100 text-center mt-2'>
   <Button variant="link" onClick={handleLogout}>Log Out</Button>
-</div>
-<PlayerList></PlayerList>
+</div> */}
+{/* <PlayerList></PlayerList> */}
     </>
   )
 }

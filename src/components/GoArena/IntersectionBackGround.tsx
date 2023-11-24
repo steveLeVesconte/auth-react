@@ -36,7 +36,7 @@ const IntersectionBackGround = (props: Props) => {
         return (
             <div className='parent'>
                 <Image className='emptyIntersection' src={boardImage} />
-                <Image m={{ base: .4, md:1 }} className='stone' src={stoneImage} />
+                <Image m="10%" className='stone' src={stoneImage} />
             </div>
         );
 

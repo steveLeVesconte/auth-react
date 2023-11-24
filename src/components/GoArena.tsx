@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { TURN_COLLECTION, Turn, addTurn,  updateMatch } from "../firestore";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Submission, evaluateSubmission } from "../services/moveProcessor";
@@ -10,7 +10,7 @@ import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/f
 import { db } from "../firebase";
 import GoGameBoard from "./GoArena/GoGameBoard";
 import Chat from "./Chat";
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, HStack, useDisclosure } from "@chakra-ui/react";
 
 const GoArena
   = () => {
@@ -22,6 +22,7 @@ const GoArena
     const [turn, setTurn] = useState<Turn | null>()
     const location = useLocation();
     const player = useContext(PlayerContext)
+    const navigate = useNavigate();
     console.log('in in in !!!!!!!!!!!!!!!!!!!!!!! arena  turn location: ',location);
      
     useEffect(() => {
@@ -127,18 +128,21 @@ const GoArena
 
     return (<>
 
-      <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} turn number {location.state.match?.turnNumber}</h1>
-      <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.turnPlayerColor} x {turn?.resultState.board}x</h1>
+{/*       <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} turn number {location.state.match?.turnNumber}</h1>
+      <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.turnPlayerColor} x {turn?.resultState.board}x</h1> */}
       {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} />}
-      <Chat match={location.state.match}></Chat>
-      <Link to="/">Home</Link>
+    
+      <HStack spacing='24px'>
+        <Button onClick={()=>{navigate("/")}}>Home</Button>
+{/*       <Link to="/">Home</Link> */}
       {utilities.getIsMyTurn(turn, player) && <Button onClick={()=>handlePass(turn,player?.id??"")}>Pass</Button>}
-      {utilities.getStoneColorOfCurrentPlayer(player?.id??"", turn)}
+     <div> {utilities.getStoneColorOfCurrentPlayer(player?.id??"", turn)}</div>
       <div>{utilities.getIsMyTurn(turn, player) ? "myturn" : "notMyTurn"}</div>
-
-      <Button colorScheme='red' onClick={onOpen}>
+      </HStack >
+      <Chat match={location.state.match}></Chat>
+      {/* <Button colorScheme='red' onClick={onOpen}>
           Delete Customer
-        </Button>
+        </Button> */}
   
         <AlertDialog
           isOpen={isOpen}
@@ -152,7 +156,7 @@ const GoArena
               </AlertDialogHeader>
   
               <AlertDialogBody>
-                Are you sure? You can't undo this action afterwards.{play?.row} {play?.col}
+                You chose to play at: {play?.row} {play?.col} OK?
               </AlertDialogBody>
   
               <AlertDialogFooter>
@@ -160,7 +164,7 @@ const GoArena
                   Cancel
                 </Button>
                 <Button colorScheme='red' onClick={executeStonePlay} ml={3}>
-                  Delete
+                  Yes
                 </Button>
               </AlertDialogFooter>
             </AlertDialogContent>
