@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 const GameBoardLayout = () => {
   return (<>
   
-    <Box padding={5}>
+    <Box>
         <Outlet></Outlet>
     </Box>
     </>
