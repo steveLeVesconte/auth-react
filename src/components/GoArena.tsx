@@ -26,7 +26,7 @@ const GoArena
     console.log('in in in !!!!!!!!!!!!!!!!!!!!!!! arena  turn location: ',location);
  //    let dialogMargin="5px";
    // let isCentered=true;
-
+/// TBD TBD TBD make page recover from no match in location
     useEffect(() => {
       const turnQuery = query(collection(db, TURN_COLLECTION), where("matchId", "==", location.state.match.id), orderBy("createDate", "desc"), limit(1));
       console.log('!!!!!!!!!!!!!!!!!!!!!!! arena  turn qury: ',turnQuery);
@@ -133,12 +133,14 @@ const GoArena
       }
     }
 
+   try{
+
     return (<>
 
 {/*       <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} turn number {location.state.match?.turnNumber}</h1>
       <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.playerStoneColor} x {turn?.resultState.board}x</h1> */}
-      <div className="boardContainer">
-      {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} expressLetters={true} />}
+      <div className="xxxboardContainer">
+      {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} expressRowAndColumnLabels={true} />}
       </div>
       <HStack spacing='24px'>
         <Button onClick={()=>{navigate("/")}}>Home</Button>
@@ -181,6 +183,13 @@ const GoArena
         </AlertDialog>
     </>
     );
+      }catch(e)
+      {
+            console.log("Error displaying component:  probably no match: ", location.state);
+           ///TBD TBD TBD  test if "missing match" is issue and show toast.
+           navigate("/");
+      }
   }
+  
 
 export default GoArena

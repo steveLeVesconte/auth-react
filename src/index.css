@@ -90,7 +90,27 @@ button:focus-visible {
   opacity: 0.5;
    /* margin-bottom: 5px; */
   }
+.cornerSpacer{
+ /*   min-width: 28px;  */
+/*   min-height: 28px; */
+   flex-grow:.5; 
+}
 
+.rowNumberLabel{
+  color:black;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  min-width: 28px;
+}
+
+.colLetterLabel{
+  color:black;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  min-height: 28px;
+  flex-grow:1;
+  text-align: center;
+}
 .parent {
   position: relative;
   top: 0;
@@ -140,7 +160,24 @@ div.intersection-hover:hover {
   background-color: #EAC77B;
 }
 
-
+.rowNumberDiv{
+  flex-grow:1; 
+  background-color:transparent; 
+  border: 1px black solid;
+  color:white;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+}
+.rowNumberDiv>span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  color:blue;
+}
 
 @media screen and (max-width: 1035px){
 .boardContainer{
@@ -156,6 +193,83 @@ div.intersection-hover:hover {
     /* background-color: #EAC77B; */
   }
   }
+
+
+  @media screen and (max-width: 900px){
+
+    .cornerSpacer{
+
+      flex-grow: 0.7;
+    }
+  }
+
+  @media screen and (max-width: 800px){
+
+    .cornerSpacer{
+
+      flex-grow: 1;
+    }
+  }
+  @media screen and (max-width: 700px){
+
+    .cornerSpacer{
+
+      flex-grow: 1.25;
+    }
+  }
+
+  @media screen and (max-width: 600px){
+
+    .cornerSpacer{
+
+      flex-grow: 1.5;
+    }
+  }
+
+  @media screen and (max-width: 500px){
+    .rowNumberLabel{
+        font-size: 10px;
+        min-width: 20px;
+    }
+    .colLetterLabel{
+      font-size: 10px;
+      min-height: 17px;
+      
+    }
+    
+
+    .cornerSpacer{
+
+      flex-grow: 1.5;
+    }
+  }
+    
+
+    @media screen and (max-width: 320px){
+        .rowNumberLabel{
+            font-size: 07px;
+            min-width: 15px;
+        }
+        .colLetterLabel{
+          font-size: 7px;
+          min-height: 10px;
+        }
+        .cornerSpacer{
+
+          flex-grow: 1.6;
+        }
+      }
+        
+
+
+
+
+
+
+
+
+
+
 .letter-row-container{
   width:calc(100vh);
 }
