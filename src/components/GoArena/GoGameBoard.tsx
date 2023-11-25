@@ -1,16 +1,21 @@
 import BoardRow from './BoardRow';
+import LetterRow from './LetterRow';
 
 interface Props {
     boardString: string;
     isMyTurn: boolean;
     onSelectIntersection: (row: number, col: number) => void;
+    expressLetters:boolean;
 }
 
 const GoGameBoard = (props: Props) => {
     console.log("go game board: ",props)
-    return (<div className='gameBoard'>
+    return (<>
+     {false &&   <div className="letter-row-container"> <LetterRow ></LetterRow></div>}
+    <div className='gameBoard'>
         {createRows(props.boardString, props.onSelectIntersection, props.isMyTurn)}
     </div>
+    </>
     );
 }
 

@@ -17,6 +17,8 @@ const BoardRow = (props: Props) => {
   }
   return (
     <HStack gap={0}>{content}</HStack>
+   /*  <HStack gap={0}><div style={{width:"10%", backgroundColor:"transparent"}}>{props.row}</div>{content}</HStack>
+ */
   )
 }
 

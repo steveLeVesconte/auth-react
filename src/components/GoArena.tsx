@@ -24,7 +24,9 @@ const GoArena
     const player = useContext(PlayerContext)
     const navigate = useNavigate();
     console.log('in in in !!!!!!!!!!!!!!!!!!!!!!! arena  turn location: ',location);
-     
+ //    let dialogMargin="5px";
+   // let isCentered=true;
+
     useEffect(() => {
       const turnQuery = query(collection(db, TURN_COLLECTION), where("matchId", "==", location.state.match.id), orderBy("createDate", "desc"), limit(1));
       console.log('!!!!!!!!!!!!!!!!!!!!!!! arena  turn qury: ',turnQuery);
@@ -43,9 +45,13 @@ const GoArena
     );
 
     const onSelectIntersection = (row: number, col: number): void => {
+     // if(row>10) dialogMargin="50px";
      // handleStonePlay(turn, player?.id ?? "", row, col);
      setPlay({row:row,col:col});
      onOpen();
+
+
+
      // handleStonePlay(turn, player?.id ?? "", row, col);
     }
     // const handleStonePlay = (turn: Turn | null | undefined, userId: string, row: number, col: number) => {
@@ -92,6 +98,7 @@ const GoArena
     }
 
     const doStonePlay = (turn: Turn | null | undefined, userId: string, row: number, col: number) => {
+
       if (turn) {
         const submission: Submission =
           submissionFactory.createSubmission(turn, userId, row, col);
@@ -131,7 +138,7 @@ const GoArena
 {/*       <h1>{location.state.match?.id} {location.state.match?.playerBlackName} {location.state.match?.playerWhiteName} turn number {location.state.match?.turnNumber}</h1>
       <h1> {turn?.playerBlackName} {turn?.playerWhiteName} turn-turnNumber: {turn?.turnNumber} player of last turn: {turn?.playerStoneColor} x {turn?.resultState.board}x</h1> */}
       <div className="boardContainer">
-      {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} />}
+      {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} expressLetters={true} />}
       </div>
       <HStack spacing='24px'>
         <Button onClick={()=>{navigate("/")}}>Home</Button>
@@ -147,17 +154,17 @@ const GoArena
         </Button> */}
   
         <AlertDialog
+         motionPreset='slideInBottom'
           isOpen={isOpen}
           leastDestructiveRef={cancelRef}
           onClose={onClose}
+          isCentered
         >
           <AlertDialogOverlay>
-            <AlertDialogContent>
-              <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                Delete Customer
-              </AlertDialogHeader>
+            <AlertDialogContent style={{  width: "200px" , fontWeight: "bold" , marginTop: "10px", marginLeft:"10px"}} >
+   
   
-              <AlertDialogBody>
+              <AlertDialogBody >
                 You chose to play at: {play?.row} {play?.col} OK?
               </AlertDialogBody>
   

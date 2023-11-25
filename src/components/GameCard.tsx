@@ -22,7 +22,7 @@ const GameCard = ({ match }: Props) => {
     <Card>
       <CardBody>
    {/*      <Image src={defaultImage} boxSize='300px' /> */}
-        <GoGameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={() => { }} />
+        <GoGameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={() => { }} expressLetters={false} />
 
           <div >
           <div>

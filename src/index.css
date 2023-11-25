@@ -106,8 +106,8 @@ button:focus-visible {
   position: absolute;
   top: 0px;
   left: 0px;
-  height:80%;
-  width:80%;
+  height:90%;
+  width:90%;
 /*   border: 1px solid #000000; */
 }
 
@@ -140,8 +140,33 @@ div.intersection-hover:hover {
   background-color: #EAC77B;
 }
 
+
+
+@media screen and (max-width: 1035px){
 .boardContainer{
+  width:calc(97vw);
+  height:calc(97vw);
+  /* background-color: #EAC77B; */
+}
+}
+@media screen and (min-width: 1036px){
+  .boardContainer{
+    width:calc(97vh);
+    height:calc(97vh);
+    /* background-color: #EAC77B; */
+  }
+  }
+.letter-row-container{
   width:calc(100vh);
-  height:calc(100vh);
-  background-color: #EAC77B;
+}
+.letter-row{
+  width:100%;
+}
+
+#moveDialog{
+  margin-top: 0px;
+  margin-left: 0px;
+  background-color:"transparent";
+   color: "black"; 
+   font-weight: "bold"
 }
