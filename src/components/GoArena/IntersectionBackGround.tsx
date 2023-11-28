@@ -10,6 +10,7 @@
 import blackStone from '../../assets/blackStoneTrans.png'
 import whiteStone from '../../assets/whiteStoneTrans.png'
 import { Image } from '@chakra-ui/react';
+import IntersctionSVG from './IntersctionSVG';
 
 interface Props {
     row: number;
@@ -19,51 +20,27 @@ interface Props {
     onSelectIntersection: (row: number, col: number) => void;
 }
 
-// const handlePlay = (row: number, col: number) => {
-//     console.log("intersection click: ", row.toString() + '-' + col);
-// }
-
 const IntersectionBackGround = (props: Props) => {
-    // const boardImage = getIntersctionImage(props.row, props.col);
 
-   // let intersctionClass = "emptyIntersection ";
-    /*     if (props.isMyTurn) {
-            intersctionClass = intersctionClass + " intersectionHover";
-        } */
     let stoneImage = blackStone;
     if (props.content == 'w') stoneImage = whiteStone;
     // occupied cell
     if (props.content == 'b' || props.content == 'w')
         return (
-            <div className='parent'>
-                {/*  <Image className='emptyIntersection' src={boardImage} /> */}
-                <svg viewBox="0 0 100 100" className="svgBack emptyIntersection" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="0" y1="50" x2="100" y2="50" stroke="black" stroke-width="2"  />
-                    <line x1="50" y1="0" x2="50" y2="100" stroke="black" stroke-width="2"  />
-
-                </svg>
+            <div className='boardIntersectionWithStone'>
+                 <IntersctionSVG/>
                 <Image m="5%" className='stone' src={stoneImage} />
             </div>
         );
-//NOT  my turn and empty cell
+    //NOT  my turn and empty cell
     if (!props.isMyTurn) {
-        return (<>
-            <svg viewBox="0 0 100 100" className="svgBack emptyIntersection" xmlns="http://www.w3.org/2000/svg">
-                <line x1="0" y1="50" x2="100" y2="50" stroke="black" stroke-width="2"  />
-                <line x1="50" y1="0" x2="50" y2="100" stroke="black" stroke-width="2"  />
-
-            </svg>
-            {/*  <Image className={intersctionClass} src={boardImage} /> */}
-        </>
+        return (
+            <IntersctionSVG/>
         );
     } else {
         // my turn and empty cell
         return (<div onClick={() => props.onSelectIntersection(props.row, props.col)} className="intersctionClass intersection-hover" >
-            <svg viewBox="0 0 100 100" className="svgBack emptyIntersection" xmlns="http://www.w3.org/2000/svg">
-                <line x1="0" y1="50" x2="100" y2="50" stroke="black" stroke-width="2"  />
-                <line x1="50" y1="0" x2="50" y2="100" stroke="black" stroke-width="2"  />
-
-            </svg>
+            <IntersctionSVG/>
         </div>
 
 

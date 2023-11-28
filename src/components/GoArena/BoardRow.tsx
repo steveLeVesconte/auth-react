@@ -6,14 +6,13 @@ interface Props {
   content: string;
   isMyTurn: boolean;
   onSelectIntersection: (row: number, col: number) => void;
-
 }
 
 const BoardRow = (props: Props) => {
   const content = [];
   const stringArray = props.content.split("");
 /*   if(props.expressRowAndColumnLables){
-    
+
       content.push(<div className='rowNumberLabel'>{props.row.toString()}</div>);
   } */
 
@@ -24,8 +23,6 @@ const BoardRow = (props: Props) => {
   }
   return (
     <HStack gap={0}>{content}</HStack>
-   /*  <HStack gap={0}><div style={{width:"10%", backgroundColor:"transparent"}}>{props.row}</div>{content}</HStack>
- */
   )
 }
 

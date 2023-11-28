@@ -1,3 +1,23 @@
+.goIcon {
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  max-height: 50px;
+  max-width: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -69,77 +89,75 @@ button:focus-visible {
 }
  */
 
- xnonEdge{
+/*  xnonEdge{
   background-image:url(assets/intersection.png);
   position:relative;
   z-index:5;
-  }
+  } */
 
-  .nonEdge{
+  /* .nonEdge{
     background-image:url(assets/blackStoneTrans.png);
-  /*  position:absolute; */
+ 
     z-index:5;
-    }
-  .yourDiv{
+    } */
+/*   .yourDiv{
     position: absolute;
     z-index: 10;
-}
+} */
 
-.test3{position:absolute; z-index: 1000;}
-.intersectionHover  img:hover {
+/* .test3{position:absolute; z-index: 1000;} */
+/* .intersectionHover  img:hover {
   opacity: 0.5;
-   /* margin-bottom: 5px; */
-  }
-.cornerSpacer{
+
+  } */
+/* .cornerSpacer{ */
  /*   min-width: 28px;  */
 /*   min-height: 28px; */
-   flex-grow:.5; 
-}
+/*    flex-grow:.5; 
+} */
 
-.rowNumberLabel{
+/* .rowNumberLabel{
   color:black;
   padding-left: 0.3em;
   padding-right: 0.3em;
   text-align: right;
-/*   min-width: 28px; */
+
 }
 
 .colLetterLabel{
   color:black;
-/*   padding-top: 0.3em;
-  padding-bottom: 0.3em;
-  min-height: 28px; */
+
   flex-grow:1;
   text-align: center;
   padding-right: 5px;
-}
-.parent {
+} */
+/* .parent {
   position: relative;
   top: 0;
   left: 0;
   display: flex;
-}
-.emptyIntersection {
+} */
+/* .emptyIntersection {
   position: relative;
   top: 0;
-/*  border: 1px solid #000000; */
-}
-.stone {
+
+} */
+/* .stone {
   position: absolute;
   top: 0px;
   left: 0px;
   height:90%;
   width:90%;
-/*   border: 1px solid #000000; */
-}
 
-div.intersection-hover:hover {
+} */
+
+/* div.intersection-hover:hover {
     opacity:0.8 !important;
     background-color: rgb(184, 190, 175);
     cursor: pointer;
     border-radius: 50px;
-  }
-
+  } */
+/* 
 
 
 .goIcon{
@@ -147,22 +165,22 @@ div.intersection-hover:hover {
   background-color: rgb(255, 255, 255);
   max-height: 50px;
   max-width: 50px;
-}
+} */
 
 
-.svgBack{
- /*  background-color: #EAC77B; */
+/* .svgBack{
+ 
   height: 100%;
   width: 100%;
-}
+} */
 
 
-.gameBoard{
+/* .gameBoard{
 
   background-color: #EAC77B;
-}
+} */
 
-.rowNumberDiv{
+/* .rowNumberDiv{
   flex-grow:1; 
   background-color:transparent; 
   border: 1px black solid;
@@ -179,8 +197,8 @@ div.intersection-hover:hover {
   vertical-align: middle;
   line-height: normal;
   color:blue;
-}
-
+} */
+/* 
 .gameGridContainer{
   height: 97vh;;
   width: 97vh;;
@@ -199,18 +217,15 @@ div.intersection-hover:hover {
     aspect-ratio: 1;
   
   }
-.xxxboardContainer{
-  margin-bottom: 40px;
-}
+
 .boardContainer{
   width:97vw;
   height:97vw;
   
  background-color: #EAC77B;
 
-  /* background-color: #EAC77B; */
 }
-}
+} */
 /* @media screen and (min-width: 1036px){
   .boardContainer{
     width:97vh;
@@ -219,7 +234,7 @@ div.intersection-hover:hover {
   }
   } */
 
-
+/* 
   @media screen and (max-width: 900px){
 
 
@@ -265,13 +280,9 @@ div.intersection-hover:hover {
   }
 
   @media screen and (max-width: 500px){
-/*     .rowNumberLabel{
-        font-size: 10px;
-        min-width: 20px;
-    } */
+
     .colLetterLabel{
       font-size: 7px;
-/*       min-height: 17px; */
 
     }
     .rowNumberLabel{
@@ -280,18 +291,12 @@ div.intersection-hover:hover {
       padding-right: 2px;
     }
 
-/*     .cornerSpacer{
 
-      flex-grow: 1.5;
-    } */
   }
     
 
     @media screen and (max-width: 320px){
-/*         .rowNumberLabel{
-            font-size: 07px;
-            min-width: 15px;
-        } */
+
         .colLetterLabel{
           font-size: 6px;
 
@@ -306,10 +311,7 @@ div.intersection-hover:hover {
       }
         
       @media screen and (max-width: 200px){
-        /*         .rowNumberLabel{
-                    font-size: 07px;
-                    min-width: 15px;
-                } */
+
                 .colLetterLabel{
                   font-size: 5px;
         
@@ -324,10 +326,7 @@ div.intersection-hover:hover {
               }
 
               @media screen and (max-width: 175px){
-                /*         .rowNumberLabel{
-                            font-size: 07px;
-                            min-width: 15px;
-                        } */
+
                         .colLetterLabel{
                           font-size: 4px;
                 
@@ -341,23 +340,23 @@ div.intersection-hover:hover {
                 
                       }
 
+ */
 
 
 
 
 
-
-.letter-row-container{
+/* .letter-row-container{
   width:calc(100vh);
 }
 .letter-row{
   width:100%;
-}
+} */
 
-#moveDialog{
+/* #moveDialog{
   margin-top: 0px;
   margin-left: 0px;
   background-color:"transparent";
    color: "black"; 
    font-weight: "bold"
-}
+} */

@@ -1,0 +1,150 @@
+/* game board labels */
+
+.rowNumberLabel {
+  color: black;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  text-align: right;
+}
+.colLetterLabel {
+  color: black;
+  flex-grow: 1;
+  text-align: center;
+  padding-right: 5px;
+}
+
+@media screen and (max-width: 800px) {
+  .colLetterLabel {
+    font-size: 10px;
+  }
+  .rowNumberLabel {
+    font-size: 10px;
+    padding-right: 3px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .rowColLetterLabel {
+    font-size: 9px;
+  }
+  .rowNumberLabel {
+    font-size: 9px;
+    padding-right: 3px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .colLetterLabel {
+    font-size: 7px;
+  }
+  .rowNumberLabel {
+    font-size: 7px;
+    padding-right: 3px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .colLetterLabel {
+    font-size: 7px;
+  }
+  .rowNumberLabel {
+    font-size: 7px;
+    padding-right: 2px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .colLetterLabel {
+    font-size: 6px;
+  }
+  .rowNumberLabel {
+    font-size: 6px;
+    padding-right: 2px;
+  }
+}
+@media screen and (max-width: 200px) {
+  .colLetterLabel {
+    font-size: 5px;
+  }
+  .rowNumberLabel {
+    font-size: 5px;
+    padding-right: 2px;
+  }
+}
+@media screen and (max-width: 175px) {
+  .colLetterLabel {
+    font-size: 4px;
+  }
+  .rowNumberLabel {
+    font-size: 4px;
+    padding-right: 2px;
+  }
+}
+
+/* board intersections  */
+
+.boardIntersectionWithStone {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+}
+
+.stone {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 90%;
+  width: 90%;
+}
+
+div.intersection-hover:hover {
+  opacity: 0.8 !important;
+  background-color: rgb(184, 190, 175);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.svgBack {
+  height: 100%;
+  width: 100%;
+}
+
+/* arena board  */
+
+.areanGameBoard {
+  margin-bottom: 40px;
+}
+
+.gameGridContainer {
+  height: 97vh;
+  width: 97vh;
+  aspect-ratio: 1;
+  background-color: #eac77b;
+}
+
+.gameBoardColor {
+  /* use in MatchList */
+  background-color: #eac77b;
+}
+
+.gameBoard {
+  background-color: #eac77b;
+}
+
+@media screen and (max-width: 1330px) {
+  .gameGridContainer {
+    height: 97vw;
+    width: 97vw;
+    aspect-ratio: 1;
+  }
+}
+
+
+/* confirmation dialog boxes */
+
+
+#moveDialog {
+  margin-top: 0px;
+  margin-left: 0px;
+  background-color: "transparent";
+  color: "black";
+  font-weight: "bold";
+}
