@@ -12,10 +12,10 @@ interface Props {
 const BoardRow = (props: Props) => {
   const content = [];
   const stringArray = props.content.split("");
-  if(props.expressRowAndColumnLables){
-    /*   content.push(<div className='cornerSpacer'></div>); */
+/*   if(props.expressRowAndColumnLables){
+    
       content.push(<div className='rowNumberLabel'>{props.row.toString()}</div>);
-  }
+  } */
 
   for (let x = 0; x < 19; x++) {
     const thisKey = props.row.toString() + '-' + x.toString();

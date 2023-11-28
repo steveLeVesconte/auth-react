@@ -179,20 +179,34 @@ div.intersection-hover:hover {
   color:blue;
 }
 
-@media screen and (max-width: 1035px){
+.gameGridContainer{
+  height: 97vh;;
+  width: 97vh;;
+  aspect-ratio: 1;
+
+}
+
+@media screen and (max-width: 1330px){
+  .gameGridContainer{
+    height: 97vw;;
+    width: 97vw;;
+    aspect-ratio: 1;
+  
+  }
+
 .boardContainer{
-  width:calc(97vw);
-  height:calc(97vw);
+  width:97vw;
+  height:97vw;
   /* background-color: #EAC77B; */
 }
 }
-@media screen and (min-width: 1036px){
+/* @media screen and (min-width: 1036px){
   .boardContainer{
-    width:calc(97vh);
-    height:calc(97vh);
-    /* background-color: #EAC77B; */
+    width:97vh;
+    height:97vh;
+
   }
-  }
+  } */
 
 
   @media screen and (max-width: 900px){

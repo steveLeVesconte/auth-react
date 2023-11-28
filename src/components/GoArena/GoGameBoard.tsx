@@ -1,4 +1,4 @@
-import { Center, HStack, VStack } from '@chakra-ui/react';
+import { Box, Center, Flex, Grid, GridItem, HStack, VStack } from '@chakra-ui/react';
 import BoardRow from './BoardRow';
 import LetterRow from './LetterRow';
 
@@ -15,48 +15,46 @@ const GoGameBoard = (props: Props) => {
     //if (props.expressLetters) containerClass = "boardContainer";
     console.log("go game board: ", props)
     return (<>
-        <div >
-     {/*        {props.expressRowAndColumnLabels && <div className="letter-row-container"> <LetterRow ></LetterRow></div>}
-     */}     {/*    <div id="h" style={{ height: "100%", display: "flex"}}> */}
-              {/*   <div style={{ flexGrow:"1", height: "auto", width:"30px"}}>
-                    <div id="moo" style={{ width:"30px",height: "100%", display: "flex", flexDirection: "column", alignItems: "strech" }}>
+        <div className='gameGridContainer'>
+            <Grid templateAreas={`"corner headerLetters" 
+                              "rowNums gameBoard"`} bg="gray.50"
+                gridTemplateColumns={'3fr 97fr'}
+                gridTemplateRows={'3fr 97fr'}
+                w="100%"
+                h="100%"
+                className='boarderContainer'>
+                <GridItem bg='purple.500' area={"corner"} ><div> dsaf</div></GridItem>
+                <GridItem bg='yellow.300' area={"headerLetters"} >
+                {props.expressRowAndColumnLabels && <LetterRow ></LetterRow>}
 
-                    <div className="rowNumberDiv">00</div>
-                    <div className="rowNumberDiv">01</div>
-                        <div className="rowNumberDiv">02</div>
-                        <div className="rowNumberDiv">03</div>
-                        <div className="rowNumberDiv">04</div>
-                        <div className="rowNumberDiv">05</div>
-                        <div className="rowNumberDiv">06</div>
-                        <div className="rowNumberDiv">07</div>
-                        <div className="rowNumberDiv">08</div>
-                        <div className="rowNumberDiv">09</div>
-                        <div className="rowNumberDiv">10</div>
-                        <div className="rowNumberDiv">11</div>
-                        <div className="rowNumberDiv">12</div>
-                        <div className="rowNumberDiv">13</div>
-                        <div className="rowNumberDiv">14</div>
-                        <div className="rowNumberDiv">15</div>
-                        <div className="rowNumberDiv">16</div>
-                        <div className="rowNumberDiv">17</div>
-                        <div className="rowNumberDiv">18</div>
+                </GridItem>
+                <GridItem bg='green.500' area={"rowNums"} >
+                <Flex h={"100%"} flexDirection={"column"} >
+                    {createRowsNumbers() }
+                    </Flex>
+                </GridItem>
+                <GridItem bg='pink.200' area={"gameBoard"} >
+                    <div className='gameBoard'>
+               
+                        {/* {props.expressRowAndColumnLabels && <LetterRow ></LetterRow>} */}
+                    
+                        {createRows(props.boardString, props.onSelectIntersection, props.isMyTurn, props.expressRowAndColumnLabels)}
                     </div>
-
-                </div> */}
-              {/*   <div className={containerClass}> */}
-                <div className='gameBoard'>
-                {props.expressRowAndColumnLabels &&  <LetterRow ></LetterRow>}
-   
-                    {createRows(props.boardString, props.onSelectIntersection, props.isMyTurn, props.expressRowAndColumnLabels)}
-                </div>
-                {/* </div> */}
-          {/*   </div> */}
+                </GridItem>
+            </Grid>
         </div>
+{/*         <div className='gameGridContainer'>
+            <div className='gameBoard'>
+
+                {createRows(props.boardString, props.onSelectIntersection, props.isMyTurn, props.expressRowAndColumnLabels)}
+            </div>
+
+        </div> */}
     </>
     );
 }
 
-const createRows = (boardString: string, onSelectIntersection: (row: number, col: number) => void, isMyTurn: boolean, expressRowAndColumnLabels:boolean): JSX.Element[] => {
+const createRows = (boardString: string, onSelectIntersection: (row: number, col: number) => void, isMyTurn: boolean, expressRowAndColumnLabels: boolean): JSX.Element[] => {
     console.log('*************************** board string in create rows: ', boardString);
     const content: JSX.Element[] = [];
     const rowStringsArray: string[] = boardString.split(',');
@@ -65,6 +63,15 @@ const createRows = (boardString: string, onSelectIntersection: (row: number, col
 
     for (let x = 0; x < 19; x++) {
         content.push(<BoardRow key={x} row={x} content={rowStringsArray[x]} isMyTurn={isMyTurn} onSelectIntersection={onSelectIntersection} expressRowAndColumnLables={expressRowAndColumnLabels} />);
+    }
+    return content;
+}
+const createRowsNumbers = (): JSX.Element[] => {
+    const content: JSX.Element[] = [];
+
+    
+    for (let x = 18; x >=0 ; x--) {
+        content.push(<Box flexDir={"row"} pl={2} flexShrink={1} flexGrow={1} display={"flex"}  alignItems={"center"} key={x} ><div >{x}</div></Box>);
     }
     return content;
 }
