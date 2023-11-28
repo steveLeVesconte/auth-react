@@ -12,6 +12,7 @@ import {
 import { Match } from '../firestore';
 
 import GoGameBoard from './GoArena/GoGameBoard';
+import GameBoard from './GoArena/GameBoard';
 
 interface Props {
   match: Match;
@@ -22,8 +23,10 @@ const GameCard = ({ match }: Props) => {
     <Card>
       <CardBody>
    {/*      <Image src={defaultImage} boxSize='300px' /> */}
-        <GoGameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={() => { }} expressLetters={false} />
-
+        {/* <GoGameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={() => { }} expressLetters={false} /> */}
+        <div className="gameBoardColor">
+        <GameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={() => { }} />
+        </div>
           <div >
           <div>
             <Text align="left" >Black: {match.playerBlackName} </Text></div>

@@ -1,6 +1,7 @@
 import { Box, Center, Flex, Grid, GridItem, HStack, VStack } from '@chakra-ui/react';
 import BoardRow from './BoardRow';
 import LetterRow from './LetterRow';
+import GameBoard from './GameBoard';
 
 interface Props {
     boardString: string;
@@ -17,28 +18,29 @@ const GoGameBoard = (props: Props) => {
     return (<>
         <div className='gameGridContainer'>
             <Grid templateAreas={`"corner headerLetters" 
-                              "rowNums gameBoard"`} bg="gray.50"
+                              "rowNums gameBoard"`} 
                 gridTemplateColumns={'3fr 97fr'}
                 gridTemplateRows={'3fr 97fr'}
                 w="100%"
                 h="100%"
                 className='boarderContainer'>
-                <GridItem bg='purple.500' area={"corner"} ><div> dsaf</div></GridItem>
-                <GridItem bg='yellow.300' area={"headerLetters"} >
+                <GridItem  area={"corner"} ><div> </div></GridItem>
+                <GridItem  area={"headerLetters"} >
                 {props.expressRowAndColumnLabels && <LetterRow ></LetterRow>}
 
                 </GridItem>
-                <GridItem bg='green.500' area={"rowNums"} >
+                <GridItem  area={"rowNums"} >
                 <Flex h={"100%"} flexDirection={"column"} >
                     {createRowsNumbers() }
                     </Flex>
                 </GridItem>
                 <GridItem bg='pink.200' area={"gameBoard"} >
                     <div className='gameBoard'>
-               
+                    {<GameBoard boardString={props.boardString} isMyTurn={props.isMyTurn} onSelectIntersection={props.onSelectIntersection} />}
+
                         {/* {props.expressRowAndColumnLabels && <LetterRow ></LetterRow>} */}
                     
-                        {createRows(props.boardString, props.onSelectIntersection, props.isMyTurn, props.expressRowAndColumnLabels)}
+                      {/*   {createRows(props.boardString, props.onSelectIntersection, props.isMyTurn, props.expressRowAndColumnLabels)} */}
                     </div>
                 </GridItem>
             </Grid>
@@ -71,7 +73,7 @@ const createRowsNumbers = (): JSX.Element[] => {
 
     
     for (let x = 18; x >=0 ; x--) {
-        content.push(<Box flexDir={"row"} pl={2} flexShrink={1} flexGrow={1} display={"flex"}  alignItems={"center"} key={x} ><div >{x}</div></Box>);
+        content.push(<Box flexDir={"row"}  flexShrink={1} flexGrow={1} display={"flex"}  alignItems={"center"} key={x} ><div className='rowNumberLabel' >{x}</div></Box>);
     }
     return content;
 }

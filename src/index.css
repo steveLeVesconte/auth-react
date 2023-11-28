@@ -100,16 +100,18 @@ button:focus-visible {
   color:black;
   padding-left: 0.3em;
   padding-right: 0.3em;
-  min-width: 28px;
+  text-align: right;
+/*   min-width: 28px; */
 }
 
 .colLetterLabel{
   color:black;
-  padding-top: 0.3em;
+/*   padding-top: 0.3em;
   padding-bottom: 0.3em;
-  min-height: 28px;
+  min-height: 28px; */
   flex-grow:1;
   text-align: center;
+  padding-right: 5px;
 }
 .parent {
   position: relative;
@@ -183,7 +185,11 @@ div.intersection-hover:hover {
   height: 97vh;;
   width: 97vh;;
   aspect-ratio: 1;
+  background-color: #EAC77B;
+}
 
+.gameBoardColor{
+  background-color: #EAC77B;
 }
 
 @media screen and (max-width: 1330px){
@@ -193,10 +199,15 @@ div.intersection-hover:hover {
     aspect-ratio: 1;
   
   }
-
+.xxxboardContainer{
+  margin-bottom: 40px;
+}
 .boardContainer{
   width:97vw;
   height:97vw;
+  
+ background-color: #EAC77B;
+
   /* background-color: #EAC77B; */
 }
 }
@@ -211,72 +222,124 @@ div.intersection-hover:hover {
 
   @media screen and (max-width: 900px){
 
-    .cornerSpacer{
 
-      flex-grow: 0.7;
-    }
   }
 
   @media screen and (max-width: 800px){
 
-    .cornerSpacer{
+    .colLetterLabel{
+      font-size: 10px;
 
-      flex-grow: 1;
+
+    }
+    .rowNumberLabel{
+      font-size: 10px;
+
+      padding-right: 3px;
     }
   }
   @media screen and (max-width: 700px){
 
-    .cornerSpacer{
+    .rowColLetterLabel{
+      font-size: 9px;
 
-      flex-grow: 1.25;
+    }
+    .rowNumberLabel{
+      font-size: 9px;
+
+      padding-right: 3px;
     }
   }
 
   @media screen and (max-width: 600px){
+    .colLetterLabel{
+      font-size: 7px;
 
-    .cornerSpacer{
-
-      flex-grow: 1.5;
     }
+    .rowNumberLabel{
+      font-size: 7px;
+
+      padding-right: 3px;
+    }
+
   }
 
   @media screen and (max-width: 500px){
-    .rowNumberLabel{
+/*     .rowNumberLabel{
         font-size: 10px;
         min-width: 20px;
-    }
+    } */
     .colLetterLabel{
-      font-size: 10px;
-      min-height: 17px;
-      
-    }
-    
+      font-size: 7px;
+/*       min-height: 17px; */
 
-    .cornerSpacer{
+    }
+    .rowNumberLabel{
+      font-size: 7px;
+
+      padding-right: 2px;
+    }
+
+/*     .cornerSpacer{
 
       flex-grow: 1.5;
-    }
+    } */
   }
     
 
     @media screen and (max-width: 320px){
-        .rowNumberLabel{
+/*         .rowNumberLabel{
             font-size: 07px;
             min-width: 15px;
-        }
+        } */
         .colLetterLabel{
-          font-size: 7px;
-          min-height: 10px;
-        }
-        .cornerSpacer{
+          font-size: 6px;
 
-          flex-grow: 1.6;
+
         }
+        .rowNumberLabel{
+          font-size: 6px;
+    
+          padding-right: 2px;
+        }
+
       }
         
+      @media screen and (max-width: 200px){
+        /*         .rowNumberLabel{
+                    font-size: 07px;
+                    min-width: 15px;
+                } */
+                .colLetterLabel{
+                  font-size: 5px;
+        
+        
+                }
+                .rowNumberLabel{
+                  font-size: 5px;
+            
+                  padding-right: 2px;
+                }
+        
+              }
 
-
-
+              @media screen and (max-width: 175px){
+                /*         .rowNumberLabel{
+                            font-size: 07px;
+                            min-width: 15px;
+                        } */
+                        .colLetterLabel{
+                          font-size: 4px;
+                
+                
+                        }
+                        .rowNumberLabel{
+                          font-size: 4px;
+                    
+                          padding-right: 2px;
+                        }
+                
+                      }
 
 
 

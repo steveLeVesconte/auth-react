@@ -12,11 +12,11 @@ const LetterRow = () => {
   const content = [];
   const letters="ABCDEFGHIJKLMNOPQRS";
   //const stringArray = props.content.split("");
-  content.push(<div className='cornerSpacer'></div>);
+ /*  content.push(<div className='cornerSpacer'></div>); */
   for (let x = 0; x < 19; x++) {
     //const thisKey = props.row.toString() + '-' + x.toString();
     
-    content.push(<div className='colLetterLabel'>{letters[x]}</div>);
+    content.push(<div  className='colLetterLabel'>{letters[x]}</div>);
   }
   return (
     <HStack gap={0} >{content}</HStack>

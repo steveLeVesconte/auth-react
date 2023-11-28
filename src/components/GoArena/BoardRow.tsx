@@ -6,7 +6,7 @@ interface Props {
   content: string;
   isMyTurn: boolean;
   onSelectIntersection: (row: number, col: number) => void;
-  expressRowAndColumnLables:boolean;
+
 }
 
 const BoardRow = (props: Props) => {
