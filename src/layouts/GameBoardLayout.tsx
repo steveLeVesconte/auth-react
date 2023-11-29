@@ -4,9 +4,9 @@ import { Outlet } from 'react-router-dom'
 const GameBoardLayout = () => {
   return (<>
   
-    <Box>
+    {/* <Box> */}
         <Outlet></Outlet>
-    </Box>
+    {/* </Box> */}
     </>
   )
 }

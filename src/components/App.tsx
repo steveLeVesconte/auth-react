@@ -20,7 +20,8 @@ import AuthLayout from "../layouts/AuthLayout";
 
 function App() {
   return (<>
-  <Container maxW={{ lg: "100%", xl: "1280px" }} >
+{/*   <Container maxW={{ lg: "100%", xl: "1280px" }} > */}
+{/*   <Container > */}
 
     <Router>
     <AuthProvider>
@@ -57,7 +58,7 @@ function App() {
                         ver 1.0.0
                     </div>
 
-</Container>
+{/* </Container> */}
 </> )
 
 }

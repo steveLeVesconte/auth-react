@@ -10,7 +10,7 @@ import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/f
 import { db } from "../../firebase";
 import GoGameBoard from "./GoGameBoard";
 import Chat from "../Chat";
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter,  AlertDialogOverlay, Button, HStack, useDisclosure } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter,  AlertDialogOverlay, Box, Button, Container, Grid, GridItem, HStack, useDisclosure } from "@chakra-ui/react";
 import './GoBoard.css'
 
 const GoArena
@@ -64,9 +64,23 @@ const GoArena
       }
     }
 
+    // const wideTemplate=`"LO BB HE"
+    //                     "YO BB OP"
+    //                     "AC BB CH"`;
+
+                        
+    // const narrowTemplate=`"BB"
+    //                       "CH"
+    //                       "AC"
+    //                       "YO"
+    //                       "OP"
+    //                       "HE"
+    //                       "LO"`;
+
+
+
     const handlePass = (turn: Turn | null | undefined, userId: string) => {
       if (turn) {
-
         const newTurn = turnFactory.createPassTurn(turn, userId);
         setTurn(newTurn);
         addTurn(newTurn).then(() => {
@@ -78,22 +92,41 @@ const GoArena
     try {
 
       return (<>
-
-
-        <div className="areanGameBoard">
+            <Grid className="game-arena-grid" 
+          /*       gridTemplateColumns={{ base: "1fr", md: "30vh 100vh 30vh" }} */
+              >
+                <GridItem area={"BB"}  bg='pink.200'><div>     <div className="areanGameBoard">
           {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} expressRowAndColumnLabels={true} />}
-        </div>
+        </div> </div></GridItem>
+                <GridItem area={"AC"}  bg='purple.200'><div>       <Button onClick={() => { navigate("/") }}>Home</Button>
 
-        <HStack spacing='24px'>
+{utilities.getIsMyTurn(turn, player) && <Button onClick={() => handlePass(turn, player?.id ?? "")}>Pass</Button>}
+<div> {utilities.getStoneColorOfCurrentPlayer(player?.id ?? "", turn)}</div>
+<div>{utilities.getIsMyTurn(turn, player) ? "myturn" : "notMyTurn"}</div>
+<div>{(turn?.turnNumber ?? 0) + 1}</div></div></GridItem>
+                <GridItem area={"CH"}  ><div>      <Chat match={location.state.match}></Chat>
+</div></GridItem>
+                <GridItem area={"YO"}  bg='yellow.200'><div>yo </div></GridItem>
+                <GridItem area={"OP"}  bg='green.200'><div>op </div></GridItem>
+                <GridItem className="grid-item-he" area={"HE"}  bg='gray.200'><div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero, ullam. Quisquam atque ut, officiism. Dolorem id natus assumenda architecto quasi expedita, nostrum porro? Voluptas nobis quisquam reprehenderit quibusdam distinctio ipsa at dolorum omnis, aliquam nisi accusanti
+                   </div></GridItem>
+                <GridItem area={"LO"}  bg='blue.200'><div>lo </div></GridItem>
+            </Grid>
+          
+ {/*        <div className="areanGameBoard">
+          {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} expressRowAndColumnLabels={true} />}
+        </div> */}
+
+{/*         <HStack spacing='24px'>
           <Button onClick={() => { navigate("/") }}>Home</Button>
 
           {utilities.getIsMyTurn(turn, player) && <Button onClick={() => handlePass(turn, player?.id ?? "")}>Pass</Button>}
           <div> {utilities.getStoneColorOfCurrentPlayer(player?.id ?? "", turn)}</div>
           <div>{utilities.getIsMyTurn(turn, player) ? "myturn" : "notMyTurn"}</div>
           <div>{(turn?.turnNumber ?? 0) + 1}</div>
-        </HStack >
-        <Chat match={location.state.match}></Chat>
-
+        </HStack > */}
+       {/*  <Chat match={location.state.match}></Chat>
+ */}
 
         <AlertDialog
           motionPreset='slideInBottom'
@@ -121,6 +154,7 @@ const GoArena
             </AlertDialogContent>
           </AlertDialogOverlay>
         </AlertDialog>
+ 
       </>
       );
     } catch (e) {
