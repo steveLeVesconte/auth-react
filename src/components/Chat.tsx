@@ -53,8 +53,8 @@ const Chat = ({ match }: Props) => {
         setNewMessage("");
     }
     const AlwaysScrollToBottom = () => {
-        const elementRef = useRef();
-        useEffect(() => elementRef.current.scrollIntoView());
+        const elementRef = useRef<HTMLDivElement>(null);
+        useEffect(() => elementRef.current?.scrollIntoView());
         return <div ref={elementRef} />;
       };
     return (
