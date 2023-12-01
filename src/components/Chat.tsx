@@ -3,8 +3,7 @@ import {
     Button,
     Card,
     CardBody,
-    CardHeader,
-    Divider,
+   
     Flex,
     Text
 } from '@chakra-ui/react';
@@ -13,7 +12,7 @@ import { db } from '../firebase';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { addDoc, collection, limit, onSnapshot, orderBy, query, where } from 'firebase/firestore';
 import { PlayerContext } from '../contexts/PlayerContext';
-import MessageCard from './GoArena/MessageCard';
+//import MessageCard from './GoArena/MessageCard';
 
 interface Props {
     match: Match;
@@ -27,7 +26,7 @@ const Chat = ({ match }: Props) => {
     const messagesRef = collection(db, "messages");
 
     useEffect(() => {
-        const queryMessages = query(messagesRef, where("matchId", "==", match.id), orderBy("createDate", "asc"), limit(15));
+        const queryMessages = query(messagesRef, where("matchId", "==", match.id), orderBy("createDate", "desc"), limit(15));
         //const unsubscribe=   TBD
         onSnapshot(queryMessages, (snapshot) => {
             const messagesArray: Message[] = [];
@@ -35,12 +34,14 @@ const Chat = ({ match }: Props) => {
                 const thisMessage = { ...doc.data(), id: doc.id } as Message;
                 messagesArray.push(thisMessage)
             });
-            setMessages(messagesArray);
+            console.log('set messages next- messageArray: ',messagesArray);
+            setMessages(messagesArray.reverse());
         });
         //return ()=>unsubscribe;  TBD
     }, []);
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
+        console.log('handleSubmit called: ', newMessage);
         e.preventDefault();
         if (newMessage === "") return;
         await addDoc(messagesRef, {
@@ -57,7 +58,9 @@ const Chat = ({ match }: Props) => {
         return <div ref={elementRef} />;
       };
     return (
-        <Box >
+        <Box h="100%" p={5}>
+    <Card h="100%">
+<CardBody>
 
             <Flex w="100%" h="80%" maxH="500px" overflowY="scroll" flexDirection="column" p="3">
                 {messages.map((item) => {
@@ -98,7 +101,7 @@ const Chat = ({ match }: Props) => {
                         );
                     }
                 })}
-                <AlwaysScrollToBottom />
+            <AlwaysScrollToBottom />   
             </Flex>
             <form onSubmit={handleSubmit}>
                     <input onChange={(e) => setNewMessage(e.target.value)} value={newMessage}></input>
@@ -122,6 +125,9 @@ const Chat = ({ match }: Props) => {
                 </form>
             </CardBody>
         </Card> */}
+        </CardBody>
+                </Card>
+
         </Box>
     );
 };

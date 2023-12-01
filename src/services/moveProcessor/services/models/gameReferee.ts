@@ -238,5 +238,7 @@ export function checkIsKo(newBoard: string[][], koCompareBoard: string[][]): boo
 }
 
 export function checkIsCollision(currentBoard: string[][], stonePlay: StonePlay): boolean {
+    console.log('currentBoard: ',currentBoard);    
+    console.log('stonePlay: ',stonePlay);
     return (currentBoard[stonePlay.row][stonePlay.col] !== EMPTY_INTERSECTION);
 }

@@ -146,7 +146,7 @@ div.intersection-hover:hover {
     grid-template-columns: 30vh 100vh 30vh;
     width: 160vh;
     height: 100vh;
-    grid-template-rows: 1fr 4fr 3fr;
+    grid-template-rows: 100px 1fr 1fr;
     margin-left: auto;
     margin-right: auto;
     grid-template-areas: "LO BB HE"
@@ -205,7 +205,11 @@ div.intersection-hover:hover {
   }
 
 
-
+.cardBox{
+    padding-left: 20px; 
+    padding-right: 20px;
+    padding-top: 20px;
+}
 
 
 

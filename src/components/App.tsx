@@ -13,7 +13,7 @@ import PlayerContextProvider from "../contexts/PlayerContext";
 import CreateMatch from "../pages/CreateMatch";
 import GoArena from "./GoArena/GoArena";
 import MatchList from "./MatchList";
-import { Container } from "@chakra-ui/react";
+//import { Container } from "@chakra-ui/react";
 import MainLayout from "../layouts/MainLayout";
 import GameBoardLayout from "../layouts/GameBoardLayout";
 import AuthLayout from "../layouts/AuthLayout";
@@ -54,9 +54,9 @@ function App() {
     </PlayerContextProvider>
     </AuthProvider>
     </Router>
-    <div className='w-100 text-center mt-2'>
+{/*     <div className='w-100 text-center mt-2'>
                         ver 1.0.0
-                    </div>
+                    </div> */}
 
 {/* </Container> */}
 </> )

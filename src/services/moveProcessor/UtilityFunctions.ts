@@ -13,12 +13,10 @@ function getIsMyTurn(oldTurn: Turn | null | undefined, player: Player | null): b
   }
 
   if (oldTurn) {
-    const stoneColorOfCurrentPlayer = getStoneColorOfCurrentPlayer(
-      player.id,
-      oldTurn
-    );
+    const stoneColorOfPrevTurn =oldTurn.turnPlayerColor;
+    const myColor=getStoneColorOfPlayer(player.id,oldTurn)
     const isMyturn: boolean =
-      stoneColorOfCurrentPlayer === oldTurn.turnPlayerColor ? false : true;
+    stoneColorOfPrevTurn === myColor ? false : true;
     return isMyturn;
   }
   else {
@@ -26,19 +24,99 @@ function getIsMyTurn(oldTurn: Turn | null | undefined, player: Player | null): b
   }
 }
 
-function getStoneColorOfCurrentPlayer(
-  userId: string,
+function getStoneColorOfPlayer(
+   userId: string, 
+   
   lastTurn: Turn|null|undefined
 ): string {
-  if (userId == lastTurn?.playerBlackId) {
+  if (userId==lastTurn?.playerBlackId) {
     return 'b';
   }
-    if (userId == lastTurn?.playerWhiteId) {
+  if (userId==lastTurn?.playerWhiteId) {
     return 'w';
+  }
+
+  return '_';
+}
+
+
+// function getStoneColorOfPrevTurnPlayer(
+//   userId: string,
+//   lastTurn: Turn|null|undefined
+// ): string {
+//   if (userId == lastTurn?.playerBlackId) {
+//     return 'b';
+//   }
+//     if (userId == lastTurn?.playerWhiteId) {
+//     return 'w';
+//   }
+//   return '_';
+// }
+
+function getStoneColorOfOpponent(
+  playerUserId: string,
+  lastTurn: Turn|null|undefined
+): string {
+  if (playerUserId == lastTurn?.playerBlackId) {
+    return 'w';
+  }
+    if (playerUserId == lastTurn?.playerWhiteId) {
+    return 'b';
   }
   return '_';
 }
 
+function getIdOfOpponent(
+  playerUserId: string,
+  lastTurn: Turn|null|undefined
+): string {
+  if (playerUserId == lastTurn?.playerBlackId) {
+    return lastTurn.playerWhiteId;
+  }
+    if (playerUserId == lastTurn?.playerWhiteId) {
+    return lastTurn.playerBlackId;
+  }
+  return '_';
+}
+
+function getNameOfOpponent(
+  playerUserId: string,
+  lastTurn: Turn|null|undefined
+): string {
+  if (playerUserId == lastTurn?.playerBlackId) {
+    return lastTurn.playerWhiteName;
+  }
+    if (playerUserId == lastTurn?.playerWhiteId) {
+    return lastTurn.playerBlackName;
+  }
+  return 'unknown';
+}
+
+function getPrisonersOfOpponent(
+  userId: string,
+  lastTurn: Turn|null|undefined
+): number {
+  if (userId == lastTurn?.playerBlackId) {
+    return lastTurn.resultState.prisonersOfBlack;
+  }
+    if (userId == lastTurn?.playerWhiteId) {
+    return lastTurn.resultState.prisonersOfWhite;
+  }
+  return -1;
+}
+
+function getPrisonersOfCurrentPlayer(
+  userId: string,
+  lastTurn: Turn|null|undefined
+): number {
+  if (userId == lastTurn?.playerBlackId) {
+    return lastTurn.resultState.prisonersOfWhite;
+  }
+    if (userId == lastTurn?.playerWhiteId) {
+    return lastTurn.resultState.prisonersOfBlack;
+  }
+  return -1;
+}
 function boardArrayToString(boardArray: string[][]): string {
   let result = "";
   for (let i = 0; i < 19; i++) {
@@ -71,7 +149,12 @@ function stringBoardToArray(boardString: string): string[][] {
 const utilities = {
   getIsMyTurn,
   getStoneColorOfCurrentTurn,
-  getStoneColorOfCurrentPlayer,
+  getStoneColorOfPlayer,
+  getStoneColorOfOpponent,
+  getIdOfOpponent,
+  getNameOfOpponent,
+  getPrisonersOfCurrentPlayer,
+  getPrisonersOfOpponent,
   boardArrayToString,
   stringBoardToArray
 }

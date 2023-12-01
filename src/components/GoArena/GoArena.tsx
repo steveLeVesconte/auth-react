@@ -10,8 +10,12 @@ import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/f
 import { db } from "../../firebase";
 import GoGameBoard from "./GoGameBoard";
 import Chat from "../Chat";
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter,  AlertDialogOverlay, Box, Button, Container, Grid, GridItem, HStack, useDisclosure } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogOverlay, Button, Grid, GridItem, useDisclosure } from "@chakra-ui/react";
 import './GoBoard.css'
+import { PlayerCard } from "./PlayerCard";
+import { LogoCard } from "./LogoCard";
+import { ActionCard } from "./ActionCard";
+import NavCard from "./NavCard";
 
 const GoArena
   = () => {
@@ -33,7 +37,12 @@ const GoArena
           const latestTurn = { ...doc.data(), id: doc.id } as Turn;
           setTurn(latestTurn);
         });
-      })
+      });
+      /*       const colorOfOppoent=utilities.getStoneColorOfPrevTrunOpponent(player?.id ?? "", turn);
+            const idOfOppoent=utilities.getStoneColorOfCurrentPlayer(player?.id ?? "", turn);
+            
+            playerWhiteId
+            getPlayer(location.state.match.onSubmit) */
     }, []
     );
 
@@ -43,15 +52,15 @@ const GoArena
     }
 
     const executeStonePlay = () => {
-      doStonePlay(turn, player?.id ?? "", play?.row ?? -1, play?.col ?? -1);
+      doStonePlay(turn,  play?.row ?? -1, play?.col ?? -1);
       onClose();
     }
 
-    const doStonePlay = (turn: Turn | null | undefined, userId: string, row: number, col: number) => {
+    const doStonePlay = (turn: Turn | null | undefined,  row: number, col: number) => {
 
       if (turn) {
         const submission: Submission =
-          submissionFactory.createSubmission(turn, userId, row, col);
+          submissionFactory.createSubmission(turn,  row, col);
         const evaluation = evaluateSubmission(submission);
         if (evaluation.isLegalPlay) {
           const newTurn = turnFactory.createTurn(turn, evaluation, submission);
@@ -68,7 +77,7 @@ const GoArena
     //                     "YO BB OP"
     //                     "AC BB CH"`;
 
-                        
+
     // const narrowTemplate=`"BB"
     //                       "CH"
     //                       "AC"
@@ -77,11 +86,11 @@ const GoArena
     //                       "HE"
     //                       "LO"`;
 
+    const noOp = () => { };
 
-
-    const handlePass = (turn: Turn | null | undefined, userId: string) => {
+    const handlePass = (turn: Turn | null | undefined) => {
       if (turn) {
-        const newTurn = turnFactory.createPassTurn(turn, userId);
+        const newTurn = turnFactory.createPassTurn(turn);
         setTurn(newTurn);
         addTurn(newTurn).then(() => {
           updateMatch(location.state.match, newTurn);
@@ -92,32 +101,55 @@ const GoArena
     try {
 
       return (<>
-            <Grid className="game-arena-grid" 
-          /*       gridTemplateColumns={{ base: "1fr", md: "30vh 100vh 30vh" }} */
-              >
-                <GridItem area={"BB"}  bg='pink.200'><div>     <div className="areanGameBoard">
-          {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} expressRowAndColumnLabels={true} />}
-        </div> </div></GridItem>
-                <GridItem area={"AC"}  bg='purple.200'><div>       <Button onClick={() => { navigate("/") }}>Home</Button>
+        <Grid className="game-arena-grid"
+        /*       gridTemplateColumns={{ base: "1fr", md: "30vh 100vh 30vh" }} */
+        >
+          <GridItem area={"BB"}  ><div>     <div className="areanGameBoard">
+            {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} expressRowAndColumnLabels={true} />}
+          </div> </div></GridItem>
+          <GridItem area={"AC"}  ><ActionCard /></GridItem>
+          <GridItem area={"CH"}  ><div>      <Chat match={location.state.match}></Chat>
+          </div></GridItem>
+          <GridItem h="100%" area={"YO"}  ><PlayerCard
+            stoneColor={utilities.getStoneColorOfPlayer(player?.id ?? "", turn)}
+            playerName={player?.name ?? ""}
+            oppoenentName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
 
-{utilities.getIsMyTurn(turn, player) && <Button onClick={() => handlePass(turn, player?.id ?? "")}>Pass</Button>}
-<div> {utilities.getStoneColorOfCurrentPlayer(player?.id ?? "", turn)}</div>
-<div>{utilities.getIsMyTurn(turn, player) ? "myturn" : "notMyTurn"}</div>
-<div>{(turn?.turnNumber ?? 0) + 1}</div></div></GridItem>
-                <GridItem area={"CH"}  ><div>      <Chat match={location.state.match}></Chat>
-</div></GridItem>
-                <GridItem area={"YO"}  bg='yellow.200'><div>yo </div></GridItem>
-                <GridItem area={"OP"}  bg='green.200'><div>op </div></GridItem>
-                <GridItem className="grid-item-he" area={"HE"}  bg='gray.200'><div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero, ullam. Quisquam atque ut, officiism. Dolorem id natus assumenda architecto quasi expedita, nostrum porro? Voluptas nobis quisquam reprehenderit quibusdam distinctio ipsa at dolorum omnis, aliquam nisi accusanti
-                   </div></GridItem>
-                <GridItem area={"LO"}  bg='blue.200'><div>lo </div></GridItem>
-            </Grid>
-          
- {/*        <div className="areanGameBoard">
+            isMyTurn={utilities.getIsMyTurn(turn, player)}
+            prisoners={utilities.getPrisonersOfCurrentPlayer(player?.id ?? "", turn)}
+            isPlayer={true}
+            onPass={() => handlePass(turn)} /></GridItem>
+          <GridItem h="100%" area={"OP"}  >
+            <PlayerCard
+              stoneColor={utilities.getStoneColorOfOpponent(player?.id ?? "", turn)}
+              playerName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
+              oppoenentName={player?.name ?? ""}
+
+              isMyTurn={!utilities.getIsMyTurn(turn, player)}
+              prisoners={utilities.getPrisonersOfOpponent(player?.id ?? "", turn)}
+              isPlayer={false}
+              onPass={() => noOp()}
+
+            /></GridItem>
+          <GridItem className="grid-item-he" area={"HE"}  >
+            <NavCard></NavCard>
+            {/*               <Box className="cardBox">
+                <Card  h="100%">
+      <CardBody>
+                  <div>Lorem ipsum dolor
+                   </div>
+                   </CardBody>
+                   </Card>
+                   </Box> */}
+          </GridItem>
+          <GridItem className="test" area={"LO"} ><LogoCard /></GridItem>
+        </Grid>
+
+        {/*        <div className="areanGameBoard">
           {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} expressRowAndColumnLabels={true} />}
         </div> */}
 
-{/*         <HStack spacing='24px'>
+        {/*         <HStack spacing='24px'>
           <Button onClick={() => { navigate("/") }}>Home</Button>
 
           {utilities.getIsMyTurn(turn, player) && <Button onClick={() => handlePass(turn, player?.id ?? "")}>Pass</Button>}
@@ -125,7 +157,7 @@ const GoArena
           <div>{utilities.getIsMyTurn(turn, player) ? "myturn" : "notMyTurn"}</div>
           <div>{(turn?.turnNumber ?? 0) + 1}</div>
         </HStack > */}
-       {/*  <Chat match={location.state.match}></Chat>
+        {/*  <Chat match={location.state.match}></Chat>
  */}
 
         <AlertDialog
@@ -154,7 +186,7 @@ const GoArena
             </AlertDialogContent>
           </AlertDialogOverlay>
         </AlertDialog>
- 
+
       </>
       );
     } catch (e) {

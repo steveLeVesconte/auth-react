@@ -2,7 +2,7 @@
 import { Player, Turn } from "../firestore";
 import gameStateFactory from "./gameStateFactory";
 import { BaseSubmissionResult, Submission } from "./moveProcessor";
-import utilities from "./moveProcessor/UtilityFunctions";
+//import utilities from "./moveProcessor/UtilityFunctions";
 
 function createTurn(oldTurn: Turn, evaluation: BaseSubmissionResult, submission: Submission): Turn {
 
@@ -31,7 +31,7 @@ function createTurn(oldTurn: Turn, evaluation: BaseSubmissionResult, submission:
   return newTurn;
 }
 
-function createPassTurn(oldTurn: Turn,userId:string): Turn {
+function createPassTurn(oldTurn: Turn): Turn {
 
   /// create new turn record to save   ////////
   //// evaluation, turn, submission
@@ -41,7 +41,7 @@ function createPassTurn(oldTurn: Turn,userId:string): Turn {
   //const newState = gameStateFactory.createGameState(evaluation, oldTurn);
   const newTurn:Turn={...oldTurn,
     turnNumber: oldTurn.turnNumber+1,
-    turnPlayerColor: utilities.getStoneColorOfCurrentPlayer(userId, oldTurn),
+    turnPlayerColor: oldTurn.turnPlayerColor=="b"?"w":"b",
    
     koCompareState:oldTurn.initialState,
     initialState:oldTurn.resultState,
