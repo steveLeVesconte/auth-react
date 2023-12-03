@@ -1,4 +1,4 @@
-import { HStack, Menu, MenuList, MenuButton, MenuItem, Button, Icon, useColorModeValue } from '@chakra-ui/react'
+import { HStack, Menu, MenuList, MenuButton, MenuItem, Button, Icon, useColorModeValue, Box } from '@chakra-ui/react'
 //import logo from "../assets/logo.webp";
 import ColorModeSwitch from './ColorModeSwitch';
 import {PlayerContext} from '../contexts/PlayerContext';
@@ -29,7 +29,8 @@ const NavBar = () => {
       }
     const player=useContext(PlayerContext)
   return (
-   <HStack  justifyContent={'space-between'} maxW={{ xl: "100%", "2xl": "1280px" }}>
+    <Box p={2}>
+   <HStack  justifyContent={'space-between'} width="100%">
     <Icon  onClick={()=>{navigate("/")}} as={TbGoGame} className="goIcon"  w={8} h={8}   bg={bg} color={color} />
 {/*    <TbGoGame onClick={()=>{navigate("/")}}  className="goIcon"/>
     <Image onClick={()=>{navigate("/")}} src={logo} boxSize='60px'></Image> */}
@@ -38,7 +39,7 @@ const NavBar = () => {
     <ColorModeSwitch></ColorModeSwitch>
     <Menu>
   <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-  {player?.name} 
+  {player?.name}
   </MenuButton>
   <MenuList>
     <MenuItem   onClick={handleLogout}>Logout</MenuItem>
@@ -48,6 +49,7 @@ const NavBar = () => {
 </Menu>
     </HStack>
    </HStack>
+   </Box>
   )
 }
 

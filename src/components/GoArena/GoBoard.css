@@ -108,15 +108,294 @@ div.intersection-hover:hover {
 }
 
 
-/* arena board  */
+/* arena board ************************************************************** */
 
-.areanGameBoard {
-  margin-bottom: 40px;
+.game-container{
+  max-width: 130vmin;
+  width: 130vmin;
+  margin-left: auto;
+  margin-right: auto;
+ /*  background-color: yellow; */
+}
+.nav {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(3, 4, 4);
+ 
 }
 
+.arena-grid-container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 90vmin 40vmin;
+  grid-template-areas:
+    "goboard players"
+    "goboard actions"
+    "goboard chat";
+  grid-template-rows: 130px 90px 1fr;
+  max-width: 130vmin;
+  width: 130vmin;
+ /*  background-color: rgb(45, 51, 45); */
+/*   border: 2px black solid; */
+}
+
+.goboard {
+    grid-area: goboard;
+    background-color: bisque;
+    /*     width:300px; */
+    /* grid-row: span 3; */
+  }
+  .players {
+    /*   width: 300px; */
+    display: flex;
+    flex-direction: row;
+    grid-area: players;
+/*     background-color: violet; */
+    height: 100%;
+    width: 100%;
+  }
+  .player{
+    width:50%;
+    background-color: yellow;
+  }
+.player-box{
+    padding-left:8px;
+    padding-right:8px;
+    width: 50%;
+  }
+  .player-box-2{
+   
+    padding-right:8px;
+    width: 50%;
+  }
+
+  .player-stone{
+    height: 53px;
+    width: 53px;
+    min-width: 53px;
+  }
+  
+  .opponent{
+    width:50%;
+    background-color: rgb(128, 94, 0);
+  }
+  .actions {
+    grid-area: actions;
+/*     background-color: aqua; */
+    width: 100%;
+  
+  }
+  .chat {
+    grid-area: chat;
+/*     background-color: thistle; */
+    min-height: 251px;
+    width: 100%;
+    height: 100%;
+  }
+  .chat-window{
+    flex-grow:1;
+    max-height: calc(65vh);
+    height:48vw;
+  }
+  .goboard {
+    width: 100%;
+    background-color: bisque;
+    aspect-ratio: 5/5;
+/*     border: 2px black solid; */
+    /* flex-basis: 50%;
+    flex-grow: 1;
+    flex-shrink:1; */
+/*     max-height: 74vw;
+    max-width: 74vw;
+    width: 90vh ;
+    height: 90vh ; */
+    width: 100%;
+    max-height: 100%;
+  }
+
+
+
+
+
+@media screen and (max-width: 1540px) {
+
+  .game-container {
+    width:80vmin;
+    max-width: 80vmin;
+/*     max-width: 95vw; */
+  }
+
+  .arena-grid-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    width: 80vmin;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "players"
+      "goboard"
+      "actions"
+      "chat";
+    grid-template-rows: 90px 80vmin 90px 251px;
+   /*  max-width: 95vw; */
+  }
+  .goboard {
+
+/*     max-height: 98vw;
+    max-width:98vw;
+    width: 90vh ;
+    height: 90vh ; */
+/* 
+    width: 95vw;
+    height: 95vw; */
+    background-color: bisque;
+    aspect-ratio: 1/1;
+    height: 80vmin;
+    width: 80vmin;
+    /* border: 2px black solid; */
+    /*  grid-row: auto; */
+    /* flex-basis: 50%;
+    flex-grow: 1;
+    flex-shrink:1; */
+    /* max-width: 95vh;
+    max-height: 95vh; */
+  }
+  .actions{
+    height:150px;
+  }
+  .player-stone{
+    height: 20px;
+    width: 20px;
+    min-width: 20px;
+  }
+
+
+  .player{
+    width:50%;
+    background-color: yellow;
+  }
+.player-box{
+    padding-left:0px;
+    padding-right:8px;
+    padding-bottom: 8px;
+
+  }
+  .player-box-2{
+    padding-left:0px;
+    padding-right:0px;
+    padding-bottom: 8px;
+  }
+}
+
+
+@media screen and (max-width: 1140px) {
+  .game-container {
+    width:85vmin;
+    max-width: 85vmin;
+/*     max-width: 95vw; */
+  }
+  .goboard {
+
+    height: 85vmin;
+    width: 85vmin;
+
+}
+
+.arena-grid-container {
+
+  width: 85vmin;
+
+  grid-template-rows: 90px 85vmin 90px 251px;
+ /*  max-width: 95vw; */
+}
+}
+
+@media screen and (max-width: 1000px) {
+  .game-container {
+    width:93vmin;
+    max-width: 93vmin;
+/*     max-width: 95vw; */
+  }
+  .goboard {
+
+    height: 93vmin;
+    width: 93vmin;
+
+}
+
+.arena-grid-container {
+
+  width: 93vmin;
+
+  grid-template-rows: 90px 93vmin 90px 251px;
+ /*  max-width: 95vw; */
+}
+}
+@media screen and (max-height: 850px) {
+  .game-container {
+    width:75vmin;
+    max-width: 75vmin;
+/*     max-width: 95vw; */
+  }
+  .goboard {
+
+    height: 75vmin;
+    width: 75vmin;
+
+}
+
+.arena-grid-container {
+
+  width: 75vmin;
+
+  grid-template-rows: 90px 75vmin 90px 251px;
+ /*  max-width: 95vw; */
+}
+}
+@media screen and (max-height: 800px) {
+  .game-container {
+    width:70vmin;
+    max-width: 70vmin;
+/*     max-width: 95vw; */
+  }
+  .goboard {
+
+    height: 70vmin;
+    width: 70vmin;
+
+}
+
+.arena-grid-container {
+
+  width: 70vmin;
+
+  grid-template-rows: 90px 70vmin 90px 251px;
+ /*  max-width: 95vw; */
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* old css **********/
+/* .areanGameBoard {
+  margin-bottom: 40px;
+} */
+
 .gameGridContainer {
-  height: 100vh;
-  width: 100vh;
+
   aspect-ratio: 1;
   background-color: #eac77b;
 }
@@ -131,84 +410,6 @@ div.intersection-hover:hover {
   background-color: #eac77b;
    padding: 7px;  
 
-}
-
-@media screen and (max-width: 1584px) {
-  .gameGridContainer {
-    height: 100vw;
-    width: 100vw;
-    aspect-ratio: 1;
-  }
-}
-
-/* game arena */
-.game-arena-grid {
-    grid-template-columns: 30vh 100vh 30vh;
-    width: 160vh;
-    height: 100vh;
-    grid-template-rows: 100px 1fr 1fr;
-    margin-left: auto;
-    margin-right: auto;
-    grid-template-areas: "LO BB HE"
-                        "YO BB OP"
-                        "AC BB CH";
-
-}
-
-
-@media screen and (max-width: 160vh) {
-
-    .game-arena-grid {
-        grid-template-columns: 1fr 100vh 1fr;
-    width: 100%;    
-    }
-  }
-  
-
-  
-@media screen and (max-width: 1800px) {
-
-    .game-arena-grid { 
-        width: 100%;  
-        grid-template-columns: 1fr 100vh;
-        grid-template-areas:"LO BB"
-        "YO BB"
-        "OP BB"
-        "AC BB"
-        "CH BB"
-        "HE BB"
-        ;
-        grid-template-rows: 1fr 3fr 3fr 2fr 2fr 0px;
-    }
-    .grid-item-he{display:none}
-  }
-  
-  @media screen and (max-width: 1584px) {
-
-    .game-arena-grid {
-        grid-template-columns: 100vw ;
-        grid-template-areas:"BB"
-        "CH"
-        "AC"
-        "YO"
-        "OP"
-        "HE"
-        "LO";
-        grid-template-rows: 1fr 3fr 3fr  2fr 2fr;
-
-    }
-    .grid-item-he{display:block}
-    .areanGameBoard{
-        width: 100vw;
-        height: 100vw;
-    }
-  }
-
-
-.cardBox{
-    padding-left: 20px; 
-    padding-right: 20px;
-    padding-top: 20px;
 }
 
 

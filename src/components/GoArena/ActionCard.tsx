@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export const ActionCard = () => {
     const navigate = useNavigate();
   return (
-    <Box h="100%" p={5}>
+    <Box h="100%" p={2}>
     <Card h="100%">
 <CardBody>
     <div>action Card</div>

@@ -58,11 +58,12 @@ const Chat = ({ match }: Props) => {
         return <div ref={elementRef} />;
       };
     return (
-        <Box h="100%" p={5}>
+        <Box h="100%" p={2}>
     <Card h="100%">
-<CardBody>
-
-            <Flex w="100%" h="80%" maxH="500px" overflowY="scroll" flexDirection="column" p="3">
+<CardBody height="100%">
+        <Flex w="100%" height="100%"  flexDirection="column" p="0px">
+            <Box className='chat-window' w="100%"    p="0px">
+                <Box overflowY="scroll"  height="100%">
                 {messages.map((item) => {
                     if (item.speakerName === "me") {
                         return (
@@ -102,12 +103,14 @@ const Chat = ({ match }: Props) => {
                     }
                 })}
             <AlwaysScrollToBottom />   
-            </Flex>
+            </Box>
+            </Box>
             <form onSubmit={handleSubmit}>
                     <input onChange={(e) => setNewMessage(e.target.value)} value={newMessage}></input>
                     <Button type="submit">Send</Button>
                 </form>
-
+                </Flex>
+         
 
 
 
