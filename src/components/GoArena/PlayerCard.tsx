@@ -1,4 +1,4 @@
-import {Text, Box, Card, CardBody, Heading, VStack ,Image, Button, HStack} from '@chakra-ui/react'
+import {Text,  Card, CardBody,  VStack ,Image,  HStack} from '@chakra-ui/react'
 import blackStoneImage from "../../assets/blackStoneTrans.png";
 import whiteStoneImage from "../../assets/whiteStoneTrans.png";
 

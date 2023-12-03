@@ -25,6 +25,28 @@ const Chat = ({ match }: Props) => {
     const [messages, setMessages] = useState<Message[]>([]);
     const messagesRef = collection(db, "messages");
 
+	const [screenSize, setScreenSize] = useState(getCurrentDimension());
+
+    function getCurrentDimension(){
+        return {
+            width: window.innerWidth,
+            height: window.innerHeight
+        }
+    }
+    useEffect(() => {
+        const updateDimension = () => {
+              setScreenSize(getCurrentDimension())
+        }
+        window.addEventListener('resize', updateDimension);
+
+    
+        return(() => {
+            window.removeEventListener('resize', updateDimension);
+        })
+  }, [screenSize])
+
+
+
     useEffect(() => {
         const queryMessages = query(messagesRef, where("matchId", "==", match.id), orderBy("createDate", "desc"), limit(15));
         //const unsubscribe=   TBD
@@ -102,7 +124,7 @@ const Chat = ({ match }: Props) => {
                         );
                     }
                 })}
-            <AlwaysScrollToBottom />   
+           {screenSize.width>1600 && <AlwaysScrollToBottom />}   
             </Box>
             </Box>
             <form onSubmit={handleSubmit}>
