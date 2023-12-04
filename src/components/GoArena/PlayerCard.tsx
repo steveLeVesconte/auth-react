@@ -31,8 +31,8 @@ export const PlayerCard = (props:Props) => {
 <HStack alignItems="left">
     {(props.stoneColor=="w")&&<Image   className='player-stone' src={whiteStoneImage} />}
     {(props.stoneColor=="b")&&<Image  className='player-stone' src={blackStoneImage} />}
-    {(props.isPlayer && props.isMyTurn) &&<span>My Turn!</span>}
-     {(props.isPlayer && (!props.isMyTurn)) &&<span>Waiting.</span>}
+    {/* {(props.isPlayer && props.isMyTurn) &&<span>My Turn!</span>} */}
+    {/*  {(props.isPlayer && (!props.isMyTurn)) &&<span>Waiting.</span>} */}
 
    
     </HStack >

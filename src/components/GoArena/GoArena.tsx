@@ -193,7 +193,23 @@ const GoArena
             </GridItem>
 
             <GridItem className="players" area={"players"}>
+
             <Box className="player-box">
+                          <PlayerCard
+              stoneColor={utilities.getStoneColorOfPlayer(player?.id ?? "", turn)}
+              playerName={player?.name ?? ""}
+              oppoenentName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
+
+              isMyTurn={utilities.getIsMyTurn(turn, player)}
+              prisoners={utilities.getPrisonersOfCurrentPlayer(player?.id ?? "", turn)}
+              isPlayer={true}
+              onPass={() => handlePass(turn)} />
+              </Box>
+
+
+
+
+            <Box className="player-box-2 ">
             <PlayerCard
                 stoneColor={utilities.getStoneColorOfOpponent(player?.id ?? "", turn)}
                 playerName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
@@ -206,18 +222,6 @@ const GoArena
 
               />
               </Box>
-              <Box className="player-box-2">
-                          <PlayerCard
-              stoneColor={utilities.getStoneColorOfPlayer(player?.id ?? "", turn)}
-              playerName={player?.name ?? ""}
-              oppoenentName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
-
-              isMyTurn={utilities.getIsMyTurn(turn, player)}
-              prisoners={utilities.getPrisonersOfCurrentPlayer(player?.id ?? "", turn)}
-              isPlayer={true}
-              onPass={() => handlePass(turn)} />
-              </Box>
-
 
 </GridItem>
 
