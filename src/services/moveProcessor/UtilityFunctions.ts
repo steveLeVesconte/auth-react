@@ -24,6 +24,8 @@ function getIsMyTurn(oldTurn: Turn | null | undefined, player: Player | null): b
   }
 }
 
+
+
 function getStoneColorOfPlayer(
    userId: string, 
    

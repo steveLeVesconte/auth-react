@@ -1,3 +1,21 @@
+/* chat */
+.message-card{
+  width: 100%;
+ 
+}
+.message-card-body{
+  width: "100%";
+}
+.message-stone-div{
+
+  margin-right: 10px;
+}
+.message-stone{
+  height: 30px;
+
+}
+
+
 /* game board labels */
 
 .rowNumberLabel {
@@ -196,7 +214,7 @@ div.intersection-hover:hover {
   }
   .chat-window{
     flex-grow:1;
-    max-height: calc(65vh);
+    max-height: calc(87vh - 286px);
     height:48vw;
   }
   .goboard {
