@@ -13,7 +13,7 @@ import { TbGoGame } from "react-icons/tb";
 const NavBar = () => {
    const {currentUser, logout}=useAuth();
    const [error, setError]=useState("");
-   const bg = useColorModeValue('red.500', 'red.200')
+   //const bg = useColorModeValue('red.500', 'red.200')
    const color = useColorModeValue('white', 'gray.800')
     const navigate = useNavigate()
     async function handleLogout(){
@@ -31,7 +31,7 @@ const NavBar = () => {
   return (
     <Box p={2}>
    <HStack  justifyContent={'space-between'} width="100%">
-    <Icon  onClick={()=>{navigate("/")}} as={TbGoGame} className="goIcon"  w={8} h={8}   bg={bg} color={color} />
+    <Icon  onClick={()=>{navigate("/")}} as={TbGoGame} className="goIcon" borderRadius={10} w={8} h={8}   bg="#eac77b" color={color} />
 {/*    <TbGoGame onClick={()=>{navigate("/")}}  className="goIcon"/>
     <Image onClick={()=>{navigate("/")}} src={logo} boxSize='60px'></Image> */}
     <HStack>

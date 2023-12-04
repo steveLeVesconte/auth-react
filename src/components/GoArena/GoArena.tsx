@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { TURN_COLLECTION, Turn, addTurn, updateMatch } from "../../firestore";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect,  useState } from "react";
 import { Submission, evaluateSubmission } from "../../services/moveProcessor";
 import submissionFactory from "../../services/submissionFactory";
 import { PlayerContext } from "../../contexts/PlayerContext";
@@ -10,26 +10,35 @@ import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/f
 import { db } from "../../firebase";
 import GoGameBoard from "./GoGameBoard";
 import Chat from "../Chat";
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogOverlay, Box, Button, Grid, GridItem, useDisclosure } from "@chakra-ui/react";
+//import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogOverlay, Box, Button, Grid, GridItem, useDisclosure } from "@chakra-ui/react";
+import {  Box,  Grid, GridItem } from "@chakra-ui/react";
 import './GoBoard.css'
 import { PlayerCard } from "./PlayerCard";
 //import { LogoCard } from "./LogoCard";
 import { ActionCard } from "./ActionCard";
 //import NavCard from "./NavCard";
 import NavBar from "../NavBar";
+import { useToast } from '@chakra-ui/react'
 
 const GoArena
   = () => {
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const cancelRef = useRef<HTMLButtonElement>(null);
-    const [play, setPlay] = useState<{ row: number, col: number } | null>(null)
+   // const { isOpen, onOpen, onClose } = useDisclosure()
+    //const cancelRef = useRef<HTMLButtonElement>(null);
+    //const [play, setPlay] = useState<{ row: number, col: number } | null>(null)
+
+    const [pendingPlay, setPendingPlay] = useState<{ row: number, col: number } | null>(null)
+    const [pendingPass, setPendingPass] = useState<boolean>(false)
+    //const [turnStatus, setPendingPass] = useState<boolean>(false)
+
+
+
 
     const [turn, setTurn] = useState<Turn | null>()
     const location = useLocation();
     const player = useContext(PlayerContext)
     const navigate = useNavigate();
-
+    const toast = useToast()
     /// TBD TBD TBD make page recover from no match in location
     useEffect(() => {
       const turnQuery = query(collection(db, TURN_COLLECTION), where("matchId", "==", location.state.match.id), orderBy("createDate", "desc"), limit(1));
@@ -47,14 +56,47 @@ const GoArena
     }, []
     );
 
-    const onSelectIntersection = (row: number, col: number): void => {
+
+/*       const toast = useToast()
+      return (
+        <Button
+          onClick={() =>
+            toast({
+              title: 'Account created.',
+              description: "We've created your account for you.",
+              status: 'success',
+              duration: 9000,
+              isClosable: true,
+            })
+          }
+        >
+          Show Toast
+        </Button>
+      )
+    } */
+
+/*     const onSelectIntersection = (row: number, col: number): void => {
       setPlay({ row: row, col: col });
       onOpen();
+    } */
+
+    const onSelectIntersection = (row: number, col: number): void => {
+      setPendingPlay({ row: row, col: col });
+     // onOpen();
     }
 
+
     const executeStonePlay = () => {
-      doStonePlay(turn, play?.row ?? -1, play?.col ?? -1);
-      onClose();
+      console.log('executeStonePlay play:',pendingPlay)
+      doStonePlay(turn, pendingPlay?.row ?? -1, pendingPlay?.col ?? -1);
+    //  setPendingPlay(null);
+     // onClose();
+    }
+
+    const cancelStonePlay = () => {
+      console.log('cancelStonePlay play:',pendingPlay)
+      setPendingPlay(null);
+     // onClose();
     }
 
     const doStonePlay = (turn: Turn | null | undefined, row: number, col: number) => {
@@ -68,8 +110,37 @@ const GoArena
           setTurn(newTurn);
           addTurn(newTurn).then(() => {
             updateMatch(location.state.match, newTurn);
+            setPendingPlay(null);
+            console.log("about to toast");
+            toast({
+              title: 'Stone placment processed.',
+              description: "Success.",
+              status: 'success',
+              duration: 9000,
+              isClosable: true,
+            })
           });
+        }else{
+        console.log("about to toast error");
+        let reason="unknown";
+        if(evaluation.isKo)
+        {
+          reason="Ko Rule Violation!";
         }
+        if(evaluation.isSuicide){
+          reason ="Suiside Rule Violation!";
+        }
+
+
+        toast({
+          title: 'Illegal Move.',
+          description: reason,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+        setPendingPlay(null);
+      }
         // else{//    TBD      put alert here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TBD
       }
     }
@@ -77,12 +148,30 @@ const GoArena
 
     const noOp = () => { };
 
+
+    const selectPass = (): void => {
+      setPendingPass(true);
+     // onOpen();
+    }
+    const cancelPass = (): void => {
+      setPendingPass(false);
+     // onOpen();
+    }
+
     const handlePass = (turn: Turn | null | undefined) => {
       if (turn) {
         const newTurn = turnFactory.createPassTurn(turn);
         setTurn(newTurn);
         addTurn(newTurn).then(() => {
           updateMatch(location.state.match, newTurn);
+          setPendingPass(false);
+          toast({
+            title: 'You Passed.',
+            description: "Success.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
         });
       }
     }
@@ -132,7 +221,22 @@ const GoArena
 
 </GridItem>
 
-            <GridItem className="actions" area={"actions"}  ><ActionCard /></GridItem>
+            <GridItem className="actions" area={"actions"}  >
+              <ActionCard 
+               isPendingMove={!(pendingPlay==null)}
+               isMyTurn={utilities.getIsMyTurn(turn, player)}
+               onPlayConfirm={executeStonePlay}
+               onPassConfirm={()=>{handlePass(turn);}}
+               onPass={selectPass}
+               isActiveGame={location.state.match.status=="active"} 
+               isPendingPass={pendingPass} 
+              turnNumber={turn?.turnNumber??0}
+              turnStutus="yada yada"
+              onResign={noOp}
+              onPassCancel={cancelPass}
+              onPlayCancel={cancelStonePlay}
+
+              /></GridItem>
             <GridItem className="chat"   >      
               <Chat match={location.state.match}></Chat>
            </GridItem>
@@ -166,7 +270,7 @@ const GoArena
           </Grid>
 
 
-          <AlertDialog
+         {/*  <AlertDialog
             motionPreset='slideInBottom'
             isOpen={isOpen}
             leastDestructiveRef={cancelRef}
@@ -191,7 +295,7 @@ const GoArena
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialogOverlay>
-          </AlertDialog>
+          </AlertDialog> */}
         </div>
 
       </>
@@ -205,3 +309,4 @@ const GoArena
 
 
 export default GoArena
+

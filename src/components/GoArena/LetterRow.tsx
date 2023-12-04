@@ -1,4 +1,4 @@
-import { HStack } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 //import Intersection from './Intersection';
 
 /* interface Props {
@@ -19,7 +19,7 @@ const LetterRow = () => {
     content.push(<div  className='colLetterLabel'>{letters[x]}</div>);
   }
   return (
-    <HStack gap={0} >{content}</HStack>
+   <Box pl="5px" paddingRight="5px"> <Flex gap={0} >{content}</Flex></Box>
   )
 }
 
