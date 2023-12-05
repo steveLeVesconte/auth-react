@@ -184,7 +184,7 @@ div.intersection-hover:hover {
 
 .goboard {
     grid-area: goboard;
-    background-color: bisque;
+   /*  background-color: bisque; */
     /*     width:300px; */
     /* grid-row: span 3; */
   }
@@ -199,7 +199,7 @@ div.intersection-hover:hover {
   }
   .player{
     width:50%;
-    background-color: yellow;
+    /* background-color: yellow; */
   }
 .player-box{
     padding-left:8px;
@@ -220,7 +220,7 @@ div.intersection-hover:hover {
   
   .opponent{
     width:50%;
-    background-color: rgb(128, 94, 0);
+   /*  background-color: rgb(128, 94, 0); */
   }
   .actions {
     grid-area: actions;
@@ -231,7 +231,7 @@ div.intersection-hover:hover {
   .chat {
     grid-area: chat;
 /*     background-color: thistle; */
-    min-height: 251px;
+    min-height: 350px;
     width: 100%;
     height: 100%;
   }
@@ -242,7 +242,7 @@ div.intersection-hover:hover {
   }
   .goboard {
     width: 100%;
-    background-color: bisque;
+   /*  background-color: bisque; */
     aspect-ratio: 5/5;
 /*     border: 2px black solid; */
     /* flex-basis: 50%;
@@ -279,7 +279,7 @@ div.intersection-hover:hover {
       "goboard"
       "actions"
       "chat";
-    grid-template-rows: 90px 80vmin 90px 251px;
+    grid-template-rows: 90px 80vmin 90px 350px;
    /*  max-width: 95vw; */
   }
   .goboard {
@@ -291,7 +291,7 @@ div.intersection-hover:hover {
 /* 
     width: 95vw;
     height: 95vw; */
-    background-color: bisque;
+   /*  background-color: bisque; */
     aspect-ratio: 1/1;
     height: 80vmin;
     width: 80vmin;
@@ -315,7 +315,7 @@ div.intersection-hover:hover {
 
   .player{
     width:50%;
-    background-color: yellow;
+ /*    background-color: yellow; */
   }
 .player-box{
     padding-left:0px;
@@ -327,6 +327,11 @@ div.intersection-hover:hover {
     padding-left:0px;
     padding-right:0px;
     padding-bottom: 8px;
+  }
+  .chat-window{
+   /*  flex-grow:1; */
+    max-height: 260px;
+    height:260px;
   }
 }
 
@@ -348,7 +353,7 @@ div.intersection-hover:hover {
 
   width: 85vmin;
 
-  grid-template-rows: 90px 85vmin 90px 251px;
+  grid-template-rows: 90px 85vmin 90px 350px;
  /*  max-width: 95vw; */
 }
 }
@@ -370,7 +375,7 @@ div.intersection-hover:hover {
 
   width: 93vmin;
 
-  grid-template-rows: 90px 93vmin 90px 251px;
+  grid-template-rows: 90px 93vmin 90px 350px;
  /*  max-width: 95vw; */
 }
 }
@@ -400,7 +405,7 @@ div.intersection-hover:hover {
       "goboard"
       "actions"
       "chat";
-    grid-template-rows: 90px 80vmin 90px 251px;
+    grid-template-rows: 90px 80vmin 90px 350px;
 
   }
   .goboard {
@@ -424,7 +429,7 @@ div.intersection-hover:hover {
 
   .player{
     width:50%;
-    background-color: yellow;
+ /*    background-color: yellow; */
   }
 .player-box{
     padding-left:0px;
@@ -437,6 +442,12 @@ div.intersection-hover:hover {
     padding-right:0px;
     padding-bottom: 8px;
   }
+
+  .chat-window{
+    /*  flex-grow:1; */
+     max-height: 260px;
+     height:260px;
+   }
 }
 
 
@@ -460,7 +471,7 @@ div.intersection-hover:hover {
 
   width: 70vmin;
 
-  grid-template-rows: 90px 70vmin 90px 251px;
+  grid-template-rows: 90px 70vmin 90px 350px;
 
 }
 }

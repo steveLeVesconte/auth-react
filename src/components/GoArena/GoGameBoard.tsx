@@ -34,7 +34,7 @@ const GoGameBoard = (props: Props) => {
                         {createRowsNumbers()}
                     </Flex>
                 </GridItem>
-                <GridItem bg='pink.200' area={"gameBoard"} >
+                <GridItem  area={"gameBoard"} >
                     <div className='gameBoard'>
                         {<GameBoard boardString={props.boardString} isMyTurn={props.isMyTurn} onSelectIntersection={props.onSelectIntersection} actionState={props.actionState}/>}
                     </div>
