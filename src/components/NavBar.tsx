@@ -2,7 +2,7 @@ import { HStack, Menu, MenuList, MenuButton, MenuItem, Button, Icon, useColorMod
 //import logo from "../assets/logo.webp";
 import ColorModeSwitch from './ColorModeSwitch';
 import {PlayerContext} from '../contexts/PlayerContext';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ChevronDownIcon } from '@chakra-ui/icons'
 //import { Player } from '../firestore';
 import { useAuth } from '../contexts/AuthContext';
@@ -15,7 +15,25 @@ const NavBar = () => {
    const [error, setError]=useState("");
    //const bg = useColorModeValue('red.500', 'red.200')
    const color = useColorModeValue('white', 'gray.800')
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [windowSize, setWindowSize] = useState([
+      window.innerWidth,
+      window.innerHeight,
+    ]);
+  
+    useEffect(() => {
+      const handleWindowResize = () => {
+        setWindowSize([window.innerWidth, window.innerHeight]);
+      };
+  
+      window.addEventListener('resize', handleWindowResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleWindowResize);
+      };
+    }, []);
+
+
     async function handleLogout(){
       console.log('currentUser: ',currentUser);
       console.log('error: ',error);
@@ -42,9 +60,15 @@ const NavBar = () => {
   {player?.name}
   </MenuButton>
   <MenuList>
+{/*   <div>
+      <h2>Width: {windowSize[0]}</h2>
+
+      <h2>Height: {windowSize[1]}</h2>
+    </div> */}
     <MenuItem   onClick={handleLogout}>Logout</MenuItem>
     <MenuItem  onClick={()=>{navigate("/update-profile")}}>Change Password</MenuItem>
-
+    <MenuItem  >{windowSize[0]}</MenuItem>
+    <MenuItem   >{windowSize[1]}</MenuItem>
   </MenuList>
 </Menu>
     </HStack>

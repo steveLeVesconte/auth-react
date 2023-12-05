@@ -37,10 +37,17 @@ const emptyPackage:ContextPackage={
 
 export const StoneContext = createContext(emptyPackage);
 
+/* function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+} */
 
 const GoArena
   = () => {
-
+//const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
    // const { isOpen, onOpen, onClose } = useDisclosure()
     //const cancelRef = useRef<HTMLButtonElement>(null);
     //const [play, setPlay] = useState<{ row: number, col: number } | null>(null)
@@ -60,7 +67,22 @@ const GoArena
     const player = useContext(PlayerContext)
 /*     const navigate = useNavigate(); */
     const toast = useToast();
-    
+    const [windowSize, setWindowSize] = useState([
+      window.innerWidth,
+      window.innerHeight,
+    ]);
+  
+    useEffect(() => {
+      const handleWindowResize = () => {
+        setWindowSize([window.innerWidth, window.innerHeight]);
+      };
+  
+      window.addEventListener('resize', handleWindowResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleWindowResize);
+      };
+    }, []);
 
     /// TBD TBD TBD make page recover from no match in location
     useEffect(() => {
@@ -370,6 +392,11 @@ const GoArena
           </AlertDialog> */}
         </div>
         </StoneContext.Provider>
+        <div>
+      <h2>Width: {windowSize[0]}</h2>
+
+      <h2>Height: {windowSize[1]}</h2>
+    </div>
       </>
       );
 /*     } catch (e) {
