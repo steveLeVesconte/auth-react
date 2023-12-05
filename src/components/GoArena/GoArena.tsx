@@ -162,7 +162,7 @@ const GoArena
             updateMatch(location.state.match, newTurn);
             const newStoneContext:ContextPackage={
               pendingAction:null,
-              lastAction:contextPackage?.lastAction,
+              lastAction:newTurn.action,
               isPlayersTurn:utilities.getIsMyTurn(turn, player),
               onSelectIntersection:handleSelectIntersection
             }

@@ -46,7 +46,7 @@ const Intersection = (props: Props) => {
     return (<>
         <div className={intersectionHover} key={props.row.toString() + '-' + props.col.toString()}>
             <IntersectionBackGround onSelectIntersection={props.onSelectIntersection} row={props.row} col={props.col} content={props.content} isMyTurn={props.isMyTurn} />
-            {(isPendingActionHere(contextPackage,props.row,props.col)) && <h1>pending! {contextPackage?.pendingAction?.location?.row}</h1>}
+         {/*    {(isPendingActionHere(contextPackage,props.row,props.col)) && <h1>pending! {contextPackage?.pendingAction?.location?.row}</h1>} */}
         </div>
     </>)
 }

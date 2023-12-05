@@ -106,6 +106,12 @@
   left: 0;
   display: flex;
 }
+.emptyIntersection {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+}
 
 .stone {
   position: absolute;
@@ -113,6 +119,23 @@
   left: 0px;
   height: 90%;
   width: 90%;
+}
+
+.pending-svg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 70%;
+  width: 70%;
+  margin: 14%;
+}
+.last-turn-svg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 70%;
+  width: 70%;
+  margin: 14%;
 }
 
 div.intersection-hover:hover {
