@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { TURN_COLLECTION, Turn, addTurn, updateMatch } from "../../firestore";
-import { useContext, useEffect,  useState } from "react";
+import { BoardContextInfo, GameAction, TURN_COLLECTION, Turn, addTurn, updateMatch } from "../../firestore";
+import { createContext, useContext, useEffect,  useState } from "react";
 import { Submission, evaluateSubmission } from "../../services/moveProcessor";
 import submissionFactory from "../../services/submissionFactory";
 import { PlayerContext } from "../../contexts/PlayerContext";
@@ -20,14 +20,35 @@ import { ActionCard } from "./ActionCard";
 import NavBar from "../NavBar";
 import { useToast } from '@chakra-ui/react'
 
+
+export interface ContextPackage{ 
+  pendingAction:GameAction|null|undefined;
+  lastAction:GameAction|null|undefined;
+  isPlayersTurn: boolean;
+  onSelectIntersection: (row: number, col: number) => void;
+} 
+const emptyPackage:ContextPackage={
+  pendingAction: null,
+  lastAction: null,
+  isPlayersTurn: false,
+  onSelectIntersection: function (): void {}
+  }
+
+
+export const StoneContext = createContext(emptyPackage);
+
+
 const GoArena
   = () => {
 
    // const { isOpen, onOpen, onClose } = useDisclosure()
     //const cancelRef = useRef<HTMLButtonElement>(null);
     //const [play, setPlay] = useState<{ row: number, col: number } | null>(null)
-
-    const [pendingPlay, setPendingPlay] = useState<{ row: number, col: number } | null>(null)
+    const [contextPackage, setContextPackage] = useState<ContextPackage>(emptyPackage)
+    
+    const [pendingAction, setPendingAction] = useState<GameAction|null>(null)
+    const [lastAction, setLastAction] = useState<GameAction|null>(null)
+    //const [pendingPlay, setPendingPlay] = useState<boolean>(false)
     const [pendingPass, setPendingPass] = useState<boolean>(false)
     //const [turnStatus, setPendingPass] = useState<boolean>(false)
 
@@ -38,7 +59,9 @@ const GoArena
     const location = useLocation();
     const player = useContext(PlayerContext)
     const navigate = useNavigate();
-    const toast = useToast()
+    const toast = useToast();
+    
+
     /// TBD TBD TBD make page recover from no match in location
     useEffect(() => {
       const turnQuery = query(collection(db, TURN_COLLECTION), where("matchId", "==", location.state.match.id), orderBy("createDate", "desc"), limit(1));
@@ -46,6 +69,13 @@ const GoArena
         querySnapshot.forEach((doc) => {
           const latestTurn = { ...doc.data(), id: doc.id } as Turn;
           setTurn(latestTurn);
+       
+          setContextPackage(
+            {pendingAction:null,
+              lastAction:latestTurn.action,
+              isPlayersTurn: utilities.getIsMyTurn(turn, player),
+              onSelectIntersection:handleSelectIntersection
+            })
         });
       });
       /*       const colorOfOppoent=utilities.getStoneColorOfPrevTrunOpponent(player?.id ?? "", turn);
@@ -80,22 +110,42 @@ const GoArena
       onOpen();
     } */
 
-    const onSelectIntersection = (row: number, col: number): void => {
-      setPendingPlay({ row: row, col: col });
+    const handleSelectIntersection = (row: number, col: number): void => {
+      console.log('************* onSelectIntersection: ',row,col);
+      //console.log(...(contextPackage?);
+      const newStoneContext:ContextPackage={
+        pendingAction:{actionType: "play",location: { row: row, col: col }},
+        lastAction:contextPackage?.lastAction,
+        isPlayersTurn:utilities.getIsMyTurn(turn, player),
+        onSelectIntersection:handleSelectIntersection
+      }
+     setContextPackage(newStoneContext);
+     // setPendingAction( {actionType: "play",location: { row: row, col: col }});
+      //console.log('************* setting pending action: ',pendingAction);
+      //setPendingPlay({ row: row, col: col });
      // onOpen();
     }
 
 
     const executeStonePlay = () => {
-      console.log('executeStonePlay play:',pendingPlay)
-      doStonePlay(turn, pendingPlay?.row ?? -1, pendingPlay?.col ?? -1);
+      //console.log('executeStonePlay play:',pendingAction)
+      doStonePlay(turn, contextPackage.pendingAction?.location?.row ?? -1, contextPackage.pendingAction?.location?.col ?? -1);
     //  setPendingPlay(null);
      // onClose();
     }
 
     const cancelStonePlay = () => {
-      console.log('cancelStonePlay play:',pendingPlay)
-      setPendingPlay(null);
+    //  console.log('************* cancelStonePlay: ',pendingAction);
+    
+     // console.log('cancelStonePlay play:',pendingAction)
+      //setPendingAction(null);
+      const newStoneContext:ContextPackage={
+        pendingAction:null,
+        lastAction:contextPackage?.lastAction,
+        isPlayersTurn:utilities.getIsMyTurn(turn, player),
+        onSelectIntersection:handleSelectIntersection
+      }
+     setContextPackage(newStoneContext);
      // onClose();
     }
 
@@ -110,7 +160,15 @@ const GoArena
           setTurn(newTurn);
           addTurn(newTurn).then(() => {
             updateMatch(location.state.match, newTurn);
-            setPendingPlay(null);
+            const newStoneContext:ContextPackage={
+              pendingAction:null,
+              lastAction:contextPackage?.lastAction,
+              isPlayersTurn:utilities.getIsMyTurn(turn, player),
+              onSelectIntersection:handleSelectIntersection
+            }
+           setContextPackage(newStoneContext);
+  /*           setPendingAction(null);
+            setLastAction(pendingAction); */
             console.log("about to toast");
             toast({
               title: 'Stone placment processed.',
@@ -139,7 +197,14 @@ const GoArena
           duration: 9000,
           isClosable: true,
         });
-        setPendingPlay(null);
+       // setPendingAction(null);
+        const newStoneContext:ContextPackage={
+          pendingAction:null,
+          lastAction:contextPackage?.lastAction,
+          isPlayersTurn:utilities.getIsMyTurn(turn, player),
+          onSelectIntersection:handleSelectIntersection
+        }
+       setContextPackage(newStoneContext);
       }
         // else{//    TBD      put alert here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TBD
       }
@@ -176,9 +241,10 @@ const GoArena
       }
     }
 
-    try {
+/*     try { */
 
       return (<>
+          <StoneContext.Provider value={contextPackage}>
         <div className="game-container">
           <NavBar></NavBar>
 
@@ -188,7 +254,7 @@ const GoArena
             <GridItem className="goboard" area={"goboard"}  >
               <div>
              
-                  {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={onSelectIntersection} expressRowAndColumnLabels={true} />}
+                  {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={handleSelectIntersection} expressRowAndColumnLabels={true} actionState={{pendingAction,lastAction}}/>}
                  </div>
             </GridItem>
 
@@ -227,7 +293,8 @@ const GoArena
 
             <GridItem className="actions" area={"actions"}  >
               <ActionCard 
-               isPendingMove={!(pendingPlay==null)}
+            /*    isPendingMove={!(pendingAction==null)} */
+               isPendingMove={(!(contextPackage?.pendingAction==null))}
                isMyTurn={utilities.getIsMyTurn(turn, player)}
                onPlayConfirm={executeStonePlay}
                onPassConfirm={()=>{handlePass(turn);}}
@@ -272,6 +339,7 @@ const GoArena
             </GridItem>
             <GridItem className="test" area={"LO"} ><LogoCard /></GridItem> */}
           </Grid>
+          {contextPackage?.pendingAction&&<Box>{contextPackage?.pendingAction?.actionType}</Box>}
 
 
          {/*  <AlertDialog
@@ -301,14 +369,14 @@ const GoArena
             </AlertDialogOverlay>
           </AlertDialog> */}
         </div>
-
+        </StoneContext.Provider>
       </>
       );
-    } catch (e) {
+/*     } catch (e) {
       console.log("Error displaying component:  probably no match: ", location.state);
       ///TBD TBD TBD  test if "missing match" is issue and show toast.
       navigate("/");
-    }
+    } */
   }
 
 

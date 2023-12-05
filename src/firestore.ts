@@ -67,6 +67,25 @@ export interface GameAction {
     location: { row: number, col: number } | null;
 }
 
+export interface ActionState{ 
+    pendingAction:GameAction|null;
+    lastAction:GameAction|null;
+} 
+
+
+export interface xBoardContextInfo{ 
+    pendingPlay:{
+        row:number;
+        col:number;
+    }|null;
+    lastPlay:{
+        row:number;
+        col:number;
+    }|null;
+
+    lastActionWasStonePlay: boolean;
+
+} 
 export function addPlayerProfile(uid: string, name: string, rankInfo: string, bio: string, status: string, createDate: string) {
     return addDoc(collection(db, PLAYER_COLLECTION), { uid, name, rankInfo, bio, status, createDate })
 }

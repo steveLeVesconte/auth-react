@@ -2,12 +2,14 @@ import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 
 import LetterRow from './LetterRow';
 import GameBoard from './GameBoard';
+import { ActionState } from '../../firestore';
 
 interface Props {
     boardString: string;
     isMyTurn: boolean;
     onSelectIntersection: (row: number, col: number) => void;
     expressRowAndColumnLabels: boolean;
+    actionState:ActionState;
 }
 
 const GoGameBoard = (props: Props) => {
@@ -34,7 +36,7 @@ const GoGameBoard = (props: Props) => {
                 </GridItem>
                 <GridItem bg='pink.200' area={"gameBoard"} >
                     <div className='gameBoard'>
-                        {<GameBoard boardString={props.boardString} isMyTurn={props.isMyTurn} onSelectIntersection={props.onSelectIntersection} />}
+                        {<GameBoard boardString={props.boardString} isMyTurn={props.isMyTurn} onSelectIntersection={props.onSelectIntersection} actionState={props.actionState}/>}
                     </div>
                 </GridItem>
             </Grid>
