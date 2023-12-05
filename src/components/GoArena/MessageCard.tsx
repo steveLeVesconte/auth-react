@@ -1,8 +1,7 @@
 import {
   Image,
-    Card,
-    CardBody,
-    useColorModeValue,Text, Box, HStack, Flex
+
+    useColorModeValue,Text, Box,  Flex
   } from '@chakra-ui/react';
   import blackStoneImage from "../../assets/blackStoneTrans.png";
   import whiteStoneImage from "../../assets/whiteStoneTrans.png";

@@ -1,6 +1,6 @@
-import { useContext } from 'react';
+/* import { useContext } from 'react';
 import { ActionState } from '../../firestore';
-import { ContextPackage, StoneContext } from './GoArena';
+import { ContextPackage, StoneContext } from './GoArena'; */
 import IntersectionBackGround from './IntersectionBackGround';
 
 interface Props {
@@ -9,12 +9,12 @@ interface Props {
     content: string;
     isMyTurn: boolean;
     onSelectIntersection: (row: number, col: number) => void;
-    actionState:ActionState;
+    //actionState:ActionState;
 }
 
 const Intersection = (props: Props) => {
 
-    const contextPackage = useContext(StoneContext);
+/*     const contextPackage = useContext(StoneContext);
 
     function isPendingActionHere(context:ContextPackage,row:number,col:number):boolean{
           if(!context.isPlayersTurn) return false;
@@ -24,7 +24,7 @@ const Intersection = (props: Props) => {
           if(context.pendingAction?.location?.col!==col) return false;
           return true;
 
-    }
+    } */
 
 /*     if((props.row==0)&&(props.col==0))
     {

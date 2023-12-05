@@ -1,5 +1,5 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { BoardContextInfo, GameAction, TURN_COLLECTION, Turn, addTurn, updateMatch } from "../../firestore";
+import { useLocation } from "react-router-dom";
+import {  GameAction, TURN_COLLECTION, Turn, addTurn, updateMatch } from "../../firestore";
 import { createContext, useContext, useEffect,  useState } from "react";
 import { Submission, evaluateSubmission } from "../../services/moveProcessor";
 import submissionFactory from "../../services/submissionFactory";
@@ -46,8 +46,8 @@ const GoArena
     //const [play, setPlay] = useState<{ row: number, col: number } | null>(null)
     const [contextPackage, setContextPackage] = useState<ContextPackage>(emptyPackage)
     
-    const [pendingAction, setPendingAction] = useState<GameAction|null>(null)
-    const [lastAction, setLastAction] = useState<GameAction|null>(null)
+ /*    const [pendingAction, setPendingAction] = useState<GameAction|null>(null)
+    const [lastAction, setLastAction] = useState<GameAction|null>(null) */
     //const [pendingPlay, setPendingPlay] = useState<boolean>(false)
     const [pendingPass, setPendingPass] = useState<boolean>(false)
     //const [turnStatus, setPendingPass] = useState<boolean>(false)
@@ -58,7 +58,7 @@ const GoArena
     const [turn, setTurn] = useState<Turn | null>()
     const location = useLocation();
     const player = useContext(PlayerContext)
-    const navigate = useNavigate();
+/*     const navigate = useNavigate(); */
     const toast = useToast();
     
 
@@ -254,7 +254,7 @@ const GoArena
             <GridItem className="goboard" area={"goboard"}  >
               <div>
              
-                  {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={handleSelectIntersection} expressRowAndColumnLabels={true} actionState={{pendingAction,lastAction}}/>}
+                  {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={handleSelectIntersection} expressRowAndColumnLabels={true} />}
                  </div>
             </GridItem>
 

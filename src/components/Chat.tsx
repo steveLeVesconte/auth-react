@@ -4,8 +4,7 @@ import {
     Card,
     CardBody,
    
-    Flex,
-    Text
+    Flex
 } from '@chakra-ui/react';
 import { Match, Message, Player } from '../firestore';
 import { db } from '../firebase';
