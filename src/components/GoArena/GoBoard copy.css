@@ -1,313 +1,3 @@
-:root{
-  /* --grid-width:97vw; */
-/* --grid-width:calc(99vw - 12px); */
---chat-height:300px;
-}
-
-
-.base-phone-grid{
-display:grid;
-grid-template-areas: "left-edge game-board-layout right-edge";
-
-}
-.left-edge{
-  grid-area: "left-edge";
-  width: 8px;
-/*   background-color: aqua; */
-}
-.right-edge{
-  grid-area: "right-edge";
-  width: 8px;
-/*   background-color: aqua; */
-}
-
-.chat-scroll{
-  height: var(--chat-height);
-}
-/* @media (orientation:portrait) { */
-.nav-bar{
-
-/*   width: calc(100vw - 16px);
-  flex:1; */
-}
-
-  .game-board-layout{
-/*     padding: 0 20px; */
-/*     background-color: yellow; */
-/*     margin-left: auto;
-    margin-right: auto;
-    width: 75vw; */
-/*     display:flex; */
-/*     flex-direction: column;
-    align-items: center; */
-  }
-  
-  .nav {
-
-    height: 56px;
-/*     background-color: rgb(130, 238, 236); */
-   
-  }
-
-/*   .game-layout{
-    background-color: yellow;
-
-  } */
-
-
-  .arena-grid-container {
-/*     width: calc(100vw - 16px); */
-    width:100%;
-    flex:1;
-    display: grid;
-    grid-template-areas:
-      "players"
-      "goboard"
-      "actions"
-      "chat";
- /*      grid-template-rows: 90px var(--grid-width) 150px var(--grid-width); */
-/*  grid-template-rows: 90px calc(99vw - 5) 150px 1fr; */
-/*  grid-template-rows: 90px calc(99vw - 5) 150px 1fr; */
-/*     background-color: green; */
-    grid-template-columns: 1fr;
-  }
-
-
-
-  .goboard {
-/*     padding: 5px;
-    margin: 5px; */
-    background-color: bisque;
-/*     height:calc(100vmin - 16px) ;
-    width: calc(100vmin - 16px); */
-  /*   width:var(--grid-width); */
-    aspect-ratio: 5/5;
-    outline: 1px black solid;
-}
-
-
-
-.players {
-
-  display: flex;
-  gap: 9px;
-  flex-direction: row;
-  grid-area: players;
-/*   background-color: rgb(130, 215, 238); */
-  height: 100%;
-/*   width: calc(100vw - 16px); */
-
-  /* width: 500px; */
-/*   outline: 1px black solid; */
-padding-bottom: 8px;
-}
-
-.player-box{
-  flex-grow: 1;
-}
-.player{ 
-/*   background-color: rgb(0, 149, 255); */
-/*   outline: 1px black solid; */
-}
-
-.opponent{
-/*   background-color: rgb(128, 0, 0);
-  outline: 1px black solid; */
-}
-
-.player-stone {
-  height: 20px;
-  width: 20px;
-  min-width: 20px;
-}
-
-.actions {
-  grid-area: actions;
-/*   background-color: aqua; */
-  width: 100%;
-  outline: 1px black solid;
-
-}
-.chat {
-  grid-area: chat;
-  /* background-color: thistle; */
-  min-height: 250px;
-  width: 100%;
-/*   outline: 1px black solid */;
-}
-
-
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-
-
-/* @media (min-width: 730px) {
-  .goboard{
-    width:calc(97vw - 1%)
-  }
-} */
-
-
-
-
-
-/* @media (min-width: 1075px) { */
-@media (min-width: 111075px) {
-  .player {
-/*     background-color: rgb(89, 255, 0); */
-/*     outline: 1px black solid; */
-  }
-  .arena-grid-container {
-    grid-template-rows: 90px  1075px 150px 1fr;
-/*     background-color: rgb(150, 200, 150); */
-  }
-  .game-board-layout {
-    width:  1075px;
-/*     background-color: yellow; */
- /*    margin-left: auto;
-    margin-right: auto; */
-
-  }
-  .goboard {
-/*     background-color: bisque; */
-    height:  1075px;
-    width:  1075px;
-    aspect-ratio: 5/5;
-/*     outline: 1px black solid; */
-  }
-}
-
-/* @media(min-width: 1600px) and (min-height:1300px){ */
-/*   @media (min-width: 1600px) { */
-@media (min-width: 111600px) {
-  .game-board-layout {
-    width: calc(130vh - 16px);
-/*     background-color: yellow; */
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .arena-grid-container {
-    display: grid;
-    grid-template-columns: calc(90vh - 16px) 40vh;
-    grid-template-areas:
-      "goboard players"
-      "goboard actions"
-      "goboard chat";
-    grid-template-rows: 90px 150px calc(90vh - 16px) calc(90vh - 240px);
-/*     background-color: green; */
-  }
-  .goboard {
-   /*  background-color: bisque; */
-    height: calc(90vh - 16px);
-    width: calc(90vh - 16px);
-    aspect-ratio: 5/5;
-/*     outline: 1px black solid; */
-  }
-
-  .chat {
-    height: calc(90vh - 256px);
-  }
-}
-
-
-/* @media (max-height: 800px) and (min-width:500px) { */
-@media (max-height: 8px) and (min-width:50000px) {
-  .game-board-layout {
-    max-width: calc(70vh - 16px);
-  }
-
-  .arena-grid-container {
-    display: grid;
-    grid-template-areas:
-      "players"
-      "goboard"
-      "actions"
-      "chat";
-    grid-template-rows: 90px calc(70vh - 16px) 150px 1fr;
-/*     background-color: green */;
-    grid-template-columns: 1fr;
-  }
-
-  .goboard {
-    height: calc(70vh - 16px);
-    width: calc(70vh - 16px);
-  }
-}
-
-
-
-/* @media screen and (min-width: 1000px){ */
-
-
-
-  
-/*   .game-layout{
-    max-width: 130vh;
-    background-color: yellow;
-    margin-left: auto;
-    margin-right: auto;
-  } */
-/* } */
-
-/* 
-@media screen and (min-width: 1600px){
-
-
-  .game-layout{
-    max-width: 130vmin;
-    width: 130vmin;
-    background-color: yellow;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .arena-grid-container {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 90vmin 40vmin;
-    grid-template-areas:
-      "goboard players"
-      "goboard actions"
-      "goboard chat";
-    grid-template-rows: 130px 90px 1fr;
-    max-width: 130vmin;
-    width: 130vmin;
-
-  }
-  
-} */
-
-/*  @media (orientation:landscape) { 
-
-
-  .arena-grid-container {
-
-    grid-template-rows: 90px  100px 1fr;
-
-    background-color: rgb(128, 21, 0);
-
-  }
-
- } */
-
-
-
-
-
-
-
-
-
-
 /* chat */
 .message-card{
   width: 100%;
@@ -463,8 +153,6 @@ div.intersection-hover:hover {
 
 /* arena board ************************************************************** */
 
-@media printer and (max-width: 1600px){
-@media screen and (max-width: 1600px){
 .game-container{
   max-width: 130vmin;
   width: 130vmin;
@@ -475,7 +163,7 @@ div.intersection-hover:hover {
 .nav {
   width: 100%;
   height: 50px;
-/*   background-color: rgb(3, 4, 4); */
+  background-color: rgb(3, 4, 4);
  
 }
 
@@ -723,7 +411,7 @@ div.intersection-hover:hover {
   .goboard {
 
 
-   /*  background-color: bisque; */
+    background-color: bisque;
     aspect-ratio: 1/1;
     height: 80vmin;
     width: 80vmin;
@@ -790,7 +478,7 @@ div.intersection-hover:hover {
 
 
 
-}
+
 
 
 
@@ -839,5 +527,4 @@ div.intersection-hover:hover {
   background-color: "transparent";
   color: "black";
   font-weight: "bold";
-}
 }

@@ -88,12 +88,13 @@ const Chat = ({ match }: Props) => {
         return "w";
       }
     return (
-        <Box h="100%" pl={2} pr={2} pt={2}>
-    <Card h="100%">
-<CardBody height="100%">
-        <Flex w="100%" height="100%"  flexDirection="column" p="0px">
-            <Box className='chat-window' w="100%"    p="0px">
-                <Box overflowY="scroll"  height="100%">
+        <Box h="100%"  pt={2} pb={2}>
+    <Card h="100%" >
+<CardBody height="100%" pb={2}>
+{/*         <Flex w="100%" height="100%"  flexDirection="column" p="0px"> */}
+
+            <Box className='chat-window' w="90%"    p="0px">
+                <Box overflowY="scroll"  className='chat-scroll'>
                 {messages.map((item) => {
    /*                  if (item.speakerName === "me") { */
                         return (
@@ -137,9 +138,10 @@ const Chat = ({ match }: Props) => {
                         );
                     } */
                 })}
-           {screenSize.width>1600 && <AlwaysScrollToBottom />}   
+                {/*     {screenSize.width>1 && <AlwaysScrollToBottom />}   */}               
+           {false && <AlwaysScrollToBottom />}   
             </Box>
-            </Box>
+       
             
             <form onSubmit={handleSubmit}>
                 <Flex mt="10px" flexDirection="row">
@@ -147,8 +149,8 @@ const Chat = ({ match }: Props) => {
                     <Button type="submit">Send</Button>
                     </Flex>
                 </form>
-             
-                </Flex>
+                </Box>
+     {/*            </Flex> */}
          
 
 

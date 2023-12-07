@@ -15,8 +15,9 @@ import GoArena from "./GoArena/GoArena";
 import MatchList from "./MatchList";
 //import { Container } from "@chakra-ui/react";
 import MainLayout from "../layouts/MainLayout";
-import GameBoardLayout from "../layouts/GameBoardLayout";
+/* import GameBoardLayout from "../layouts/GameLayout"; */
 import AuthLayout from "../layouts/AuthLayout";
+import GameLayout from "../layouts/GameLayout";
 
 function App() {
   return (<>
@@ -35,7 +36,7 @@ function App() {
             <Route element={<CreateMatch />} path="create-match" />
             <Route element={<MatchList />} path="match-list" />
         </Route>
-        <Route element={<GameBoardLayout  />} path="/go-board"  >
+        <Route element={<GameLayout  />} path="/go-board"  >
        
             <Route element={<GoArena />} index />
         </Route>

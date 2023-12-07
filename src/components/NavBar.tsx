@@ -9,8 +9,10 @@ import { useAuth } from '../contexts/AuthContext';
 import {  useNavigate } from 'react-router-dom';
 //import logo from '../assets/logo.png'
 import { TbGoGame } from "react-icons/tb";
+import useScreenOrientation from '../hooks/GetScreenOrientation';
 
 const NavBar = () => {
+  const orientation:string=useScreenOrientation()
    const {currentUser, logout}=useAuth();
    const [error, setError]=useState("");
    //const bg = useColorModeValue('red.500', 'red.200')
@@ -47,7 +49,7 @@ const NavBar = () => {
       }
     const player=useContext(PlayerContext)
   return (
-    <Box p={2}>
+    <Box className="nav-bar" pt={2} pb={2} w="100%">
    <HStack  justifyContent={'space-between'} width="100%">
     <Icon  onClick={()=>{navigate("/")}} as={TbGoGame} className="goIcon" borderRadius={10} w={8} h={8}   bg="#eac77b" color={color} />
 {/*    <TbGoGame onClick={()=>{navigate("/")}}  className="goIcon"/>
@@ -69,6 +71,9 @@ const NavBar = () => {
     <MenuItem  onClick={()=>{navigate("/update-profile")}}>Change Password</MenuItem>
     <MenuItem  >{windowSize[0]}</MenuItem>
     <MenuItem   >{windowSize[1]}</MenuItem>
+    <MenuItem   >{orientation}</MenuItem>
+    <MenuItem   ><div className="display-orientation"/></MenuItem>
+
   </MenuList>
 </Menu>
     </HStack>

@@ -26,7 +26,7 @@ export const ActionCard = (props:Props) => {
     //const navigate = useNavigate();
   return (
    
-   <VStack h="100px"  p={2}>
+   <VStack h="100px"  >
     <Box h="10px"></Box>
     <Flex w="100%" h="32px" >
       <Flex flex={1} justifyItems="right" ></Flex>
