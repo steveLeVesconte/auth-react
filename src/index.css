@@ -6,9 +6,10 @@ html{
 
 .goIcon {
   color: rgb(0, 0, 0);
-  background-color: rgb(255, 255, 255);
+  background-color: var(--board-color);
+  
   max-height: 50px;
-  max-width: 50px;
+  max-width: 5990px;
 }
 
 .display-orientation::before{

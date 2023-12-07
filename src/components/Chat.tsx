@@ -48,7 +48,7 @@ const Chat = ({ match }: Props) => {
 
 
     useEffect(() => {
-        const queryMessages = query(messagesRef, where("matchId", "==", match.id), orderBy("createDate", "desc"), limit(25));
+        const queryMessages = query(messagesRef, where("matchId", "==", match.id), orderBy("createDate", "desc"), limit(10));
         //const unsubscribe=   TBD
         onSnapshot(queryMessages, (snapshot) => {
             const messagesArray: Message[] = [];
@@ -90,10 +90,10 @@ const Chat = ({ match }: Props) => {
     return (
         <Box h="100%"  pt={2} pb={2}>
     <Card h="100%" >
-<CardBody height="100%" pb={2}>
+<CardBody height="100%" pb={2} className='chat-card-body'>
 {/*         <Flex w="100%" height="100%"  flexDirection="column" p="0px"> */}
 
-            <Box className='chat-window' w="90%"    p="0px">
+            <Box className='chat-window'     p="0px">
                 <Box overflowY="scroll"  className='chat-scroll'>
                 {messages.map((item) => {
    /*                  if (item.speakerName === "me") { */

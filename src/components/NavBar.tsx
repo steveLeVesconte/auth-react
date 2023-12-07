@@ -51,7 +51,7 @@ const NavBar = () => {
   return (
     <Box className="nav-bar" pt={2} pb={2} w="100%">
    <HStack  justifyContent={'space-between'} width="100%">
-    <Icon  onClick={()=>{navigate("/")}} as={TbGoGame} className="goIcon" borderRadius={10} w={8} h={8}   bg="#eac77b" color={color} />
+    <Icon  onClick={()=>{navigate("/")}} as={TbGoGame} className="goIcon" borderRadius={10} w={8} h={8}   color={color} />
 {/*    <TbGoGame onClick={()=>{navigate("/")}}  className="goIcon"/>
     <Image onClick={()=>{navigate("/")}} src={logo} boxSize='60px'></Image> */}
     <HStack>
