@@ -389,7 +389,7 @@ padding-bottom: 8px;
   text-align: right;
   font-weight: 700;
 /*   font-size: 7px; */
-font-size: clamp(.8rem, 2vw + .1rem, 1.5rem);
+font-size: clamp(.5rem, 2vw + .1rem, 1.5rem);
 }
 .colLetterLabel {
   color: black;
@@ -398,7 +398,7 @@ font-size: clamp(.8rem, 2vw + .1rem, 1.5rem);
  
   font-weight: 700;
 /*   font-size: 7px; */
-font-size: clamp(.8rem, 2vw + .1rem, 1.5rem);
+font-size: clamp(.5rem, 2vw + .1rem, 1.5rem);
 }
 /* 
 @media screen and (max-width: 800px) {
