@@ -15,7 +15,7 @@ const GameCard = ({ match }: Props) => {
   return (
     <Card>
       <CardBody p={1}>
-        <div className="gameBoardColor">
+        <div className="game-board-color">
           <GameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={() => { }} />
         </div>
         <div >

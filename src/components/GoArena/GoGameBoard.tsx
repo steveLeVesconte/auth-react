@@ -21,9 +21,8 @@ const GoGameBoard = (props: Props) => {
                               "rowNums gameBoard"`}
                 gridTemplateColumns={'3fr 97fr'}
                 gridTemplateRows={'3fr 97fr'}
-                w="100%"
-                h="100%"
-                className='boarderContainer'>
+
+                className='boarder-container'>
                 <GridItem area={"corner"} ><div> </div></GridItem>
                 <GridItem area={"headerLetters"} >
                     {props.expressRowAndColumnLabels && <LetterRow ></LetterRow>}
