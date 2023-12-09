@@ -19,7 +19,7 @@ const LetterRow = () => {
     content.push(<div  className='colLetterLabel'>{letters[x]}</div>);
   }
   return (
-   <Box pl="5px" paddingRight="5px"> <Flex gap={0} >{content}</Flex></Box>
+   <Box  > <Flex gap={0} >{content}</Flex></Box>
   )
 }
 

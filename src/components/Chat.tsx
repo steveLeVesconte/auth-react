@@ -88,7 +88,7 @@ const Chat = ({ match }: Props) => {
         return "w";
       }
     return (
-        <Box h="100%"  pt={2} pb={2}>
+      /*   <Box h="100%"  pt={2} pb={2}> */
     <Card h="100%" >
 <CardBody height="100%" pb={2} className='chat-card-body'>
 {/*         <Flex w="100%" height="100%"  flexDirection="column" p="0px"> */}
@@ -172,7 +172,7 @@ const Chat = ({ match }: Props) => {
         </CardBody>
                 </Card>
 
-        </Box>
+      /*   </Box> */
     );
 };
 

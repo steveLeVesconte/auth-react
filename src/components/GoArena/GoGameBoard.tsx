@@ -29,7 +29,7 @@ const GoGameBoard = (props: Props) => {
 
                 </GridItem>
                 <GridItem area={"rowNums"} >
-                    <Flex h={"100%"} flexDirection={"column"} pt="7px" paddingBottom="8px" >
+                    <Flex h={"100%"} flexDirection={"column"}   >
                         {createRowsNumbers()}
                     </Flex>
                 </GridItem>
