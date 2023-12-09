@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
+import { Box,  Grid, GridItem } from '@chakra-ui/react';
 
 import LetterRow from './LetterRow';
 import GameBoard from './GameBoard';
@@ -28,10 +28,10 @@ const GoGameBoard = (props: Props) => {
                     {props.expressRowAndColumnLabels && <LetterRow ></LetterRow>}
 
                 </GridItem>
-                <GridItem area={"rowNums"} >
-                    <Flex h={"100%"} flexDirection={"column"}   >
+                <GridItem area={"rowNums"} className='row-nums' >
+                    {/* <Flex h={"100%"} flexDirection={"column"}   > */}
                         {createRowsNumbers()}
-                    </Flex>
+                  {/*   </Flex> */}
                 </GridItem>
                 <GridItem  area={"gameBoard"} >
                     <div className='gameBoard'>
@@ -51,7 +51,7 @@ const createRowsNumbers = (): JSX.Element[] => {
 
 
     for (let x = 18; x >= 0; x--) {
-        content.push(<Box flexDir={"row"} flexShrink={1} flexGrow={1} display={"flex"} alignItems={"center"} key={x} ><div className='rowNumberLabel' >{x}</div></Box>);
+        content.push(<Box  className='rowNumberLabel' key={x} ><div className='row-number'>{x}</div></Box>);
     }
     return content;
 }

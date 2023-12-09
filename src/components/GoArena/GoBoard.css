@@ -35,6 +35,20 @@
 
 /* game board labels */
 
+.row-nums{
+
+  display:grid;
+
+  padding-bottom: 2px;
+}
+
+.row-number{
+/*   display: inline-block;
+  vertical-align: middle;
+  line-height:clamp(.5rem, 1vmin + .3rem, 10px); */
+  
+}
+
 .rowNumberLabel {
   color: black;
   padding-left: 0.3em;
@@ -42,8 +56,15 @@
   text-align: right;
   font-weight: 700;
 /*   font-size: 7px; */
-
+line-height:clamp(.5rem, 1vmin + .3rem, 10px);
 font-size: clamp(.5rem, 1vmin + .3rem, 10px);
+display: flex;
+	
+/* Make a horizontal flexbox (the default) */
+flex-direction: row;
+
+/* The important part: vertically center the items */
+align-items: center;
 }
 .colLetterLabel {
   color: black;
@@ -355,6 +376,7 @@ padding-bottom: 8px;
     text-align: right;
     font-weight: 700; */
   /*   font-size: 7px; */
+  line-height:clamp(.5rem, .9vw + .1rem, 16px);
   font-size: clamp(.5rem, .9vw + .1rem, 16px);
   }
   .colLetterLabel {
@@ -364,13 +386,14 @@ padding-bottom: 8px;
    
     font-weight: 700; */
   /*   font-size: 7px; */
+ 
   font-size: clamp(.5rem, .9vw + .1rem, 16px);
   }
 
 
-     .chat-scroll{ 
-     height: calc(99vh - 450px); 
-   /*  height: 100%;  */
+      .chat-scroll{ 
+     height: calc(99vh - 430px); 
+     max-height: calc(99vw - 680px);
     
   }   
 
