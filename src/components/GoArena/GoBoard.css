@@ -368,11 +368,11 @@ padding-bottom: 8px;
   }
 
 
-/*     .chat-scroll{ */
-/*     height: calc(99vmin - 350px); */
-/*     height: 100%; */
-/*    
-  }   */
+     .chat-scroll{ 
+     height: calc(99vh - 450px); 
+   /*  height: 100%;  */
+    
+  }   
 
 /*   .chat {
     height: calc(70vw - 230px);
