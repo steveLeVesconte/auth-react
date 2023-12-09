@@ -1,7 +1,7 @@
 import { HStack, Menu, MenuList, MenuButton, MenuItem, Button, Box, CardBody, Card} from '@chakra-ui/react'
 //import logo from "../assets/logo.webp";
 //import ColorModeSwitch from './ColorModeSwitch';
-import {PlayerContext} from '../../contexts/PlayerContext'
+import {PlayerContext, PlayerContextType} from '../../contexts/PlayerContext'
 import { useContext, useState } from 'react';
 import { ChevronDownIcon } from '@chakra-ui/icons'
 //import { Player } from '../firestore';
@@ -27,7 +27,7 @@ const NavBar = () => {
           setError('failed to log out')
         }
       }
-    const player=useContext(PlayerContext)
+    const {player}=useContext(PlayerContext) as PlayerContextType;
   return (
     <Box className='cardBox'>
     <Card>

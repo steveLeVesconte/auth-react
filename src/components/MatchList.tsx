@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import {Match, getActiveMatchesForPlayerId} from "../firestore"
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom';
-import {PlayerContext} from "../contexts/PlayerContext";
+import {PlayerContext, PlayerContextType} from "../contexts/PlayerContext";
 import GameCard from "./GameCard";
 import { SimpleGrid } from "@chakra-ui/react";
 
@@ -22,7 +22,7 @@ const [matches, setMatches] = useState<Match[]|null>([])
 const {  currentUser } = useAuth();//from AuthContext
 const navigate=useNavigate();
 
-const currentPlayer=useContext(PlayerContext);
+const {player}=useContext(PlayerContext) as PlayerContextType;
 
 
 useEffect(()=>{
@@ -30,7 +30,7 @@ useEffect(()=>{
  //   console.log('in playerlist use effect - user: ', currentUser);
     async function getData() {
     if(currentUser){
-       const myActiveMatches=await getActiveMatchesForPlayerId(currentPlayer?.id??"");
+       const myActiveMatches=await getActiveMatchesForPlayerId(player?.id??"");
     //    const x = allPlayers[0].name;
     //    const y:string = currentUser.uid as string;
     //    console.log(y+x);
@@ -41,7 +41,7 @@ useEffect(()=>{
     }
 }
 getData();
-},[currentPlayer,currentUser]
+},[player,currentUser]
 );
 
 const handleSelect=(selectedMatch:Match)=>{

@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom';
-import { addPlayerProfile } from '../firestore';
+import { Player, addPlayerProfile } from '../firestore';
 import { Alert, Button, Card, CardBody, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import {PlayerContext,  PlayerContextType } from '../contexts/PlayerContext';
 
 const PlayerProfile
     = () => {
@@ -14,13 +15,26 @@ const PlayerProfile
         const [error, setError] = useState('')
         const [loading, setLoading] = useState(false);
         const navigate = useNavigate()
-
+        const {updatePlayer} = useContext(PlayerContext) as PlayerContextType;
+       // const [player, setPlayer] = useState<Player>({} as Player);
         function handleSubmit(e: { preventDefault: () => void; }) {
             e.preventDefault();
             setLoading(true);
             setError('');
             addPlayerProfile(currentUser?.uid, nameRef.current?.value ?? "", rankInfoRef.current?.value ?? "", bioRef.current?.value ?? "", "active", (new Date).toISOString())
-                .then(() => {
+                .then((refDoc) => {
+                    const newPlayer:Player = {name:nameRef.current?.value??"", 
+                    bio:bioRef.current?.value??"",
+                rankInfo:rankInfoRef.current?.value??"",
+            location:locationRef.current?.value??"",
+             id:refDoc.id,
+            createDate:(new Date).toISOString(),
+        status:"active",
+    uid:currentUser.uid }
+    console.log('new player context: ',newPlayer)
+                    updatePlayer(newPlayer);
+
+
                     if (nameRef.current)
                         nameRef.current.value = "";
                     if (bioRef.current)
@@ -29,6 +43,7 @@ const PlayerProfile
                         rankInfoRef.current.value = "";
                     if (locationRef.current)
                         locationRef.current.value = "";
+                   
                     navigate("/");
                 })
                 .catch(() => {

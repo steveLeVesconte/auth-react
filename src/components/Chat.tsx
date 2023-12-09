@@ -6,11 +6,11 @@ import {
    
     Flex
 } from '@chakra-ui/react';
-import { Match, Message, Player } from '../firestore';
+import { Match, Message } from '../firestore';
 import { db } from '../firebase';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { addDoc, collection, limit, onSnapshot, orderBy, query, where } from 'firebase/firestore';
-import { PlayerContext } from '../contexts/PlayerContext';
+import { PlayerContext, PlayerContextType } from '../contexts/PlayerContext';
 import MessageCard from './GoArena/MessageCard';
 //import MessageCard from './GoArena/MessageCard';
 
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const Chat = ({ match }: Props) => {
-    const player: Player | null = useContext(PlayerContext)
+    const {player} = useContext(PlayerContext) as PlayerContextType
 
     const [newMessage, setNewMessage] = useState<string>("");
     const [messages, setMessages] = useState<Message[]>([]);

@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom';
 import { GameState, Player, Turn, addMatch, addTurn } from '../firestore';
 import PlayerSelectList from '../components/PlayerSelectList';
-import { PlayerContext } from '../contexts/PlayerContext';
+import { PlayerContext, PlayerContextType } from '../contexts/PlayerContext';
 import { Alert, Button, Card, CardBody, FormControl, FormLabel, Select } from '@chakra-ui/react';
 
 const CreateMatch
@@ -15,8 +15,8 @@ const CreateMatch
         const [opponentName, setOpponentName] = useState('')
         const [error, setError] = useState('')
         const [loading, setLoading] = useState(false);
-        const currentPlayer = useContext(PlayerContext);
-        console.log('current player: ', currentPlayer)
+        const {player} = useContext(PlayerContext) as PlayerContextType;
+        console.log('current player: ', player)
         function onSelectPlayer(selectedPlayer: Player) {
             setOpponentId(selectedPlayer.id);
             setOpponentName(selectedPlayer.name);
@@ -24,15 +24,15 @@ const CreateMatch
 
         function handleSubmit(e: { preventDefault: () => void; }) {
             e.preventDefault();
-            let playerBlackId = currentPlayer?.id;
-            let playerBlackName = currentPlayer?.name;
+            let playerBlackId = player?.id;
+            let playerBlackName = player?.name;
             let playerWhiteId = opponentId;
             let playerWhiteName = opponentName;
             if (myStoneColorRef?.current?.value == "w") {
                 playerBlackId = opponentId;
                 playerBlackName = opponentName;
-                playerWhiteId = currentPlayer?.id ?? "";
-                playerWhiteName = currentPlayer?.name ?? "";
+                playerWhiteId = player?.id ?? "";
+                playerWhiteName = player?.name ?? "";
             }
 
             setLoading(true);

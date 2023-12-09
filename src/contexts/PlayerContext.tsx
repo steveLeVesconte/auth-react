@@ -2,7 +2,22 @@ import { createContext, useEffect, useState } from 'react'
 import { getPlayer, Player } from '../firestore';
 import { auth } from '../firebase';
 
-export const PlayerContext = createContext<Player | null>(null);
+
+// export interface ITodo {
+//     id: number;
+//     title: string;
+//     description: string;
+//     status: boolean;
+//   }
+  export type PlayerContextType = {
+    player: Player|null;
+    updatePlayer: (player:Player) => void;
+  };
+
+
+
+
+export const PlayerContext = createContext<PlayerContextType|null>(null);
 
 interface IAuthProviderProps {
     children: JSX.Element
@@ -10,7 +25,7 @@ interface IAuthProviderProps {
 
 const PlayerContextProvider = ({ children }: IAuthProviderProps): JSX.Element => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [player, setPlayer] = useState<Player>({} as Player);
+    const [player, setPlayer] = useState<Player|null>({} as Player);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -26,8 +41,14 @@ const PlayerContextProvider = ({ children }: IAuthProviderProps): JSX.Element =>
         return unsubscribe;// unsubscribe from onAuthStateChanged when unmounted
     }, []);
 
+
+    const updatePlayer = (player: Player) => {
+        setPlayer(player);
+   
+      }
+
     return (
-        <PlayerContext.Provider value={player}>
+        <PlayerContext.Provider value={{ player, updatePlayer}}>
             {children}
         </PlayerContext.Provider>
     );

@@ -1,11 +1,11 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { useContext } from 'react';
-import { PlayerContext } from '../contexts/PlayerContext';
+import { PlayerContext, PlayerContextType } from '../contexts/PlayerContext';
 
 export default function PrivateRoutes() {
   const { currentUser } = useAuth();
-  const player = useContext(PlayerContext);
+  const {player} = useContext(PlayerContext) as PlayerContextType;
   const loc = useLocation();
   if (!currentUser) {
     return (<Navigate to="/auth/login" />);

@@ -10,6 +10,7 @@ export interface Player {
     name: string;
     location: string;
     bio: string;
+    rankInfo:string;
     status: string;
     uid: string;
     createDate: string;

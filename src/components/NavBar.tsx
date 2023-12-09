@@ -1,7 +1,7 @@
 import { HStack, Menu, MenuList, MenuButton, MenuItem, Button, Icon, useColorModeValue, Box } from '@chakra-ui/react'
 //import logo from "../assets/logo.webp";
 import ColorModeSwitch from './ColorModeSwitch';
-import {PlayerContext} from '../contexts/PlayerContext';
+import {PlayerContext, PlayerContextType} from '../contexts/PlayerContext';
 import { useContext, useEffect, useState } from 'react';
 import { ChevronDownIcon } from '@chakra-ui/icons'
 //import { Player } from '../firestore';
@@ -22,7 +22,7 @@ const NavBar = () => {
       window.innerWidth,
       window.innerHeight,
     ]);
-  
+    const {player}=useContext(PlayerContext) as PlayerContextType;
     useEffect(() => {
       const handleWindowResize = () => {
         setWindowSize([window.innerWidth, window.innerHeight]);
@@ -47,7 +47,7 @@ const NavBar = () => {
           setError('failed to log out')
         }
       }
-    const player=useContext(PlayerContext)
+
   return (
     <Box className="nav-bar" pt={2} pb={2} w="100%">
    <HStack  justifyContent={'space-between'} width="100%">

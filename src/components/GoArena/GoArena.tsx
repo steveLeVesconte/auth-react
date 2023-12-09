@@ -3,7 +3,7 @@ import {  GameAction, TURN_COLLECTION, Turn, addTurn, updateMatch } from "../../
 import { createContext, useContext, useEffect,  useState } from "react";
 import { Submission, evaluateSubmission } from "../../services/moveProcessor";
 import submissionFactory from "../../services/submissionFactory";
-import { PlayerContext } from "../../contexts/PlayerContext";
+import { PlayerContext, PlayerContextType } from "../../contexts/PlayerContext";
 import turnFactory from "../../services/turnFactory";
 import utilities from "../../services/moveProcessor/UtilityFunctions"
 import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/firestore";
@@ -64,7 +64,7 @@ const GoArena
 
     const [turn, setTurn] = useState<Turn | null>()
     const location = useLocation();
-    const player = useContext(PlayerContext)
+    const {player} = useContext(PlayerContext) as PlayerContextType;
 /*     const navigate = useNavigate(); */
     const toast = useToast();
 /*     const [windowSize, setWindowSize] = useState([
