@@ -98,11 +98,15 @@ function getPrisonersOfOpponent(
   userId: string,
   lastTurn: Turn|null|undefined
 ): number {
+  console.log('getPrisonersOfOpponent turn and id:',userId,lastTurn)
   if (userId == lastTurn?.playerBlackId) {
-    return lastTurn.resultState.prisonersOfBlack;
+     console.log('getPrisonersOfOpponent =blackid so returnign white returning:',lastTurn.resultState.prisonersOfWhite)
+    return lastTurn.resultState.prisonersOfWhite;
   }
     if (userId == lastTurn?.playerWhiteId) {
-    return lastTurn.resultState.prisonersOfWhite;
+      console.log('getPrisonersOfOpponent =whiteId so returning black returning:',lastTurn.resultState.prisonersOfWhite)
+   
+    return lastTurn.resultState.prisonersOfBlack;
   }
   return -1;
 }
@@ -111,11 +115,17 @@ function getPrisonersOfCurrentPlayer(
   userId: string,
   lastTurn: Turn|null|undefined
 ): number {
+   console.log('getPrisonersOfCurrentPlayer turn and id:',userId,lastTurn)
+
   if (userId == lastTurn?.playerBlackId) {
-    return lastTurn.resultState.prisonersOfWhite;
+    console.log('getPrisonersOfCurrentPlayer =blackid so returnign black returning:',lastTurn.resultState.prisonersOfBlack)
+ 
+    return lastTurn.resultState.prisonersOfBlack;
   }
     if (userId == lastTurn?.playerWhiteId) {
-    return lastTurn.resultState.prisonersOfBlack;
+      console.log('getPrisonersOfCurrentPlayer =whiteid so returnign white returning:',lastTurn.resultState.prisonersOfWhite)
+ 
+    return lastTurn.resultState.prisonersOfWhite;
   }
   return -1;
 }
