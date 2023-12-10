@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
 import {Player, getPlayersAll} from "../firestore"
 import { useAuth } from '../contexts/AuthContext'
+//import { Button, Card, CardBody, Select} from "@chakra-ui/react";
 
 
-interface ListProps {
+/* interface ListProps {
 
   
-    // 👇️ turn off type checking
-    selectPlayer: (params: Player) => void;
-  }
 
-export default function PlayerList({selectPlayer}:ListProps){
+    selectPlayer: (params: Player) => void;
+  } */
+
+export default function PlayerList(){
 
 
 
@@ -40,21 +41,32 @@ getData();
 },[]
 );
 
-const handleSelect=(selectedPlayer:Player)=>{
+/* const handleSelect=(selectedPlayer:Player)=>{
 selectPlayer(selectedPlayer);
-}
+} */
 
 return (
     <>
-    <div>Player List</div>
-    {
-        console.log("in return - players", players)
-    }
-    {players.map((player)=>(
-        <div key={player.id}>
-            {player.name} {player.uid} <button  onClick={()=>handleSelect(player)}>Select</button>
-        </div>
+
+                                {players.map((player)=>(
+          <option  value={player.id + "_"+ player.name} >{player.name}</option>
+
     ))}
+                             
+
+{/* 
+    <div className="player-card-grid">
+    {players.map((player)=>(
+        <Card className="player-card"
+       key={player.id}>
+        <CardBody>
+          <div> {player.name}</div> 
+          <div> {player.uid} </div> 
+          <div> <Button  onClick={()=>handleSelect(player)}>{player.name}</Button></div> 
+            </CardBody>
+        </Card>
+    ))}
+    </div> */}
     </>
 )
 

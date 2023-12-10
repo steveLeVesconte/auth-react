@@ -1,0 +1,6 @@
+
+.player-card-grid{
+    display:grid;
+    grid-auto-rows: auto;
+    
+}
