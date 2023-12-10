@@ -1,26 +1,46 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext } from 'react'
 //import { useAuth } from '../contexts/AuthContext'
-import { Link } from 'react-router-dom';
-import { GameState, Turn, addMatch, addTurn } from '../firestore';
+import { Link, useNavigate } from 'react-router-dom';
+//import { GameState, Match, Turn, addMatch, addTurn } from '../firestore';
 import PlayerSelectList from '../components/PlayerSelectList';
 import { PlayerContext, PlayerContextType } from '../contexts/PlayerContext';
-import { Alert, Button, Card, CardBody, FormControl, FormErrorMessage, FormLabel, Select, SimpleGrid } from '@chakra-ui/react';
-import { ChangeEvent } from 'react';
+import {  Box, Button, Card, CardBody, Center, FormControl, FormErrorMessage, FormLabel, Heading, Select, SimpleGrid } from '@chakra-ui/react';
+//import { ChangeEvent } from 'react';
 import { MdArrowDropDown } from "react-icons/md";
+import { FieldValues, useForm,  } from 'react-hook-form';
+import { GameState, Match, Turn, addMatch, addTurn } from '../firestore';
+//import { FieldPath } from 'firebase/firestore';
 
 
 //type OpponentOption = {label: string, value: string}
+
+
+interface FormData{
+    stoneColor: string;
+    opponentKey:string;
+}
 
 const CreateMatch
     = () => {
         /* const { currentUser } = useAuth(); *///from AuthContext
         console.log('inCreateWatch');
-        const myStoneColorRef = useRef<HTMLSelectElement>(null);
-        const [opponentId, setOpponentId] = useState('')
-        const [opponentName, setOpponentName] = useState('')
-        const [error, setError] = useState('')
-        const [loading, setLoading] = useState(false);
+        //const myStoneColorRef = useRef<HTMLSelectElement>(null);
+       // const [userStoneColor, setuserStoneColor] = useState('')        
+        //const [opponentId, setOpponentId] = useState('')
+       // const [opponentName, setOpponentName] = useState('')
+       // const [error, setError] = useState('')
+      //  const [loading, setLoading] = useState(false);
         const { player } = useContext(PlayerContext) as PlayerContextType;
+        const navigate=useNavigate();
+
+        const {
+            handleSubmit,
+            register,
+            formState: { errors, isSubmitting , isValid},
+          } = useForm<FormData>()
+
+
+
         console.log('current player: ', player)
         /*         function onSelectPlayer(selectedPlayer:string) {
                     const playerInfoArray=selectedPlayer.split("_");
@@ -36,51 +56,68 @@ const CreateMatch
                     setOpponentName(playerInfoArray[1]);   
                 } */
 
-        const handleOpponentSelect = (event: ChangeEvent<HTMLSelectElement>) => {
+        //const handleOpponentSelect = (values:FieldValues) => {
             // setOpponentId(event.target.value);
             // setOpponentName(event.target.); 
-            const playerInfoArray = event.target.value.split("_");
-            setOpponentId(playerInfoArray[0]);
-            setOpponentName(playerInfoArray[1]);
+           //const playerInfoArray = event.target.value.split("_");
+      //     console.log(values);
+            // const playerInfoArray = values
+            // // split("_");
+            // setOpponentId(playerInfoArray[0]);
+            // setOpponentName(playerInfoArray[1]);
             /*             setSelected(selectedOption);
                         console.log(`Option selected:`, selectedOption); */
-        };
-
-        function handleSubmit(e: { preventDefault: () => void; }) {
-            e.preventDefault();
+     //   };
 
 
+        
 
+        function handleFormSubmit(values:FieldValues) {
+            //e.preventDefault();
+
+            // console.log('*******------------------------*******values: ', values);
+            
+            // return;
+            const userStoneColor=values.stoneColor;
+            const playerInfoArray = values.opponentKey.split("_");
+            const opponentName=playerInfoArray[1];
+            const opponentId=playerInfoArray[0]
             let playerBlackId = player?.id;
             let playerBlackName = player?.name;
             let playerWhiteId = opponentId;
             let playerWhiteName = opponentName;
-            if (myStoneColorRef?.current?.value == "w") {
+            if (userStoneColor == "w") {
                 playerBlackId = opponentId;
                 playerBlackName = opponentName;
                 playerWhiteId = player?.id ?? "";
                 playerWhiteName = player?.name ?? "";
             }
 
-            setLoading(true);
-            setError('');
+           //  setLoading(true);
+            // setError('');
             const createDate = (new Date).toISOString();
-            addMatch(
-                "___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________" +
-                ",___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________",
-                "b",
-                playerBlackId ?? "",
-                playerWhiteId,
-                playerBlackName ?? "",
-                playerWhiteName,
-                0,
+            const newMatch:Match={
+ 
 
+ board:    "___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________" +
+ ",___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________",
 
-                'active',
-                createDate
-            )
+ nextTurnPlayer: userStoneColor,
+ playerBlackId: playerBlackId??"",
+ playerWhiteId:  playerWhiteId,
+ playerBlackName: playerBlackName??"",
+ playerWhiteName: playerWhiteName,
+ turnNumber: 0,
+ status: "active",
+ createDate: createDate,
+ updateDate: createDate,
+ id:""
+            }
+
+            addMatch(newMatch)
+
                 .then((refDoc) => {
-
+                    newMatch.id=refDoc.id;
                     const koComareState: GameState = {
                         board: "___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________" +
                             ",___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________",
@@ -120,56 +157,73 @@ const CreateMatch
                     };
 
                     addTurn(startTurn).then(() => {
+
+                        navigate('/go-board', {state:{match: newMatch}})
                         console.log('yay turn saved')
                     })
                 })
                 .catch(() => {
                     console.log('failed to create match')
-                    setError("Failed to create Match");
+                   // setError("Failed to create Match");
                 })
                 .finally(() => {
-                    setLoading(false);
+                    //setLoading(false);
                 })
         }
 
-        const isColorError=(!((myStoneColorRef?.current?.value==="b")||(myStoneColorRef?.current?.value==="w")))
-        const isOpponentError = opponentId === '';
+        // const isColorError=(!((userStoneColor==="b")||(userStoneColor==="w")))
+        // const isOpponentError = opponentId === '';
 
         return (
             <>
-                <Card>
+                <Card marginLeft="auto" marginRight="auto" maxW="500px">
                     <CardBody>
-                        <h2 className='text-center mb-4'>Create New Match</h2>
+                        <Heading marginBottom={6} >Create New Match</Heading>
                        {/*  <div>{currentUser?.email}</div> */}{/*  currentUser starts as undefined and is then set. */}
-                        {error && <Alert status="error"  >{error}</Alert>}
-                        <form onSubmit={handleSubmit} >
+                    {/*     {error && <Alert status="error"  >{error}</Alert>} */}
+                   {/*  <form onSubmit={handleSubmit(handleFormSubmit)} > */}
+                 {/*   <form onSubmit={handleSubmit(data=>console.log('**********data: ',data))} > */}
+                   <form onSubmit={handleSubmit(data=>handleFormSubmit(data))} >
                             <SimpleGrid columns={1} spacing={10}>
-                            <FormControl id="myStoneColor" isInvalid={isColorError}>
+                            <FormControl id="myStoneColor" >
 
-                                <FormLabel>My Stone Color</FormLabel>
-                                <Select icon={<MdArrowDropDown />} ref={myStoneColorRef} variant="filled" placeholder="select your stone color" >
+                                <FormLabel htmlFor='stoneColor'>My Stone Color</FormLabel>
+                                <Select  icon={<MdArrowDropDown />} 
+                                  {...register('stoneColor', {
+                                    required: 'This is required',
+                                  })}
+                                
+
+                                 variant="filled" placeholder="select your stone color" >
                                     <option value="b" >Black</option>
                                     <option value="w" >White</option>
                                 </Select>
-                                <FormErrorMessage>Stone color is required.</FormErrorMessage>
+                                <FormErrorMessage>{errors.stoneColor && errors.stoneColor.message}</FormErrorMessage>
                                 </FormControl>
-                                <FormControl id="myOpponent" isInvalid={isOpponentError}>
+                                <FormControl id="myOpponent">
                                     
                                 <FormLabel>My Opponent</FormLabel>
-                                <Select onChange={handleOpponentSelect} icon={<MdArrowDropDown />} variant="filled" placeholder="select an opponent">
+                                <Select 
+                                             {...register('opponentKey', {
+                                               required: 'This is required',
+                                             })}
+        
+                                icon={<MdArrowDropDown />} variant="filled" placeholder="select an opponent">
                                     <PlayerSelectList />
                                 </Select>
-                                <FormErrorMessage>Opponent is required.</FormErrorMessage>
+                                <FormErrorMessage>{errors.opponentKey && errors.opponentKey.message}</FormErrorMessage>
                             </FormControl>
-                            <Button disabled={loading} className='w-100 mt-4' type="submit">Save</Button>
+                            <SimpleGrid templateColumns="80% 20%" >
+                            <Button disabled={!isValid} isLoading = {isSubmitting} 
+colorScheme='orange'
+                            className='w-100 mt-4' type="submit">Save</Button>
+                                <Center> <Link to="/">Cancel</Link></Center>
+                            </SimpleGrid>
                             </SimpleGrid>
                         </form>
-                        {/*             <PlayerSelectList selectPlayer={onSelectPlayer}></PlayerSelectList>
-             */}        </CardBody>
+     </CardBody>
                 </Card>
-                <div className='w-100 text-center mt-2'>
-                    <Link to="/">Cancel</Link>
-                </div>
+
 
             </>
         )

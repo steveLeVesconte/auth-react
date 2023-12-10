@@ -197,8 +197,8 @@ export function updateMatch(match: Match, turn: Turn) {
 
 }
 
-export function addMatch(
-    board: string,
+export function addMatch( match:Match)
+/*     board: string,
     nextTurnPlayer: string,
     playerBlackId: string,
     playerWhiteId: string,
@@ -206,11 +206,11 @@ export function addMatch(
     playerWhiteName: string,
     turnNumber: number,
     status: string,
-    createDate: string
-) {
-    const updateDate = createDate;
-    return addDoc(collection(db, MATCH_COLLECTION), {
-        board,
+    createDate: string */
+ {
+   // const updateDate = match.createDate;
+    return addDoc(collection(db, MATCH_COLLECTION), match
+/*         board,
         nextTurnPlayer,
         playerBlackId,
         playerWhiteId,
@@ -220,7 +220,8 @@ export function addMatch(
         status,
         createDate,
         updateDate
-    })
+    } */
+    )
 }
 
 export function addTurn(turn: Turn) {
