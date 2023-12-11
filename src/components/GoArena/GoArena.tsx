@@ -10,16 +10,11 @@ import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/f
 import { db } from "../../firebase";
 import GoGameBoard from "./GoGameBoard";
 import Chat from "../Chat";
-//import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogOverlay, Box, Button, Grid, GridItem, useDisclosure } from "@chakra-ui/react";
 import {  Box,  Grid, GridItem } from "@chakra-ui/react";
 import './GoBoard.css'
 import { PlayerCard } from "./PlayerCard";
-//import { LogoCard } from "./LogoCard";
 import { ActionCard } from "./ActionCard";
-//import NavCard from "./NavCard";
-// import NavBar from "../NavBar";
 import { useToast } from '@chakra-ui/react'
-
 
 export interface ContextPackage{ 
   pendingAction:GameAction|null|undefined;
@@ -33,21 +28,10 @@ const emptyPackage:ContextPackage={
   isPlayersTurn: false,
   onSelectIntersection: function (): void {}
   }
-
-
 export const StoneContext = createContext(emptyPackage);
-
-/* function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height
-  };
-} */
 
 const GoArena
   = () => {
-
     const [contextPackage, setContextPackage] = useState<ContextPackage>(emptyPackage)
     const [pendingPass, setPendingPass] = useState<boolean>(false)
     const [turn, setTurn] = useState<Turn | null>()

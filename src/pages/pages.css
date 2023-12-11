@@ -5,11 +5,6 @@
     
 }
 
-
-/* .landing-grid-intro{
-    height: 435.2px;
-} */
-
 .landing-grid{
     gap:1rem;
     max-width: 100%;
@@ -21,8 +16,6 @@
     "intro"
     "special"
     "login";
-
-
 }
 
 .landing-grid-image {
@@ -48,7 +41,6 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: "intro intro login"
                          " go-pic special special";
-
 
 }
 .landing-grid-image {

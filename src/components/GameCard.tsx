@@ -28,7 +28,6 @@ const GameCard = ({ match }: Props) => {
             <Text align="left">Move: {match.turnNumber} </Text>
           </HStack>
         </div>
-
       </CardBody>
     </Card>
   );

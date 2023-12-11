@@ -16,7 +16,7 @@ const PlayerProfile
         const [loading, setLoading] = useState(false);
         const navigate = useNavigate()
         const {updatePlayer} = useContext(PlayerContext) as PlayerContextType;
-       // const [player, setPlayer] = useState<Player>({} as Player);
+
         function handleSubmit(e: { preventDefault: () => void; }) {
             e.preventDefault();
             setLoading(true);
@@ -33,7 +33,6 @@ const PlayerProfile
     uid:currentUser.uid }
     console.log('new player context: ',newPlayer)
                     updatePlayer(newPlayer);
-
 
                     if (nameRef.current)
                         nameRef.current.value = "";

@@ -5,8 +5,6 @@ import { StoneColor } from "./moveProcessor/constants";
 
 function createGameState(evaluation: BaseSubmissionResult, oldTurn: Turn) {
 
-    //evaluation.stoneColorOfNextTurn
-
     const board =
         utilities.boardArrayToString(evaluation.newBoard);
     let prisonersOfBlack = oldTurn.resultState.prisonersOfBlack;

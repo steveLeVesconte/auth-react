@@ -3,7 +3,6 @@ import blackStoneImage from "../../assets/blackStoneTrans.png";
 import whiteStoneImage from "../../assets/whiteStoneTrans.png";
 
 
-
 interface Props {
     stoneColor:string;
     prisoners: number;

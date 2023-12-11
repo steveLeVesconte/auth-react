@@ -1,85 +1,76 @@
-import { HStack, Menu, MenuList, MenuButton, MenuItem, Button, Icon, useColorModeValue, Box } from '@chakra-ui/react'
-//import logo from "../assets/logo.webp";
-import ColorModeSwitch from './ColorModeSwitch';
-import {PlayerContext, PlayerContextType} from '../contexts/PlayerContext';
-import { useContext,  useState } from 'react';
-import { ChevronDownIcon } from '@chakra-ui/icons'
-//import { Player } from '../firestore';
-import { useAuth } from '../contexts/AuthContext';
-import {  useNavigate } from 'react-router-dom';
-//import logo from '../assets/logo.png'
+import {
+  HStack,
+  Menu,
+  MenuList,
+  MenuButton,
+  MenuItem,
+  Button,
+  Icon,
+  useColorModeValue,
+  Box,
+} from "@chakra-ui/react";
+import ColorModeSwitch from "./ColorModeSwitch";
+import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
+import { useContext, useState } from "react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { TbGoGame } from "react-icons/tb";
-//import useScreenOrientation from '../hooks/GetScreenOrientation';
 
 const NavBar = () => {
-/*   const orientation:string=useScreenOrientation() */
-   const {currentUser, logout}=useAuth();
-   const [error, setError]=useState("");
-   //const bg = useColorModeValue('red.500', 'red.200')
-   const color = useColorModeValue('white', 'gray.800')
-    const navigate = useNavigate();
-/*     const [windowSize, setWindowSize] = useState([
-      window.innerWidth,
-      window.innerHeight,
-    ]); */
-    const {player}=useContext(PlayerContext) as PlayerContextType;
-/*     useEffect(() => {
-      const handleWindowResize = () => {
-        setWindowSize([window.innerWidth, window.innerHeight]);
-      };
-  
-      window.addEventListener('resize', handleWindowResize);
-  
-      return () => {
-        window.removeEventListener('resize', handleWindowResize);
-      };
-    }, []); */
+  const { currentUser, logout } = useAuth();
+  const [error, setError] = useState("");
+  const color = useColorModeValue("white", "gray.800");
+  const navigate = useNavigate();
+  const { player } = useContext(PlayerContext) as PlayerContextType;
 
-
-    async function handleLogout(){
-      console.log('currentUser: ',currentUser);
-      console.log('error: ',error);
-        setError('');
-        try{
-          await logout();
-          navigate("/auth/login");
-        }catch{
-          setError('failed to log out')
-        }
-      }
+  async function handleLogout() {
+    console.log("currentUser: ", currentUser);
+    console.log("error: ", error);
+    setError("");
+    try {
+      await logout();
+      navigate("/auth/login");
+    } catch {
+      setError("failed to log out");
+    }
+  }
 
   return (
-    <Box bg="black" className="nav-bar" p={2}  w="100%">
-   <HStack  justifyContent={'space-between'} width="100%">
-    <Icon  onClick={()=>{navigate("/")}} as={TbGoGame} className="goIcon" borderRadius={10} w={8} h={8}   color={color} />
-{/*    <TbGoGame onClick={()=>{navigate("/")}}  className="goIcon"/>
-    <Image onClick={()=>{navigate("/")}} src={logo} boxSize='60px'></Image> */}
-    <HStack>
-       
-    <ColorModeSwitch></ColorModeSwitch>
-    <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-  {player?.name}
-  </MenuButton>
-  <MenuList>
-{/*   <div>
-      <h2>Width: {windowSize[0]}</h2>
+    <Box bg="black" className="nav-bar" p={2} w="100%">
+      <HStack justifyContent={"space-between"} width="100%">
+        <Icon
+          onClick={() => {
+            navigate("/");
+          }}
+          as={TbGoGame}
+          className="goIcon"
+          borderRadius={10}
+          w={8}
+          h={8}
+          color={color}
+        />
+        <HStack>
+          <ColorModeSwitch></ColorModeSwitch>
+          <Menu>
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+              {player?.name}
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate("/update-profile");
+                }}
+              >
+                Change Password
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </HStack>
+      </HStack>
+    </Box>
+  );
+};
 
-      <h2>Height: {windowSize[1]}</h2>
-    </div> */}
-    <MenuItem   onClick={handleLogout}>Logout</MenuItem>
-    <MenuItem  onClick={()=>{navigate("/update-profile")}}>Change Password</MenuItem>
-{/*     <MenuItem  >{windowSize[0]}</MenuItem>
-    <MenuItem   >{windowSize[1]}</MenuItem>
-    <MenuItem   >{orientation}</MenuItem>
-    <MenuItem   ><div className="display-orientation"/></MenuItem> */}
-
-  </MenuList>
-</Menu>
-    </HStack>
-   </HStack>
-   </Box>
-  )
-}
-
-export default NavBar
+export default NavBar;

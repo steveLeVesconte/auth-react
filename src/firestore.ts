@@ -10,7 +10,7 @@ export interface Player {
     name: string;
     location: string;
     bio: string;
-    rankInfo:string;
+    rankInfo: string;
     status: string;
     uid: string;
     createDate: string;
@@ -68,25 +68,25 @@ export interface GameAction {
     location: { row: number, col: number } | null;
 }
 
-export interface ActionState{ 
-    pendingAction:GameAction|null;
-    lastAction:GameAction|null;
-} 
+export interface ActionState {
+    pendingAction: GameAction | null;
+    lastAction: GameAction | null;
+}
 
 
-export interface xBoardContextInfo{ 
-    pendingPlay:{
-        row:number;
-        col:number;
-    }|null;
-    lastPlay:{
-        row:number;
-        col:number;
-    }|null;
+export interface xBoardContextInfo {
+    pendingPlay: {
+        row: number;
+        col: number;
+    } | null;
+    lastPlay: {
+        row: number;
+        col: number;
+    } | null;
 
     lastActionWasStonePlay: boolean;
 
-} 
+}
 export function addPlayerProfile(uid: string, name: string, rankInfo: string, bio: string, status: string, createDate: string) {
     return addDoc(collection(db, PLAYER_COLLECTION), { uid, name, rankInfo, bio, status, createDate })
 }
@@ -176,7 +176,6 @@ export function setMatchTurnNumber(match: Match, turnNumber: number) {
         .then(docRef => {
             console.log("Value of an Existing Document Field has been updated", docRef);
         }).catch(error => { console.log(error); })
-
 }
 
 export function updateMatch(match: Match, turn: Turn) {
@@ -194,33 +193,10 @@ export function updateMatch(match: Match, turn: Turn) {
         .then(docRef => {
             console.log("Value of an Existing Document Field has been updated", docRef);
         }).catch(error => { console.log(error); })
-
 }
 
-export function addMatch( match:Match)
-/*     board: string,
-    nextTurnPlayer: string,
-    playerBlackId: string,
-    playerWhiteId: string,
-    playerBlackName: string,
-    playerWhiteName: string,
-    turnNumber: number,
-    status: string,
-    createDate: string */
- {
-   // const updateDate = match.createDate;
+export function addMatch(match: Match) {
     return addDoc(collection(db, MATCH_COLLECTION), match
-/*         board,
-        nextTurnPlayer,
-        playerBlackId,
-        playerWhiteId,
-        playerBlackName,
-        playerWhiteName,
-        turnNumber,
-        status,
-        createDate,
-        updateDate
-    } */
     )
 }
 
