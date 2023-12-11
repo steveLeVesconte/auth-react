@@ -1,52 +1,26 @@
-:root{
-  /* --grid-width:97vw; */
-/* --grid-width:calc(99vw - 12px); */
---chat-height:300px;
---board-color:#CF9A32;
+:root {
+  --chat-height: 300px;
+  --board-color: #cf9a32;
 }
-
-
-
-
-
-
-
-
-
-
 
 /* chat */
-.message-card{
-  width: 100%;
- 
-}
-.message-card-body{
+.message-card {
   width: 100%;
 }
-.message-stone-div{
-
+.message-card-body {
+  width: 100%;
+}
+.message-stone-div {
   margin-right: 10px;
 }
-.message-stone{
+.message-stone {
   height: 30px;
-
 }
-
 
 /* game board labels */
-
-.row-nums{
-
-  display:grid;
-
+.row-nums {
+  display: grid;
   padding-bottom: 2px;
-}
-
-.row-number{
-/*   display: inline-block;
-  vertical-align: middle;
-  line-height:clamp(.5rem, 1vmin + .3rem, 10px); */
-  
 }
 
 .rowNumberLabel {
@@ -55,140 +29,71 @@
   padding-right: 0.3em;
   text-align: right;
   font-weight: 700;
-/*   font-size: 7px; */
-line-height:clamp(.5rem, 1vmin + .3rem, 10px);
-font-size: clamp(.5rem, 1vmin + .3rem, 10px);
-display: flex;
-	
-/* Make a horizontal flexbox (the default) */
-flex-direction: row;
+  line-height: clamp(0.5rem, 1vmin + 0.3rem, 10px);
+  font-size: clamp(0.5rem, 1vmin + 0.3rem, 10px);
+  display: flex;
 
-/* The important part: vertically center the items */
-align-items: center;
+  /* Make a horizontal flexbox (the default) */
+  flex-direction: row;
+
+  /* The important part: vertically center the items */
+  align-items: center;
 }
 .colLetterLabel {
   color: black;
   flex-grow: 1;
   text-align: center;
- 
+
   font-weight: 700;
-/*   font-size: 7px; */
-font-size: clamp(.5rem, 1vmin + .3rem, 10px);
+  font-size: clamp(0.5rem, 1vmin + 0.3rem, 10px);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-.game-board-color{
+.game-board-color {
   background-color: var(--board-color);
 }
 
-.gameGridContainer {
-
-}
-
-.boarder-container{
+.boarder-container {
   aspect-ratio: 5/5;
 }
 
-.base-phone-grid{
-/*   max-width: calc(100vh - 300px);
-  margin: 0 auto ; */
-display:grid;
-grid-template-areas: "left-edge game-board-layout right-edge";
-
+.base-phone-grid {
+  display: grid;
+  grid-template-areas: "left-edge game-board-layout right-edge";
 }
-.left-edge{
+.left-edge {
   grid-area: "left-edge";
   width: 8px;
-/*   background-color: aqua; */
 }
-.right-edge{
+.right-edge {
   grid-area: "right-edge";
   width: 8px;
-/*   background-color: aqua; */
 }
 
-.chat-scroll{
+.chat-scroll {
   height: var(--chat-height);
   scrollbar-width: auto;
 }
-/* @media (orientation:portrait) { */
-.nav-bar{
 
-/*   width: calc(100vw - 16px);
-  flex:1; */
+.nav {
+  height: 56px;
 }
 
-  .game-board-layout{
-/*     padding: 0 20px; */
-/*     background-color: yellow; */
-/*     margin-left: auto;
-    margin-right: auto;
-    width: 75vw; */
-/*     display:flex; */
-/*     flex-direction: column;
-    align-items: center; */
-  }
-  
-  .nav {
-
-    height: 56px;
-/*     background-color: rgb(130, 238, 236); */
-   
-  }
-
-/*   .game-layout{
-    background-color: yellow;
-
-  } */
-
-
-  .arena-grid-container {
-/*     width: calc(100vw - 16px); */
-    width:100%;
-    flex:1;
-    display: grid;
-    grid-template-areas:
-      "players"
-      "goboard"
-      "actions"
-      "chat";
- /*      grid-template-rows: 90px var(--grid-width) 150px var(--grid-width); */
-/*  grid-template-rows: 90px calc(99vw - 5) 150px 1fr; */
-/*  grid-template-rows: 90px calc(99vw - 5) 150px 1fr; */
-/*     background-color: green; */
-    grid-template-columns: 1fr;
-  }
-
-
-
-  .goboard {
-/*     padding: 5px;
-    margin: 5px; */
-     background-color: var(--board-color);
-/*     height:calc(100vmin - 16px) ;
-    width: calc(100vmin - 16px); */
-  /*   width:var(--grid-width); */
-    aspect-ratio: 5/5;
-    /* outline: 1px black solid; */
+.arena-grid-container {
+  width: 100%;
+  flex: 1;
+  display: grid;
+  grid-template-areas:
+    "players"
+    "goboard"
+    "actions"
+    "chat";
+  grid-template-columns: 1fr;
 }
 
-
-
-
-
-
-
-
+.goboard {
+  background-color: var(--board-color);
+  aspect-ratio: 5/5;
+}
 
 /* board intersections  */
 
@@ -227,9 +132,8 @@ grid-template-areas: "left-edge game-board-layout right-edge";
   left: 0px;
   height: 70%;
   width: 70%;
-margin-top: 16.5%;
-margin-left: 14.5%;
-
+  margin-top: 16.5%;
+  margin-left: 14.5%;
 }
 
 div.intersection-hover:hover {
@@ -244,44 +148,19 @@ div.intersection-hover:hover {
   width: 100%;
 }
 
-
-
-
-
-
-
-
-
+/* players */
 
 .players {
-
   display: flex;
-
-
-
   gap: 9px;
   flex-direction: row;
   grid-area: players;
-/*   background-color: rgb(130, 215, 238); */
   height: 100%;
-/*   width: calc(100vw - 16px); */
-
-  /* width: 500px; */
-/*   outline: 1px black solid; */
-padding-bottom: 8px;
+  padding-bottom: 8px;
 }
 
-.player-box{
+.player-box {
   flex-grow: 1;
-}
-.player{ 
-/*   background-color: rgb(0, 149, 255); */
-/*   outline: 1px black solid; */
-}
-
-.opponent{
-/*   background-color: rgb(128, 0, 0);
-  outline: 1px black solid; */
 }
 
 .player-stone {
@@ -290,26 +169,22 @@ padding-bottom: 8px;
   min-width: 20px;
 }
 
+/* grid areas */
+
 .actions {
   grid-area: actions;
-/*   background-color: aqua; */
   width: 100%;
-/*   outline: 1px black solid;
- */
 }
+
+/* chat */
+
 .chat {
-
   grid-area: chat;
-  /* background-color: thistle; */
   min-height: 250px;
-/*   max-width: calc(99vw - 50px) */
-/*   width: 100%; */
-/*   outline: 1px black solid */;
 }
 
-.chat-card-body{
-
-  max-width: calc(99vw - 13px)
+.chat-card-body {
+  max-width: calc(99vw - 13px);
 }
 
 /* media queries media queries media queries media queries */
@@ -317,729 +192,38 @@ padding-bottom: 8px;
 /* media queries media queries media queries media queries */
 /* media queries media queries media queries media queries */
 /* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
-/* media queries media queries media queries media queries */
 
-
-/* @media (min-width: 730px) {
-  .goboard{
-    width:calc(97vw - 1%)
-  }
-} */
-
-
-
-
-
-/* @media (min-width: 1075px)  calc(100vh + 300px) { */
-/* @media ( min-width:33300px) {  */
 @media (min-width: calc(99vh - 190px)) {
-  .base-phone-grid{
+  .base-phone-grid {
     max-width: calc(99vh + 300px);
     margin-left: auto;
     margin-right: auto;
-  } 
-
-/*   .game-board-layout {
-    width: calc(130vh - 16px);
-
-    margin-left: auto;
-    margin-right: auto;
-  } */
+  }
 
   .arena-grid-container {
-/*     height: calc(99vmin - 500px); */
     display: grid;
-  grid-template-columns: 1fr  350px; 
+    grid-template-columns: 1fr 350px;
     grid-template-areas:
       "goboard players"
       "goboard actions"
       "goboard chat";
-     grid-template-rows: 90px 150px 1fr ;
-
+    grid-template-rows: 90px 150px 1fr;
   }
   .goboard {
-
-/*     height: calc(90vh - 16px);
-    width: calc(90vh - 16px); */
     aspect-ratio: 5/5;
     max-height: calc(99vh - 100px);
-
   }
 
-
   .rowNumberLabel {
-/*     color: black;
-    padding-left: 0.3em;
-    padding-right: 0.3em;
-    text-align: right;
-    font-weight: 700; */
-  /*   font-size: 7px; */
-  line-height:clamp(.5rem, .9vw + .1rem, 16px);
-  font-size: clamp(.5rem, .9vw + .1rem, 16px);
+    line-height: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
+    font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
   }
   .colLetterLabel {
-/*     color: black;
-    flex-grow: 1;
-    text-align: center;
-   
-    font-weight: 700; */
-  /*   font-size: 7px; */
- 
-  font-size: clamp(.5rem, .9vw + .1rem, 16px);
+    font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
   }
 
-
-      .chat-scroll{ 
-     height: calc(99vh - 430px); 
-     max-height: calc(99vw - 680px);
-    
-  }   
-
-/*   .chat {
-    height: calc(70vw - 230px);
-  } */
-
-
-/* 
-  .arena-grid-container {
-    grid-template-rows: 90px  1075px 150px 1fr;
-
-  }
-  .game-board-layout {
-    width:  1075px;
-
-  }
-  .goboard {
-
-    height:  1075px;
-    width:  1075px;
-    aspect-ratio: 5/5; 
-
-  }*/
-}
-
-/* @media(min-width: 1600px) and (min-height:1300px){ */
-/*   @media (min-width: 1600px) { */
-/* @media (min-width: 111600px) {
-  .game-board-layout {
-    width: calc(130vh - 16px);
-
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .arena-grid-container {
-    display: grid;
-    grid-template-columns: calc(90vh - 16px) 40vh;
-    grid-template-areas:
-      "goboard players"
-      "goboard actions"
-      "goboard chat";
-    grid-template-rows: 90px 150px calc(90vh - 16px) calc(90vh - 240px);
-
-  }
-  .goboard {
-
-    height: calc(90vh - 16px);
-    width: calc(90vh - 16px);
-    aspect-ratio: 5/5;
-
-  }
-
-  .chat {
-    height: calc(90vh - 256px);
+  .chat-scroll {
+    height: calc(99vh - 430px);
+    max-height: calc(99vw - 680px);
   }
 }
-
-
-
-@media (max-height: 8px) and (min-width:50000px) {
-  .game-board-layout {
-    max-width: calc(70vh - 16px);
-  }
-
-  .arena-grid-container {
-    display: grid;
-    grid-template-areas:
-      "players"
-      "goboard"
-      "actions"
-      "chat";
-    grid-template-rows: 90px calc(70vh - 16px) 150px 1fr;
-
-    grid-template-columns: 1fr;
-  }
-
-  .goboard {
-    height: calc(70vh - 16px);
-    width: calc(70vh - 16px);
-  }
-}
- */
-
-
-/* @media screen and (min-width: 1000px){ */
-
-
-
-  
-/*   .game-layout{
-    max-width: 130vh;
-    background-color: yellow;
-    margin-left: auto;
-    margin-right: auto;
-  } */
-/* } */
-
-/* 
-@media screen and (min-width: 1600px){
-
-
-  .game-layout{
-    max-width: 130vmin;
-    width: 130vmin;
-    background-color: yellow;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .arena-grid-container {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 90vmin 40vmin;
-    grid-template-areas:
-      "goboard players"
-      "goboard actions"
-      "goboard chat";
-    grid-template-rows: 130px 90px 1fr;
-    max-width: 130vmin;
-    width: 130vmin;
-
-  }
-  
-} */
-
-/*  @media (orientation:landscape) { 
-
-
-  .arena-grid-container {
-
-    grid-template-rows: 90px  100px 1fr;
-
-    background-color: rgb(128, 21, 0);
-
-  }
-
- } */
-
-
-
-
-
-
-
-
-
-
-/* chat */
-/* .message-card{
-  width: 100%;
- 
-}
-.message-card-body{
-  width: 100%;
-}
-.message-stone-div{
-
-  margin-right: 10px;
-}
-.message-stone{
-  height: 30px;
-
-}
- */
-
-/* game board labels */
-/* 
-.rowNumberLabel {
-  color: black;
-  padding-left: 0.3em;
-  padding-right: 0.3em;
-  text-align: right;
-  font-weight: 700;
-
-
-font-size: clamp(.1rem, 1vmin + .1rem, 1rem);
-}
-.colLetterLabel {
-  color: black;
-  flex-grow: 1;
-  text-align: center;
- 
-  font-weight: 700;
-
-font-size: clamp(.1rem, 1vmin + .1rem, 1rem);
-} */
-/* 
-@media screen and (max-width: 800px) {
-  .colLetterLabel {
-    font-size: 10px;
-  }
-  .rowNumberLabel {
-    font-size: 10px;
-    
-  }
-}
-@media screen and (max-width: 700px) {
-  .rowColLetterLabel {
-    font-size: 9px;
-  }
-  .rowNumberLabel {
-    font-size: 9px;
-    
-  }
-}
-@media screen and (max-width: 600px) {
-  .colLetterLabel {
-    font-size: 7px;
-  }
-  .rowNumberLabel {
-    font-size: 7px;
-    
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .colLetterLabel {
-    font-size: 7px;
-  }
-  .rowNumberLabel {
-    font-size: 7px;
-
-  }
-}
-@media screen and (max-width: 320px) {
-  .colLetterLabel {
-    font-size: 6px;
-  }
-  .rowNumberLabel {
-    font-size: 6px;
-   
-  }
-}
-@media screen and (max-width: 200px) {
-  .colLetterLabel {
-    font-size: 5px;
-  }
-  .rowNumberLabel {
-    font-size: 5px;
-   
-  }
-}
-@media screen and (max-width: 175px) {
-  .colLetterLabel {
-    font-size: 4px;
-  }
-  .rowNumberLabel {
-    font-size: 4px;
-   
-  }
-}
- */
-/* board intersections  */
-/* 
-.boardIntersectionWithStone {
-  position: relative;
-  top: 0;
-  left: 0;
-  display: flex;
-}
-.emptyIntersection {
-  position: relative;
-  top: 0;
-  left: 0;
-  display: flex;
-}
-
-.stone {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 90%;
-  width: 90%;
-}
-
-.pending-svg {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 70%;
-  width: 70%;
-  margin: 14%;
-}
-.last-turn-svg {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 70%;
-  width: 70%;
-  margin: 14%;
-}
-
-div.intersection-hover:hover {
-  opacity: 0.8 !important;
-  background-color: rgb(184, 190, 175);
-  cursor: pointer;
-  border-radius: 50px;
-}
-
-.svgBack {
-  height: 100%;
-  width: 100%;
-}
- */
-
-/* arena board ************************************************************** */
-/* 
-@media printer and (max-width: 1600px){
-@media screen and (max-width: 1600px){
-.game-container{
-  max-width: 130vmin;
-  width: 130vmin;
-  margin-left: auto;
-  margin-right: auto;
-
-}
-.nav {
-  width: 100%;
-  height: 50px;
-
- 
-}
-
-.arena-grid-container {
-  display: grid;
-  width: 100%;
-  grid-template-columns: 90vmin 40vmin;
-  grid-template-areas:
-    "goboard players"
-    "goboard actions"
-    "goboard chat";
-  grid-template-rows: 130px 90px 1fr;
-  max-width: 130vmin;
-  width: 130vmin;
-
-}
-
-.goboard {
-    grid-area: goboard;
-
-  }
-  .players {
-
-    display: flex;
-    flex-direction: row;
-    grid-area: players;
-
-    height: 100%;
-    width: 100%;
-  }
-  .player{
-    width:50%;
-
-  }
-.player-box{
-    padding-left:8px;
-    padding-right:8px;
-    flex:1
-  }
-  .player-box-2{
-   
-    padding-right:8px;
-    flex:1
-  }
-
-  .player-stone{
-    height: 53px;
-    width: 53px;
-    min-width: 53px;
-  }
-  
-  .opponent{
-    width:50%;
-
-  }
-  .actions {
-    grid-area: actions;
-
-    width: 100%;
-  
-  }
-  .chat {
-    grid-area: chat;
-    min-height: 350px;
-    width: 100%;
-    height: 100%;
-  }
-  .chat-window{
-    flex-grow:1;
-    max-height: calc(87vh - 286px);
-    height:48vw;
-  }
-  .goboard {
-    width: 100%;
-
-    aspect-ratio: 5/5;
-
-    width: 100%;
-    max-height: 100%;
-  }
-
-
-
-
-@media screen and (max-width: 1600px) {
-
-  .game-container {
-    width:80vmin;
-    max-width: 80vmin;
-
-  }
-
-  .arena-grid-container {
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    width: 80vmin;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "players"
-      "goboard"
-      "actions"
-      "chat";
-    grid-template-rows: 90px 80vmin 90px 350px;
-
-  }
-  .goboard {
-
-
-    aspect-ratio: 1/1;
-    height: 80vmin;
-    width: 80vmin;
-
-  }
-  .actions{
-    height:150px;
-  }
-  .player-stone{
-    height: 20px;
-    width: 20px;
-    min-width: 20px;
-  }
-
-
-  .player{
-
-  }
-.player-box{
-    padding-left:0px;
-    padding-right:8px;
-    padding-bottom: 8px;
-
-  }
-  .player-box-2{
-    padding-left:0px;
-    padding-right:0px;
-    padding-bottom: 8px;
-  }
-  .chat-window{
- 
-    max-height: 260px;
-    height:260px;
-  }
-}
-
-
-@media screen and (max-width: 1140px) {
-  .game-container {
-    width:85vmin;
-    max-width: 85vmin;
-/
-  }
-  .goboard {
-
-    height: 85vmin;
-    width: 85vmin;
-
-}
-
-.arena-grid-container {
-
-  width: 85vmin;
-
-  grid-template-rows: 90px 85vmin 90px 350px;
-
-}
-}
-
-@media screen and (max-width: 1000px) {
-  .game-container {
-    width:93vmin;
-    max-width: 93vmin;
-
-  }
-  .goboard {
-
-    height: 93vmin;
-    width: 93vmin;
-
-}
-
-.arena-grid-container {
-
-  width: 93vmin;
-
-  grid-template-rows: 90px 93vmin 90px 350px;
-
-}
-}
-
-
-
-
-
-@media screen and (max-height: 850px) {
-
-  .game-container {
-    width:80vmin;
-    max-width: 80vmin;
-
-  }
-
-  .arena-grid-container {
-    margin-left: auto;
-    margin-right: auto;
-    display: grid;
-    width: 80vmin;
-
-    grid-template-areas:
-      "players"
-      "goboard"
-      "actions"
-      "chat";
-    grid-template-rows: 90px 80vmin 90px 350px;
-
-  }
-  .goboard {
-
-
-    aspect-ratio: 1/1;
-    height: 80vmin;
-    width: 80vmin;
-
-  }
-  .actions{
-    height:150px;
-  }
-  .player-stone{
-    height: 20px;
-    width: 20px;
-    min-width: 20px;
-  }
-
-
-
-.player-box{
-    padding-left:0px;
-    padding-right:8px;
-    padding-bottom: 8px;
-
-  }
-  .player-box-2{
-    padding-left:0px;
-    padding-right:0px;
-    padding-bottom: 8px;
-  }
-
-  .chat-window{
- 
-     max-height: 260px;
-     height:260px;
-   }
-}
-
-
-
-
-
-@media screen and (max-height: 800px) {
-
-
-  .game-container {
-    width:316px;
-    max-width: 316px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .goboard {
-
-    height: 316px;
-    width: 316px;
-
-}
-
-.arena-grid-container {
-
-  width: 316px;
-
-  grid-template-rows: 90px 320px 90px 350px;
-
-}
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.gameGridContainer {
-
-  aspect-ratio: 1;
-  background-color: #eac77b;
-}
-
-.gameBoardColor {
-
-  background-color: #eac77b;
- 
-}
-
-.gameBoard {
-  background-color: #eac77b;
-   padding: 7px;  
-
-}
-
-
-
-
-#moveDialog {
-  margin-top: 0px;
-  margin-left: 0px;
-  background-color: "transparent";
-  color: "black";
-  font-weight: "bold";
-}
-}
- */

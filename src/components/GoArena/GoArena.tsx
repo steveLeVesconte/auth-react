@@ -47,42 +47,13 @@ export const StoneContext = createContext(emptyPackage);
 
 const GoArena
   = () => {
-//const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-   // const { isOpen, onOpen, onClose } = useDisclosure()
-    //const cancelRef = useRef<HTMLButtonElement>(null);
-    //const [play, setPlay] = useState<{ row: number, col: number } | null>(null)
+
     const [contextPackage, setContextPackage] = useState<ContextPackage>(emptyPackage)
-    
- /*    const [pendingAction, setPendingAction] = useState<GameAction|null>(null)
-    const [lastAction, setLastAction] = useState<GameAction|null>(null) */
-    //const [pendingPlay, setPendingPlay] = useState<boolean>(false)
     const [pendingPass, setPendingPass] = useState<boolean>(false)
-    //const [turnStatus, setPendingPass] = useState<boolean>(false)
-
-
-
-
     const [turn, setTurn] = useState<Turn | null>()
     const location = useLocation();
     const {player} = useContext(PlayerContext) as PlayerContextType;
-/*     const navigate = useNavigate(); */
     const toast = useToast();
-/*     const [windowSize, setWindowSize] = useState([
-      window.innerWidth,
-      window.innerHeight,
-    ]); */
-  
-/*     useEffect(() => {
-      const handleWindowResize = () => {
-        setWindowSize([window.innerWidth, window.innerHeight]);
-      }; */
-  
-/*       window.addEventListener('resize', handleWindowResize);
-  
-      return () => {
-        window.removeEventListener('resize', handleWindowResize);
-      };
-    }, []); */
 
     /// TBD TBD TBD make page recover from no match in location
     useEffect(() => {
@@ -91,7 +62,6 @@ const GoArena
         querySnapshot.forEach((doc) => {
           const latestTurn = { ...doc.data(), id: doc.id } as Turn;
           setTurn(latestTurn);
-       
           setContextPackage(
             {pendingAction:null,
               lastAction:latestTurn.action,
@@ -100,41 +70,10 @@ const GoArena
             })
         });
       });
-      /*       const colorOfOppoent=utilities.getStoneColorOfPrevTrunOpponent(player?.id ?? "", turn);
-            const idOfOppoent=utilities.getStoneColorOfCurrentPlayer(player?.id ?? "", turn);
-            
-            playerWhiteId
-            getPlayer(location.state.match.onSubmit) */
     }, []
     );
 
-
-/*       const toast = useToast()
-      return (
-        <Button
-          onClick={() =>
-            toast({
-              title: 'Account created.',
-              description: "We've created your account for you.",
-              status: 'success',
-              duration: 9000,
-              isClosable: true,
-            })
-          }
-        >
-          Show Toast
-        </Button>
-      )
-    } */
-
-/*     const onSelectIntersection = (row: number, col: number): void => {
-      setPlay({ row: row, col: col });
-      onOpen();
-    } */
-
     const handleSelectIntersection = (row: number, col: number): void => {
-      console.log('************* onSelectIntersection: ',row,col);
-      //console.log(...(contextPackage?);
       const newStoneContext:ContextPackage={
         pendingAction:{actionType: "play",location: { row: row, col: col }},
         lastAction:contextPackage?.lastAction,
@@ -142,25 +81,13 @@ const GoArena
         onSelectIntersection:handleSelectIntersection
       }
      setContextPackage(newStoneContext);
-     // setPendingAction( {actionType: "play",location: { row: row, col: col }});
-      //console.log('************* setting pending action: ',pendingAction);
-      //setPendingPlay({ row: row, col: col });
-     // onOpen();
     }
 
-
     const executeStonePlay = () => {
-      //console.log('executeStonePlay play:',pendingAction)
       doStonePlay(turn, contextPackage.pendingAction?.location?.row ?? -1, contextPackage.pendingAction?.location?.col ?? -1);
-    //  setPendingPlay(null);
-     // onClose();
     }
 
     const cancelStonePlay = () => {
-    //  console.log('************* cancelStonePlay: ',pendingAction);
-    
-     // console.log('cancelStonePlay play:',pendingAction)
-      //setPendingAction(null);
       const newStoneContext:ContextPackage={
         pendingAction:null,
         lastAction:contextPackage?.lastAction,
@@ -168,11 +95,9 @@ const GoArena
         onSelectIntersection:handleSelectIntersection
       }
      setContextPackage(newStoneContext);
-     // onClose();
     }
 
     const doStonePlay = (turn: Turn | null | undefined, row: number, col: number) => {
-
       if (turn) {
         const submission: Submission =
           submissionFactory.createSubmission(turn, row, col);
@@ -189,8 +114,6 @@ const GoArena
               onSelectIntersection:handleSelectIntersection
             }
            setContextPackage(newStoneContext);
-  /*           setPendingAction(null);
-            setLastAction(pendingAction); */
             console.log("about to toast");
             toast({
               title: 'Stone placment processed.',
@@ -210,8 +133,6 @@ const GoArena
         if(evaluation.isSuicide){
           reason ="Suiside Rule Violation!";
         }
-
-
         toast({
           title: 'Illegal Move.',
           description: reason,
@@ -219,7 +140,6 @@ const GoArena
           duration: 9000,
           isClosable: true,
         });
-       // setPendingAction(null);
         const newStoneContext:ContextPackage={
           pendingAction:null,
           lastAction:contextPackage?.lastAction,
@@ -228,21 +148,16 @@ const GoArena
         }
        setContextPackage(newStoneContext);
       }
-        // else{//    TBD      put alert here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TBD
+        // else{//    TBD   TBD   TBD      put alert here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TBD
       }
     }
 
-
     const noOp = () => { };
-
-
     const selectPass = (): void => {
       setPendingPass(true);
-     // onOpen();
     }
     const cancelPass = (): void => {
       setPendingPass(false);
-     // onOpen();
     }
 
     const handlePass = (turn: Turn | null | undefined) => {
@@ -263,59 +178,40 @@ const GoArena
       }
     }
 
-/*     try { */
-
       return (<>
           <StoneContext.Provider value={contextPackage}>
-{/*         <div className="game-container">
-          <NavBar></NavBar> */}
-
-          <Grid className="arena-grid-container"
-          /*       gridTemplateColumns={{ base: "1fr", md: "30vh 100vh 30vh" }} */
-          >
+          <Grid className="arena-grid-container"  >
             <GridItem className="goboard" area={"goboard"}  >
               <div>
-             
                   {turn && <GoGameBoard boardString={turn?.resultState.board ?? ""} isMyTurn={utilities.getIsMyTurn(turn, player)} onSelectIntersection={handleSelectIntersection} expressRowAndColumnLabels={true} />}
                  </div>
             </GridItem>
-
             <GridItem className="players" area={"players"}>
-
             <Box className="player-box">
                           <PlayerCard
               stoneColor={utilities.getStoneColorOfPlayer(player?.id ?? "", turn)}
               playerName={player?.name ?? ""}
               oppoenentName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
-
               isMyTurn={utilities.getIsMyTurn(turn, player)}
               prisoners={utilities.getPrisonersOfCurrentPlayer(player?.id ?? "", turn)}
               isPlayer={true}
               onPass={() => handlePass(turn)} />
               </Box>
-
-
-
-
             <Box className="player-box ">
             <PlayerCard
                 stoneColor={utilities.getStoneColorOfOpponent(player?.id ?? "", turn)}
                 playerName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
                 oppoenentName={player?.name ?? ""}
-
                 isMyTurn={!utilities.getIsMyTurn(turn, player)}
                 prisoners={utilities.getPrisonersOfOpponent(player?.id ?? "", turn)}
                 isPlayer={false}
                 onPass={() => noOp()}
-
               />
               </Box>
-
 </GridItem>
 
             <GridItem className="actions" area={"actions"}  >
               <ActionCard 
-            /*    isPendingMove={!(pendingAction==null)} */
                isPendingMove={(!(contextPackage?.pendingAction==null))}
                isMyTurn={utilities.getIsMyTurn(turn, player)}
                onPlayConfirm={executeStonePlay}
@@ -328,85 +224,16 @@ const GoArena
               onResign={noOp}
               onPassCancel={cancelPass}
               onPlayCancel={cancelStonePlay}
-
               /></GridItem>
             <GridItem className="chat"   >      
               <Chat match={location.state.match}></Chat>
            </GridItem>
-
-  {/*           <GridItem h="100%" area={"YO"}  ><PlayerCard
-              stoneColor={utilities.getStoneColorOfPlayer(player?.id ?? "", turn)}
-              playerName={player?.name ?? ""}
-              oppoenentName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
-
-              isMyTurn={utilities.getIsMyTurn(turn, player)}
-              prisoners={utilities.getPrisonersOfCurrentPlayer(player?.id ?? "", turn)}
-              isPlayer={true}
-              onPass={() => handlePass(turn)} /></GridItem>
-            <GridItem h="100%" area={"OP"}  > */}
-{/*               <PlayerCard
-                stoneColor={utilities.getStoneColorOfOpponent(player?.id ?? "", turn)}
-                playerName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
-                oppoenentName={player?.name ?? ""}
-
-                isMyTurn={!utilities.getIsMyTurn(turn, player)}
-                prisoners={utilities.getPrisonersOfOpponent(player?.id ?? "", turn)}
-                isPlayer={false}
-                onPass={() => noOp()}
-
-              /></GridItem> */}
-{/*             <GridItem className="grid-item-he" area={"HE"}  >
-              <NavCard></NavCard>
-
-            </GridItem>
-            <GridItem className="test" area={"LO"} ><LogoCard /></GridItem> */}
           </Grid>
           {contextPackage?.pendingAction&&<Box>{contextPackage?.pendingAction?.actionType}</Box>}
-
-
-         {/*  <AlertDialog
-            motionPreset='slideInBottom'
-            isOpen={isOpen}
-            leastDestructiveRef={cancelRef}
-            onClose={onClose}
-            isCentered
-          >
-            <AlertDialogOverlay>
-              <AlertDialogContent style={{ width: "200px", fontWeight: "bold", marginTop: "10px", marginLeft: "10px" }} >
-
-
-                <AlertDialogBody >
-                  You chose to play at: {play?.row} {play?.col} OK?
-                </AlertDialogBody>
-
-                <AlertDialogFooter>
-                  <Button ref={cancelRef} onClick={onClose}>
-                    Cancel
-                  </Button>
-                  <Button colorScheme='red' onClick={executeStonePlay} ml={3}>
-                    Yes
-                  </Button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialogOverlay>
-          </AlertDialog> */}
-   {/*      </div> */}
         </StoneContext.Provider>
-     {/*    <div className="display-width-var">x</div> */}
-{/*         <div>
-      <h2>Width: {windowSize[0]}</h2>
-
-      <h2>Height: {windowSize[1]}</h2>
-    </div> */}
       </>
       );
-/*     } catch (e) {
-      console.log("Error displaying component:  probably no match: ", location.state);
-      ///TBD TBD TBD  test if "missing match" is issue and show toast.
-      navigate("/");
-    } */
   }
-
 
 export default GoArena
 
