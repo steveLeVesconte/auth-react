@@ -1,69 +1,115 @@
 
-import { useRef, useState } from 'react'
-//import { Form, Button, Card, Alert} from 'react-bootstrap';
-import { useAuth } from '../contexts/AuthContext'
-import { Link, useNavigate } from 'react-router-dom';
-import { Alert, Button, Card, CardBody, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import {Image , Card, CardBody, Grid, GridItem, Heading, Center, SimpleGrid, List, ListItem, CardHeader, } from '@chakra-ui/react'
+import LoginCard from './LoginCard'
+import goGameImage from '../assets/igo.jpg';
 
 const Login = () => {
-    const emailRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
-    const { login, currentUser } = useAuth();//from AuthContext
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
+  return (
+    <Grid marginTop={10} gap={10} className='landing-grid' marginLeft="auto" 
+     >
+      <GridItem className='landing-grid-intro' gridArea="intro" >
+        <Card h="100%">
+          <CardBody>
+            <SimpleGrid gap={3}>
+            <Heading>Welcome to React Go Game Kata</Heading>
+            <p>One purpose of the project is to provide an adequately rich domain for the exploration of multiple technologies. In my experience, many learning projects are too simple to challenge a developer to deeply exercise a technology. </p>
+
+            <Card h="100%">
+              <CardHeader>
+              <Heading size='md' paddingTop={0}>Technologies Employed:</Heading>
+
+              </CardHeader>
+          <CardBody>
+          
+            <div className='tech-grid' >
+              <div>
+       React
+              </div>
+              <div>
+        Typescript
+              </div>
+
+              <div>
+              Firebase Realtime Database - cloud-hosted NoSQL database 
+              </div>
+
+              
+              <div>
+              Chakra UI - component library
+              </div>
+
+              
+              <div>
+              React Context API
+              </div>
+
+              
+              <div>
+              React Hook Form
+              </div>
+              <div>
+              Firebase Authentication Service from Google
+              </div>
+              
+              <div>
+              Vite - for project setup, building and packing
+              </div>
+             </div>
+              
+             </CardBody>
+             </Card>
+            </SimpleGrid>
+          </CardBody>
+        </Card>
+        
 
 
-    async function handleSubmit(e: { preventDefault: () => void; }) {
-        e.preventDefault();
-console.log('in hanld submit');
-        try {
-            setError('');
-            setLoading(true);
-            console.log('in hanld submit values: ',emailRef.current?.value, passwordRef.current?.value);
-            await login(emailRef.current?.value, passwordRef.current?.value)
-            navigate("/");
-        } catch {
-            console.log('in hanld submit error!!!!!!!!!!!!!!!: ',emailRef.current?.value, passwordRef.current?.value);
-         
-            setError('Failed to log in')
-        }
-        setLoading(false);
-    }
+      </GridItem>
+      <GridItem gridArea="login" className='landing-grid-login'>
+      <LoginCard></LoginCard>
+      </GridItem>
+       <GridItem gridArea="go-pic">
+       <Card h="100%" className='landing-grid-image'>
+          <CardBody>
+            <Center>
+          <Image src={goGameImage} ></Image>
+          </Center>
+          </CardBody>
+        </Card>
+       </GridItem>
+       <GridItem className="landing-grid-special" gridArea="special">
+       <Card h="100%">
+       <CardBody>
+        <SimpleGrid gap={3}>
+            <Heading>Special Secret Login Bypass</Heading>
+           <p>
+           Another purpose of this website is to allow interested persons to easily see my work.  To facilitate this, I have provided two accounts with easy usernames and passwords so that you can view the site without "signing up".  This allows you to quickly access games-in-progress without needing to recruit a friend to play against you.  Though, if you want to, you definitely can play against each other using these two credentials.  There is of course the possibility that I will be sending updates as you play, but this should not cause any issues as the CI/CD process is quite seamless.
 
-    return (
-        <>
+            </p> 
+           
+            <p>You are also welcome to sign up.  A "real" email is not required as email verification has been turned off.</p>
+             
+             <List spacing={4}>
+              <ListItem>
+              <p>Test Account email A: <strong>roo2@roo2.com</strong> </p>
+            <p>Test Account password A: <strong>12345678</strong></p>
+              </ListItem>
+              <ListItem>
+              <p>Test Account email B: <strong>roo3@roo3.com </strong> </p>
+            <p>  Test Account password B: <strong>12345678</strong></p>
+              </ListItem>
 
-                    <Card>
+             </List>
+              <p>Please consider providing any feedback at this email address: twowaypress@gmail.com </p>
 
-                        <CardBody>
-                            <h2 className='text-center mb-4'>Log In</h2>
-                            <div>{currentUser?.email}</div>{/*  currentUser starts as undefined and is then set. */}
-                            {error && <Alert status="error"  >{error}</Alert>}
-                            <form onSubmit={handleSubmit}>
-                                <FormControl id="emial">
-                                    <FormLabel>Email</FormLabel>
-                                    <Input type="email" ref={emailRef} required></Input>
-                                </FormControl>
-                                <FormControl id="password">
-                                    <FormLabel>Password</FormLabel>
-                                    <Input type="password" ref={passwordRef} required></Input>
-                                </FormControl>
-
-                                <Button disabled={loading} className='w-100 mt-4' type="submit">Log In</Button>
-
-                            </form>
-                            <div className='w-100 text-center mt-2'>
-                        <Link to= "/auth/forgot-password">Forgot Password?</Link>
-                    </div>
-                        </CardBody>
-                    </Card>
-                    <div className='w-100 text-center mt-2'>
-                        Need to Sign Up?  <Link to= "/auth/signup">Sign Up</Link>
-                    </div>
-
-        </>
-    )
+             
+            </SimpleGrid>
+           </CardBody>
+        </Card>
+       </GridItem>
+    </Grid>
+  )
 }
+
 
 export default Login

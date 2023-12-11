@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 //import { useAuth } from '../contexts/AuthContext'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 //import { GameState, Match, Turn, addMatch, addTurn } from '../firestore';
 import PlayerSelectList from '../components/PlayerSelectList';
 import { PlayerContext, PlayerContextType } from '../contexts/PlayerContext';
-import {  Box, Button, Card, CardBody, Center, FormControl, FormErrorMessage, FormLabel, Heading, Select, SimpleGrid } from '@chakra-ui/react';
+import {Link as ChakraLink,  Button, Card, CardBody, Center, FormControl, FormErrorMessage, FormLabel, Heading, Select, SimpleGrid } from '@chakra-ui/react';
 //import { ChangeEvent } from 'react';
 import { MdArrowDropDown } from "react-icons/md";
 import { FieldValues, useForm,  } from 'react-hook-form';
@@ -73,6 +73,7 @@ const CreateMatch
         
 
         function handleFormSubmit(values:FieldValues) {
+            
             //e.preventDefault();
 
             // console.log('*******------------------------*******values: ', values);
@@ -185,12 +186,12 @@ const CreateMatch
                  {/*   <form onSubmit={handleSubmit(data=>console.log('**********data: ',data))} > */}
                    <form onSubmit={handleSubmit(data=>handleFormSubmit(data))} >
                             <SimpleGrid columns={1} spacing={10}>
-                            <FormControl id="myStoneColor" >
+                            <FormControl id="myStoneColor" isInvalid={!!errors?.stoneColor}>
 
                                 <FormLabel htmlFor='stoneColor'>My Stone Color</FormLabel>
                                 <Select  icon={<MdArrowDropDown />} 
                                   {...register('stoneColor', {
-                                    required: 'This is required',
+                                    required: 'Your stone color choice is required',
                                   })}
                                 
 
@@ -200,12 +201,12 @@ const CreateMatch
                                 </Select>
                                 <FormErrorMessage>{errors.stoneColor && errors.stoneColor.message}</FormErrorMessage>
                                 </FormControl>
-                                <FormControl id="myOpponent">
+                                <FormControl id="myOpponent" isInvalid={!!errors?.opponentKey}>
                                     
                                 <FormLabel>My Opponent</FormLabel>
                                 <Select 
                                              {...register('opponentKey', {
-                                               required: 'This is required',
+                                               required: 'Your choice of opponent is required',
                                              })}
         
                                 icon={<MdArrowDropDown />} variant="filled" placeholder="select an opponent">
@@ -217,7 +218,11 @@ const CreateMatch
                             <Button disabled={!isValid} isLoading = {isSubmitting} 
 colorScheme='orange'
                             className='w-100 mt-4' type="submit">Save</Button>
-                                <Center> <Link to="/">Cancel</Link></Center>
+                                <Center> <ChakraLink as={ReactRouterLink} to="/">Cancel</ChakraLink></Center>
+                            </SimpleGrid>
+                            <SimpleGrid templateColumns="80% 20%" >
+
+
                             </SimpleGrid>
                             </SimpleGrid>
                         </form>

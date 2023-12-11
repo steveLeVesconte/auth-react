@@ -1,4 +1,4 @@
-import { Box,  Button,  Flex,  VStack } from '@chakra-ui/react'
+import { Box,   Flex,  VStack } from '@chakra-ui/react'
 //import { useNavigate } from 'react-router-dom';
 import  GameMoveButton  from './GameMoveButton';
 import CancelMoveButton from './CancelMoveButton';
@@ -44,7 +44,7 @@ export const ActionCard = (props:Props) => {
     
       </Flex>
       <Flex flex={1} justifyContent="right" alignContent="center">
-      <Button colorScheme="gray" size="sm" >Resign</Button>
+     {/*  <Button colorScheme="gray" size="sm" >Resign</Button> */}
       </Flex>
     </Flex>
     <Flex h="32px" w="100%" justifyContent="center"  > <CancelMoveButton

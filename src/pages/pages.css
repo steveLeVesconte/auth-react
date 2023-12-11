@@ -4,3 +4,69 @@
     grid-auto-rows: auto;
     
 }
+
+
+/* .landing-grid-intro{
+    height: 435.2px;
+} */
+
+.landing-grid{
+    gap:1rem;
+    max-width: 100%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: "go-pic"
+    "intro"
+    "special"
+    "login";
+
+
+}
+
+.landing-grid-image {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tech-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    max-width: 100%;    
+    gap:20px;
+    }
+    
+
+@media (min-width: 1000px){
+.landing-grid{
+    gap: 2.5rem;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "intro intro login"
+                         " go-pic special special";
+
+
+}
+.landing-grid-image {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.landing-grid-login{
+    min-width: 300px;
+}
+
+.tech-grid{
+    display: grid;
+grid-template-columns: 1fr 1fr;
+max-width: 1000px;   
+gap:20px;
+   
+}
+
+}

@@ -2,28 +2,28 @@ import { HStack, Menu, MenuList, MenuButton, MenuItem, Button, Icon, useColorMod
 //import logo from "../assets/logo.webp";
 import ColorModeSwitch from './ColorModeSwitch';
 import {PlayerContext, PlayerContextType} from '../contexts/PlayerContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext,  useState } from 'react';
 import { ChevronDownIcon } from '@chakra-ui/icons'
 //import { Player } from '../firestore';
 import { useAuth } from '../contexts/AuthContext';
 import {  useNavigate } from 'react-router-dom';
 //import logo from '../assets/logo.png'
 import { TbGoGame } from "react-icons/tb";
-import useScreenOrientation from '../hooks/GetScreenOrientation';
+//import useScreenOrientation from '../hooks/GetScreenOrientation';
 
 const NavBar = () => {
-  const orientation:string=useScreenOrientation()
+/*   const orientation:string=useScreenOrientation() */
    const {currentUser, logout}=useAuth();
    const [error, setError]=useState("");
    //const bg = useColorModeValue('red.500', 'red.200')
    const color = useColorModeValue('white', 'gray.800')
     const navigate = useNavigate();
-    const [windowSize, setWindowSize] = useState([
+/*     const [windowSize, setWindowSize] = useState([
       window.innerWidth,
       window.innerHeight,
-    ]);
+    ]); */
     const {player}=useContext(PlayerContext) as PlayerContextType;
-    useEffect(() => {
+/*     useEffect(() => {
       const handleWindowResize = () => {
         setWindowSize([window.innerWidth, window.innerHeight]);
       };
@@ -33,7 +33,7 @@ const NavBar = () => {
       return () => {
         window.removeEventListener('resize', handleWindowResize);
       };
-    }, []);
+    }, []); */
 
 
     async function handleLogout(){
@@ -49,7 +49,7 @@ const NavBar = () => {
       }
 
   return (
-    <Box className="nav-bar" pt={2} pb={2} w="100%">
+    <Box bg="black" className="nav-bar" p={2}  w="100%">
    <HStack  justifyContent={'space-between'} width="100%">
     <Icon  onClick={()=>{navigate("/")}} as={TbGoGame} className="goIcon" borderRadius={10} w={8} h={8}   color={color} />
 {/*    <TbGoGame onClick={()=>{navigate("/")}}  className="goIcon"/>
@@ -69,10 +69,10 @@ const NavBar = () => {
     </div> */}
     <MenuItem   onClick={handleLogout}>Logout</MenuItem>
     <MenuItem  onClick={()=>{navigate("/update-profile")}}>Change Password</MenuItem>
-    <MenuItem  >{windowSize[0]}</MenuItem>
+{/*     <MenuItem  >{windowSize[0]}</MenuItem>
     <MenuItem   >{windowSize[1]}</MenuItem>
     <MenuItem   >{orientation}</MenuItem>
-    <MenuItem   ><div className="display-orientation"/></MenuItem>
+    <MenuItem   ><div className="display-orientation"/></MenuItem> */}
 
   </MenuList>
 </Menu>
