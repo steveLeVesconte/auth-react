@@ -111,7 +111,6 @@ export async function getPlayersAll() {
     for (const documentSnapshot of querySnapshot.docs) {
         const player: Player = documentSnapshot.data() as Player;
         player.id = documentSnapshot.id;
-        console.log('player#######', player);
         await players.push({
             ...(player)
         })

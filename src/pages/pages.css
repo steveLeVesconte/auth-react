@@ -32,6 +32,11 @@
     }
     
 
+    .sign-up-card{
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
 @media (min-width: 1000px){
 .landing-grid{
     gap: 2.5rem;

@@ -1,5 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
+import "../pages/pages.css";
 
 const AuthLayout = () => {
   return (<>

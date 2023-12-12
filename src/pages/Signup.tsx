@@ -1,45 +1,48 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
 import {
   Alert,
   Button,
   Card,
   CardBody,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
+  SimpleGrid,
+  Link as ChakraLink,
+  Heading,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
-const Signup = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const confirmRef = useRef<HTMLInputElement>(null);
-  const { signup, currentUser } = useAuth(); //from AuthContext
+interface FormData {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const SignUp = () => {
+  const { signup } = useAuth(); //from AuthContext
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<FormData>();
+  const pwd = watch("password");
 
-  async function handleSubmit(e: { preventDefault: () => void }) {
-    e.preventDefault();
-
-    if (passwordRef.current?.value !== confirmRef.current?.value) {
-      return setError("Passwords do not match");
-    }
-    console.log(
-      "got match",
-      passwordRef.current?.value,
-      emailRef.current?.value
-    );
+  async function handleFormSubmit(values: FormData) {
+    setError("");
     try {
       setError("");
       setLoading(true);
-      const data = await signup(
-        emailRef.current?.value,
-        passwordRef.current?.value
-      );
+      const data: FormData = await signup(values.email, values.password);
       console.log("data: ", data);
-      console.log("newUserId: ", data.user.uid);
+
       navigate("/");
     } catch (error) {
       console.log("error: ", error);
@@ -50,36 +53,84 @@ const Signup = () => {
 
   return (
     <>
-      <Card>
+      <Card className="sign-up-card">
         <CardBody>
-          <h2 className="text-center mb-4">Sign Up</h2>
-          <div>{currentUser?.email}</div>
-          {/*  currentUser starts as undefined and is then set. */}
-          {error && <Alert variant="danger">{error}</Alert>}
-          <form onSubmit={handleSubmit}>
-            <FormControl id="emial">
-              <FormLabel>Email</FormLabel>
-              <Input type="email" ref={emailRef} required></Input>
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input type="password" ref={passwordRef} required></Input>
-            </FormControl>
-            <FormControl id="password-confirm">
-              <FormLabel>Confirm Password</FormLabel>
-              <Input type="password" ref={confirmRef} required></Input>
-            </FormControl>
-            <Button disabled={loading} className="w-100 mt-4" type="submit">
-              Sign Up
-            </Button>
+          <Heading marginBottom={6}>Sign Up</Heading>
+          {error && <Alert status="error">{error}xx</Alert>}
+          <form
+            onSubmit={handleSubmit((data) => handleFormSubmit(data))}
+            onChange={() => {
+              setError("");
+            }}
+          >
+            <SimpleGrid columns={1} spacing={10}>
+              <FormControl id="emial" isInvalid={!!errors?.email}>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  type="email"
+                  {...register("email", {
+                    required: "Email is required.",
+                  })}
+                ></Input>
+                <FormErrorMessage>
+                  {errors.email && errors.email.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl id="password" isInvalid={!!errors?.password}>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  {...register("password", {
+                    required: "Password is required.",
+                  })}
+                  type="password"
+                ></Input>
+                <FormErrorMessage>
+                  {errors.password && errors.password.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl
+                id="password-confirm"
+                isInvalid={!!errors?.confirmPassword}
+              >
+                <FormLabel>Confirm Password</FormLabel>
+                <Input
+                  {...register("confirmPassword", {
+                    required: "Confirm Password is required.",
+                    validate: (value) =>
+                      value === pwd || "The passwords do not match",
+                  })}
+                  type="password"
+                ></Input>
+                <FormErrorMessage>
+                  {errors.confirmPassword && errors.confirmPassword.message}
+                </FormErrorMessage>
+              </FormControl>
+              <Button
+                isLoading={isSubmitting}
+                disabled={!isValid}
+                type="submit"
+                colorScheme="orange"
+              >
+                Sign Up
+              </Button>
+              <SimpleGrid templateColumns="50% 50%">
+                <div>
+                  Already have an account?{" "}
+                  <ChakraLink
+                    color="orange.300"
+                    as={ReactRouterLink}
+                    to="/auth/login"
+                  >
+                    Log In
+                  </ChakraLink>
+                </div>
+              </SimpleGrid>
+            </SimpleGrid>
           </form>
         </CardBody>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/auth/login">Log In</Link>
-      </div>
     </>
   );
 };
 
-export default Signup;
+export default SignUp;

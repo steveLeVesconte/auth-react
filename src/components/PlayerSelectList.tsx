@@ -19,7 +19,7 @@ export default function PlayerList() {
   return (
     <>
       {players.map((player) => (
-        <option value={player.id + "_" + player.name}>{player.name}</option>
+        <option key={player.id + "_" + player.name} value={player.id + "_" + player.name}>{player.name}</option>
       ))}
     </>
   );

@@ -1,4 +1,4 @@
-import Signup from "../pages/Signup";
+
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
@@ -14,6 +14,7 @@ import MatchList from "./MatchList";
 import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import GameLayout from "../layouts/GameLayout";
+import SignUp from "../pages/Signup";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
                 </Route>
               </Route>
               <Route element={<AuthLayout />} path="/auth">
-                <Route path="signup" element={<Signup />} />
+                <Route path="signup" element={<SignUp />} />
                 <Route path="login" element={<Login />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
               </Route>

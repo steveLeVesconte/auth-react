@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
 import {
@@ -23,8 +23,8 @@ interface FormData {
 }
 
 const LoginCard = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+ /*  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null); */
   const { login, currentUser } = useAuth(); //from AuthContext
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -42,9 +42,7 @@ const LoginCard = () => {
       navigate("/");
     } catch {
       console.log(
-        "in hanld submit error!!!!!!!!!!!!!!!: ",
-        emailRef.current?.value,
-        passwordRef.current?.value
+        "in hanld submit error!!!!!!!!!!!!!!!: "
       );
 
       setError("Failed to log in");
@@ -56,7 +54,7 @@ const LoginCard = () => {
       <Card marginLeft="auto" marginRight="auto">
         <CardBody>
           <Heading marginBottom={6}>Login</Heading>
-          <div>{currentUser?.email}</div>
+          {/* <div>{currentUser?.email}</div> */}
           {/*  currentUser starts as undefined and is then set. */}
           {error && <Alert status="error">{error}</Alert>}
           <form onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
