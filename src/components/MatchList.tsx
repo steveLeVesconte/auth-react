@@ -41,7 +41,7 @@ export default function MatchList() {
           matches.map((match) => (
             <div key={match.id}>
               <button onClick={() => handleSelect(match)}>
-                <GameCard match={match}></GameCard>
+                <GameCard match={match} userId={ player?.id ?? ""}></GameCard>
               </button>
             </div>
           ))}
