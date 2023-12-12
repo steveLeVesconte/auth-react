@@ -22,10 +22,10 @@ interface FormData {
   confirmPassword: string;
 }
 
-const SignUp = () => {
+const Signup = () => {
   const { signup } = useAuth(); //from AuthContext
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  //const [ setLoading] = useState(false);
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -39,7 +39,7 @@ const SignUp = () => {
     setError("");
     try {
       setError("");
-      setLoading(true);
+      //setLoading(true);
       const data: FormData = await signup(values.email, values.password);
       console.log("data: ", data);
 
@@ -48,7 +48,7 @@ const SignUp = () => {
       console.log("error: ", error);
       setError("Failed to create an account");
     }
-    setLoading(false);
+    //setLoading(false);
   }
 
   return (
@@ -133,4 +133,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;

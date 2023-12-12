@@ -25,7 +25,7 @@ interface FormData {
 const LoginCard = () => {
  /*  const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null); */
-  const { login, currentUser } = useAuth(); //from AuthContext
+  const { login } = useAuth(); //from AuthContext
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const {
