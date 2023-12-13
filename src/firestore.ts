@@ -169,12 +169,18 @@ export async function getLatestTurnForMatchId(matchId: string): Promise<Turn | n
 
 export async function getActiveMatchesForPlayerId(playerId: string): Promise<Match[] | null> {
     console.log('getActiveMatchesForPlayerId - playerId in:', playerId);
+    const matches: Match[] = [];
+    if(! playerId) {
+        console.log('********** no player id.  why???  getActiveMatchesForPlayerId - playerId in:', playerId);
+   
+        return matches;
+    }
     const matchQuery = query(collection(db, MATCH_COLLECTION), and(where("status", "==", "active"), or(where("playerBlackId", "==", playerId), where("playerWhiteId", "==", playerId))), orderBy("createDate", "desc"));
     const querySnapshot = await getDocs(matchQuery);
 
-    console.log('match list querySnapshot', querySnapshot);
+    console.log('^^^^^^^^^^^^^^^   match list querySnapshot', querySnapshot);
 
-    const matches: Match[] = [];
+
 
     for (const documentSnapshot of querySnapshot.docs) {
         const match: Match = documentSnapshot.data() as Match;

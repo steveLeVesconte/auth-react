@@ -92,7 +92,7 @@ const Chat = ({ match }: Props) => {
           <Box overflowY="scroll" className="chat-scroll">
             {messages.map((item) => {
               return (
-                <MessageCard
+                <MessageCard key={item.id}
                   message={item}
                   stoneColor={getMessageStoneColor(item.speakerName, match)}
                 ></MessageCard>

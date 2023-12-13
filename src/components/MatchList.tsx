@@ -23,7 +23,7 @@ export default function MatchList() {
       }
     }
     getData();
-  }, [player, currentUser]);
+  }, [player]);
 
   const handleSelect = (selectedMatch: Match) => {
     console.log("in handleSelect=(selectedMatch:Match)", selectedMatch);
