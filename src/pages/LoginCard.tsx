@@ -92,7 +92,7 @@ const LoginCard = () => {
                 Log In
               </Button>
               <SimpleGrid templateColumns="50% 50%">
-                <div className="w-100 text-center mt-2">
+                <div>
                   <ChakraLink
                     color="orange.300"
                     as={ReactRouterLink}

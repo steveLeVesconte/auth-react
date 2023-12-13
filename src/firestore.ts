@@ -1,4 +1,4 @@
-import { addDoc, and, collection, doc, getDocs, limit, or, orderBy, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { addDoc, and, collection, doc, getDocs, limit, or, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import { db } from './firebase';
 
 const PLAYER_COLLECTION = 'go-players';
@@ -87,20 +87,28 @@ export interface xBoardContextInfo {
     lastActionWasStonePlay: boolean;
 
 }
-export function addPlayerProfile(uid: string, name: string, rankInfo: string, bio: string, status: string, createDate: string) {
-    return addDoc(collection(db, PLAYER_COLLECTION), { uid, name, rankInfo, bio, status, createDate })
+export function addPlayerProfile(
+    name: string, 
+    location:string, 
+    rankInfo: string, 
+    bio: string, 
+    status: string, 
+    uid: string,
+    createDate: string) {
+    return addDoc(collection(db, PLAYER_COLLECTION), { name, location, rankInfo, bio, status, uid,  createDate })
 }
 
-export function setPlayerProfile(uid: string, name: string, rankInfo: string, bio: string, status: string, createDate: string) {
+/* export function setPlayerProfile( name: string, locations:string, rankInfo: string, bio: string, status: string, createDate: string) {
     const docData = {
         name: name,
+        location:location,
         rankInfo: rankInfo,
         bio: bio,
         status: status,
         createDate: createDate
     }
     return setDoc(doc(db, PLAYER_COLLECTION, uid), docData);
-}
+} */
 
 export async function getPlayersAll() {
     const otherPlayersQueryAll = query(collection(db, PLAYER_COLLECTION), orderBy("name", "asc"));
@@ -132,6 +140,19 @@ export async function getPlayer(uid: string): Promise<Player | null> {
     else return null;
 }
 
+export async function getPlayerByName(name: string): Promise<Player | null> {
+    const playersQuery = query(collection(db, PLAYER_COLLECTION), where("name", "==", name));
+    const querySnapshot = await getDocs(playersQuery);
+
+    console.log('querySnapshot', querySnapshot);
+    if (querySnapshot?.docs.length > 0) {
+
+        const player: Player = querySnapshot.docs[0].data() as Player;
+        player.id = querySnapshot.docs[0].id;
+        return player;
+    }
+    else return null;
+}
 
 
 export async function getLatestTurnForMatchId(matchId: string): Promise<Turn | null> {

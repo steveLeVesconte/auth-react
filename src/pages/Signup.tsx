@@ -56,7 +56,7 @@ const Signup = () => {
       <Card className="sign-up-card">
         <CardBody>
           <Heading marginBottom={6}>Sign Up</Heading>
-          {error && <Alert status="error">{error}xx</Alert>}
+          {error && <Alert status="error">{error}</Alert>}
           <form
             onSubmit={handleSubmit((data) => handleFormSubmit(data))}
             onChange={() => {
