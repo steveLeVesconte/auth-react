@@ -2,10 +2,19 @@ import blackStone from "../../assets/blackStoneTrans.png";
 import whiteStone from "../../assets/whiteStoneTrans.png";
 import { Image } from "@chakra-ui/react";
 import IntersctionSVG from "./IntersctionSVG";
+import UpperLeftSVG from "./UpperLeftSvg";
 import PendingSVG from "./PendingSVG";
 import { useContext } from "react";
 import { ContextPackage, StoneContext } from "./GoArena";
 import LastTurnSVG from "./LastTurnSVG";
+import TopSVG from "./TopSVG";
+import UpperRightSVG from "./UpperRightSVG";
+import LowerLeftSVG from "./LowerLeftSVG";
+import LowerRightSVG from "./LowerRightSVG";
+import BottomSVG from "./BottomSVG";
+import LeftEdgeSVG from "./LeftEdge";
+import RightEdgeSVG from "./RightEdgeSVG";
+import IntersctionDotSVG from "./IntersctionDotSVG";
 
 interface Props {
   row: number;
@@ -49,7 +58,8 @@ const IntersectionBackGround = (props: Props) => {
     const lastPlayIconColor = props.content == "b" ? "white" : "black";
     return (
       <div className="boardIntersectionWithStone">
-        <IntersctionSVG />
+        {intersectionBG(props.row,props.col)}
+       {/*  <IntersctionSVG /> */}
         <Image m="5%" className="stone" src={stoneImage} />
         {isLastPlayHere(contextPackage, props.row, props.col) && (
           <LastTurnSVG stoneColor={lastPlayIconColor} />
@@ -59,7 +69,7 @@ const IntersectionBackGround = (props: Props) => {
   }
   //NOT  my turn and empty cell
   if (!props.isMyTurn) {
-    return <IntersctionSVG />;
+    return  intersectionBG(props.row,props.col);
   } else {
     // my turn and empty cell
     return (
@@ -67,7 +77,7 @@ const IntersectionBackGround = (props: Props) => {
         onClick={() => props.onSelectIntersection(props.row, props.col)}
         className="intersctionClass intersection-hover emptyIntersection"
       >
-        <IntersctionSVG />
+         {intersectionBG(props.row,props.col)}
         {isPendingActionHere(contextPackage, props.row, props.col) && (
           <PendingSVG stoneColor="#000000" />
         )}
@@ -75,5 +85,32 @@ const IntersectionBackGround = (props: Props) => {
     );
   }
 };
+
+function intersectionBG(row:number, col:number): JSX.Element {
+
+  console.log('intersection row col: ',row,col)
+   if((row==0) && (col==0)  )  return <UpperLeftSVG/>;
+   if((row==0) && (col>0)&& (col<18)   )  return <TopSVG/>;
+   if((row==0) &&  (col==18)   )  return <UpperRightSVG/>;
+
+   if((row==18) && (col==0)  )  return <LowerLeftSVG/>;
+   if((row==18) && (col>0)&& (col<18)   )  return <BottomSVG/>;
+   if((row==18) &&  (col==18)   )  return <LowerRightSVG/>;
+
+   if((row>0) &&(row<18) &&   (col==0)   )  return <LeftEdgeSVG/>;
+   if((row>0) &&(row<18) &&   (col==18)   )  return <RightEdgeSVG/>;
+
+   if((row==3) && (col==3)  )  return <IntersctionDotSVG/>;
+   if((row==3) && (col==15)  )  return <IntersctionDotSVG/>; 
+   if((row==15) && (col==15)  )  return <IntersctionDotSVG/>; 
+   if((row==15) && (col==3)  )  return <IntersctionDotSVG/>;
+   if((row==3) && (col==9)  )  return <IntersctionDotSVG/>;
+   if((row==9) && (col==3)  )  return <IntersctionDotSVG/>;
+   if((row==9) && (col==15)  )  return <IntersctionDotSVG/>;
+   if((row==9) && (col==9)  )  return <IntersctionDotSVG/>;
+   if((row==15) && (col==9)  )  return <IntersctionDotSVG/>;
+  return   <IntersctionSVG />;
+}
+
 
 export default IntersectionBackGround;
