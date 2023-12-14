@@ -35,15 +35,15 @@ export default function MatchList() {
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         spacing={6}
-        padding="10px"
+        paddingTop="10px"
       >
         {matches &&
           matches.map((match) => (
-            <div key={match.id}>
-              <div  onClick={() => handleSelect(match)}>
+  
+              <div  key={match.id} onClick={() => handleSelect(match)}>
                 <GameCard match={match} userId={ player?.id ?? ""}></GameCard>
               </div>
-            </div>
+       
           ))}
       </SimpleGrid>
     </>

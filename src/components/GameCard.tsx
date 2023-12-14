@@ -16,7 +16,7 @@ interface Props {
 
 const GameCard = ({ match,userId }: Props) => {
   return (
-    <Card p={1}>
+    <Card className='game-card'>
       <CardBody >
         <div className="game-board-color">
           <GameBoard boardString={match.board ?? ""} isMyTurn={false} onSelectIntersection={() => { }} />

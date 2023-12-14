@@ -227,3 +227,16 @@ div.intersection-hover:hover {
     max-height: calc(99vw - 680px);
   }
 }
+
+
+
+/* light dark mode */
+
+.chakra-ui-light .game-card:hover{
+  background-color:palegoldenrod;
+}
+
+.chakra-ui-dark .game-card:hover{
+  background-color:#343E5E;
+ /*  //#2D3748;; */
+}
