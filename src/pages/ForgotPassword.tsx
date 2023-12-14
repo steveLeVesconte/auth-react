@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 //import { Form, Button, Card, Alert} from 'react-bootstrap';
 import { useAuth } from "../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import {  Link as ReactRouterLink} from "react-router-dom";
 import {
   Alert,
   Button,
@@ -10,56 +10,104 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Link as ChakraLink,
+  FormErrorMessage,
+  SimpleGrid,
+  Box,
+  Heading,
+  CardHeader,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+
+interface FormData {
+  email: string;
+
+}
+
 
 const ForgotPassword = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
+
   const { currentUser, resetPassword } = useAuth(); //from AuthContext
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+ /*  const [loading, setLoading] = useState(false) */
 
-  async function handleSubmit(e: { preventDefault: () => void }) {
-    e.preventDefault();
+  const {
+    handleSubmit,
+    register,
 
+    formState: { errors, isSubmitting, isValid },
+
+  } = useForm<FormData>();
+
+  async function handleFormSubmit(values: FormData) {
+    //e.preventDefault();
+    console.log('in handleFormSubmit values.email: ',values.email)
+   
     try {
       setMessage("");
       setError("");
-      setLoading(true);
-      await resetPassword(emailRef.current?.value);
+/*       setLoading(true); */
+console.log('vvvvvvvvv values.email: ',values.email)
+      await resetPassword(values.email);
       setMessage("Check your inbox for further instructions.");
-    } catch {
+    } catch(e) {
+      console.log('eeeeeeeeeL=: ',(e as Error).message);
       setError("Failed to reset password");
     }
-    setLoading(false);
+/*     setLoading(false); */
   }
 
   return (
     <>
-      <Card>
+      <Card maxW="500px" marginLeft="auto" marginRight="auto">
+        <CardHeader>
+      <Heading marginBottom={6}>Password Reset</Heading>
+      </CardHeader>
         <CardBody>
-          <h2 className="text-center mb-4">Password Reset</h2>
           <div>{currentUser?.email}</div>
           {/*  currentUser starts as undefined and is then set. */}
           {error && <Alert status="error">{error}</Alert>}
           {message && <Alert variant="success">{message}</Alert>}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit((data) => handleFormSubmit(data))}
+            onChange={() => {
+              setError("");
+            }}>
+            <SimpleGrid columns={1} spacing={10}>
             <FormControl id="emial">
               <FormLabel>Email</FormLabel>
-              <Input type="email" ref={emailRef} required></Input>
+              <Input
+                   {...register("email", {
+                    required: "Email is required.",
+                  })}
+              
+              type="email"  required></Input>
+                        <FormErrorMessage>
+                  {errors.email && errors.email.message}
+                </FormErrorMessage>
+     
             </FormControl>
-            <Button disabled={loading} className="w-100 mt-4" type="submit">
+            <Button 
+                            isLoading={isSubmitting}
+                            disabled={!isValid}
+         type="submit">
               Reset Password
             </Button>
-          </form>
-          <div className="w-100 text-center mt-2">
-            <Link to="/auth/login">Login</Link>
+            <SimpleGrid templateColumns="50% 50%">
+            <div className="w-100 text-center mt-2">
+            <ChakraLink      color="orange.300" as={ReactRouterLink} to="/auth/login">Login</ChakraLink>
           </div>
+          <Box textAlign="right">
+        Need to Sign Up? <ChakraLink      color="orange.300" as={ReactRouterLink} to="/auth/signup">Sign Up</ChakraLink>
+      </Box>
+
+            </SimpleGrid> 
+            </SimpleGrid>
+          </form>
+
         </CardBody>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Need to Sign Up? <Link to="/auth/signup">Sign Up</Link>
-      </div>
+
     </>
   );
 };

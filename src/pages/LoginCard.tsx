@@ -14,6 +14,7 @@ import {
   SimpleGrid,
   Link as ChakraLink,
   Box,
+  CardHeader,
 } from "@chakra-ui/react";
 import { FieldValues, useForm } from "react-hook-form";
 
@@ -52,9 +53,13 @@ const LoginCard = () => {
   return (
     <>
       <Card marginLeft="auto" marginRight="auto">
+      <CardHeader>
+      <Heading marginBottom={6}>Login</Heading>
+      
+      </CardHeader>
+    
         <CardBody>
-          <Heading marginBottom={6}>Login</Heading>
-          {/* <div>{currentUser?.email}</div> */}
+           {/* <div>{currentUser?.email}</div> */}
           {/*  currentUser starts as undefined and is then set. */}
           {error && <Alert status="error">{error}</Alert>}
           <form onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
