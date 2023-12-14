@@ -40,9 +40,9 @@ export default function MatchList() {
         {matches &&
           matches.map((match) => (
             <div key={match.id}>
-              <button onClick={() => handleSelect(match)}>
+              <div  onClick={() => handleSelect(match)}>
                 <GameCard match={match} userId={ player?.id ?? ""}></GameCard>
-              </button>
+              </div>
             </div>
           ))}
       </SimpleGrid>

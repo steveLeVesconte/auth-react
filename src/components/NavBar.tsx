@@ -6,8 +6,9 @@ import {
   MenuItem,
   Button,
   Icon,
-  useColorModeValue,
+
   Box,
+  DarkMode,
 } from "@chakra-ui/react";
 import ColorModeSwitch from "./ColorModeSwitch";
 import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
@@ -20,7 +21,7 @@ import { TbGoGame } from "react-icons/tb";
 const NavBar = () => {
   const { currentUser, logout } = useAuth();
   const [error, setError] = useState("");
-  const color = useColorModeValue("white", "gray.800");
+  //const color = useColorModeValue("white", "gray.800");
   const navigate = useNavigate();
   const { player } = useContext(PlayerContext) as PlayerContextType;
 
@@ -36,7 +37,7 @@ const NavBar = () => {
     }
   }
 
-  return (
+  return (  
     <Box bg="black" className="nav-bar" p={2} w="100%">
       <HStack justifyContent={"space-between"} width="100%">
         <Icon
@@ -48,14 +49,16 @@ const NavBar = () => {
           borderRadius={10}
           w={8}
           h={8}
-          color={color}
+          color="black"
         />
         <HStack>
           <ColorModeSwitch></ColorModeSwitch>
           <Menu>
+          <DarkMode>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               {player?.name}
             </MenuButton>
+            </DarkMode>
             <MenuList>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
               <MenuItem
@@ -70,6 +73,7 @@ const NavBar = () => {
         </HStack>
       </HStack>
     </Box>
+ 
   );
 };
 

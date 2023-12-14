@@ -11,7 +11,7 @@ export const StatusIndicator = (props: Props) => {
   if (props.match.status !== "active") {
     return (
       <HStack>
-        <Icon as={CloseIcon} w={8} h={8} color="orange.500" />{" "}
+        <Icon as={CloseIcon} w={6} h={6} color="orange.500" />{" "}
         <Text>{props.match.status}</Text>
       </HStack>
     );
@@ -21,7 +21,7 @@ export const StatusIndicator = (props: Props) => {
     return (
       <HStack>
         <Text>My Turn!</Text>
-        <Icon as={BellIcon} w={8} h={8} color="orange.500" />
+        <Icon as={BellIcon} w={6} h={6} color="orange.500" />
       </HStack>
     );
   } else {

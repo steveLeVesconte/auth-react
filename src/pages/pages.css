@@ -1,3 +1,15 @@
+/* light dark mode */
+
+.chakra-ui-light .chakra-card{
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,.16), 0 2px 5px 0 rgba(0,0,0,.15); ;
+}
+
+
+
+
+
+/* end of light dark mode */
+
 
 .player-card-grid{
     display:grid;
