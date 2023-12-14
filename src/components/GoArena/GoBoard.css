@@ -161,6 +161,7 @@ div.intersection-hover:hover {
 
 .player-box {
   flex-grow: 1;
+  padding-top: 10px;
 }
 
 .player-stone {
@@ -201,8 +202,9 @@ div.intersection-hover:hover {
   }
 
   .arena-grid-container {
+     gap:10px;
     display: grid;
-    grid-template-columns: 1fr 350px;
+    grid-template-columns: 1fr 320px;
     grid-template-areas:
       "goboard players"
       "goboard actions"
@@ -226,6 +228,10 @@ div.intersection-hover:hover {
     height: calc(99vh - 430px);
     max-height: calc(99vw - 680px);
   }
+
+/*   .chat-card-body {
+    max-width: calc(99vw - 900px);
+  } */
 }
 
 

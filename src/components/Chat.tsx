@@ -86,7 +86,7 @@ const Chat = ({ match }: Props) => {
     } else return "w";
   }
   return (
-    <Card h="100%">
+    <Card h="100%" p={0}>
       <CardBody height="100%" pb={2} className="chat-card-body">
         <Box className="chat-window" p="0px">
           <Box overflowY="scroll" className="chat-scroll">

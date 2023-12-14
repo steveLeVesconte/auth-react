@@ -2,7 +2,6 @@ import blackStone from "../../assets/blackStoneTrans.png";
 import whiteStone from "../../assets/whiteStoneTrans.png";
 import { Image } from "@chakra-ui/react";
 import IntersctionSVG from "./IntersctionSVG";
-import UpperLeftSVG from "./UpperLeftSvg";
 import PendingSVG from "./PendingSVG";
 import { useContext } from "react";
 import { ContextPackage, StoneContext } from "./GoArena";
@@ -15,6 +14,7 @@ import BottomSVG from "./BottomSVG";
 import LeftEdgeSVG from "./LeftEdge";
 import RightEdgeSVG from "./RightEdgeSVG";
 import IntersctionDotSVG from "./IntersctionDotSVG";
+import UpperLeftSVG from "./UpperLeftSVG";
 
 interface Props {
   row: number;
