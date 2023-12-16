@@ -3,11 +3,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
 import MessageCard from "./GoArena/MessageCard";
 import { Match } from "../services/match-service";
-import {
-  Message,
-  addMessage,
-  watchMessagesForMatchId,
-} from "../services/message-service";
+import { Message} from "../services/message-service";
+import useMessages from "../services/useMessages";
 
 interface Props {
   match: Match;
@@ -15,47 +12,20 @@ interface Props {
 
 const Chat = ({ match }: Props) => {
   const { player } = useContext(PlayerContext) as PlayerContextType;
-  const [newMessage, setNewMessage] = useState<string>("");
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [screenSize, setScreenSize] = useState(getCurrentDimension());
-
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  }
-
-  useEffect(() => {
-    const updateDimension = () => {
-      setScreenSize(getCurrentDimension());
-    };
-    window.addEventListener("resize", updateDimension);
-    return () => {
-      window.removeEventListener("resize", updateDimension);
-    };
-  }, [screenSize]);
-
-  useEffect(() => {
-    watchMessagesForMatchId(match.id, handleNewMessageList);
-    //return ()=>unsubscribe;  TBD?? not sure.
-  }, []);
-
-  const handleNewMessageList = (messages: Message[]) => {
-    setMessages(messages.reverse());
-  };
+  const [newMessageText, setNewMessageText] = useState<string>("");
+  const {messages, addNewMessage} = useMessages(match.id);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
-    console.log("handleSubmit called: ", newMessage);
+    console.log("handleSubmit called: ", newMessageText);
     e.preventDefault();
-    if (newMessage === "") return;
-    addMessage({
-      message: newMessage,
+    if (newMessageText === "") return;
+    addNewMessage({
+      message: newMessageText,
       speakerName: player?.name ?? "unkown",
       matchId: match.id,
       createDate: new Date().toISOString(),
     } as Message);
-    setNewMessage("");
+    setNewMessageText("");
   };
 
   const AlwaysScrollToBottom = () => {
@@ -89,8 +59,8 @@ const Chat = ({ match }: Props) => {
             <Flex mt="10px" flexDirection="row">
               <input
                 style={{ flex: 1 }}
-                onChange={(e) => setNewMessage(e.target.value)}
-                value={newMessage}
+                onChange={(e) => setNewMessageText(e.target.value)}
+                value={newMessageText}
               ></input>
               <Button type="submit">Send</Button>
             </Flex>
