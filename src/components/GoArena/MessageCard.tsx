@@ -1,8 +1,7 @@
 import { Image, useColorModeValue, Text, Box, Flex } from "@chakra-ui/react";
 import blackStoneImage from "../../assets/blackStoneTrans.png";
 import whiteStoneImage from "../../assets/whiteStoneTrans.png";
-
-import { Message } from "../../firestore";
+import { Message } from "../../services/message-service";
 
 interface Props {
   message: Message;

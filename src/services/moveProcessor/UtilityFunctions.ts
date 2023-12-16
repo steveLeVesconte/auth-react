@@ -1,5 +1,7 @@
 
-import { Player, Turn } from "../../firestore";
+
+import { Player } from "../player-service";
+import { Turn } from "../turn-service";
 import { StoneColor } from "./constants";
 
 function getStoneColorOfCurrentTurn(lastTurn: Turn): string {
