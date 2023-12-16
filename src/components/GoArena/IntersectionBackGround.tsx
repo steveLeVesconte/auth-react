@@ -75,7 +75,7 @@ const IntersectionBackGround = (props: Props) => {
     return (
       <div
         onClick={() => props.onSelectIntersection(props.row, props.col)}
-        className="intersctionClass intersection-hover emptyIntersection"
+        className=" intersection-hover emptyIntersection"
       >
          {intersectionBG(props.row,props.col)}
         {isPendingActionHere(contextPackage, props.row, props.col) && (

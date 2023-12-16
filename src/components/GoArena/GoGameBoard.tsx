@@ -6,7 +6,7 @@ interface Props {
     boardString: string;
     isMyTurn: boolean;
     onSelectIntersection: (row: number, col: number) => void;
-    expressRowAndColumnLabels: boolean;
+  
 }
 
 const GoGameBoard = (props: Props) => {
@@ -20,7 +20,7 @@ const GoGameBoard = (props: Props) => {
                 className='boarder-container'>
                 <GridItem area={"corner"} ><div> </div></GridItem>
                 <GridItem area={"headerLetters"} >
-                    {props.expressRowAndColumnLabels && <LetterRow ></LetterRow>}
+                 <LetterRow ></LetterRow>
                 </GridItem>
                 <GridItem area={"rowNums"} className='row-nums' >
                         {createRowsNumbers()}

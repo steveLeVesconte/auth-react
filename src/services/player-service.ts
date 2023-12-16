@@ -68,7 +68,7 @@ export async function getPlayerByName(name: string): Promise<Player | null> {
     const playersQuery = query(collection(db, PLAYER_COLLECTION), where("name", "==", name));
     const querySnapshot = await getDocs(playersQuery);
 
-    console.log('querySnapshot', querySnapshot);
+   // console.log('querySnapshot', querySnapshot);
     if (querySnapshot?.docs.length > 0) {
         const player: Player = querySnapshot.docs[0].data() as Player;
         player.id = querySnapshot.docs[0].id;

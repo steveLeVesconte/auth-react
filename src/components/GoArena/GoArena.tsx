@@ -183,7 +183,7 @@ const GoArena = () => {
                   boardString={turn?.resultState.board ?? ""}
                   isMyTurn={utilities.getIsMyTurn(turn, player)}
                   onSelectIntersection={handleSelectIntersection}
-                  expressRowAndColumnLabels={true}
+           
                 />
               )}
             </div>
