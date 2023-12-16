@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardBody, Flex } from "@chakra-ui/react";
-import { Match, Message } from "../firestore";
+import {Message } from "../firestore";
 import { db } from "../firebase";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
 import MessageCard from "./GoArena/MessageCard";
+import { Match } from "../services/match-service";
 
 interface Props {
   match: Match;

@@ -17,7 +17,8 @@ import {
 } from "@chakra-ui/react";
 import { MdArrowDropDown } from "react-icons/md";
 import { FieldValues, useForm } from "react-hook-form";
-import { GameState, Match, Turn, addMatch, addTurn } from "../firestore";
+import { GameState, Turn, addTurn } from "../services/turn-service";
+import { Match, addMatch } from "../services/match-service";
 
 interface FormData {
   stoneColor: string;
@@ -54,7 +55,7 @@ const CreateMatch = () => {
         "___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________" +
         ",___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________",
 
-      nextTurnPlayer: userStoneColor,
+      nextTurnPlayer: "w",
       playerBlackId: playerBlackId ?? "",
       playerWhiteId: playerWhiteId,
       playerBlackName: playerBlackName ?? "",

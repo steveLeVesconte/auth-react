@@ -1,7 +1,7 @@
 import { useContext,  useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
-import { Player, addPlayerProfile, getPlayerByName } from "../firestore";
+
 import {
   Alert,
   Box,
@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
 import { useForm } from "react-hook-form";
+import { Player, addPlayerProfile, getPlayerByName } from "../services/player-service";
 
 interface FormData {
   name: string;

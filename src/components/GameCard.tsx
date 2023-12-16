@@ -5,9 +5,10 @@ import {
   SimpleGrid,
   Text,
 } from '@chakra-ui/react';
-import { Match } from '../firestore';
+
 import GameBoard from './GoArena/GameBoard';
 import { StatusIndicator } from './StatusIndicator';
+import { Match } from '../services/match-service';
 
 interface Props {
   match: Match;

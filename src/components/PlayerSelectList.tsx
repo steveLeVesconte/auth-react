@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Player, getPlayersAll } from "../firestore";
+
 import { useAuth } from "../contexts/AuthContext";
+import { Player, getPlayersAll } from "../services/player-service";
 
 export default function PlayerList() {
   const [players, setPlayers] = useState<Player[]>([]);

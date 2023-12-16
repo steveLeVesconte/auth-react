@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { Match, getActiveMatchesForPlayerId } from "../firestore";
+
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
 import GameCard from "./GameCard";
 import { SimpleGrid } from "@chakra-ui/react";
+import { Match, getActiveMatchesForPlayerId } from "../services/match-service";
 
 export default function MatchList() {
   const [matches, setMatches] = useState<Match[] | null>([]);

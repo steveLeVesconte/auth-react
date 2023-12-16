@@ -1,7 +1,9 @@
 
-import { Player, Turn } from "../firestore";
+
+import { Turn } from "./turn-service";
 import gameStateFactory from "./gameStateFactory";
 import { BaseSubmissionResult, Submission } from "./moveProcessor";
+import { Player } from "./player-service";
 
 function createTurn(oldTurn: Turn, evaluation: BaseSubmissionResult, submission: Submission): Turn {
 

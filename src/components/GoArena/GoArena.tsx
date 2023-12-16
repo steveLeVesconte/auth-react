@@ -1,13 +1,13 @@
 import { useLocation } from "react-router-dom";
-import {  GameAction, TURN_COLLECTION, Turn, addTurn, updateMatch } from "../../firestore";
+
 import { createContext, useContext, useEffect,  useState } from "react";
 import { Submission, evaluateSubmission } from "../../services/moveProcessor";
 import submissionFactory from "../../services/submissionFactory";
 import { PlayerContext, PlayerContextType } from "../../contexts/PlayerContext";
 import turnFactory from "../../services/turnFactory";
 import utilities from "../../services/moveProcessor/UtilityFunctions"
-import { query, where, collection, onSnapshot, orderBy, limit } from "firebase/firestore";
-import { db } from "../../firebase";
+
+
 import GoGameBoard from "./GoGameBoard";
 import Chat from "../Chat";
 import {  Box,  Grid, GridItem } from "@chakra-ui/react";
@@ -15,6 +15,8 @@ import './GoBoard.css'
 import { PlayerCard } from "./PlayerCard";
 import { ActionCard } from "./ActionCard";
 import { useToast } from '@chakra-ui/react'
+import { GameAction, Turn, addTurn, watchForLatestTurnForMatchId } from "../../services/turn-service";
+import { updateMatch } from "../../services/match-service";
 
 export interface ContextPackage{ 
   pendingAction:GameAction|null|undefined;
@@ -41,21 +43,39 @@ const GoArena
 
     /// TBD TBD TBD make page recover from no match in location
     useEffect(() => {
-      const turnQuery = query(collection(db, TURN_COLLECTION), where("matchId", "==", location.state.match.id), orderBy("createDate", "desc"), limit(1));
-      onSnapshot(turnQuery, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          const latestTurn = { ...doc.data(), id: doc.id } as Turn;
-          setTurn(latestTurn);
-          setContextPackage(
-            {pendingAction:null,
-              lastAction:latestTurn.action,
-              isPlayersTurn: utilities.getIsMyTurn(turn, player),
-              onSelectIntersection:handleSelectIntersection
-            })
-        });
-      });
+
+      watchForLatestTurnForMatchId( location.state.match.id,handleTurnupdate);
+      // const turnQuery = query(collection(db, TURN_COLLECTION), where("matchId", "==", location.state.match.id), orderBy("createDate", "desc"), limit(1));
+      // onSnapshot(turnQuery, (querySnapshot) => {
+      //   querySnapshot.forEach((doc) => {
+      //     const latestTurn = { ...doc.data(), id: doc.id } as Turn;
+
+      //     handleTurnupdate(latestTurn);
+      //     // setTurn(latestTurn);
+      //     // setContextPackage(
+      //     //   {pendingAction:null,
+      //     //     lastAction:latestTurn.action,
+      //     //     isPlayersTurn: utilities.getIsMyTurn(turn, player),
+      //     //     onSelectIntersection:handleSelectIntersection
+      //     //   })
+
+
+      //   });
+      // });
     }, []
     );
+
+    const handleTurnupdate= (latestTurn:Turn) => {
+
+      setTurn(latestTurn);
+      setContextPackage(
+        {pendingAction:null,
+          lastAction:latestTurn.action,
+          isPlayersTurn: utilities.getIsMyTurn(turn, player),
+          onSelectIntersection:handleSelectIntersection
+        })
+    }
+
 
     const handleSelectIntersection = (row: number, col: number): void => {
       const newStoneContext:ContextPackage={

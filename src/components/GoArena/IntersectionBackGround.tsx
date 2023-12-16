@@ -88,7 +88,7 @@ const IntersectionBackGround = (props: Props) => {
 
 function intersectionBG(row:number, col:number): JSX.Element {
 
-  console.log('intersection row col: ',row,col)
+  // console.log('intersection row col: ',row,col)
    if((row==0) && (col==0)  )  return <UpperLeftSVG/>;
    if((row==0) && (col>0)&& (col<18)   )  return <TopSVG/>;
    if((row==0) &&  (col==18)   )  return <UpperRightSVG/>;

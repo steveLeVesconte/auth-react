@@ -1,6 +1,7 @@
 import { BellIcon, CloseIcon, Icon } from "@chakra-ui/icons";
 import { HStack, Text } from "@chakra-ui/react";
-import { Match } from "../firestore";
+import { Match } from "../services/match-service";
+
 
 interface Props {
   userId: string;
