@@ -1,4 +1,4 @@
-import { addDoc, collection,  limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { addDoc, collection, limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import { TURN_COLLECTION } from "../firestore";
 
@@ -27,6 +27,7 @@ export interface GameState {
     prisonersOfBlack: number;
     prisonersOfWhite: number;
 }
+
 export interface GameAction {
     actionType: string;
     location: { row: number, col: number } | null;
@@ -36,25 +37,17 @@ export function addTurn(turn: Turn) {
     return addDoc(collection(db, TURN_COLLECTION), turn)
 }
 
-// export async function getLatestTurnForMatchId(matchId: string): Promise<Turn | null> {
-//     console.log('new *** turn querySnapshot matchId', matchId);
-//     const turnQuery = query(collection(db, TURN_COLLECTION), where("matchId", "==", matchId), orderBy("createDate", "desc"), limit(1));
-//     const querySnapshot = await getDocs(turnQuery);
-//     console.log('new *** turn querySnapshot', querySnapshot);
-//     if (querySnapshot?.docs.length > 0) {
-//         const turn: Turn = querySnapshot.docs[0].data() as Turn;
-//         return turn;
-//     }
-//     else return null;
-// }
 
 export function watchForLatestTurnForMatchId(matchId: string, onNewTurn: (latestTrun: Turn) => void): void {
-    const turnQuery = query(collection(db, TURN_COLLECTION), where("matchId", "==", matchId), orderBy("createDate", "desc"), limit(1));
+    const turnQuery =
+        query(collection(db, TURN_COLLECTION),
+            where("matchId", "==", matchId),
+            orderBy("createDate", "desc"),
+            limit(1));
     onSnapshot(turnQuery, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
             const latestTurn = { ...doc.data(), id: doc.id } as Turn;
             onNewTurn(latestTurn);
-
         });
     });
 

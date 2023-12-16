@@ -1,19 +1,13 @@
 import { Box, Button, Card, CardBody, Flex } from "@chakra-ui/react";
-import {Message } from "../firestore";
-import { db } from "../firebase";
 import { useContext, useEffect, useRef, useState } from "react";
-import {
-  addDoc,
-  collection,
-  limit,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
 import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
 import MessageCard from "./GoArena/MessageCard";
 import { Match } from "../services/match-service";
+import {
+  Message,
+  addMessage,
+  watchMessagesForMatchId,
+} from "../services/message-service";
 
 interface Props {
   match: Match;
@@ -23,7 +17,6 @@ const Chat = ({ match }: Props) => {
   const { player } = useContext(PlayerContext) as PlayerContextType;
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const messagesRef = collection(db, "messages");
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
 
   function getCurrentDimension() {
@@ -32,49 +25,39 @@ const Chat = ({ match }: Props) => {
       height: window.innerHeight,
     };
   }
+
   useEffect(() => {
     const updateDimension = () => {
       setScreenSize(getCurrentDimension());
     };
     window.addEventListener("resize", updateDimension);
-
     return () => {
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
 
   useEffect(() => {
-    const queryMessages = query(
-      messagesRef,
-      where("matchId", "==", match.id),
-      orderBy("createDate", "desc"),
-      limit(10)
-    );
-    //const unsubscribe=   TBD
-    onSnapshot(queryMessages, (snapshot) => {
-      const messagesArray: Message[] = [];
-      snapshot.forEach((doc) => {
-        const thisMessage = { ...doc.data(), id: doc.id } as Message;
-        messagesArray.push(thisMessage);
-      });
-      console.log("set messages next- messageArray: ", messagesArray);
-      setMessages(messagesArray.reverse());
-    });
-    //return ()=>unsubscribe;  TBD
+    watchMessagesForMatchId(match.id, handleNewMessageList);
+    //return ()=>unsubscribe;  TBD?? not sure.
   }, []);
+
+  const handleNewMessageList = (messages: Message[]) => {
+    setMessages(messages.reverse());
+  };
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     console.log("handleSubmit called: ", newMessage);
     e.preventDefault();
     if (newMessage === "") return;
-    await addDoc(messagesRef, {
+    addMessage({
       message: newMessage,
       speakerName: player?.name ?? "unkown",
       matchId: match.id,
       createDate: new Date().toISOString(),
-    });
+    } as Message);
     setNewMessage("");
   };
+
   const AlwaysScrollToBottom = () => {
     const elementRef = useRef<HTMLDivElement>(null);
     useEffect(() => elementRef.current?.scrollIntoView());
@@ -93,7 +76,8 @@ const Chat = ({ match }: Props) => {
           <Box overflowY="scroll" className="chat-scroll">
             {messages.map((item) => {
               return (
-                <MessageCard key={item.id}
+                <MessageCard
+                  key={item.id}
                   message={item}
                   stoneColor={getMessageStoneColor(item.speakerName, match)}
                 ></MessageCard>

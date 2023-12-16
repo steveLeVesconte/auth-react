@@ -13,7 +13,6 @@ export interface Player {
     createDate: string;
 }
 
-
 export function addPlayerProfile(
     name: string, 
     location:string, 
@@ -25,7 +24,8 @@ export function addPlayerProfile(
     return addDoc(collection(db, PLAYER_COLLECTION), { name, location, rankInfo, bio, status, uid,  createDate })
 }
 
-/* export function setPlayerProfile( name: string, locations:string, rankInfo: string, bio: string, status: string, createDate: string) {
+/* for future use
+    export function setPlayerProfile( name: string, locations:string, rankInfo: string, bio: string, status: string, createDate: string) {
     const docData = {
         name: name,
         location:location,
@@ -40,9 +40,7 @@ export function addPlayerProfile(
 export async function getPlayersAll() {
     const otherPlayersQueryAll = query(collection(db, PLAYER_COLLECTION), orderBy("name", "asc"));
     const querySnapshot = await getDocs(otherPlayersQueryAll);
-
     const players: Player[] = [];
-
     for (const documentSnapshot of querySnapshot.docs) {
         const player: Player = documentSnapshot.data() as Player;
         player.id = documentSnapshot.id;
@@ -56,7 +54,6 @@ export async function getPlayersAll() {
 export async function getPlayer(uid: string): Promise<Player | null> {
     const playersQuery = query(collection(db, PLAYER_COLLECTION), where("uid", "==", uid));
     const querySnapshot = await getDocs(playersQuery);
-
     console.log('querySnapshot', querySnapshot);
     if (querySnapshot?.docs.length > 0) {
 
@@ -73,7 +70,6 @@ export async function getPlayerByName(name: string): Promise<Player | null> {
 
     console.log('querySnapshot', querySnapshot);
     if (querySnapshot?.docs.length > 0) {
-
         const player: Player = querySnapshot.docs[0].data() as Player;
         player.id = querySnapshot.docs[0].id;
         return player;

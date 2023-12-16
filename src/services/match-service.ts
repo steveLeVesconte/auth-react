@@ -3,7 +3,6 @@ import { MATCH_COLLECTION } from "../firestore";
 import { Turn } from "./turn-service";
 import { db } from "../firebase";
 
-
 export interface Match {
     id: string;
     board: string;
@@ -19,24 +18,15 @@ export interface Match {
 }
 
 export async function getActiveMatchesForPlayerId(playerId: string): Promise<Match[] | null> {
-    console.log('getActiveMatchesForPlayerId - playerId in:', playerId);
-    const matches: Match[] = [];
+     const matches: Match[] = [];
     if(! playerId) {
-        console.log('********** no player id.  why???  getActiveMatchesForPlayerId - playerId in:', playerId);
-   
         return matches;
     }
     const matchQuery = query(collection(db, MATCH_COLLECTION), and(where("status", "==", "active"), or(where("playerBlackId", "==", playerId), where("playerWhiteId", "==", playerId))), orderBy("createDate", "desc"));
     const querySnapshot = await getDocs(matchQuery);
-
-    console.log('^^^^^^^^^^^^^^^   match list querySnapshot', querySnapshot);
-
-
-
     for (const documentSnapshot of querySnapshot.docs) {
         const match: Match = documentSnapshot.data() as Match;
         match.id = documentSnapshot.id;
-        console.log('match in for each#######', match);
         await matches.push({
             ...(match)
         })
