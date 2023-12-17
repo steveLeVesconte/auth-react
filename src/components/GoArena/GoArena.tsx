@@ -5,7 +5,7 @@ import submissionFactory from "../../services/submissionFactory";
 import { PlayerContext, PlayerContextType } from "../../contexts/PlayerContext";
 import turnFactory from "../../services/turnFactory";
 import utilities from "../../services/moveProcessor/UtilityFunctions";
-import GoGameBoard from "./GoGameBoard";
+//import GoGameBoard from "./GoGameBoard";
 import Chat from "../Chat";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import "./GoBoard.css";
@@ -19,6 +19,7 @@ import {
   watchForLatestTurnForMatchId,
 } from "../../services/turn-service";
 import { updateMatch } from "../../services/match-service";
+import GameBoardWithLabels from "../game-board-w-labels/game-board-w-labels";
 
 export interface ContextPackage {
   pendingAction: GameAction | null | undefined;
@@ -179,7 +180,7 @@ const GoArena = () => {
           <GridItem className="goboard" area={"goboard"}>
             <div>
               {turn && (
-                <GoGameBoard
+                <GameBoardWithLabels
                   boardString={turn?.resultState.board ?? ""}
                   isMyTurn={utilities.getIsMyTurn(turn, player)}
                   onSelectIntersection={handleSelectIntersection}

@@ -1,7 +1,8 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import styles from "./game-board-w-labels.module.css";
 import GameBoard from "../game-board/game-board";
-import LetterRow from "../GoArena/LetterRow";
+import LetterLabelRow from "./letter-label-row";
+
 
 interface Props {
   boardString: string;
@@ -9,7 +10,7 @@ interface Props {
   onSelectIntersection: (row: number, col: number) => void;
 }
 
-const GoGameBoard = (props: Props) => {
+const GameBoardWithLabels = (props: Props) => {
   return (
     <>
       <div>
@@ -24,9 +25,9 @@ const GoGameBoard = (props: Props) => {
             <div> </div>
           </GridItem>
           <GridItem area={"headerLetters"}>
-            <LetterRow></LetterRow>
+            <LetterLabelRow></LetterLabelRow>
           </GridItem>
-          <GridItem area={"rowNums"} className="row-nums">
+          <GridItem area={"rowNums"} className={styles.rowNumberColumn}>
             {createRowsNumbers()}
           </GridItem>
           <GridItem area={"gameBoard"}>
@@ -48,13 +49,13 @@ const GoGameBoard = (props: Props) => {
 
 const createRowsNumbers = (): JSX.Element[] => {
   const content: JSX.Element[] = [];
-  for (let x = 18; x >= 0; x--) {
+  for (let rowNum = 18; rowNum >= 0; rowNum--) {
     content.push(
-      <Box className="rowNumberLabel" key={x}>
-        <div className="row-number">{x}</div>
+      <Box className={styles.rowNumberLabel} key={rowNum}>
+        <div >{rowNum}</div>
       </Box>
     );
   }
   return content;
 };
-export default GoGameBoard;
+export default GameBoardWithLabels;

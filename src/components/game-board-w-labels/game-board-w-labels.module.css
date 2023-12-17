@@ -1,0 +1,51 @@
+.colLetterLabel {
+    color: black;
+    flex-grow: 1;
+    text-align: center;
+  
+    font-weight: 700;
+    font-size: clamp(0.5rem, 1vmin + 0.3rem, 10px);
+  }
+
+  .boardContainer {
+    aspect-ratio: 5/5;
+  }
+
+  .rowNumberColumn {
+    display: grid;
+    padding-bottom: 2px;
+  }
+
+  .rowNumberLabel {
+    color: black;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    text-align: right;
+    font-weight: 700;
+    line-height: clamp(0.5rem, 1vmin + 0.3rem, 10px);
+    font-size: clamp(0.5rem, 1vmin + 0.3rem, 10px);
+    display: flex;
+  
+    /* Make a horizontal flexbox (the default) */
+    flex-direction: row;
+  
+    /* The important part: vertically center the items */
+    align-items: center;
+  }
+
+/*   .rowNumberLabel {
+    line-height: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
+    font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
+  } */
+
+  @media (min-width: calc(99vh - 190px)) {
+ 
+
+    .rowNumberLabel {
+      line-height: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
+      font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
+    }
+    .colLetterLabel {
+      font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
+    }
+  }

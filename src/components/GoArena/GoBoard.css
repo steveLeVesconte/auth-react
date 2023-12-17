@@ -18,11 +18,11 @@
 }
 
 /* game board labels */
-.row-nums {
+/* .row-nums {
   display: grid;
   padding-bottom: 2px;
-}
-
+} */
+/* 
 .rowNumberLabel {
   color: black;
   padding-left: 0.3em;
@@ -33,20 +33,19 @@
   font-size: clamp(0.5rem, 1vmin + 0.3rem, 10px);
   display: flex;
 
-  /* Make a horizontal flexbox (the default) */
+
   flex-direction: row;
 
-  /* The important part: vertically center the items */
   align-items: center;
-}
-.colLetterLabel {
+} */
+/* .colLetterLabel {
   color: black;
   flex-grow: 1;
   text-align: center;
 
   font-weight: 700;
   font-size: clamp(0.5rem, 1vmin + 0.3rem, 10px);
-}
+} */
 
 .game-board-color {
   background-color: var(--board-color);
@@ -216,13 +215,13 @@
     max-height: calc(99vh - 100px);
   }
 
-  .rowNumberLabel {
+/*   .rowNumberLabel {
     line-height: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
     font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
   }
   .colLetterLabel {
     font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
-  }
+  } */
 
   .chat-scroll {
     height: calc(99vh - 430px);

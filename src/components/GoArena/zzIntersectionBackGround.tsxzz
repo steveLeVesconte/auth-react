@@ -13,7 +13,7 @@ import LowerRightSVG from "./LowerRightSVG";
 import BottomSVG from "./BottomSVG";
 import LeftEdgeSVG from "./LeftEdge";
 import RightEdgeSVG from "./RightEdgeSVG";
-import IntersctionDotSVG from "./IntersctionDotSVG";
+import IntersctionDotSVG from "./zzIntersctionDotSVG.tsxzz";
 import UpperLeftSVG from "./UpperLeftSVG";
 
 interface Props {
