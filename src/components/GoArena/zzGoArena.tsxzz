@@ -6,11 +6,11 @@ import { PlayerContext, PlayerContextType } from "../../contexts/PlayerContext";
 import turnFactory from "../../services/turnFactory";
 import utilities from "../../services/moveProcessor/UtilityFunctions";
 //import GoGameBoard from "./GoGameBoard";
-import Chat from "../Chat";
+
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import "./GoBoard.css";
-import { PlayerCard } from "./PlayerCard";
-import { ActionCard } from "./ActionCard";
+
+
 import { useToast } from "@chakra-ui/react";
 import {
   GameAction,
@@ -19,7 +19,10 @@ import {
   watchForLatestTurnForMatchId,
 } from "../../services/turn-service";
 import { updateMatch } from "../../services/match-service";
-import GameBoardWithLabels from "../game-board-w-labels/game-board-w-labels";
+import GameBoardWithLabels from "../features/game-board-w-labels/game-board-w-labels";
+import Chat from "../features/chat/chat";
+import { GameActionCard } from "../features/game-arena/game-action-card/game-action-card";
+import { PlayerCard } from "./PlayerCard";
 
 export interface ContextPackage {
   pendingAction: GameAction | null | undefined;
@@ -230,7 +233,7 @@ const GoArena = () => {
           </GridItem>
 
           <GridItem className="actions" area={"actions"}>
-            <ActionCard
+            <GameActionCard
               isPendingMove={!(contextPackage?.pendingAction == null)}
               isMyTurn={utilities.getIsMyTurn(turn, player)}
               onPlayConfirm={executeStonePlay}

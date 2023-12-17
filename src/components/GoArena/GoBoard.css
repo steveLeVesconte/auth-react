@@ -4,7 +4,7 @@
 }
 
 /* chat */
-.message-card {
+/* .message-card {
   width: 100%;
 }
 .message-card-body {
@@ -15,7 +15,7 @@
 }
 .message-stone {
   height: 30px;
-}
+} */
 
 /* game board labels */
 /* .row-nums {
@@ -222,11 +222,11 @@
   .colLetterLabel {
     font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
   } */
-
+/* 
   .chat-scroll {
     height: calc(99vh - 430px);
     max-height: calc(99vw - 680px);
-  }
+  } */
 
 /*   .chat-card-body {
     max-width: calc(99vw - 900px);

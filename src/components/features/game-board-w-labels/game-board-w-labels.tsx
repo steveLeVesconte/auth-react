@@ -1,6 +1,8 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import LetterRow from "./LetterRow";
-import GameBoard from "../game-board/game-board";
+import styles from "./game-board-w-labels.module.css";
+import LetterLabelRow from "./letter-label-row";
+import GameBoard from "../../game-board/game-board";
+
 
 interface Props {
   boardString: string;
@@ -8,28 +10,28 @@ interface Props {
   onSelectIntersection: (row: number, col: number) => void;
 }
 
-const GoGameBoard = (props: Props) => {
+const GameBoardWithLabels = (props: Props) => {
   return (
     <>
       <div>
         <Grid
           templateAreas={`"corner headerLetters" 
                               "rowNums gameBoard"`}
-          gridTemplateColumns={"3fr 97fr"}
-          gridTemplateRows={"3fr 97fr"}
-          className="boarder-container"
+/*     gridTemplateColumns={"3fr 97fr"}
+          gridTemplateRows={"3fr 97fr"} */
+          className={styles.boarderContainer}
         >
           <GridItem area={"corner"}>
             <div> </div>
           </GridItem>
           <GridItem area={"headerLetters"}>
-            <LetterRow></LetterRow>
+            <LetterLabelRow></LetterLabelRow>
           </GridItem>
-          <GridItem area={"rowNums"} className="row-nums">
+          <GridItem area={"rowNums"} className={styles.rowNumberColumn}>
             {createRowsNumbers()}
           </GridItem>
           <GridItem area={"gameBoard"}>
-            <div className="gameBoard">
+            <div>
               {
                 <GameBoard
                   boardString={props.boardString}
@@ -47,13 +49,13 @@ const GoGameBoard = (props: Props) => {
 
 const createRowsNumbers = (): JSX.Element[] => {
   const content: JSX.Element[] = [];
-  for (let x = 18; x >= 0; x--) {
+  for (let rowNum = 18; rowNum >= 0; rowNum--) {
     content.push(
-      <Box className="rowNumberLabel" key={x}>
-        <div className="row-number">{x}</div>
+      <Box className={styles.rowNumberLabel} key={rowNum}>
+        <div >{rowNum}</div>
       </Box>
     );
   }
   return content;
 };
-export default GoGameBoard;
+export default GameBoardWithLabels;

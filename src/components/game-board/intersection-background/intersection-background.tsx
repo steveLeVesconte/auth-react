@@ -16,14 +16,15 @@ import { LeftEdgeSVG } from "./svg/index";
 import { RightEdgeSVG } from "./svg/index";
 import { IntersectionDotSVG } from "./svg/index";
 import { UpperLeftSVG } from "./svg/index";
-import { ContextPackage, StoneContext } from "../../GoArena/GoArena";
+import { ContextPackage, StoneContext } from "../../features/game-arena/game-arena";
+
 
 interface Props {
   row: number;
   col: number;
   content: string;
-  isMyTurn: boolean;
-  onSelectIntersection: (row: number, col: number) => void;
+  isMyTurn: boolean;//////
+  onSelectIntersection: (row: number, col: number) => void;//////
 }
 
 const IntersectionBackGround = (props: Props) => {

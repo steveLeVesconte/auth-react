@@ -4,8 +4,8 @@ interface Props {
   row: number;
   col: number;
   content: string;
-  isMyTurn: boolean;
-  onSelectIntersection: (row: number, col: number) => void;
+  isMyTurn: boolean;//////
+  onSelectIntersection: (row: number, col: number) => void;/////
 }
 
 const Intersection = (props: Props) => {
