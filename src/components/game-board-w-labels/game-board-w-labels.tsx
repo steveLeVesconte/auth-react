@@ -1,6 +1,7 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import LetterRow from "./LetterRow";
+import styles from "./game-board-w-labels.module.css";
 import GameBoard from "../game-board/game-board";
+import LetterRow from "../GoArena/LetterRow";
 
 interface Props {
   boardString: string;
@@ -17,7 +18,7 @@ const GoGameBoard = (props: Props) => {
                               "rowNums gameBoard"`}
           gridTemplateColumns={"3fr 97fr"}
           gridTemplateRows={"3fr 97fr"}
-          className="boarder-container"
+          className={styles.boarderContainer}
         >
           <GridItem area={"corner"}>
             <div> </div>
@@ -29,7 +30,7 @@ const GoGameBoard = (props: Props) => {
             {createRowsNumbers()}
           </GridItem>
           <GridItem area={"gameBoard"}>
-            <div className="gameBoard">
+            <div>
               {
                 <GameBoard
                   boardString={props.boardString}
