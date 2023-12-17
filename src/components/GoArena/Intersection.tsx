@@ -1,4 +1,6 @@
-import IntersectionBackGround from "./IntersectionBackGround";
+//import IntersectionBackGround from "./IntersectionBackGround";
+
+import IntersectionBackGround from "../game-board/intersection-background/intersection-background";
 
 interface Props {
   row: number;
