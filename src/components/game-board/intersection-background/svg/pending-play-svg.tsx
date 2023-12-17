@@ -1,3 +1,5 @@
+import styles from "../intersection-background.module.css";
+
 interface Props {
   stoneColor: string;
 }
@@ -5,7 +7,7 @@ interface Props {
 export  function PendingPlaySVG(props: Props) {
   return (
     <svg
-      className="pending-svg"
+      className={styles.pendingSvg}
       fill={props.stoneColor}
       height="200px"
       width="200px"

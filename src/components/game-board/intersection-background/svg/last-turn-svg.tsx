@@ -1,3 +1,5 @@
+import styles from "../intersection-background.module.css";
+
 interface Props {
   stoneColor: string;
 }
@@ -5,7 +7,7 @@ interface Props {
 export  function LastTurnSVG(props: Props) {
   return (
     <svg
-      className="last-turn-svg"
+      className={styles.lastTurnSvg}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

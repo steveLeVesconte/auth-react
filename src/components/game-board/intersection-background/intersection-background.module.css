@@ -29,6 +29,26 @@
     border-radius: 50px;
   }
   
+  .lastTurnSvg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 70%;
+    width: 70%;
+    margin-top: 16.5%;
+    margin-left: 14.5%;
+  }
 
 
-
+  .svgBack {
+    height: 100%;
+    width: 100%;
+  }
+  .pendingSvg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 70%;
+    width: 70%;
+    margin: 14%;
+  }

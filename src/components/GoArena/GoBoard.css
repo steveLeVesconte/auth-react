@@ -96,7 +96,7 @@
 }
 
 /* board intersections  */
-
+/* 
 .boardIntersectionWithStone {
   position: relative;
   top: 0;
@@ -108,9 +108,9 @@
   top: 0;
   left: 0;
   display: flex;
-}
+} */
 
-.stone {
+/* .stone {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -125,8 +125,8 @@
   height: 70%;
   width: 70%;
   margin: 14%;
-}
-.last-turn-svg {
+} */
+/* .last-turn-svg {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -134,9 +134,9 @@
   width: 70%;
   margin-top: 16.5%;
   margin-left: 14.5%;
-}
+} */
 
-div.intersection-hover:hover {
+/* div.intersection-hover:hover {
   opacity: 0.8 !important;
   background-color: rgb(184, 190, 175);
   cursor: pointer;
@@ -146,7 +146,7 @@ div.intersection-hover:hover {
 .svgBack {
   height: 100%;
   width: 100%;
-}
+} */
 
 /* players */
 
