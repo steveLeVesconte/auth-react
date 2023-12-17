@@ -1,5 +1,6 @@
 import { HStack } from '@chakra-ui/react'
-import Intersection from './Intersection';
+import Intersection from '../game-board/intersection/intersection';
+
 
 interface Props {
   row: number;
