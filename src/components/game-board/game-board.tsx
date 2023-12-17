@@ -2,8 +2,8 @@ import BoardRow from "../game-board/board-row/board-row";
 
 interface Props {
   boardString: string;
-  isMyTurn: boolean;
-  onSelectIntersection: (row: number, col: number) => void;
+ // isMyTurn: boolean;
+ // onSelectIntersection: (row: number, col: number) => void;
 }
 
 const GameBoard = (props: Props) => {
@@ -11,8 +11,8 @@ const GameBoard = (props: Props) => {
     <>
       {createRows(
         props.boardString,
-        props.onSelectIntersection,
-        props.isMyTurn
+       // props.onSelectIntersection,
+       // props.isMyTurn
       )}
     </>
   );
@@ -20,8 +20,8 @@ const GameBoard = (props: Props) => {
 
 const createRows = (
   boardString: string,
-  onSelectIntersection: (row: number, col: number) => void,
-  isMyTurn: boolean
+  //onSelectIntersection: (row: number, col: number) => void,
+ //isMyTurn: boolean
 ): JSX.Element[] => {
   const content: JSX.Element[] = [];
   const rowStringsArray: string[] = boardString.split(",");
@@ -31,8 +31,8 @@ const createRows = (
         key={rowNum}
         row={rowNum}
         content={rowStringsArray[rowNum]}
-        isMyTurn={isMyTurn}
-        onSelectIntersection={onSelectIntersection}
+      //  isMyTurn={isMyTurn}
+      //  onSelectIntersection={onSelectIntersection}
       />
     );
   }

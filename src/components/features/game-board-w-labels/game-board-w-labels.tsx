@@ -35,8 +35,8 @@ const GameBoardWithLabels = (props: Props) => {
               {
                 <GameBoard
                   boardString={props.boardString}
-                  isMyTurn={props.isMyTurn}
-                  onSelectIntersection={props.onSelectIntersection}
+                 // isMyTurn={props.isMyTurn}
+                //  onSelectIntersection={props.onSelectIntersection}
                 />
               }
             </div>

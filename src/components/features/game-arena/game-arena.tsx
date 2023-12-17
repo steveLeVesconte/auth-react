@@ -62,7 +62,7 @@ const GameArena = () => {
     setContextPackage({
       pendingAction: null,
       lastAction: latestTurn.action,
-      isPlayersTurn: utilities.getIsMyTurn(turn, player),
+      isPlayersTurn: utilities.getIsMyTurn(latestTurn, player),
       onSelectIntersection: handleSelectIntersection,
       turnNumber:latestTurn.turnNumber
     });

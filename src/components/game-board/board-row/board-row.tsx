@@ -4,8 +4,8 @@ import Intersection from "../intersection/intersection";
 interface Props {
   row: number;
   content: string;
-  isMyTurn: boolean;
-  onSelectIntersection: (row: number, col: number) => void;
+ // isMyTurn: boolean;
+ // onSelectIntersection: (row: number, col: number) => void;
 }
 
 const BoardRow = (props: Props) => {
@@ -19,8 +19,8 @@ const BoardRow = (props: Props) => {
         row={props.row}
         col={colNum}
         content={stringArray[colNum]}
-        isMyTurn={props.isMyTurn}
-        onSelectIntersection={props.onSelectIntersection}
+      //  isMyTurn={props.isMyTurn}
+       // onSelectIntersection={props.onSelectIntersection}
       />
     );
   }

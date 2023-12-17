@@ -23,8 +23,8 @@ interface Props {
   row: number;
   col: number;
   content: string;
-  isMyTurn: boolean;//////
-  onSelectIntersection: (row: number, col: number) => void;//////
+  //isMyTurn: boolean;//////
+ //onSelectIntersection: (row: number, col: number) => void;//////
 }
 
 const IntersectionBackGround = (props: Props) => {
@@ -73,13 +73,13 @@ const IntersectionBackGround = (props: Props) => {
     );
   }
   //NOT  my turn and empty cell
-  if (!props.isMyTurn) {
+  if (!contextPackage.isPlayersTurn) {
     return intersectionBackground(props.row, props.col);
   } else {
     // my turn and empty cell
     return (
       <div
-        onClick={() => props.onSelectIntersection(props.row, props.col)}
+        onClick={() => contextPackage.onSelectIntersection(props.row, props.col)}
         className={` ${styles.intersectionHover} ${styles.emptyIntersection}`}
       >
         {intersectionBackground(props.row, props.col)}
