@@ -3,49 +3,7 @@
   --board-color: #cf9a32;
 }
 
-/* chat */
-/* .message-card {
-  width: 100%;
-}
-.message-card-body {
-  width: 100%;
-}
-.message-stone-div {
-  margin-right: 10px;
-}
-.message-stone {
-  height: 30px;
-} */
 
-/* game board labels */
-/* .row-nums {
-  display: grid;
-  padding-bottom: 2px;
-} */
-/* 
-.rowNumberLabel {
-  color: black;
-  padding-left: 0.3em;
-  padding-right: 0.3em;
-  text-align: right;
-  font-weight: 700;
-  line-height: clamp(0.5rem, 1vmin + 0.3rem, 10px);
-  font-size: clamp(0.5rem, 1vmin + 0.3rem, 10px);
-  display: flex;
-
-
-  flex-direction: row;
-
-  align-items: center;
-} */
-/* .colLetterLabel {
-  color: black;
-  flex-grow: 1;
-  text-align: center;
-
-  font-weight: 700;
-  font-size: clamp(0.5rem, 1vmin + 0.3rem, 10px);
-} */
 
 .game-board-color {
   background-color: var(--board-color);
@@ -94,58 +52,6 @@
   aspect-ratio: 5/5;
 }
 
-/* board intersections  */
-/* 
-.boardIntersectionWithStone {
-  position: relative;
-  top: 0;
-  left: 0;
-  display: flex;
-}
-.emptyIntersection {
-  position: relative;
-  top: 0;
-  left: 0;
-  display: flex;
-} */
-
-/* .stone {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 90%;
-  width: 90%;
-}
-
-.pending-svg {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 70%;
-  width: 70%;
-  margin: 14%;
-} */
-/* .last-turn-svg {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 70%;
-  width: 70%;
-  margin-top: 16.5%;
-  margin-left: 14.5%;
-} */
-
-/* div.intersection-hover:hover {
-  opacity: 0.8 !important;
-  background-color: rgb(184, 190, 175);
-  cursor: pointer;
-  border-radius: 50px;
-}
-
-.svgBack {
-  height: 100%;
-  width: 100%;
-} */
 
 /* players */
 
@@ -215,22 +121,7 @@
     max-height: calc(99vh - 100px);
   }
 
-/*   .rowNumberLabel {
-    line-height: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
-    font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
-  }
-  .colLetterLabel {
-    font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
-  } */
-/* 
-  .chat-scroll {
-    height: calc(99vh - 430px);
-    max-height: calc(99vw - 680px);
-  } */
 
-/*   .chat-card-body {
-    max-width: calc(99vw - 900px);
-  } */
 }
 
 

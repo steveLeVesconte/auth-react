@@ -11,8 +11,6 @@ interface Props {
 
 const MessageCard = (props: Props) => {
   const nameColor = useColorModeValue("orange.600", "orange.100");
-  console.log("message: ", props.message);
-
   return (
     <Flex minH="20px" mb="15px" flexDirection="row" className="message-card">
       <Box className={styles.MessageStoneDiv} flexShrink={0} width="35px">

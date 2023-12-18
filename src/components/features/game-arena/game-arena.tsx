@@ -1,8 +1,14 @@
 import { useLocation } from "react-router-dom";
-import { createContext, useContext, useEffect, useState } from "react";
-import { Submission, evaluateSubmission } from "../../../services/moveProcessor";
+import { useContext, useEffect, useState } from "react";
+import {
+  Submission,
+  evaluateSubmission,
+} from "../../../services/moveProcessor";
 import submissionFactory from "../../../services/submissionFactory";
-import { PlayerContext, PlayerContextType } from "../../../contexts/PlayerContext";
+import {
+  PlayerContext,
+  PlayerContextType,
+} from "../../../contexts/PlayerContext";
 import turnFactory from "../../../services/turnFactory";
 import utilities from "../../../services/moveProcessor/UtilityFunctions";
 //import GoGameBoard from "./GoGameBoard";
@@ -10,10 +16,8 @@ import utilities from "../../../services/moveProcessor/UtilityFunctions";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import "../../GoArena/GoBoard.css";
 
-
 import { useToast } from "@chakra-ui/react";
 import {
-  GameAction,
   Turn,
   addTurn,
   watchForLatestTurnForMatchId,
@@ -23,29 +27,10 @@ import GameBoardWithLabels from "../../features/game-board-w-labels/game-board-w
 import Chat from "../../features/chat/chat";
 import { GameActionCard } from "./game-action-card/game-action-card";
 import { PlayerCard } from "./players-card/player-card";
+import { useBoardContext } from "./board-context";
 
-
-export interface ContextPackage {
-  pendingAction: GameAction | null | undefined;
-  lastAction: GameAction | null | undefined;
-  isPlayersTurn: boolean;
-  onSelectIntersection: (row: number, col: number) => void;
-  turnNumber:number;
-}
-const emptyPackage: ContextPackage = {
-  pendingAction: null,
-  lastAction: null,
-  isPlayersTurn: false,
-  onSelectIntersection: function (): void {},
-  turnNumber:-1
-};
-
-
-// TBDS seperate context
-export const StoneContext = createContext(emptyPackage);
 const GameArena = () => {
-  const [contextPackage, setContextPackage] =
-    useState<ContextPackage>(emptyPackage);
+  const { boardState, setBoardState } = useBoardContext();
   const [pendingPass, setPendingPass] = useState<boolean>(false);
   const [turn, setTurn] = useState<Turn | null>();
   const location = useLocation();
@@ -59,43 +44,44 @@ const GameArena = () => {
 
   const handleTurnupdate = (latestTurn: Turn) => {
     setTurn(latestTurn);
-    setContextPackage({
+    setBoardState({
       pendingAction: null,
       lastAction: latestTurn.action,
       isPlayersTurn: utilities.getIsMyTurn(latestTurn, player),
       onSelectIntersection: handleSelectIntersection,
-      turnNumber:latestTurn.turnNumber
+      turnNumber: latestTurn.turnNumber,
+      isContext: true,
     });
   };
 
   const handleSelectIntersection = (row: number, col: number): void => {
-    const newStoneContext: ContextPackage = {
+    setBoardState({
       pendingAction: { actionType: "play", location: { row: row, col: col } },
-      lastAction: contextPackage?.lastAction,
-      isPlayersTurn: utilities.getIsMyTurn(turn, player),
+      lastAction: boardState?.lastAction,
+      isPlayersTurn: true, //  utilities.getIsMyTurn(turn, player),
       onSelectIntersection: handleSelectIntersection,
-      turnNumber:turn?.turnNumber??-1
-    };
-    setContextPackage(newStoneContext);
+      turnNumber: turn?.turnNumber ?? -1,
+      isContext: true,
+    });
   };
 
   const executeStonePlay = () => {
     doStonePlay(
       turn,
-      contextPackage.pendingAction?.location?.row ?? -1,
-      contextPackage.pendingAction?.location?.col ?? -1
+      boardState?.pendingAction?.location?.row ?? -1,
+      boardState?.pendingAction?.location?.col ?? -1
     );
   };
 
   const cancelStonePlay = () => {
-    const newStoneContext: ContextPackage = {
+    setBoardState({
       pendingAction: null,
-      lastAction: contextPackage?.lastAction,
-      isPlayersTurn: utilities.getIsMyTurn(turn, player),
+      lastAction: boardState?.lastAction,
+      isPlayersTurn: true, //  utilities.getIsMyTurn(turn, player),
       onSelectIntersection: handleSelectIntersection,
-      turnNumber: turn?.turnNumber??-1
-    };
-    setContextPackage(newStoneContext);
+      turnNumber: turn?.turnNumber ?? -1,
+      isContext: true,
+    });
   };
 
   const doStonePlay = (
@@ -115,15 +101,15 @@ const GameArena = () => {
         setTurn(newTurn);
         addTurn(newTurn).then(() => {
           updateMatch(location.state.match, newTurn);
-          const newStoneContext: ContextPackage = {
+          setBoardState({
             pendingAction: null,
             lastAction: newTurn.action,
             isPlayersTurn: utilities.getIsMyTurn(newTurn, player),
             onSelectIntersection: handleSelectIntersection,
-            turnNumber:newTurn.turnNumber
-          };
-          setContextPackage(newStoneContext);
-          console.log("about to toast");
+            turnNumber: turn?.turnNumber ?? -1,
+            isContext: true,
+          });
+
           toast({
             title: "Stone placment processed.",
             description: "Success.",
@@ -133,7 +119,6 @@ const GameArena = () => {
           });
         });
       } else {
-        console.log("about to toast error");
         let reason = "unknown";
         if (evaluation.isKo) {
           reason = "Ko Rule Violation!";
@@ -148,14 +133,15 @@ const GameArena = () => {
           duration: 9000,
           isClosable: true,
         });
-        const newStoneContext: ContextPackage = {
+
+        setBoardState({
           pendingAction: null,
-          lastAction: contextPackage?.lastAction,
+          lastAction: boardState?.lastAction,
           isPlayersTurn: utilities.getIsMyTurn(turn, player),
           onSelectIntersection: handleSelectIntersection,
-          turnNumber:turn.turnNumber
-        };
-        setContextPackage(newStoneContext);
+          turnNumber: turn?.turnNumber ?? -1,
+          isContext: true,
+        });
       }
       // else{//    TBD   TBD   TBD      put alert here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TBD
     }
@@ -188,84 +174,82 @@ const GameArena = () => {
 
   return (
     <>
-      <StoneContext.Provider value={contextPackage}>
-        <Grid className="arena-grid-container">
-          <GridItem className="goboard" area={"goboard"}>
-              {turn && (
-                <GameBoardWithLabels
-                  boardString={turn?.resultState.board ?? ""}
-                  isMyTurn={utilities.getIsMyTurn(turn, player)} /*  TBD remove */
-                  onSelectIntersection={handleSelectIntersection}/*  TBD remove */
-                />
-              )}
-          </GridItem>
-          <GridItem className="players" area={"players"}>
-       {/*    // TBDS serperate plaer box */}
-            <Box className="player-box">
-              <PlayerCard
-                stoneColor={utilities.getStoneColorOfPlayer(
-                  player?.id ?? "",
-                  turn
-                )}
-                playerName={player?.name ?? ""}
-                oppoenentName={utilities.getNameOfOpponent(
-                  player?.id ?? "",
-                  turn
-                )}
-                isMyTurn={utilities.getIsMyTurn(turn, player)} 
-                prisoners={utilities.getPrisonersOfCurrentPlayer(
-                  player?.id ?? "",
-                  turn
-                )}
-                isPlayer={true}
-                onPass={() => handlePass(turn)}/*  TBD remove */
-              />
-            </Box>
-            <Box className="player-box ">
-              <PlayerCard
-                stoneColor={utilities.getStoneColorOfOpponent(
-                  player?.id ?? "",
-                  turn
-                )}
-                playerName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
-                oppoenentName={player?.name ?? ""}
-                isMyTurn={!utilities.getIsMyTurn(turn, player)}
-                prisoners={utilities.getPrisonersOfOpponent(
-                  player?.id ?? "",
-                  turn
-                )}
-                isPlayer={false}
-                onPass={() => noOp()}/*  TBD remove */
-              />
-            </Box>
-          </GridItem>
-
-          <GridItem className="actions" area={"actions"}>
-            <GameActionCard
-              isPendingMove={!(contextPackage?.pendingAction == null)}
+      <Grid className="arena-grid-container">
+        <GridItem className="goboard" area={"goboard"}>
+          {turn && (
+            <GameBoardWithLabels
+              boardString={turn?.resultState.board ?? ""}
               isMyTurn={utilities.getIsMyTurn(turn, player)} /*  TBD remove */
-              onPlayConfirm={executeStonePlay}
-              onPassConfirm={() => {
-                handlePass(turn);
-              }}
-              onPass={selectPass}
-              isActiveGame={location.state.match.status == "active"}
-              isPendingPass={pendingPass}
-              turnNumber={turn?.turnNumber ?? 0} /*  TBD remove */
-              turnStutus="yada yada"
-              onResign={noOp}
-              onPassCancel={cancelPass}
-              onPlayCancel={cancelStonePlay}
+              onSelectIntersection={handleSelectIntersection} /*  TBD remove */
             />
-          </GridItem>
-          <GridItem className="chat">
-            <Chat match={location.state.match}></Chat>
-          </GridItem>
-        </Grid>
-        {contextPackage?.pendingAction && (
-          <Box>{contextPackage?.pendingAction?.actionType}</Box>
-        )}
-      </StoneContext.Provider>
+          )}
+        </GridItem>
+        <GridItem className="players" area={"players"}>
+          {/*    // TBDS serperate plaer box */}
+          <Box className="player-box">
+            <PlayerCard
+              stoneColor={utilities.getStoneColorOfPlayer(
+                player?.id ?? "",
+                turn
+              )}
+              playerName={player?.name ?? ""}
+              oppoenentName={utilities.getNameOfOpponent(
+                player?.id ?? "",
+                turn
+              )}
+              isMyTurn={utilities.getIsMyTurn(turn, player)}
+              prisoners={utilities.getPrisonersOfCurrentPlayer(
+                player?.id ?? "",
+                turn
+              )}
+              isPlayer={true}
+              onPass={() => handlePass(turn)} /*  TBD remove */
+            />
+          </Box>
+          <Box className="player-box ">
+            <PlayerCard
+              stoneColor={utilities.getStoneColorOfOpponent(
+                player?.id ?? "",
+                turn
+              )}
+              playerName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
+              oppoenentName={player?.name ?? ""}
+              isMyTurn={!utilities.getIsMyTurn(turn, player)}
+              prisoners={utilities.getPrisonersOfOpponent(
+                player?.id ?? "",
+                turn
+              )}
+              isPlayer={false}
+              onPass={() => noOp()} /*  TBD remove */
+            />
+          </Box>
+        </GridItem>
+
+        <GridItem className="actions" area={"actions"}>
+          <GameActionCard
+            isPendingMove={!(boardState?.pendingAction == null)}
+            isMyTurn={utilities.getIsMyTurn(turn, player)} /*  TBD remove */
+            onPlayConfirm={executeStonePlay}
+            onPassConfirm={() => {
+              handlePass(turn);
+            }}
+            onPass={selectPass}
+            isActiveGame={location.state.match.status == "active"}
+            isPendingPass={pendingPass}
+            turnNumber={turn?.turnNumber ?? 0} /*  TBD remove */
+            turnStutus="yada yada"
+            onResign={noOp}
+            onPassCancel={cancelPass}
+            onPlayCancel={cancelStonePlay}
+          />
+        </GridItem>
+        <GridItem className="chat">
+          <Chat match={location.state.match}></Chat>
+        </GridItem>
+      </Grid>
+      {boardState?.pendingAction && (
+        <Box>{boardState?.pendingAction?.actionType}</Box>
+      )}
     </>
   );
 };

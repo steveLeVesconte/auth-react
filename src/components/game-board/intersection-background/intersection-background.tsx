@@ -3,10 +3,8 @@ import blackStone from "../../../assets/blackStoneTrans.png";
 import whiteStone from "../../../assets/whiteStoneTrans.png";
 import { Image } from "@chakra-ui/react";
 import { UpperRightSVG } from "./svg/index";
-
 import { IntersectionSVG } from "./svg/index";
 import { PendingPlaySVG } from "./svg/index";
-import { useContext } from "react";
 import { LastTurnSVG } from "./svg/index";
 import { TopRowSVG } from "./svg/index";
 import { LowerLeftSVG } from "./svg/index";
@@ -16,74 +14,66 @@ import { LeftEdgeSVG } from "./svg/index";
 import { RightEdgeSVG } from "./svg/index";
 import { IntersectionDotSVG } from "./svg/index";
 import { UpperLeftSVG } from "./svg/index";
-import { ContextPackage, StoneContext } from "../../features/game-arena/game-arena";
-
+import { useBoardContext } from "../../features/game-arena/board-context";
 
 interface Props {
   row: number;
   col: number;
   content: string;
-  //isMyTurn: boolean;//////
- //onSelectIntersection: (row: number, col: number) => void;//////
 }
 
 const IntersectionBackGround = (props: Props) => {
-  const contextPackage = useContext(StoneContext);
+  const { boardState } = useBoardContext();
 
-  function isPendingActionHere(
-    context: ContextPackage,
-    row: number,
-    col: number
-  ): boolean {
-    if (!context.isPlayersTurn) return false;
-    if (!context.pendingAction) return false;
-    if (context.pendingAction.actionType !== "play") return false;
-    if (context.pendingAction?.location?.row !== row) return false;
-    if (context.pendingAction?.location?.col !== col) return false;
+  function isPendingActionHere(row: number, col: number): boolean {
+    if (!boardState?.isPlayersTurn) return false;
+
+    if (!boardState?.pendingAction) return false;
+
+    if (boardState?.pendingAction.actionType !== "play") return false;
+
+    if (boardState?.pendingAction?.location?.row !== row) return false;
+
+    if (boardState?.pendingAction?.location?.col !== col) return false;
+
     return true;
   }
 
-  function isLastPlayHere(
-    context: ContextPackage,
-    row: number,
-    col: number
-  ): boolean {
-    if (!context.lastAction) return false;
-    if (context.lastAction.actionType !== "play") return false;
-    if (context.lastAction?.location?.row !== row) return false;
-    if (context.lastAction?.location?.col !== col) return false;
+  function isLastPlayHere(row: number, col: number): boolean {
+    if (!boardState?.lastAction) return false;
+    if (boardState?.lastAction.actionType !== "play") return false;
+    if (boardState?.lastAction?.location?.row !== row) return false;
+    if (boardState?.lastAction?.location?.col !== col) return false;
     return true;
   }
 
   let stoneImage = blackStone;
   if (props.content == "w") stoneImage = whiteStone;
-
   // occupied cell
   if (props.content == "b" || props.content == "w") {
     const lastPlayIconColor = props.content == "b" ? "white" : "black";
     return (
       <div className={styles.boardIntersectionWithStone}>
         {intersectionBackground(props.row, props.col)}
-
         <Image m="5%" className={styles.stone} src={stoneImage} />
-        {isLastPlayHere(contextPackage, props.row, props.col) && (
+        {isLastPlayHere(props.row, props.col) && (
           <LastTurnSVG stoneColor={lastPlayIconColor} />
         )}
       </div>
     );
   }
   //NOT  my turn and empty cell
-  if (!contextPackage.isPlayersTurn) {
+  if (!boardState?.isPlayersTurn) {
     return intersectionBackground(props.row, props.col);
   } else {
     // my turn and empty cell
     return (
       <div
-        onClick={() => contextPackage.onSelectIntersection(props.row, props.col)}
+        onClick={() => boardState?.onSelectIntersection(props.row, props.col)}
         className={` ${styles.intersectionHover} ${styles.emptyIntersection}`}
       >
         {intersectionBackground(props.row, props.col)}
-        {isPendingActionHere(contextPackage, props.row, props.col) && (
+        {isPendingActionHere(props.row, props.col) && (
           <PendingPlaySVG stoneColor="#000000" />
         )}
       </div>

@@ -19,7 +19,6 @@ const Chat = ({ match }: Props) => {
   const {messages, addNewMessage} = useMessages(match.id);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
-    console.log("handleSubmit called: ", newMessageText);
     e.preventDefault();
     if (newMessageText === "") return;
     addNewMessage({

@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import BoardContextProvider from "../components/features/game-arena/board-context";
 
 const GameBoardLayout = () => {
   return (
@@ -9,7 +10,9 @@ const GameBoardLayout = () => {
         <div className="left-edge" />
         <Box className="game-board-layout">
           <NavBar />
+          <BoardContextProvider >
           <Outlet></Outlet>
+          </BoardContextProvider >
         </Box>
 
         <div className="right-edge" />
