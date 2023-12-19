@@ -9,8 +9,11 @@ function getStoneColorOfCurrentTurn(lastTurn: Turn): string {
 }
 
 function getIsMyTurn(oldTurn: Turn | null | undefined, player: Player | null): boolean {
-
   if (!player) {
+    return false;
+  }
+
+  if(!(player?.id)){
     return false;
   }
 

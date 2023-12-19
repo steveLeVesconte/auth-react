@@ -24,7 +24,6 @@ interface Props {
 
 const IntersectionBackGround = (props: Props) => {
   const { boardState } = useBoardContext();
-
   function isPendingActionHere(row: number, col: number): boolean {
     if (!boardState?.isPlayersTurn) return false;
 

@@ -11,11 +11,8 @@ import {
 } from "../../../contexts/PlayerContext";
 import turnFactory from "../../../services/turnFactory";
 import utilities from "../../../services/moveProcessor/UtilityFunctions";
-//import GoGameBoard from "./GoGameBoard";
-
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import "../../GoArena/GoBoard.css";
-
 import { useToast } from "@chakra-ui/react";
 import {
   Turn,
@@ -40,9 +37,12 @@ const GameArena = () => {
   /// TBD TBD TBD make page recover from no match in location
   useEffect(() => {
     watchForLatestTurnForMatchId(location.state.match.id, handleTurnupdate);
-  }, []);
+  }, [player]);
 
   const handleTurnupdate = (latestTurn: Turn) => {
+    if (!player?.id) {
+      return;
+    }
     setTurn(latestTurn);
     setBoardState({
       pendingAction: null,
