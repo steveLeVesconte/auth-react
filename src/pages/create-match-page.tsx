@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
-import PlayerSelectList from "../components/PlayerSelectList";
+import PlayerSelectList from "../components/features/player-select-list/player-select-list";
 import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
 import {
   Link as ChakraLink,

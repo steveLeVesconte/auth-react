@@ -1,8 +1,10 @@
 import { Card, CardBody, HStack, SimpleGrid, Text } from "@chakra-ui/react";
 
-import { StatusIndicator } from "./StatusIndicator";
-import { Match } from "../services/match-service";
-import GameBoard from "./game-board/game-board";
+
+import { Match } from "../../../services/match-service";
+import GameBoard from "../game-board/game-board";
+import { GameStatusIndicator } from "./game-status-indicator";
+
 
 interface Props {
   match: Match;
@@ -23,7 +25,7 @@ const GameCard = ({ match, userId }: Props) => {
         <SimpleGrid spacing={1} paddingTop="8px">
           <HStack>
             <Text align="left"> Status: </Text>
-            <StatusIndicator userId={userId} match={match} />
+            <GameStatusIndicator userId={userId} match={match} />
           </HStack>
           <div>
             <Text align="left">Black: {match.playerBlackName} </Text>

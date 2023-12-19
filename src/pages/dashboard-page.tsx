@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button, Heading } from "@chakra-ui/react";
-import MatchList from "../components/MatchList";
+import MatchList from "../components/features/match-list/match-list";
 
 const Dashboard = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import styles from "./intersection-background.module.css";
-import blackStone from "../../../assets/blackStoneTrans.png";
-import whiteStone from "../../../assets/whiteStoneTrans.png";
+import blackStone from "../../../../assets/blackStoneTrans.png";
+import whiteStone from "../../../../assets/whiteStoneTrans.png";
 import { Image } from "@chakra-ui/react";
 import { UpperRightSVG } from "./svg/index";
 import { IntersectionSVG } from "./svg/index";
@@ -14,7 +14,8 @@ import { LeftEdgeSVG } from "./svg/index";
 import { RightEdgeSVG } from "./svg/index";
 import { IntersectionDotSVG } from "./svg/index";
 import { UpperLeftSVG } from "./svg/index";
-import { useBoardContext } from "../../features/game-arena/board-context";
+import { useBoardContext } from "../../game-arena/board-context";
+
 
 interface Props {
   row: number;

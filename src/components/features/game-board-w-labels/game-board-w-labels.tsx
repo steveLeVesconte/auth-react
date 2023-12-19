@@ -1,7 +1,8 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import styles from "./game-board-w-labels.module.css";
 import LetterLabelRow from "./letter-label-row";
-import GameBoard from "../../game-board/game-board";
+import GameBoard from "../game-board/game-board";
+
 
 
 interface Props {

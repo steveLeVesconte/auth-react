@@ -10,11 +10,11 @@ import {
   Box,
   DarkMode,
 } from "@chakra-ui/react";
-import ColorModeSwitch from "./ColorModeSwitch";
-import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
+import ColorModeSwitch from "./color-mode-switch";
+import { PlayerContext, PlayerContextType } from "../../../contexts/PlayerContext";
 import { useContext, useState } from "react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { TbGoGame } from "react-icons/tb";
 

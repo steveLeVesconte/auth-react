@@ -11,7 +11,7 @@ import {
   ListItem,
   CardHeader,
 } from "@chakra-ui/react";
-import LoginCard from "./LoginCard";
+import LoginCard from "./login-card";
 import goGameImage from "../assets/igo.jpg";
 
 const Login = () => {

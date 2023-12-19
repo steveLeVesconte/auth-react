@@ -1,20 +1,20 @@
 
 import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
-import Login from "../pages/Login";
+import Dashboard from "../pages/dashboard-page";
+import Login from "../pages/login-page";
 import PrivateRoutes from "./PrivateRoute";
-import ForgotPassword from "../pages/ForgotPassword";
-import UpdateProfile from "../pages/UpdateProfile";
-import PlayerProfile from "../pages/PlayerProfile";
+import ForgotPassword from "../pages/forgot-password-page";
+import UpdateProfile from "../pages/update-profile";
+import PlayerProfile from "../pages/player-profile";
 import PlayerContextProvider from "../contexts/PlayerContext";
-import CreateMatch from "../pages/CreateMatch";
+import CreateMatch from "../pages/create-match-page";
 
-import MatchList from "./MatchList";
-import MainLayout from "../layouts/MainLayout";
-import AuthLayout from "../layouts/AuthLayout";
-import GameLayout from "../layouts/GameLayout";
-import Signup from "../pages/Signup";
+import MatchList from "./features/match-list/match-list";
+import MainLayout from "../layouts/main-layout";
+import AuthLayout from "../layouts/auth-layout";
+import GameLayout from "../layouts/game-layout";
+import Signup from "../pages/signup-page";
 import GameArena from "./features/game-arena/game-arena";
 
 
