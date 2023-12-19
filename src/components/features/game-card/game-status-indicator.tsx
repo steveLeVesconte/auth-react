@@ -1,6 +1,6 @@
 import { BellIcon, CloseIcon, Icon } from "@chakra-ui/icons";
 import { HStack, Text } from "@chakra-ui/react";
-import { Match } from "../../../services/match-service";
+import { Match } from "../../../services/data/match-service";
 
 
 interface Props {

@@ -4,12 +4,12 @@ import {
   Submission,
   evaluateSubmission,
 } from "../../../services/moveProcessor";
-import submissionFactory from "../../../services/submissionFactory";
+import submissionFactory from "../../../services/factories/submission-factory";
 import {
   PlayerContext,
   PlayerContextType,
 } from "../../../contexts/PlayerContext";
-import turnFactory from "../../../services/turnFactory";
+import turnFactory from "../../../services/factories/turn-factory";
 import utilities from "../../../services/moveProcessor/UtilityFunctions";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import "../../GoArena/GoBoard.css";
@@ -18,8 +18,8 @@ import {
   Turn,
   addTurn,
   watchForLatestTurnForMatchId,
-} from "../../../services/turn-service";
-import { updateMatch } from "../../../services/match-service";
+} from "../../../services/data/turn-service";
+import { updateMatch } from "../../../services/data/match-service";
 import GameBoardWithLabels from "../../features/game-board-w-labels/game-board-w-labels";
 import Chat from "../../features/chat/chat";
 import { GameActionCard } from "./game-action-card/game-action-card";

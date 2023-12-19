@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
 import { useForm } from "react-hook-form";
-import { Player, addPlayerProfile, getPlayerByName } from "../services/player-service";
+import { Player, addPlayerProfile, getPlayerByName } from "../services/data/player-service";
 
 interface FormData {
   name: string;

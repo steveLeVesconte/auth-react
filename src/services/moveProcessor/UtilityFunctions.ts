@@ -1,7 +1,7 @@
 
 
-import { Player } from "../player-service";
-import { Turn } from "../turn-service";
+import { Player } from "../data/player-service";
+import { Turn } from "../data/turn-service";
 import { StoneColor } from "./constants";
 
 function getStoneColorOfCurrentTurn(lastTurn: Turn): string {

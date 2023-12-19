@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { GameAction } from "../../../services/turn-service";
+import { GameAction } from "../../../services/data/turn-service";
 
 export type BoardState = {
   pendingAction: GameAction | null | undefined;

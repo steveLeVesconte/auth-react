@@ -1,9 +1,9 @@
 
 
-import { Turn } from "./turn-service";
-import gameStateFactory from "./gameStateFactory";
-import { BaseSubmissionResult, Submission } from "./moveProcessor";
-import { Player } from "./player-service";
+import { Turn } from "../data/turn-service";
+import gameStateFactory from "./game-state-factory";
+import { BaseSubmissionResult, Submission } from "../moveProcessor";
+import { Player } from "../data/player-service";
 
 function createTurn(oldTurn: Turn, evaluation: BaseSubmissionResult, submission: Submission): Turn {
 

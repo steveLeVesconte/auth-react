@@ -17,8 +17,8 @@ import {
 } from "@chakra-ui/react";
 import { MdArrowDropDown } from "react-icons/md";
 import { FieldValues, useForm } from "react-hook-form";
-import { GameState, Turn, addTurn } from "../services/turn-service";
-import { Match, addMatch } from "../services/match-service";
+import { GameState, Turn, addTurn } from "../services/data/turn-service";
+import { Match, addMatch } from "../services/data/match-service";
 
 interface FormData {
   stoneColor: string;

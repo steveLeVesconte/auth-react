@@ -1,8 +1,8 @@
 //import { GameState, Turn } from "../firestore";
-import { GameState, Turn } from "./turn-service";
-import { BaseSubmissionResult } from "./moveProcessor";
-import utilities from "./moveProcessor/UtilityFunctions";
-import { StoneColor } from "./moveProcessor/constants";
+import { GameState, Turn } from "../data/turn-service";
+import { BaseSubmissionResult } from "../moveProcessor";
+import utilities from "../moveProcessor/UtilityFunctions";
+import { StoneColor } from "../moveProcessor/constants";
 
 function createGameState(evaluation: BaseSubmissionResult, oldTurn: Turn) {
 

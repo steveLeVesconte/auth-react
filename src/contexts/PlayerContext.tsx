@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 
 import { auth } from '../firebase';
-import { Player, getPlayer } from '../services/player-service';
+import { Player, getPlayer } from '../services/data/player-service';
 
 
 // export interface ITodo {

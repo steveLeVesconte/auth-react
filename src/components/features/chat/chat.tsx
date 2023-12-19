@@ -1,9 +1,9 @@
 import { Box, Button, Card, CardBody, Flex } from "@chakra-ui/react";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Match } from "../../../services/match-service";
+import { Match } from "../../../services/data/match-service";
 import {PlayerContext, PlayerContextType } from "../../../contexts/PlayerContext";
-import useMessages from "../../../services/useMessages";
-import { Message } from "../../../services/message-service";
+import useMessages from "../../../services/data/use-messages";
+import { Message } from "../../../services/data/message-service";
 
 import styles from "./chat.module.css";
 import MessageCard from "./message-card";

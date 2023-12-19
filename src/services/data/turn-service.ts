@@ -1,6 +1,6 @@
 import { addDoc, collection, limit, onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { db } from "../firebase";
-import { TURN_COLLECTION } from "../firestore";
+import { db } from "../../firebase";
+import { TURN_COLLECTION } from "../../firestore";
 
 export interface Turn {
     id: string;

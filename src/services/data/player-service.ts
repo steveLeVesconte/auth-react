@@ -1,6 +1,6 @@
 import {  addDoc, collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import { db } from "../firebase";
-import { PLAYER_COLLECTION } from "../firestore";
+import { db } from "../../firebase";
+import { PLAYER_COLLECTION } from "../../firestore";
 
 export interface Player {
     id: string;

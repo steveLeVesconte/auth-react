@@ -1,7 +1,7 @@
 import { addDoc, and, collection, doc, getDocs, or, orderBy, query, updateDoc, where } from "firebase/firestore";
-import { MATCH_COLLECTION } from "../firestore";
+import { MATCH_COLLECTION } from "../../firestore";
 import { Turn } from "./turn-service";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
 export interface Match {
     id: string;

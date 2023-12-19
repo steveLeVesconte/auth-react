@@ -1,7 +1,7 @@
 import { Card, CardBody, HStack, SimpleGrid, Text } from "@chakra-ui/react";
 
 
-import { Match } from "../../../services/match-service";
+import { Match } from "../../../services/data/match-service";
 import GameBoard from "../game-board/game-board";
 import { GameStatusIndicator } from "./game-status-indicator";
 
