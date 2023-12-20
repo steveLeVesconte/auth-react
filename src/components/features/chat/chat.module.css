@@ -1,23 +1,25 @@
 .messageCard {
-    width: 100%;
-  }
-  .messageCardBody {
-    width: 100%;
-  }
-  .messageStoneDiv {
-    margin-right: 10px;
-  }
-  .messageStone {
-    height: 30px;
-  }
+  width: 100%;
+}
+.messageCardBody {
+  width: 100%;
+}
+.messageStoneDiv {
+  margin-right: 10px;
+}
+.messageStone {
+  height: 30px;
+}
 
-  .chatScroll {
-    height: 300px;
-    scrollbar-width: auto;
-  }
+.chatScroll {
+  height: 300px;
+  scrollbar-width: auto;
+}
+.chatCardBody {
+  max-width: calc(99vw - 13px);
+}
 
-
-  @media (min-width: calc(99vh - 190px)) {
+@media (min-width: calc(99vh - 190px)) {
   .chatScroll {
     height: calc(99vh - 430px);
     max-height: calc(99vw - 680px);

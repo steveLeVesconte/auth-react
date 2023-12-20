@@ -4,7 +4,6 @@ import { Match } from "../../../services/data/match-service";
 import {PlayerContext, PlayerContextType } from "../../../contexts/PlayerContext";
 import useMessages from "../../../services/data/use-messages";
 import { Message } from "../../../services/data/message-service";
-
 import styles from "./chat.module.css";
 import MessageCard from "./message-card";
 
@@ -43,7 +42,7 @@ const Chat = ({ match }: Props) => {
   }
   return (
     <Card h="100%" p={0}>
-      <CardBody height="100%" pb={2} className="chat-card-body">
+      <CardBody height="100%" pb={2} className={styles.chatCardBody}>
         <Box className="chat-window" p="0px">
           <Box overflowY="scroll" className={styles.chatScroll}>
             {messages.map((item) => {

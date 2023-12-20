@@ -1,0 +1,53 @@
+.arenaGridContainer {
+  width: 100%;
+  flex: 1;
+  display: grid;
+  grid-template-areas:
+    "players"
+    "goboard"
+    "actions"
+    "chat";
+  grid-template-columns: 1fr;
+}
+
+.goboard {
+  background-color: var(--board-color);
+  aspect-ratio: 5/5;
+}
+
+.players {
+  display: flex;
+  gap: 9px;
+  flex-direction: row;
+  grid-area: players;
+  height: 100%;
+  padding-bottom: 8px;
+}
+
+.playerBox {
+  flex-grow: 1;
+  padding-top: 10px;
+}
+
+.actions {
+  grid-area: actions;
+  width: 100%;
+}
+
+@media (min-width: calc(99vh - 190px)) {
+  .arenaGridContainer {
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    grid-template-areas:
+      "goboard players"
+      "goboard actions"
+      "goboard chat";
+    grid-template-rows: 90px 150px 1fr;
+  }
+
+  .goboard {
+    aspect-ratio: 5/5;
+    max-height: calc(99vh - 100px);
+  }
+}

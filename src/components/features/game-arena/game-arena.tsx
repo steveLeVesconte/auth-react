@@ -12,7 +12,6 @@ import {
 import turnFactory from "../../../services/factories/turn-factory";
 import utilities from "../../../services/moveProcessor/UtilityFunctions";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import "../../GoArena/GoBoard.css";
 import { useToast } from "@chakra-ui/react";
 import {
   Turn,
@@ -25,6 +24,7 @@ import Chat from "../../features/chat/chat";
 import { GameActionCard } from "./game-action-card/game-action-card";
 import { PlayerCard } from "./players-card/player-card";
 import { useBoardContext } from "./board-context";
+import styles from "./game-arena.module.css";
 
 const GameArena = () => {
   const { boardState, setBoardState } = useBoardContext();
@@ -174,8 +174,8 @@ const GameArena = () => {
 
   return (
     <>
-      <Grid className="arena-grid-container">
-        <GridItem className="goboard" area={"goboard"}>
+      <Grid className={styles.arenaGridContainer}>
+        <GridItem className={styles.goboard} area={"goboard"}>
           {turn && (
             <GameBoardWithLabels
               boardString={turn?.resultState.board ?? ""}
@@ -184,9 +184,9 @@ const GameArena = () => {
             />
           )}
         </GridItem>
-        <GridItem className="players" area={"players"}>
+        <GridItem className={styles.players} area={"players"}>
           {/*    // TBDS serperate plaer box */}
-          <Box className="player-box">
+          <Box className={styles.playerBox}>
             <PlayerCard
               stoneColor={utilities.getStoneColorOfPlayer(
                 player?.id ?? "",
@@ -206,7 +206,7 @@ const GameArena = () => {
               onPass={() => handlePass(turn)} /*  TBD remove */
             />
           </Box>
-          <Box className="player-box ">
+          <Box className={styles.playerBox}>
             <PlayerCard
               stoneColor={utilities.getStoneColorOfOpponent(
                 player?.id ?? "",
@@ -225,7 +225,7 @@ const GameArena = () => {
           </Box>
         </GridItem>
 
-        <GridItem className="actions" area={"actions"}>
+        <GridItem className={styles.actions} area={"actions"}>
           <GameActionCard
             isPendingMove={!(boardState?.pendingAction == null)}
             isMyTurn={utilities.getIsMyTurn(turn, player)} /*  TBD remove */

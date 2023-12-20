@@ -1,0 +1,26 @@
+.basePhoneGrid {
+    display: grid;
+    grid-template-areas: "left-edge game-board-layout right-edge";
+  }
+  .leftEdge {
+    grid-area: "left-edge";
+    width: 8px;
+  }
+  .rightEdge {
+    grid-area: "right-edge";
+    width: 8px;
+  }
+
+
+  .goboard {
+    background-color: var(--board-color);
+    aspect-ratio: 5/5;
+  }
+
+  @media (min-width: calc(99vh - 190px)) {
+    .basePhoneGrid {
+      max-width: calc(99vh + 300px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+}
