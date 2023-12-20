@@ -2,7 +2,7 @@ import { addDoc, and, collection, doc, getDocs, or, orderBy, query, updateDoc, w
 import { MATCH_COLLECTION } from "../../firestore";
 import { Turn } from "./turn-service";
 import { db } from "../../firebase";
-import { STONE_BLACK, STONE_WHITE } from "../../constants";
+import { MATCH_STATUS_ACTIVE, STONE_BLACK, STONE_WHITE } from "../../constants";
 
 export interface Match {
     id: string;
@@ -23,7 +23,7 @@ export async function getActiveMatchesForPlayerId(playerId: string): Promise<Mat
     if(! playerId) {
         return matches;
     }
-    const matchQuery = query(collection(db, MATCH_COLLECTION), and(where("status", "==", "active"), or(where("playerBlackId", "==", playerId), where("playerWhiteId", "==", playerId))), orderBy("createDate", "desc"));
+    const matchQuery = query(collection(db, MATCH_COLLECTION), and(where("status", "==", MATCH_STATUS_ACTIVE), or(where("playerBlackId", "==", playerId), where("playerWhiteId", "==", playerId))), orderBy("createDate", "desc"));
     const querySnapshot = await getDocs(matchQuery);
     for (const documentSnapshot of querySnapshot.docs) {
         const match: Match = documentSnapshot.data() as Match;

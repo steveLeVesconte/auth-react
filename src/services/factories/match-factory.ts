@@ -21,7 +21,7 @@
 //     newMatch.playerBlackId = user2._id;
 //   }
 
-//   newMatch.status = "active";
+//   newMatch.status = MATCH_STATUS_ACTIVE;
 //   const dateStamp = new Date().toISOString();
 //   newMatch.createdAt = dateStamp;
 //   newMatch.updatedAt = dateStamp;

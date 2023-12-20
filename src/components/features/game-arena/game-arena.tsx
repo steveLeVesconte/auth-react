@@ -25,7 +25,7 @@ import { GameActionCard } from "./game-action-card/game-action-card";
 import { PlayerCard } from "./players-card/player-card";
 import { useBoardContext } from "./board-context";
 import styles from "./game-arena.module.css";
-import { ACTION_STONE_PLAY } from "../../../constants";
+import { ACTION_STONE_PLAY, MATCH_STATUS_ACTIVE } from "../../../constants";
 
 const GameArena = () => {
   const { boardState, setBoardState } = useBoardContext();
@@ -235,7 +235,7 @@ const GameArena = () => {
               handlePass(turn);
             }}
             onPass={selectPass}
-            isActiveGame={location.state.match.status == "active"}
+            isActiveGame={location.state.match.status == MATCH_STATUS_ACTIVE}
             isPendingPass={pendingPass}
             turnNumber={turn?.turnNumber ?? 0} /*  TBD remove */
             turnStutus="yada yada"

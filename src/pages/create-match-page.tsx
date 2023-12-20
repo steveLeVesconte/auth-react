@@ -19,7 +19,7 @@ import { MdArrowDropDown } from "react-icons/md";
 import { FieldValues, useForm } from "react-hook-form";
 import { GameState, Turn, addTurn } from "../services/data/turn-service";
 import { Match, addMatch } from "../services/data/match-service";
-import { STONE_BLACK, STONE_WHITE } from "../constants";
+import { MATCH_STATUS_ACTIVE, STONE_BLACK, STONE_WHITE } from "../constants";
 
 
 interface FormData {
@@ -63,7 +63,7 @@ const CreateMatch = () => {
       playerBlackName: playerBlackName ?? "",
       playerWhiteName: playerWhiteName,
       turnNumber: 0,
-      status: "active",
+      status: MATCH_STATUS_ACTIVE,
       createDate: createDate,
       updateDate: createDate,
       id: "",

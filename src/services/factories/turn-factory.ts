@@ -4,7 +4,7 @@ import { Turn } from "../data/turn-service";
 import gameStateFactory from "./game-state-factory";
 import { BaseSubmissionResult, Submission } from "../moveProcessor";
 import { Player } from "../data/player-service";
-import { STONE_BLACK, STONE_WHITE } from "../../constants";
+import { ACTION_NEW_MATCH, ACTION_PASS, STONE_BLACK, STONE_WHITE } from "../../constants";
 
 function createTurn(oldTurn: Turn, evaluation: BaseSubmissionResult, submission: Submission): Turn {
 
@@ -49,7 +49,7 @@ function createPassTurn(oldTurn: Turn): Turn {
     initialState: oldTurn.resultState,
     resultState: oldTurn.resultState,
     action: {
-      actionType: "pass",
+      actionType: ACTION_PASS,
       location: { row: -1, col: -1 },///TBD Refactor to null or undefined
     },
     isValid: true,
@@ -82,7 +82,7 @@ function createStartingTurn(creatingPlayer: Player, opponent: Player, creatorSto
     initialState: startState,
     resultState: startState,
     action: {
-      actionType: "new",
+      actionType: ACTION_NEW_MATCH,
       location: null,
     },
     isValid: true,

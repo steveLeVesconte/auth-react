@@ -1,7 +1,7 @@
 import { BellIcon, CloseIcon, Icon } from "@chakra-ui/icons";
 import { HStack, Text } from "@chakra-ui/react";
 import { Match } from "../../../services/data/match-service";
-import { STONE_BLACK, STONE_WHITE } from "../../../constants";
+import { MATCH_STATUS_ACTIVE, STONE_BLACK, STONE_WHITE } from "../../../constants";
 
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const GameStatusIndicator = (props: Props) => {
-  if (props.match.status !== "active") {
+  if (props.match.status !== MATCH_STATUS_ACTIVE) {
     return (
       <HStack>
         <Icon as={CloseIcon} w={6} h={6} color="orange.500" />{" "}
