@@ -19,6 +19,8 @@ import { MdArrowDropDown } from "react-icons/md";
 import { FieldValues, useForm } from "react-hook-form";
 import { GameState, Turn, addTurn } from "../services/data/turn-service";
 import { Match, addMatch } from "../services/data/match-service";
+import { STONE_BLACK, STONE_WHITE } from "../constants";
+
 
 interface FormData {
   stoneColor: string;
@@ -43,7 +45,7 @@ const CreateMatch = () => {
     let playerBlackName = player?.name;
     let playerWhiteId = opponentId;
     let playerWhiteName = opponentName;
-    if (userStoneColor == "w") {
+    if (userStoneColor == STONE_WHITE) {
       playerBlackId = opponentId;
       playerBlackName = opponentName;
       playerWhiteId = player?.id ?? "";
@@ -55,7 +57,7 @@ const CreateMatch = () => {
         "___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________" +
         ",___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________",
 
-      nextTurnPlayer: "w",
+      nextTurnPlayer: STONE_WHITE,
       playerBlackId: playerBlackId ?? "",
       playerWhiteId: playerWhiteId,
       playerBlackName: playerBlackName ?? "",
@@ -94,7 +96,7 @@ const CreateMatch = () => {
         const startTurn: Turn = {
           id: "",
           matchId: refDoc.id,
-          turnPlayerColor: "w",
+          turnPlayerColor: STONE_WHITE,
           turnNumber: 0,
           playerBlackId: playerBlackId ?? "missing",
           playerWhiteId: playerWhiteId,
@@ -139,8 +141,8 @@ const CreateMatch = () => {
                   variant="filled"
                   placeholder="select your stone color"
                 >
-                  <option value="b">Black</option>
-                  <option value="w">White</option>
+                  <option value={STONE_BLACK} >Black</option>
+                  <option value={STONE_WHITE} >White</option>
                 </Select>
                 <FormErrorMessage>
                   {errors.stoneColor && errors.stoneColor.message}

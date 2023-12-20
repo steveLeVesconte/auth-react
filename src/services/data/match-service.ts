@@ -2,6 +2,7 @@ import { addDoc, and, collection, doc, getDocs, or, orderBy, query, updateDoc, w
 import { MATCH_COLLECTION } from "../../firestore";
 import { Turn } from "./turn-service";
 import { db } from "../../firebase";
+import { STONE_BLACK, STONE_WHITE } from "../../constants";
 
 export interface Match {
     id: string;
@@ -48,7 +49,7 @@ export function setMatchTurnNumber(match: Match, turnNumber: number) {
 export function updateMatch(match: Match, turn: Turn) {
     const docData = {
         ...match,
-        nextTurnPlayer: turn.turnPlayerColor === "b" ? "w" : "b",
+        nextTurnPlayer: turn.turnPlayerColor === STONE_BLACK ? STONE_WHITE : STONE_BLACK,
         turnNumber: turn.turnNumber,
         board: turn.resultState.board,
         prisonersOfBlack: turn.resultState.prisonersOfBlack,

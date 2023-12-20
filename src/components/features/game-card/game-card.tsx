@@ -4,6 +4,7 @@ import { Card, CardBody, HStack, SimpleGrid, Text } from "@chakra-ui/react";
 import { Match } from "../../../services/data/match-service";
 import GameBoard from "../game-board/game-board";
 import { GameStatusIndicator } from "./game-status-indicator";
+import { STONE_BLACK } from "../../../constants";
 
 
 interface Props {
@@ -33,7 +34,7 @@ const GameCard = ({ match, userId }: Props) => {
             <Text align="left">White: {match.playerWhiteName} </Text>
           </div>
           <Text align="left">
-            Turn Of: {match.nextTurnPlayer === "b" ? "Black" : "White"}{" "}
+            Turn Of: {match.nextTurnPlayer === STONE_BLACK ? "Black" : "White"}{" "}
           </Text>
           <Text align="left">Move: {match.turnNumber} </Text>
           <Text align="left">

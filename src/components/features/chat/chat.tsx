@@ -6,6 +6,8 @@ import useMessages from "../../../services/data/use-messages";
 import { Message } from "../../../services/data/message-service";
 import styles from "./chat.module.css";
 import MessageCard from "./message-card";
+import { STONE_BLACK, STONE_WHITE } from "../../../constants";
+
 
 
 interface Props {
@@ -37,8 +39,8 @@ const Chat = ({ match }: Props) => {
 
   function getMessageStoneColor(senderName: string, match: Match): string {
     if (match.playerBlackName === senderName) {
-      return "b";
-    } else return "w";
+      return STONE_BLACK;
+    } else return STONE_WHITE;
   }
   return (
     <Card h="100%" p={0}>

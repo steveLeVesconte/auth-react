@@ -4,6 +4,7 @@ import { Turn } from "../data/turn-service";
 import gameStateFactory from "./game-state-factory";
 import { BaseSubmissionResult, Submission } from "../moveProcessor";
 import { Player } from "../data/player-service";
+import { STONE_BLACK, STONE_WHITE } from "../../constants";
 
 function createTurn(oldTurn: Turn, evaluation: BaseSubmissionResult, submission: Submission): Turn {
 
@@ -42,7 +43,7 @@ function createPassTurn(oldTurn: Turn): Turn {
   const newTurn: Turn = {
     ...oldTurn,
     turnNumber: oldTurn.turnNumber + 1,
-    turnPlayerColor: oldTurn.turnPlayerColor == "b" ? "w" : "b",
+    turnPlayerColor: oldTurn.turnPlayerColor == STONE_BLACK ? STONE_WHITE : STONE_BLACK,
 
     koCompareState: oldTurn.initialState,
     initialState: oldTurn.resultState,
@@ -64,7 +65,7 @@ function createPassTurn(oldTurn: Turn): Turn {
 
 
 function createStartingTurn(creatingPlayer: Player, opponent: Player, creatorStoneColor: string, matchId: string): Turn {
-  const creatorChoseBlack: boolean = creatorStoneColor == "b";
+  const creatorChoseBlack: boolean = creatorStoneColor == STONE_BLACK;
   const startState = gameStateFactory.createStartingGameState();
   const dateStamp = new Date().toISOString();
 
@@ -75,7 +76,7 @@ function createStartingTurn(creatingPlayer: Player, opponent: Player, creatorSto
     playerWhiteId: creatorChoseBlack ? opponent.id : creatingPlayer.id,
     playerWhiteName: creatorChoseBlack ? opponent.name : creatingPlayer.name,
     turnNumber: 0,
-    turnPlayerColor: "b",
+    turnPlayerColor: STONE_BLACK,
     matchId: matchId,
     koCompareState: startState,
     initialState: startState,

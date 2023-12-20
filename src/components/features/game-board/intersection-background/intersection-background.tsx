@@ -15,6 +15,7 @@ import { RightEdgeSVG } from "./svg/index";
 import { IntersectionDotSVG } from "./svg/index";
 import { UpperLeftSVG } from "./svg/index";
 import { useBoardContext } from "../../game-arena/board-context";
+import { STONE_BLACK, STONE_WHITE } from "../../../../constants";
 
 
 interface Props {
@@ -48,10 +49,10 @@ const IntersectionBackGround = (props: Props) => {
   }
 
   let stoneImage = blackStone;
-  if (props.content == "w") stoneImage = whiteStone;
+  if (props.content == STONE_WHITE) stoneImage = whiteStone;
   // occupied cell
-  if (props.content == "b" || props.content == "w") {
-    const lastPlayIconColor = props.content == "b" ? "white" : "black";
+  if (props.content == STONE_BLACK || props.content == STONE_WHITE) {
+    const lastPlayIconColor = props.content == STONE_BLACK ? "white" : "black";
     return (
       <div className={styles.boardIntersectionWithStone}>
         {intersectionBackground(props.row, props.col)}

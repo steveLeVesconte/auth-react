@@ -1,6 +1,7 @@
 import { BellIcon, CloseIcon, Icon } from "@chakra-ui/icons";
 import { HStack, Text } from "@chakra-ui/react";
 import { Match } from "../../../services/data/match-service";
+import { STONE_BLACK, STONE_WHITE } from "../../../constants";
 
 
 interface Props {
@@ -34,9 +35,9 @@ export const GameStatusIndicator = (props: Props) => {
   }
 
   function getIsMyTurnByMatch(userId: string, match: Match): boolean {
-    let userStoneColor = "b";
+    let userStoneColor = STONE_BLACK;
     if (match.playerWhiteId == userId) {
-      userStoneColor = "w";
+      userStoneColor = STONE_WHITE;
     }
     const isMyTurn = userStoneColor === match.nextTurnPlayer;
     return isMyTurn;

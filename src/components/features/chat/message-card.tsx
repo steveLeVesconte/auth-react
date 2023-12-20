@@ -3,10 +3,12 @@ import blackStoneImage from "../../../assets/blackStoneTrans.png";
 import whiteStoneImage from "../../../assets/whiteStoneTrans.png";
 import { Message } from "../../../services/data/message-service";
 import styles from "./chat.module.css";
+import { STONE_WHITE } from "../../../constants";
+import { STONE_BLACK } from "../../../constants";
 
 interface Props {
   message: Message;
-  stoneColor: string;
+  stoneColor: string ;
 }
 
 const MessageCard = (props: Props) => {
@@ -14,10 +16,10 @@ const MessageCard = (props: Props) => {
   return (
     <Flex minH="20px" mb="15px" flexDirection="row" className="message-card">
       <Box className={styles.MessageStoneDiv} flexShrink={0} width="35px">
-        {props.stoneColor == "w" && (
+        {props.stoneColor === STONE_WHITE.toString() && (
           <Image className={styles.messageStone} src={whiteStoneImage} />
         )}
-        {props.stoneColor == "b" && (
+        {props.stoneColor === STONE_BLACK.toString() && (
           <Image className={styles.messageStone} src={blackStoneImage} />
         )}
       </Box>
