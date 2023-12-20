@@ -6,12 +6,14 @@ import {
   MenuItem,
   Button,
   Icon,
-
   Box,
   DarkMode,
 } from "@chakra-ui/react";
-import ColorModeSwitch from "./color-mode-switch";
-import { PlayerContext, PlayerContextType } from "../../../contexts/PlayerContext";
+//import ColorModeSwitch from "./color-mode-switch";
+import {
+  PlayerContext,
+  PlayerContextType,
+} from "../../../contexts/PlayerContext";
 import { useContext, useState } from "react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../../contexts/AuthContext";
@@ -37,7 +39,7 @@ const NavBar = () => {
     }
   }
 
-  return (  
+  return (
     <Box bg="black" className="nav-bar" p={2} w="100%">
       <HStack justifyContent={"space-between"} width="100%">
         <Icon
@@ -52,12 +54,18 @@ const NavBar = () => {
           color="black"
         />
         <HStack>
-          <ColorModeSwitch></ColorModeSwitch>
+{/* TBD TBD TBD - Lightmode autofills are showing dark mode colors. 
+TBD TBD TBD -  Suspending light mode feature until this bug is solved.
+ */}
+          {/* <ColorModeSwitch></ColorModeSwitch> */}
+{/* TBD TBD TBD - Lightmode autofills are showing dark mode colors. 
+TBD TBD TBD -  Suspending light mode feature until this bug is solved.
+ */}
           <Menu>
-          <DarkMode>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              {player?.name}
-            </MenuButton>
+            <DarkMode>
+              <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                {player?.name}
+              </MenuButton>
             </DarkMode>
             <MenuList>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
@@ -73,7 +81,6 @@ const NavBar = () => {
         </HStack>
       </HStack>
     </Box>
- 
   );
 };
 
