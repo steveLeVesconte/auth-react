@@ -18,8 +18,6 @@ const GameCard = ({ match, userId }: Props) => {
         <div className="game-board-color">
           <GameBoard
             boardString={match.board ?? ""}
-            //isMyTurn={false}
-            //onSelectIntersection={() => {}}
           />
         </div>
         <SimpleGrid spacing={1} paddingTop="8px">
