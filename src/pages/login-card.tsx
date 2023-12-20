@@ -24,8 +24,6 @@ interface FormData {
 }
 
 const LoginCard = () => {
- /*  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null); */
   const { login } = useAuth(); //from AuthContext
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -36,7 +34,6 @@ const LoginCard = () => {
   } = useForm<FormData>();
 
   async function handleFormSubmit(values: FieldValues) {
-    console.log("in hanld submit");
     try {
       setError("");
       await login(values.email, values.password);
@@ -59,8 +56,6 @@ const LoginCard = () => {
       </CardHeader>
     
         <CardBody>
-           {/* <div>{currentUser?.email}</div> */}
-          {/*  currentUser starts as undefined and is then set. */}
           {error && <Alert status="error">{error}</Alert>}
           <form onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
             <SimpleGrid columns={1} spacing={10}>
@@ -119,7 +114,6 @@ const LoginCard = () => {
               </SimpleGrid>
             </SimpleGrid>
           </form>
-          <div className="w-100 text-center mt-2"></div>
         </CardBody>
       </Card>
     </>
