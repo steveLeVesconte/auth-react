@@ -15,7 +15,7 @@ import { RightEdgeSVG } from "./svg/index";
 import { IntersectionDotSVG } from "./svg/index";
 import { UpperLeftSVG } from "./svg/index";
 import { useBoardContext } from "../../game-arena/board-context";
-import { STONE_BLACK, STONE_WHITE } from "../../../../constants";
+import { ACTION_STONE_PLAY, STONE_BLACK, STONE_WHITE } from "../../../../constants";
 
 
 interface Props {
@@ -31,7 +31,7 @@ const IntersectionBackGround = (props: Props) => {
 
     if (!boardState?.pendingAction) return false;
 
-    if (boardState?.pendingAction.actionType !== "play") return false;
+    if (boardState?.pendingAction.actionType !== ACTION_STONE_PLAY) return false;
 
     if (boardState?.pendingAction?.location?.row !== row) return false;
 
@@ -42,7 +42,7 @@ const IntersectionBackGround = (props: Props) => {
 
   function isLastPlayHere(row: number, col: number): boolean {
     if (!boardState?.lastAction) return false;
-    if (boardState?.lastAction.actionType !== "play") return false;
+    if (boardState?.lastAction.actionType !== ACTION_STONE_PLAY) return false;
     if (boardState?.lastAction?.location?.row !== row) return false;
     if (boardState?.lastAction?.location?.col !== col) return false;
     return true;

@@ -25,6 +25,7 @@ import { GameActionCard } from "./game-action-card/game-action-card";
 import { PlayerCard } from "./players-card/player-card";
 import { useBoardContext } from "./board-context";
 import styles from "./game-arena.module.css";
+import { ACTION_STONE_PLAY } from "../../../constants";
 
 const GameArena = () => {
   const { boardState, setBoardState } = useBoardContext();
@@ -56,7 +57,7 @@ const GameArena = () => {
 
   const handleSelectIntersection = (row: number, col: number): void => {
     setBoardState({
-      pendingAction: { actionType: "play", location: { row: row, col: col } },
+      pendingAction: { actionType: ACTION_STONE_PLAY, location: { row: row, col: col } },
       lastAction: boardState?.lastAction,
       isPlayersTurn: true, //  utilities.getIsMyTurn(turn, player),
       onSelectIntersection: handleSelectIntersection,

@@ -14,7 +14,7 @@ function createSubmission(turn: Turn, row:number, col:number): Submission {
     new StonePlay(row, col),
     koCompareBoardArray,
     boardArray,
-    "play",
+    ACTION_STONE_PLAY,
     currentPlayerColor
   );
   return submission;
