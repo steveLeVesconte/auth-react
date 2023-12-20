@@ -19,6 +19,4 @@ const useMessages = (matchId: string) => {
     return { messages, setMessages, addNewMessage }
 }
 
-
-
 export default useMessages;

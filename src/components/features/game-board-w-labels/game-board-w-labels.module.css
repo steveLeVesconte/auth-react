@@ -33,11 +33,6 @@
     align-items: center;
   }
 
-/*   .rowNumberLabel {
-    line-height: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
-    font-size: clamp(0.5rem, 0.9vw + 0.1rem, 16px);
-  } */
-
   @media (min-width: calc(99vh - 190px)) {
  
 

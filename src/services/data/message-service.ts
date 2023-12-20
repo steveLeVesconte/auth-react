@@ -24,7 +24,6 @@ export function watchMessagesForMatchId(matchId: string, onNewMessage: (messages
       const thisMessage = { ...doc.data(), id: doc.id } as Message;
       messagesArray.push(thisMessage);
     });
-    console.log("set messages next- messageArray: ", messagesArray);
     onNewMessage(messagesArray);
   });
 

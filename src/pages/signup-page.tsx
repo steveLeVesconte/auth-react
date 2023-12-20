@@ -39,7 +39,6 @@ const Signup = () => {
     setError("");
     try {
       setError("");
-      //setLoading(true);
       const data: FormData = await signup(values.email, values.password);
       console.log("data: ", data);
 
@@ -48,7 +47,6 @@ const Signup = () => {
       console.log("error: ", error);
       setError("Failed to create an account");
     }
-    //setLoading(false);
   }
 
   return (

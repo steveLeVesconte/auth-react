@@ -3,7 +3,6 @@ import { HStack, Text } from "@chakra-ui/react";
 import { Match } from "../../../services/data/match-service";
 import { MATCH_STATUS_ACTIVE, STONE_BLACK, STONE_WHITE } from "../../../constants";
 
-
 interface Props {
   userId: string;
   match: Match;

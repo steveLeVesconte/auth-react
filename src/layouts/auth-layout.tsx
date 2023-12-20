@@ -4,7 +4,6 @@ import "../pages/pages.css";
 
 const AuthLayout = () => {
   return (<>
-
     <Box padding={5}>
         <Outlet></Outlet>
     </Box>

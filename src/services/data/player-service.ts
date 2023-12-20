@@ -1,4 +1,4 @@
-import {  addDoc, collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../../firebase";
 import { PLAYER_COLLECTION } from "../../firestore";
 
@@ -14,14 +14,14 @@ export interface Player {
 }
 
 export function addPlayerProfile(
-    name: string, 
-    location:string, 
-    rankInfo: string, 
-    bio: string, 
-    status: string, 
+    name: string,
+    location: string,
+    rankInfo: string,
+    bio: string,
+    status: string,
     uid: string,
     createDate: string) {
-    return addDoc(collection(db, PLAYER_COLLECTION), { name, location, rankInfo, bio, status, uid,  createDate })
+    return addDoc(collection(db, PLAYER_COLLECTION), { name, location, rankInfo, bio, status, uid, createDate })
 }
 
 /* for future use

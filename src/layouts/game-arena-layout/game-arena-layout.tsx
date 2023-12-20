@@ -4,7 +4,6 @@ import NavBar from "../../components/features/nav-bar/nav-bar";
 import BoardContextProvider from "../../components/features/game-arena/board-context";
 import styles from "./game-arena-layout.module.css";
 
-
 const GameArenaLayout = () => {
   return (
     <>
@@ -16,7 +15,6 @@ const GameArenaLayout = () => {
           <Outlet></Outlet>
           </BoardContextProvider >
         </Box>
-
         <div className={styles.rightEdge} />
       </div>
     </>

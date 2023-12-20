@@ -4,7 +4,6 @@ import blackStoneImage from '../../../../assets/blackStoneTrans.png'
 import styles from "./players-card.module.css"
 import { STONE_BLACK, STONE_WHITE } from "../../../../constants";
 
-
 interface Props {
   stoneColor: string;
   prisoners: number;

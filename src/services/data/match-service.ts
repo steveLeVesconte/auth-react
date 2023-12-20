@@ -19,8 +19,8 @@ export interface Match {
 }
 
 export async function getActiveMatchesForPlayerId(playerId: string): Promise<Match[] | null> {
-     const matches: Match[] = [];
-    if(! playerId) {
+    const matches: Match[] = [];
+    if (!playerId) {
         return matches;
     }
     const matchQuery = query(collection(db, MATCH_COLLECTION), and(where("status", "==", MATCH_STATUS_ACTIVE), or(where("playerBlackId", "==", playerId), where("playerWhiteId", "==", playerId))), orderBy("createDate", "desc"));

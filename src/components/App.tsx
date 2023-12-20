@@ -16,7 +16,6 @@ import Signup from "../pages/signup-page";
 import GameArena from "./features/game-arena/game-arena";
 import GameArenaLayout from "../layouts/game-arena-layout/game-arena-layout";
 
-
 function App() {
   return (
     <>

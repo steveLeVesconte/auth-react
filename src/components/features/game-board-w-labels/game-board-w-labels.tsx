@@ -18,8 +18,6 @@ const GameBoardWithLabels = (props: Props) => {
         <Grid
           templateAreas={`"corner headerLetters" 
                               "rowNums gameBoard"`}
-/*     gridTemplateColumns={"3fr 97fr"}
-          gridTemplateRows={"3fr 97fr"} */
           className={styles.boarderContainer}
         >
           <GridItem area={"corner"}>
@@ -36,8 +34,6 @@ const GameBoardWithLabels = (props: Props) => {
               {
                 <GameBoard
                   boardString={props.boardString}
-                 // isMyTurn={props.isMyTurn}
-                //  onSelectIntersection={props.onSelectIntersection}
                 />
               }
             </div>

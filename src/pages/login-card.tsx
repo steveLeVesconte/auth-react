@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
 import {
@@ -39,9 +39,7 @@ const LoginCard = () => {
       await login(values.email, values.password);
       navigate("/");
     } catch {
-      console.log(
-        "in hanld submit error!!!!!!!!!!!!!!!: "
-      );
+      console.log("in hanld submit error!!!!!!!!!!!!!!!: ");
 
       setError("Failed to log in");
     }
@@ -50,11 +48,10 @@ const LoginCard = () => {
   return (
     <>
       <Card marginLeft="auto" marginRight="auto">
-      <CardHeader>
-      <Heading marginBottom={6}>Login</Heading>
-      
-      </CardHeader>
-    
+        <CardHeader>
+          <Heading marginBottom={6}>Login</Heading>
+        </CardHeader>
+
         <CardBody>
           {error && <Alert status="error">{error}</Alert>}
           <form onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
