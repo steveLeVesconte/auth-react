@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import {
+  BaseSubmissionResult,
   Submission,
   evaluateSubmission,
 } from "../../../services/moveProcessor";
@@ -57,7 +58,10 @@ const GameArena = () => {
 
   const handleSelectIntersection = (row: number, col: number): void => {
     setBoardState({
-      pendingAction: { actionType: ACTION_STONE_PLAY, location: { row: row, col: col } },
+      pendingAction: {
+        actionType: ACTION_STONE_PLAY,
+        location: { row: row, col: col },
+      },
       lastAction: boardState?.lastAction,
       isPlayersTurn: true, //  utilities.getIsMyTurn(turn, player),
       onSelectIntersection: handleSelectIntersection,
@@ -85,6 +89,64 @@ const GameArena = () => {
     });
   };
 
+  const handleIllegalPlay = (
+    turn: Turn,
+    submission: Submission,
+    evaluation: BaseSubmissionResult
+  ) => {
+    let reason = "unknown";
+    if (evaluation.isKo) {
+      reason = "Ko Rule Violation!";
+    }
+    if (evaluation.isSuicide) {
+      reason = "Suiside Rule Violation!";
+    }
+    toast({
+      title: "Illegal Move.",
+      description: reason,
+      status: "error",
+      duration: 9000,
+      isClosable: true,
+    });
+
+    setBoardState({
+      pendingAction: null,
+      lastAction: boardState?.lastAction,
+      isPlayersTurn: utilities.getIsMyTurn(turn, player),
+      onSelectIntersection: handleSelectIntersection,
+      turnNumber: turn?.turnNumber ?? -1,
+      isContext: true,
+    });
+  };
+
+  const handleLegalPlay = (
+    turn: Turn,
+    submission: Submission,
+    evaluation: BaseSubmissionResult
+  ) => {
+    const newTurn = turnFactory.createTurn(turn, evaluation, submission);
+    setTurn(newTurn);
+    addTurn(newTurn).then(() => {
+      updateMatch(location.state.match, newTurn);
+      setBoardState({
+        pendingAction: null,
+        lastAction: newTurn.action,
+        isPlayersTurn: utilities.getIsMyTurn(newTurn, player),
+        onSelectIntersection: handleSelectIntersection,
+        turnNumber: turn?.turnNumber ?? -1,
+        isContext: true,
+      });
+
+      toast({
+        title: "Stone placment processed.",
+        description: "Success.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    });
+  };
+
   const doStonePlay = (
     turn: Turn | null | undefined,
     row: number,
@@ -98,55 +160,14 @@ const GameArena = () => {
       );
       const evaluation = evaluateSubmission(submission);
       if (evaluation.isLegalPlay) {
-        const newTurn = turnFactory.createTurn(turn, evaluation, submission);
-        setTurn(newTurn);
-        addTurn(newTurn).then(() => {
-          updateMatch(location.state.match, newTurn);
-          setBoardState({
-            pendingAction: null,
-            lastAction: newTurn.action,
-            isPlayersTurn: utilities.getIsMyTurn(newTurn, player),
-            onSelectIntersection: handleSelectIntersection,
-            turnNumber: turn?.turnNumber ?? -1,
-            isContext: true,
-          });
-
-          toast({
-            title: "Stone placment processed.",
-            description: "Success.",
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
-        });
+        handleLegalPlay(turn, submission, evaluation);
       } else {
-        let reason = "unknown";
-        if (evaluation.isKo) {
-          reason = "Ko Rule Violation!";
-        }
-        if (evaluation.isSuicide) {
-          reason = "Suiside Rule Violation!";
-        }
-        toast({
-          title: "Illegal Move.",
-          description: reason,
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
-
-        setBoardState({
-          pendingAction: null,
-          lastAction: boardState?.lastAction,
-          isPlayersTurn: utilities.getIsMyTurn(turn, player),
-          onSelectIntersection: handleSelectIntersection,
-          turnNumber: turn?.turnNumber ?? -1,
-          isContext: true,
-        });
+        handleIllegalPlay(turn, submission, evaluation);
       }
       // else{//    TBD   TBD   TBD      put alert here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TBD
     }
   };
+
   const noOp = () => {};
   const selectPass = (): void => {
     setPendingPass(true);
@@ -186,7 +207,8 @@ const GameArena = () => {
           )}
         </GridItem>
         <GridItem className={styles.players} area={"players"}>
-          {/*    // TBDS serperate plaer box */}
+          {/*    // TBDS serperate player box */}
+          {/*   extract PlayerCards player, turn */}
           <Box className={styles.playerBox}>
             <PlayerCard
               stoneColor={utilities.getStoneColorOfPlayer(
@@ -238,7 +260,7 @@ const GameArena = () => {
             isActiveGame={location.state.match.status == MATCH_STATUS_ACTIVE}
             isPendingPass={pendingPass}
             turnNumber={turn?.turnNumber ?? 0} /*  TBD remove */
-            turnStutus="yada yada"
+            turnStutus="tbd - not used yet"
             onResign={noOp}
             onPassCancel={cancelPass}
             onPlayCancel={cancelStonePlay}
@@ -248,9 +270,6 @@ const GameArena = () => {
           <Chat match={location.state.match}></Chat>
         </GridItem>
       </Grid>
-      {boardState?.pendingAction && (
-        <Box>{boardState?.pendingAction?.actionType}</Box>
-      )}
     </>
   );
 };
