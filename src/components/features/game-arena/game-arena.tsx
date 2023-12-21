@@ -12,7 +12,7 @@ import {
 } from "../../../contexts/PlayerContext";
 import turnFactory from "../../../services/factories/turn-factory";
 import utilities from "../../../services/moveProcessor/UtilityFunctions";
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 import {
   Turn,
@@ -23,10 +23,10 @@ import { updateMatch } from "../../../services/data/match-service";
 import GameBoardWithLabels from "../../features/game-board-w-labels/game-board-w-labels";
 import Chat from "../../features/chat/chat";
 import { GameActionCard } from "./game-action-card/game-action-card";
-import { PlayerCard } from "./players-card/player-card";
 import { useBoardContext } from "./board-context";
 import styles from "./game-arena.module.css";
 import { ACTION_STONE_PLAY, MATCH_STATUS_ACTIVE } from "../../../constants";
+import { Players } from "./players-card/players";
 
 const GameArena = () => {
   const { boardState, setBoardState } = useBoardContext();
@@ -57,16 +57,19 @@ const GameArena = () => {
   };
 
   const handleSelectIntersection = (row: number, col: number): void => {
+    console.log('handleSelectIntersection boardState: ',boardState);
+
     setBoardState({
       pendingAction: {
         actionType: ACTION_STONE_PLAY,
         location: { row: row, col: col },
       },
-      lastAction: boardState?.lastAction,
+      lastAction: boardState?.lastAction,///
       isPlayersTurn: true, //  utilities.getIsMyTurn(turn, player),
-      onSelectIntersection: handleSelectIntersection,
-      turnNumber: turn?.turnNumber ?? -1,
-      isContext: true,
+      onSelectIntersection: handleSelectIntersection,///
+      
+      turnNumber: boardState?.turnNumber ?? -1,///
+      isContext: true,//
     });
   };
 
@@ -84,14 +87,13 @@ const GameArena = () => {
       lastAction: boardState?.lastAction,
       isPlayersTurn: true, //  utilities.getIsMyTurn(turn, player),
       onSelectIntersection: handleSelectIntersection,
-      turnNumber: turn?.turnNumber ?? -1,
+      turnNumber: boardState?.turnNumber ?? -1,
       isContext: true,
     });
   };
 
   const handleIllegalPlay = (
     turn: Turn,
-    submission: Submission,
     evaluation: BaseSubmissionResult
   ) => {
     let reason = "unknown";
@@ -114,7 +116,7 @@ const GameArena = () => {
       lastAction: boardState?.lastAction,
       isPlayersTurn: utilities.getIsMyTurn(turn, player),
       onSelectIntersection: handleSelectIntersection,
-      turnNumber: turn?.turnNumber ?? -1,
+      turnNumber: boardState?.turnNumber ?? -1,
       isContext: true,
     });
   };
@@ -133,7 +135,7 @@ const GameArena = () => {
         lastAction: newTurn.action,
         isPlayersTurn: utilities.getIsMyTurn(newTurn, player),
         onSelectIntersection: handleSelectIntersection,
-        turnNumber: turn?.turnNumber ?? -1,
+        turnNumber: newTurn?.turnNumber ?? -1,
         isContext: true,
       });
 
@@ -162,7 +164,7 @@ const GameArena = () => {
       if (evaluation.isLegalPlay) {
         handleLegalPlay(turn, submission, evaluation);
       } else {
-        handleIllegalPlay(turn, submission, evaluation);
+        handleIllegalPlay(turn, evaluation);
       }
       // else{//    TBD   TBD   TBD      put alert here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TBD
     }
@@ -182,6 +184,14 @@ const GameArena = () => {
       setTurn(newTurn);
       addTurn(newTurn).then(() => {
         updateMatch(location.state.match, newTurn);
+        setBoardState({
+          pendingAction: null,
+          lastAction: newTurn.action,
+          isPlayersTurn: utilities.getIsMyTurn(newTurn, player),
+          onSelectIntersection: handleSelectIntersection,
+          turnNumber: newTurn?.turnNumber ?? -1,
+          isContext: true,
+        });
         setPendingPass(false);
         toast({
           title: "You Passed.",
@@ -207,51 +217,12 @@ const GameArena = () => {
           )}
         </GridItem>
         <GridItem className={styles.players} area={"players"}>
-          {/*    // TBDS serperate player box */}
-          {/*   extract PlayerCards player, turn */}
-          <Box className={styles.playerBox}>
-            <PlayerCard
-              stoneColor={utilities.getStoneColorOfPlayer(
-                player?.id ?? "",
-                turn
-              )}
-              playerName={player?.name ?? ""}
-              oppoenentName={utilities.getNameOfOpponent(
-                player?.id ?? "",
-                turn
-              )}
-              isMyTurn={utilities.getIsMyTurn(turn, player)}
-              prisoners={utilities.getPrisonersOfCurrentPlayer(
-                player?.id ?? "",
-                turn
-              )}
-              isPlayer={true}
-              onPass={() => handlePass(turn)} /*  TBD remove */
-            />
-          </Box>
-          <Box className={styles.playerBox}>
-            <PlayerCard
-              stoneColor={utilities.getStoneColorOfOpponent(
-                player?.id ?? "",
-                turn
-              )}
-              playerName={utilities.getNameOfOpponent(player?.id ?? "", turn)}
-              oppoenentName={player?.name ?? ""}
-              isMyTurn={!utilities.getIsMyTurn(turn, player)}
-              prisoners={utilities.getPrisonersOfOpponent(
-                player?.id ?? "",
-                turn
-              )}
-              isPlayer={false}
-              onPass={() => noOp()} /*  TBD remove */
-            />
-          </Box>
+          <Players player={player} turn={turn} />
         </GridItem>
-
         <GridItem className={styles.actions} area={"actions"}>
           <GameActionCard
-            isPendingMove={!(boardState?.pendingAction == null)}
-            isMyTurn={utilities.getIsMyTurn(turn, player)} /*  TBD remove */
+          /*   isPendingMove={!(boardState?.pendingAction == null)} */
+           /*  isMyTurn={utilities.getIsMyTurn(turn, player)} */ /*  TBD remove */
             onPlayConfirm={executeStonePlay}
             onPassConfirm={() => {
               handlePass(turn);
@@ -259,9 +230,9 @@ const GameArena = () => {
             onPass={selectPass}
             isActiveGame={location.state.match.status == MATCH_STATUS_ACTIVE}
             isPendingPass={pendingPass}
-            turnNumber={turn?.turnNumber ?? 0} /*  TBD remove */
-            turnStutus="tbd - not used yet"
-            onResign={noOp}
+           /*  turnNumber={turn?.turnNumber ?? 0} */ /*  TBD remove */
+            turnStutus="tbd - not used yet"  // TBD future feature
+            onResign={noOp}// TBD future feature
             onPassCancel={cancelPass}
             onPlayCancel={cancelStonePlay}
           />

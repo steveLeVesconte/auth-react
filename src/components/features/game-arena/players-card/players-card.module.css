@@ -3,3 +3,7 @@
     width: 20px;
     min-width: 20px;
   }
+  .playerBox {
+    flex-grow: 1;
+    padding-top: 10px;
+  }

@@ -1,4 +1,4 @@
-import { Text, Card, CardBody, VStack, Image, HStack } from "@chakra-ui/react";
+import { Text, Card, CardBody, VStack, Image, HStack, Box } from "@chakra-ui/react";
 import whiteStoneImage from '../../../../assets/whiteStoneTrans.png'
 import blackStoneImage from '../../../../assets/blackStoneTrans.png'
 import styles from "./players-card.module.css"
@@ -8,14 +8,13 @@ interface Props {
   stoneColor: string;
   prisoners: number;
   playerName: string;
-  oppoenentName: string;
   isMyTurn: boolean;
   isPlayer: boolean;
-  onPass: () => void;
 }
 
 export const PlayerCard = (props: Props) => {
   return (
+    <Box id="text" className={styles.playerBox}>
     <Card h="100%">
       <CardBody p="5px">
         <VStack alignItems="left" gap={0}>
@@ -32,5 +31,6 @@ export const PlayerCard = (props: Props) => {
         </VStack>
       </CardBody>
     </Card>
+    </Box>
   );
 };

@@ -1,5 +1,3 @@
-
-
 import { Turn } from "../data/turn-service";
 import gameStateFactory from "./game-state-factory";
 import { BaseSubmissionResult, Submission } from "../moveProcessor";
@@ -29,7 +27,6 @@ function createTurn(oldTurn: Turn, evaluation: BaseSubmissionResult, submission:
     createDate: dateStamp,
     updateDate: dateStamp
   }
-
 
   return newTurn;
 }

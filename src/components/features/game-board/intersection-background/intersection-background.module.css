@@ -33,10 +33,12 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    height: 70%;
-    width: 70%;
-    margin-top: 16.5%;
-    margin-left: 14.5%;
+    height: 100%;
+    width: 100%;
+    font-weight: 500;
+    font-size: clamp(0.4rem, 1.5vw + 0.2rem, 2.0rem);
+/*     margin-top: 16.5%;
+    margin-left: 14.5%; */
   }
 
 

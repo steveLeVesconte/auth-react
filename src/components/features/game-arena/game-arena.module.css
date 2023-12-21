@@ -24,10 +24,10 @@
   padding-bottom: 8px;
 }
 
-.playerBox {
+/* .playerBox {
   flex-grow: 1;
   padding-top: 10px;
-}
+} */
 
 .actions {
   grid-area: actions;
