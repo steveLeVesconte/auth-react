@@ -17,6 +17,8 @@ import { UpperLeftSVG } from "./svg/index";
 import { useBoardContext } from "../../game-arena/board-context";
 import { ACTION_STONE_PLAY, STONE_BLACK, STONE_WHITE } from "../../../../constants";
 import { LastTurnNumberLabel } from "./last-turn-number-label";
+import { useGameActionContext } from "../../../../contexts/game-action-context";
+import { useTurnStateContext } from "../../../../contexts/turn-state-context";
 
 
 interface Props {
@@ -27,27 +29,29 @@ interface Props {
 
 const IntersectionBackGround = (props: Props) => {
   const { boardState } = useBoardContext();
-  const lastTurnNumber=boardState?.turnNumber;
+  const {gameActionState}=useGameActionContext();
+  const {turnState}=useTurnStateContext()
+  const lastTurnNumber=turnState?.turnNumber;
 
   function isPendingActionHere(row: number, col: number): boolean {
     if (!boardState?.isPlayersTurn) return false;
 
-    if (!boardState?.pendingAction) return false;
+    if (!gameActionState?.pendingAction) return false;
 
-    if (boardState?.pendingAction.actionType !== ACTION_STONE_PLAY) return false;
+    if (gameActionState?.pendingAction.actionType !== ACTION_STONE_PLAY) return false;
 
-    if (boardState?.pendingAction?.location?.row !== row) return false;
+    if (gameActionState?.pendingAction?.location?.row !== row) return false;
 
-    if (boardState?.pendingAction?.location?.col !== col) return false;
+    if (gameActionState?.pendingAction?.location?.col !== col) return false;
 
     return true;
   }
 
   function isLastPlayHere(row: number, col: number): boolean {
-    if (!boardState?.lastAction) return false;
-    if (boardState?.lastAction.actionType !== ACTION_STONE_PLAY) return false;
-    if (boardState?.lastAction?.location?.row !== row) return false;
-    if (boardState?.lastAction?.location?.col !== col) return false;
+    if (!turnState?.lastAction) return false;
+    if (turnState?.lastAction.actionType !== ACTION_STONE_PLAY) return false;
+    if (turnState?.lastAction?.location?.row !== row) return false;
+    if (turnState?.lastAction?.location?.col !== col) return false;
     return true;
   }
 
@@ -73,7 +77,12 @@ const IntersectionBackGround = (props: Props) => {
     // my turn and empty cell
     return (
       <div
-        onClick={() => boardState?.onSelectIntersection(props.row, props.col)}
+        onClick={() => gameActionState?.onGameAction(
+          {actionType:ACTION_STONE_PLAY,
+            location:{row:props.row, col:props.col}}
+        )}
+ 
+        
         className={` ${styles.intersectionHover} ${styles.emptyIntersection}`}
       >
         {intersectionBackground(props.row, props.col)}

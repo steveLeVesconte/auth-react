@@ -1,12 +1,12 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { GameAction } from "../../../services/data/turn-service";
+//import { GameAction } from "../../../services/data/turn-service";
 
 export type BoardState = {
-  pendingAction: GameAction | null | undefined;
-  lastAction: GameAction | null | undefined;
-  isPlayersTurn: boolean;
-  onSelectIntersection: (row: number, col: number) => void;
-  turnNumber: number;
+ // pendingAction: GameAction | null | undefined;//1  i p
+//  lastAction: GameAction | null | undefined;///drop
+  isPlayersTurn: boolean;///2  i p
+ // onSelectIntersection: (row: number, col: number) => void;//1  i
+  //turnNumber: number;//3  i  p
   isContext: boolean;
 };
 
@@ -40,11 +40,11 @@ export const useBoardContext = () => {
 
   if (!boardContext) {
     const boardState = {
-      pendingAction: null,
-      lastAction: null,
+    //  pendingAction: null,
+     // lastAction: null,
       isPlayersTurn: false,
-      onSelectIntersection: () => {},
-      turnNumber: -1,
+    //  onSelectIntersection: () => {},
+    //  turnNumber: -1,
       isContext: false,
     } as BoardState;
 

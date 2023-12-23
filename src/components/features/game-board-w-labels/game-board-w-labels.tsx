@@ -7,8 +7,8 @@ import GameBoard from "../game-board/game-board";
 
 interface Props {
   boardString: string;
-  isMyTurn: boolean;
-  onSelectIntersection: (row: number, col: number) => void;
+  //isMyTurn: boolean;
+  //onSelectIntersection: (row: number, col: number) => void;
 }
 
 const GameBoardWithLabels = (props: Props) => {

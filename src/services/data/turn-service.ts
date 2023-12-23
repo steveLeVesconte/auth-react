@@ -39,14 +39,20 @@ export function addTurn(turn: Turn) {
 
 
 export function watchForLatestTurnForMatchId(matchId: string, onNewTurn: (latestTrun: Turn) => void): void {
+
+    console.log('watchForLatestTurnForMatchId', matchId);
     const turnQuery =
         query(collection(db, TURN_COLLECTION),
             where("matchId", "==", matchId),
             orderBy("createDate", "desc"),
             limit(1));
     onSnapshot(turnQuery, (querySnapshot) => {
+        console.log('onSnapshot: ',querySnapshot);
+   
         querySnapshot.forEach((doc) => {
+
             const latestTurn = { ...doc.data(), id: doc.id } as Turn;
+            console.log('onSnapshot: latestTurn ', latestTurn);
             onNewTurn(latestTurn);
         });
     });
