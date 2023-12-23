@@ -5,7 +5,6 @@ import { Image } from "@chakra-ui/react";
 import { UpperRightSVG } from "./svg/index";
 import { IntersectionSVG } from "./svg/index";
 import { PendingPlaySVG } from "./svg/index";
-//import { LastTurnSVG } from "./svg/index";
 import { TopRowSVG } from "./svg/index";
 import { LowerLeftSVG } from "./svg/index";
 import { LowerRightSVG } from "./svg/index";
@@ -15,11 +14,14 @@ import { RightEdgeSVG } from "./svg/index";
 import { IntersectionDotSVG } from "./svg/index";
 import { UpperLeftSVG } from "./svg/index";
 import { useBoardContext } from "../../game-arena/board-context";
-import { ACTION_STONE_PLAY, STONE_BLACK, STONE_WHITE } from "../../../../constants";
+import {
+  ACTION_STONE_PLAY,
+  STONE_BLACK,
+  STONE_WHITE,
+} from "../../../../constants";
 import { LastTurnNumberLabel } from "./last-turn-number-label";
 import { useGameActionContext } from "../../../../contexts/game-action-context";
 import { useTurnStateContext } from "../../../../contexts/turn-state-context";
-
 
 interface Props {
   row: number;
@@ -29,16 +31,17 @@ interface Props {
 
 const IntersectionBackGround = (props: Props) => {
   const { boardState } = useBoardContext();
-  const {gameActionState}=useGameActionContext();
-  const {turnState}=useTurnStateContext()
-  const lastTurnNumber=turnState?.turnNumber;
+  const { gameActionState } = useGameActionContext();
+  const { turnState } = useTurnStateContext();
+  const lastTurnNumber = turnState?.turnNumber;
 
   function isPendingActionHere(row: number, col: number): boolean {
     if (!boardState?.isPlayersTurn) return false;
 
     if (!gameActionState?.pendingAction) return false;
 
-    if (gameActionState?.pendingAction.actionType !== ACTION_STONE_PLAY) return false;
+    if (gameActionState?.pendingAction.actionType !== ACTION_STONE_PLAY)
+      return false;
 
     if (gameActionState?.pendingAction?.location?.row !== row) return false;
 
@@ -64,9 +67,12 @@ const IntersectionBackGround = (props: Props) => {
       <div className={styles.boardIntersectionWithStone}>
         {intersectionBackground(props.row, props.col)}
         <Image m="5%" className={styles.stone} src={stoneImage} />
-        {isLastPlayHere(props.row, props.col) && (<LastTurnNumberLabel stoneColor={lastPlayIconColor} lastTurnNumber={lastTurnNumber??0}></LastTurnNumberLabel>)}
-          {/* <LastTurnSVG stoneColor={lastPlayIconColor} /> */}
-        {/* )} */}
+        {isLastPlayHere(props.row, props.col) && (
+          <LastTurnNumberLabel
+            stoneColor={lastPlayIconColor}
+            lastTurnNumber={lastTurnNumber ?? 0}
+          ></LastTurnNumberLabel>
+        )}
       </div>
     );
   }
@@ -77,12 +83,12 @@ const IntersectionBackGround = (props: Props) => {
     // my turn and empty cell
     return (
       <div
-        onClick={() => gameActionState?.onGameAction(
-          {actionType:ACTION_STONE_PLAY,
-            location:{row:props.row, col:props.col}}
-        )}
- 
-        
+        onClick={() =>
+          gameActionState?.onGameAction({
+            actionType: ACTION_STONE_PLAY,
+            location: { row: props.row, col: props.col },
+          })
+        }
         className={` ${styles.intersectionHover} ${styles.emptyIntersection}`}
       >
         {intersectionBackground(props.row, props.col)}
