@@ -24,7 +24,6 @@ import { updateMatch } from "../../../services/data/match-service";
 import GameBoardWithLabels from "../../features/game-board-w-labels/game-board-w-labels";
 import Chat from "../../features/chat/chat";
 import { GameActionCard } from "./game-action-card/game-action-card";
-import { useBoardContext } from "./board-context";
 import styles from "./game-arena.module.css";
 import {
   ACTION_PASS,
@@ -32,13 +31,11 @@ import {
   MATCH_STATUS_ACTIVE,
 } from "../../../constants";
 import { Players } from "./players-card/players";
-import { useGameActionContext } from "../../../contexts/game-action-context";
-import { useTurnStateContext } from "../../../contexts/turn-state-context";
+import { useGameArenaContext } from "../../../contexts/game-arena-context";
 
 const GameArena = () => {
-  const { setBoardState } = useBoardContext();
-  const { gameActionState, setGameActionState } = useGameActionContext();
-  const { setTurnState } = useTurnStateContext();
+  const { gameActionState, setGameActionState, setTurnState, setBoardState } =
+    useGameArenaContext();
   const [pendingPass, setPendingPass] = useState<boolean>(false);
   const [turn, setTurn] = useState<Turn | null>();
   const location = useLocation();
@@ -55,10 +52,7 @@ const GameArena = () => {
       return;
     }
     setTurn(latestTurn);
-    setBoardState({
-      isPlayersTurn: utilities.getIsMyTurn(latestTurn, player),
-      isContext: true,
-    });
+    setBoardState({  isPlayersTurn: utilities.getIsMyTurn(latestTurn, player) });
     setGameActionState({
       pendingAction: null,
       onGameAction: handleGameAction,
@@ -118,10 +112,7 @@ const GameArena = () => {
         pendingAction: null,
         onGameAction: handleGameAction,
       });
-      setBoardState({
-        isPlayersTurn: false,
-        isContext: true,
-      });
+      setBoardState({    isPlayersTurn: false  });
 
       setTurnState({
         lastAction: newTurn.action,
@@ -160,10 +151,7 @@ const GameArena = () => {
         setTurn(newTurn);
         addTurn(newTurn).then(() => {
           updateMatch(location.state.match, newTurn);
-          setBoardState({
-            isPlayersTurn: false,
-            isContext: true,
-          });
+          setBoardState({   isPlayersTurn: false });
 
           setTurnState({
             lastAction: newTurn.action,

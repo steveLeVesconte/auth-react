@@ -13,15 +13,13 @@ import { LeftEdgeSVG } from "./svg/index";
 import { RightEdgeSVG } from "./svg/index";
 import { IntersectionDotSVG } from "./svg/index";
 import { UpperLeftSVG } from "./svg/index";
-import { useBoardContext } from "../../game-arena/board-context";
 import {
   ACTION_STONE_PLAY,
   STONE_BLACK,
   STONE_WHITE,
 } from "../../../../constants";
 import { LastTurnNumberLabel } from "./last-turn-number-label";
-import { useGameActionContext } from "../../../../contexts/game-action-context";
-import { useTurnStateContext } from "../../../../contexts/turn-state-context";
+import { useGameArenaContext } from "../../../../contexts/game-arena-context";
 
 interface Props {
   row: number;
@@ -30,9 +28,7 @@ interface Props {
 }
 
 const IntersectionBackGround = (props: Props) => {
-  const { boardState } = useBoardContext();
-  const { gameActionState } = useGameActionContext();
-  const { turnState } = useTurnStateContext();
+  const { gameActionState, turnState, boardState } = useGameArenaContext();
   const lastTurnNumber = turnState?.turnNumber;
 
   function isPendingActionHere(row: number, col: number): boolean {

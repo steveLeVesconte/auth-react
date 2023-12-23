@@ -1,9 +1,7 @@
 import { Text, Box, Flex, VStack } from "@chakra-ui/react";
 import GameMoveButtons from "./game-move-buttons";
 import CancelMoveButton from "./cancel-move-button";
-import { useBoardContext } from "../board-context";
-import { useGameActionContext } from "../../../../contexts/game-action-context";
-import { useTurnStateContext } from "../../../../contexts/turn-state-context";
+import { useGameArenaContext } from "../../../../contexts/game-arena-context";
 
 interface Props {
   isPendingPass: boolean;
@@ -18,9 +16,8 @@ interface Props {
 }
 
 export const GameActionCard = (props: Props) => {
-  const { boardState } = useBoardContext();
-  const { gameActionState } = useGameActionContext();
-  const { turnState } = useTurnStateContext();
+  const {gameActionState,  turnState , boardState}=useGameArenaContext();
+
   const isPendingMove = !(gameActionState?.pendingAction == null);
   const isMyTurn = boardState?.isPlayersTurn ?? false;
   const turnNumber = turnState?.turnNumber ?? -1;
