@@ -4,6 +4,8 @@ import { GameAction } from "../services/data/turn-service";
 export type GameActionState = {
   pendingAction: GameAction | null | undefined;
   onGameAction: (gameAction: GameAction) => void;
+  onGameActionConfirm: (gameAction:GameAction| null | undefined) => void;
+  onCancelGameAction:() => void;           
 };
 
 export type TurnState = {
@@ -67,6 +69,8 @@ export const useGameArenaContext = () => {
     const gameActionState = {
       pendingAction: null,
       onGameAction: () => {},
+      onGameActionConfirm: ()=>{},
+      onCancelGameAction: ()=>{}
     } as GameActionState;
     const turnState = null;
     const boardState = null;

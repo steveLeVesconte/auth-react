@@ -5,14 +5,20 @@ import { PlayerContext, PlayerContextType } from "../../../contexts/PlayerContex
 import GameCard from "../game-card/game-card";
 import { SimpleGrid } from "@chakra-ui/react";
 import { Match, getActiveMatchesForPlayerId } from "../../../services/data/match-service";
+import { useGameStateStore } from "../../../stores/game-state-store";
 
 export default function MatchList() {
   const [matches, setMatches] = useState<Match[] | null>([]);
   const { currentUser } = useAuth(); //from AuthContext
   const navigate = useNavigate();
   const { player } = useContext(PlayerContext) as PlayerContextType;
+  const updatePendingAction = useGameStateStore(state=>state.updatePendingAction);
+  const updateLastAction = useGameStateStore(state=>state.updateLastAction);
+   
 
   useEffect(() => {
+    updatePendingAction(null);
+    updateLastAction(null);
     console.log("in matchlist use effect");
     async function getData() {
       if (currentUser) {
@@ -26,6 +32,7 @@ export default function MatchList() {
   }, [player]);
 
   const handleSelect = (selectedMatch: Match) => {
+    updatePendingAction(null);
     console.log("in handleSelect=(selectedMatch:Match)", selectedMatch);
     navigate("/go-board", { state: { match: selectedMatch } });
   };

@@ -12,7 +12,7 @@ import {
 } from "../../../contexts/PlayerContext";
 import turnFactory from "../../../services/factories/turn-factory";
 import utilities from "../../../services/moveProcessor/UtilityFunctions";
-import { Grid, GridItem } from "@chakra-ui/react";
+import {Text, Grid, GridItem, Button } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 import {
   GameAction,
@@ -28,54 +28,103 @@ import styles from "./game-arena.module.css";
 import {
   ACTION_PASS,
   ACTION_STONE_PLAY,
-  MATCH_STATUS_ACTIVE,
 } from "../../../constants";
 import { Players } from "./players-card/players";
-import { useGameArenaContext } from "../../../contexts/game-arena-context";
+//import { useGameArenaContext } from "../../../contexts/game-arena-context";
+import {useGameStateStore} from '../../../stores/game-state-store'
 
 const GameArena = () => {
-  const { gameActionState, setGameActionState, setTurnState, setBoardState } =
-    useGameArenaContext();
-  const [pendingPass, setPendingPass] = useState<boolean>(false);
-  const [turn, setTurn] = useState<Turn | null>();
+
+  const isPlayerTurn=useGameStateStore(state=>state.isPlayerTurn);
+  const turnNumber=useGameStateStore(state=>state.turnNumber);
+  const updateTurnNumber=useGameStateStore(state=>state.updateTurnNumber);
+  const updateIsPlyerTurn=useGameStateStore(state=>state.updateIsPlayerTurn);
+  const onCancelAction=useGameStateStore(state=>state.onCancelAction);
+  // const updateOnCancelAction=useGameStateStore(state=>state.updateOnCancelAction);
+  // const onConfirmAction=useGameStateStore(state=>state.onConfirmAction);
+  const updateOnConfirmAction=useGameStateStore(state=>state.updateOnConfirmAction);
+  const pendingAction = useGameStateStore(state=>state.pendingAction);
+  const updatPendingAction = useGameStateStore(state=>state.updatePendingAction);
+  //const lastAction=useGameStateStore(state=>state.lastAction);
+  const updatLastAction = useGameStateStore(state=>state.updateLastAction);
+  
+  
+
+  // const { gameActionState, setGameActionState, setTurnState, setBoardState } =
+  //   useGameArenaContext();
+  //const [pendingPass, setPendingPass] = useState<boolean>(false);
+  const [turn, setTurn] = useState<Turn>({} as Turn);
   const location = useLocation();
   const { player } = useContext(PlayerContext) as PlayerContextType;
   const toast = useToast();
 
   /// TBD TBD TBD make page recover from no match in location
   useEffect(() => {
+    updateOnConfirmAction(executeAction);
+
+    //updatPendingAction(null);
     watchForLatestTurnForMatchId(location.state.match.id, handleTurnupdate);
-  }, []);
+  }, [pendingAction, location.state.match.id]);
 
   const handleTurnupdate = (latestTurn: Turn) => {
+    console.log("in handleTurnupdate:");
     if (!player?.id) {
+      console.log("in handleTurnupdate NO PLAYER ID:",player);
       return;
     }
     setTurn(latestTurn);
-    setBoardState({  isPlayersTurn: utilities.getIsMyTurn(latestTurn, player) });
-    setGameActionState({
-      pendingAction: null,
-      onGameAction: handleGameAction,
-    });
-    setTurnState({
-      lastAction: latestTurn.action,
-      turnNumber: latestTurn.turnNumber,
-    });
+
+    console.log("in handleTurnupdate after setTurn:",turn);
+  
+
+    updateTurnNumber(latestTurn.turnNumber);
+    updateIsPlyerTurn(utilities.getIsMyTurn(latestTurn, player));
+    
+  
+    //updateOnConfirmAction(executeAction);
+    updatLastAction(latestTurn.action);
+    //updatPendingAction(null);
+
+   // updateOnCancelAction(()=>void);
+   // console.log('un set:' ,onCancelAction);
+
+
+    // setBoardState({  isPlayersTurn: utilities.getIsMyTurn(latestTurn, player) });
+    // setGameActionState({
+    //   pendingAction: null,
+    //   onGameAction: handleGameAction,
+    //   onGameActionConfirm:executeAction,
+    //   onCancelGameAction:cancelGameAction               
+    // });
+    // setTurnState({
+    //   lastAction: latestTurn.action,
+    //   turnNumber: latestTurn.turnNumber,
+    // });
   };
 
-  const handleGameAction = (gameAction: GameAction): void => {
-    setGameActionState({
-      pendingAction: gameAction,
-      onGameAction: handleGameAction,
-    });
-  };
+  // const handleGameAction = (gameAction: GameAction): void => {
 
-  const cancelGameAction = () => {
-    setGameActionState({
-      pendingAction: null,
-      onGameAction: handleGameAction,
-    });
-  };
+ 
+  //   updatPendingAction(gameAction);
+
+  //   // setGameActionState({
+  //   //   pendingAction: gameAction,
+  //   //   onGameAction: handleGameAction,
+  //   //   onGameActionConfirm:executeAction,
+  //   //   onCancelGameAction:cancelGameAction                 
+  //   // });
+  //   console.log('in handle game action - gameAction: ',gameActionState?.pendingAction);
+  // };
+
+  // const cancelGameAction = () => {
+  //   console.log('cancel action performed!! **********************************')
+  //   setGameActionState({
+  //     pendingAction: null,
+  //     onGameAction: handleGameAction,
+  //     onGameActionConfirm:executeAction,
+  //     onCancelGameAction:cancelGameAction                 
+  //   });
+  // };
 
   const handleIllegalPlay = (evaluation: BaseSubmissionResult) => {
     let reason = "unknown";
@@ -93,10 +142,14 @@ const GameArena = () => {
       isClosable: true,
     });
 
-    setGameActionState({
-      pendingAction: null,
-      onGameAction: handleGameAction,
-    });
+    updatPendingAction(null);
+
+    // setGameActionState({
+    //   pendingAction: null,
+    //   onGameAction: handleGameAction,
+    //   onGameActionConfirm:executeAction,
+    //   onCancelGameAction:cancelGameAction                 
+    // });
   };
 
   const handleLegalPlay = (
@@ -108,16 +161,29 @@ const GameArena = () => {
     setTurn(newTurn);
     addTurn(newTurn).then(() => {
       updateMatch(location.state.match, newTurn);
-      setGameActionState({
-        pendingAction: null,
-        onGameAction: handleGameAction,
-      });
-      setBoardState({    isPlayersTurn: false  });
 
-      setTurnState({
-        lastAction: newTurn.action,
-        turnNumber: newTurn?.turnNumber ?? -1,
-      });
+   
+      updateTurnNumber(newTurn.turnNumber);
+      updateIsPlyerTurn(false);
+      
+ 
+      updatLastAction(newTurn.action);
+      updatPendingAction(null);
+
+
+
+      // setGameActionState({
+      //   pendingAction: null,
+      //   onGameAction: handleGameAction,
+      //   onGameActionConfirm:executeAction,
+      //   onCancelGameAction:cancelGameAction                 
+      // });
+      // setBoardState({    isPlayersTurn: false  });
+
+      // setTurnState({
+      //   lastAction: newTurn.action,
+      //   turnNumber: newTurn?.turnNumber ?? -1,
+      // });
 
       toast({
         title: "Stone placment processed.",
@@ -129,36 +195,64 @@ const GameArena = () => {
     });
   };
 
-  const executeAction = () => {
-    if (turn) {
-      if (gameActionState?.pendingAction?.actionType == ACTION_STONE_PLAY) {
+  const executeAction = (actionToExecute:GameAction) => {
+ 
+    console.log("in execute pending action:",pendingAction);
+    console.log("in execute pending action:",actionToExecute);
+    console.log("in execute pending action turn:",turn);
+  
+   // if (turn) {
+      console.log("in execute pending turn:",turn);
+ 
+      if (actionToExecute?.actionType == ACTION_STONE_PLAY) {
+        console.log("in execute pending type stone play:");
+ 
         const submission: Submission = submissionFactory.createSubmission(
           turn,
-          gameActionState?.pendingAction?.location?.row ?? -1,
-          gameActionState?.pendingAction?.location?.col ?? -1
+          actionToExecute?.location?.row ?? -1,
+          actionToExecute?.location?.col ?? -1
         );
         const evaluation = evaluateSubmission(submission);
+        console.log("in execute pending type evaluation:", evaluation);
+     
         if (evaluation.isLegalPlay) {
           handleLegalPlay(turn, submission, evaluation);
+          console.log("in execute pending type LEGAL:", evaluation);
+     
         } else {
+          console.log("in execute pending type NOT LEGAL:", evaluation);
+     
           handleIllegalPlay(evaluation);
         }
         // else{//    TBD   TBD   TBD      put alert here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  TBD
       }
 
-      if (gameActionState?.pendingAction?.actionType == ACTION_PASS) {
+      if (pendingAction?.actionType == ACTION_PASS) {
+        console.log("in execute pending type pass:");
         const newTurn = turnFactory.createPassTurn(turn);
+        console.log("in execute pending type pass new turn:", newTurn);
+      
         setTurn(newTurn);
         addTurn(newTurn).then(() => {
           updateMatch(location.state.match, newTurn);
-          setBoardState({   isPlayersTurn: false });
 
-          setTurnState({
-            lastAction: newTurn.action,
-            turnNumber: newTurn?.turnNumber ?? -1,
-          });
+          updateTurnNumber(newTurn.turnNumber);
+          updateIsPlyerTurn(false);
+          
+     
+          updatLastAction(newTurn.action);
+          updatPendingAction(null);
+    
+          
 
-          setPendingPass(false);
+          // setBoardState({   isPlayersTurn: false });
+
+          // setTurnState({
+          //   lastAction: newTurn.action,
+          //   turnNumber: newTurn?.turnNumber ?? -1,
+          // });
+
+          //setPendingPass(false);
           toast({
             title: "You Passed.",
             description: "Success.",
@@ -167,18 +261,21 @@ const GameArena = () => {
             isClosable: true,
           });
         });
-      }
-    }
+      }// end of if pass
+
+   // }
+    console.log("in execute pending action falling through:",turn);
+  
   };
 
-  const noOp = () => {};
-
+  //const noOp = () => {};
+  if(turn?.id)
   return (
     <>
       <Grid className={styles.arenaGridContainer}>
         <GridItem className={styles.goboard} area={"goboard"}>
           {turn && (
-            <GameBoardWithLabels boardString={turn?.resultState.board ?? ""} />
+            <GameBoardWithLabels boardString={turn?.resultState?.board ?? ""} />
           )}
         </GridItem>
         <GridItem className={styles.players} area={"players"}>
@@ -186,23 +283,28 @@ const GameArena = () => {
         </GridItem>
         <GridItem className={styles.actions} area={"actions"}>
           <GameActionCard
-            onPlayConfirm={executeAction}
-            onPassConfirm={executeAction}
-            onPass={() => {
-              handleGameAction({ actionType: ACTION_PASS, location: null });
-            }}
-            isActiveGame={location.state.match.status == MATCH_STATUS_ACTIVE}
-            isPendingPass={pendingPass}
-            turnStutus="tbd - not used yet" // TBD future feature
-            onResign={noOp} // TBD future feature
-            onPassCancel={cancelGameAction}
-            onPlayCancel={cancelGameAction}
+         /*    onPlayConfirm={executeAction}
+            onPassConfirm={executeAction} */
+            // onPass={() => {
+            //   updatPendingAction({ actionType: ACTION_PASS, location: null });
+            //   //handleGameAction({ actionType: ACTION_PASS, location: null });
+            // }}
+            // isActiveGame={location.state.match.status == MATCH_STATUS_ACTIVE}
+            // //isPendingPass={pendingPass}
+            // turnStutus="tbd - not used yet" // TBD future feature
+            // onResign={noOp} // TBD future feature
+            // onPassCancel={cancelGameAction}
+            // onPlayCancel={cancelGameAction}
           />
         </GridItem>
         <GridItem className="chat">
           <Chat match={location.state.match}></Chat>
         </GridItem>
       </Grid>
+      <Text>{isPlayerTurn.toString()} </Text>
+      <Text>{turnNumber}</Text>
+      <Text>[{pendingAction?.actionType}] {pendingAction?.location?.row.toString()}</Text>
+    <Button onClick={()=>{if(onCancelAction) onCancelAction()}}>cancel</Button>
     </>
   );
 };

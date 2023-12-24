@@ -1,63 +1,87 @@
-import { Text, Box, Flex, VStack } from "@chakra-ui/react";
+import { Box, SimpleGrid, GridItem } from "@chakra-ui/react";
 import GameMoveButtons from "./game-move-buttons";
 import CancelMoveButton from "./cancel-move-button";
-import { useGameArenaContext } from "../../../../contexts/game-arena-context";
+//import { useGameArenaContext } from "../../../../contexts/game-arena-context";
+import GameStatusMessage from "./game-status-message";
+import { useGameStateStore } from "../../../../stores/game-state-store";
 
-interface Props {
-  isPendingPass: boolean;
-  onPlayConfirm: () => void;
-  onPassConfirm: () => void;
-  onPlayCancel: () => void;
-  onPassCancel: () => void;
-  onPass: () => void;
-  isActiveGame: boolean;
-  turnStutus: string;
-  onResign: () => void;
-}
+// interface Props {
+//   //isPendingPass: boolean;
+//   // onPlayConfirm: () => void;
+//   // onPassConfirm: () => void;
+//   // onPlayCancel: () => void;
+//   // onPassCancel: () => void;
+//   // onPass: () => void;
+//   // isActiveGame: boolean;
+//   // turnStutus: string;
+//   // onResign: () => void;
+// }
 
-export const GameActionCard = (props: Props) => {
-  const {gameActionState,  turnState , boardState}=useGameArenaContext();
+export const GameActionCard = () => {
 
-  const isPendingMove = !(gameActionState?.pendingAction == null);
-  const isMyTurn = boardState?.isPlayersTurn ?? false;
-  const turnNumber = turnState?.turnNumber ?? -1;
-  const lastAction = turnState?.lastAction;
+  //const isPlayerTurn=useGameStateStore(state=>state.isPlayerTurn);
+  const turnNumber=useGameStateStore(state=>state.turnNumber);
+  // const updateTurnNumber=useGameStateStore(state=>state.updateTurnNumber);
+  // const updateIsPlyerTurn=useGameStateStore(state=>state.updateIsPlayerTurn);
+  // const onCancelAction=useGameStateStore(state=>state.onCancelAction);
+  // const updateOnCancelAction=useGameStateStore(state=>state.updateOnCancelAction);
+  // const onConfirmAction=useGameStateStore(state=>state.onConfirmAction);
+  // const updateOnConfirmAction=useGameStateStore(state=>state.updateOnConfirmAction);
+   const pendingAction = useGameStateStore(state=>state.pendingAction);
+  // const updatPendingAction = useGameStateStore(state=>state.updatePendingAction);
+  const lastAction=useGameStateStore(state=>state.lastAction);
+  // const updatLastAction = useGameStateStore(state=>state.updateLastAction);
+  
+
+
+
+ // const {gameActionState,  turnState , boardState}=useGameArenaContext();
+
+  // const isPendingMove = !(gameActionState?.pendingAction == null);
+  // const isMyTurn = boardState?.isPlayersTurn ?? false;
+  // const turnNumber = turnState?.turnNumber ?? -1;
+  // const lastAction = turnState?.lastAction;
+  const letters="ABCDEFGHIJKLMNOPQRS"
   return (
-    <VStack h="100px">
-      <Box h="10px"></Box>
-      <Flex w="100%" h="32px">
-        <Flex flex={1} justifyItems="right"></Flex>
-        <Flex flex={1} justifyContent="center">
-          <GameMoveButtons
-            isPendingMove={isPendingMove}
-            isMyTurn={isMyTurn}
-            onPlayConfirm={props.onPlayConfirm}
-            onPassConfirm={props.onPassConfirm}
-            onPass={props.onPass}
-            isActiveGame={props.isActiveGame}
-            isPendingPass={props.isPendingPass}
+    <SimpleGrid gridTemplateColumns="1fr 1fr" gridTemplateRows="32px 32px" gap="10px">
+      <GridItem>
+      <GameMoveButtons
+          //  isPendingMove={isPendingMove}
+          //  isMyTurn={isMyTurn}
+          /*   onPlayConfirm={props.onPlayConfirm}
+            onPassConfirm={props.onPassConfirm} */
+           // onPass={props.onPass}
+          //  isActiveGame={props.isActiveGame}
+           // isPendingPass={props.isPendingPass}
           />
-        </Flex>
-        <Flex flex={1} justifyContent="right" alignContent="center">
-          {/* TBD TBD TBD  <Button colorScheme="gray" size="sm" >Resign</Button> */}
-        </Flex>
-      </Flex>
-      <Flex h="32px" w="100%" justifyContent="center">
-        {" "}
-        <CancelMoveButton
-          isPendingMove={isPendingMove}
-          isMyTurn={isMyTurn}
-          onPlayCancel={props.onPlayCancel}
-          onPassCancel={props.onPassCancel}
-          isPendingPass={props.isPendingPass}
+      </GridItem>
+      <GridItem>
+      <CancelMoveButton
+        //  isPendingMove={isPendingMove}
+      //    isMyTurn={isMyTurn}
+       //   onPlayCancel={props.onPlayCancel}
+       //   onPassCancel={props.onPassCancel}
+         // isPendingPass={props.isPendingPass}
         ></CancelMoveButton>
-      </Flex>
-      <Box>
-        Turn Number: <Text>{turnNumber}</Text>
+      </GridItem>
+      <GridItem colSpan={2}>
+        <GameStatusMessage></GameStatusMessage>
+      </GridItem>
+      <GridItem>     <Box width="100%">
+        Turn: {turnNumber}
       </Box>
-      <Box>
-        {lastAction?.actionType === "pass" && <Text>Last Action Was Pass</Text>}
-      </Box>
-    </VStack>
+      </GridItem>
+      <GridItem> <Box width="100%">Last Play:{" "} 
+        {lastAction?.actionType === "pass" &&  <span>Pass</span>}
+        {lastAction?.actionType === "play" &&  <span>{18-(lastAction?.location?.row??0)} {letters[lastAction.location?.col??0]}</span>}
+      </Box></GridItem>
+   
+      <GridItem> <Box width="100%">Pending:{" "} 
+      {(!pendingAction) &&  <span>none</span>}
+      {pendingAction?.actionType === "pass" &&  <span>Pass</span>}
+        {pendingAction?.actionType === "play" &&  <span>{18-(pendingAction?.location?.row??0)} {letters[pendingAction.location?.col??0]}</span>}
+      </Box></GridItem>
+    </SimpleGrid>
   );
+ 
 };
