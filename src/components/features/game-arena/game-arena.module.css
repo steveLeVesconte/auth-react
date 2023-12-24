@@ -38,11 +38,15 @@
       "goboard players"
       "goboard actions"
       "goboard chat";
-    grid-template-rows: 90px 150px 1fr;
+    grid-template-rows: 90px 135px 1fr;
   }
 
   .goboard {
     aspect-ratio: 5/5;
     max-height: calc(99vh - 100px);
+  }
+
+  .players {
+    padding-bottom: 0px;
   }
 }

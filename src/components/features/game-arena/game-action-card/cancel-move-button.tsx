@@ -12,7 +12,7 @@ const CancelMoveButton = () => {
     return (
       <Button
         onClick={() => updatPendingAction(null)}
-        colorScheme="orange"
+        colorScheme='gray'
         size="sm"
         width="100%"
       >
@@ -25,7 +25,7 @@ const CancelMoveButton = () => {
     return (
       <Button
         onClick={() => updatPendingAction(null)}
-        colorScheme="red"
+        colorScheme='gray'
         size="sm"
         width="100%"
       >

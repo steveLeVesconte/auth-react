@@ -1,0 +1,14 @@
+.gameActionCardGrid {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 32px 48px 36px;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: calc(99vh - 190px)) {
+  .gameActionCardGrid {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}

@@ -8,8 +8,6 @@ import styles from "./chat.module.css";
 import MessageCard from "./message-card";
 import { STONE_BLACK, STONE_WHITE } from "../../../constants";
 
-
-
 interface Props {
   match: Match;
 }
@@ -65,7 +63,7 @@ const Chat = ({ match }: Props) => {
                 onChange={(e) => setNewMessageText(e.target.value)}
                 value={newMessageText}
               ></input>
-              <Button type="submit">Send</Button>
+              <Button type="submit" colorScheme="blue">Send</Button>
             </Flex>
           </form>
         </Box>
