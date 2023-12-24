@@ -13,15 +13,15 @@ function getIsMyTurn(oldTurn: Turn | null | undefined, player: Player | null): b
     return false;
   }
 
-  if(!(player?.id)){
+  if (!(player?.id)) {
     return false;
   }
 
   if (oldTurn) {
-    const stoneColorOfPrevTurn =oldTurn.turnPlayerColor;
-    const myColor=getStoneColorOfPlayer(player.id,oldTurn)
+    const stoneColorOfPrevTurn = oldTurn.turnPlayerColor;
+    const myColor = getStoneColorOfPlayer(player.id, oldTurn)
     const isMyturn: boolean =
-    stoneColorOfPrevTurn === myColor ? false : true;
+      stoneColorOfPrevTurn === myColor ? false : true;
     return isMyturn;
   }
   else {
@@ -32,42 +32,28 @@ function getIsMyTurn(oldTurn: Turn | null | undefined, player: Player | null): b
 
 
 function getStoneColorOfPlayer(
-   userId: string, 
-   
-  lastTurn: Turn|null|undefined
+  userId: string,
+
+  lastTurn: Turn | null | undefined
 ): string {
-  if (userId==lastTurn?.playerBlackId) {
+  if (userId == lastTurn?.playerBlackId) {
     return 'b';
   }
-  if (userId==lastTurn?.playerWhiteId) {
+  if (userId == lastTurn?.playerWhiteId) {
     return 'w';
   }
 
   return '_';
 }
 
-
-// function getStoneColorOfPrevTurnPlayer(
-//   userId: string,
-//   lastTurn: Turn|null|undefined
-// ): string {
-//   if (userId == lastTurn?.playerBlackId) {
-//     return 'b';
-//   }
-//     if (userId == lastTurn?.playerWhiteId) {
-//     return 'w';
-//   }
-//   return '_';
-// }
-
 function getStoneColorOfOpponent(
   playerUserId: string,
-  lastTurn: Turn|null|undefined
+  lastTurn: Turn | null | undefined
 ): string {
   if (playerUserId == lastTurn?.playerBlackId) {
     return 'w';
   }
-    if (playerUserId == lastTurn?.playerWhiteId) {
+  if (playerUserId == lastTurn?.playerWhiteId) {
     return 'b';
   }
   return '_';
@@ -75,12 +61,12 @@ function getStoneColorOfOpponent(
 
 function getIdOfOpponent(
   playerUserId: string,
-  lastTurn: Turn|null|undefined
+  lastTurn: Turn | null | undefined
 ): string {
   if (playerUserId == lastTurn?.playerBlackId) {
     return lastTurn.playerWhiteId;
   }
-    if (playerUserId == lastTurn?.playerWhiteId) {
+  if (playerUserId == lastTurn?.playerWhiteId) {
     return lastTurn.playerBlackId;
   }
   return '_';
@@ -88,12 +74,12 @@ function getIdOfOpponent(
 
 function getNameOfOpponent(
   playerUserId: string,
-  lastTurn: Turn|null|undefined
+  lastTurn: Turn | null | undefined
 ): string {
   if (playerUserId == lastTurn?.playerBlackId) {
     return lastTurn.playerWhiteName;
   }
-    if (playerUserId == lastTurn?.playerWhiteId) {
+  if (playerUserId == lastTurn?.playerWhiteId) {
     return lastTurn.playerBlackName;
   }
   return 'unknown';
@@ -101,16 +87,12 @@ function getNameOfOpponent(
 
 function getPrisonersOfOpponent(
   userId: string,
-  lastTurn: Turn|null|undefined
+  lastTurn: Turn | null | undefined
 ): number {
-  //console.log('getPrisonersOfOpponent turn and id:',userId,lastTurn)
   if (userId == lastTurn?.playerBlackId) {
- //    console.log('getPrisonersOfOpponent =blackid so returnign white returning:',lastTurn.resultState.prisonersOfWhite)
     return lastTurn.resultState.prisonersOfWhite;
   }
-    if (userId == lastTurn?.playerWhiteId) {
-     // console.log('getPrisonersOfOpponent =whiteId so returning black returning:',lastTurn.resultState.prisonersOfWhite)
-   
+  if (userId == lastTurn?.playerWhiteId) {
     return lastTurn.resultState.prisonersOfBlack;
   }
   return -1;
@@ -118,18 +100,12 @@ function getPrisonersOfOpponent(
 
 function getPrisonersOfCurrentPlayer(
   userId: string,
-  lastTurn: Turn|null|undefined
+  lastTurn: Turn | null | undefined
 ): number {
-   //console.log('getPrisonersOfCurrentPlayer turn and id:',userId,lastTurn)
-
   if (userId == lastTurn?.playerBlackId) {
-  //  console.log('getPrisonersOfCurrentPlayer =blackid so returnign black returning:',lastTurn.resultState.prisonersOfBlack)
- 
     return lastTurn.resultState.prisonersOfBlack;
   }
-    if (userId == lastTurn?.playerWhiteId) {
-     // console.log('getPrisonersOfCurrentPlayer =whiteid so returnign white returning:',lastTurn.resultState.prisonersOfWhite)
- 
+  if (userId == lastTurn?.playerWhiteId) {
     return lastTurn.resultState.prisonersOfWhite;
   }
   return -1;

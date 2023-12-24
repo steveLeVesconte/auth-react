@@ -25,7 +25,6 @@ interface FormData {
 const Signup = () => {
   const { signup } = useAuth(); //from AuthContext
   const [error, setError] = useState("");
-  //const [ setLoading] = useState(false);
   const navigate = useNavigate();
   const {
     handleSubmit,

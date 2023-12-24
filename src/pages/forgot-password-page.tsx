@@ -42,7 +42,6 @@ const ForgotPassword = () => {
     } catch (e) {
       setError("Failed to reset password");
     }
-    /*     setLoading(false); */
   }
 
   return (

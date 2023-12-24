@@ -15,11 +15,9 @@ export default function MatchList() {
   const updatePendingAction = useGameStateStore(state=>state.updatePendingAction);
   const updateLastAction = useGameStateStore(state=>state.updateLastAction);
    
-
   useEffect(() => {
     updatePendingAction(null);
     updateLastAction(null);
-    console.log("in matchlist use effect");
     async function getData() {
       if (currentUser) {
         const myActiveMatches = await getActiveMatchesForPlayerId(
@@ -33,7 +31,6 @@ export default function MatchList() {
 
   const handleSelect = (selectedMatch: Match) => {
     updatePendingAction(null);
-    console.log("in handleSelect=(selectedMatch:Match)", selectedMatch);
     navigate("/go-board", { state: { match: selectedMatch } });
   };
 

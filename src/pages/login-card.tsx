@@ -39,8 +39,6 @@ const LoginCard = () => {
       await login(values.email, values.password);
       navigate("/");
     } catch {
-      console.log("in hanld submit error!!!!!!!!!!!!!!!: ");
-
       setError("Failed to log in");
     }
   }

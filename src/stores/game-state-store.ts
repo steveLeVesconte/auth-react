@@ -4,6 +4,7 @@ import {GameAction} from '../services/data/turn-service'
 interface IGameState{
     pendingAction: GameAction|null;
     updatePendingAction: (newPendingAction: GameAction|null )=>void ,
+
     lastAction:GameAction|null;
     updateLastAction: (newLastAction: GameAction|null )=>void ,
   
@@ -18,8 +19,6 @@ interface IGameState{
 
     onCancelAction: (()=>void)|null;
     updateOnCancelAction: (newOnCancelAction: (()=>void) )=>void ,
-
-
 }
 
 export const useGameStateStore = create<IGameState>((set)=>({
@@ -40,6 +39,5 @@ export const useGameStateStore = create<IGameState>((set)=>({
 
         onCancelAction:null,
         updateOnCancelAction: (newOnCancelAction:()=>void)=> set({onCancelAction:newOnCancelAction}),
-
     })
 );

@@ -14,7 +14,6 @@
     width: 90%;
   }
 
-
 .boardIntersectionWithStone {
     position: relative;
     top: 0;
@@ -37,8 +36,6 @@
     width: 100%;
     font-weight: 500;
     font-size: clamp(0.4rem, 1.5vw + 0.2rem, 2.0rem);
-/*     margin-top: 16.5%;
-    margin-left: 14.5%; */
   }
 
 
