@@ -37,7 +37,13 @@ export function addTurn(turn: Turn) {
     return addDoc(collection(db, TURN_COLLECTION), turn)
 }
 
-export function watchForLatestTurnForMatchId(matchId: string, onNewTurn: (latestTrun: Turn) => void): void {
+export function watchForLatestTurnForMatchId(matchId: string, onNewTurn: (latestTrun: Turn|null) => void): void {
+
+
+    if(matchId===undefined || matchId===null){
+        onNewTurn(null);
+        return;
+    }
 
     const turnQuery =
         query(collection(db, TURN_COLLECTION),

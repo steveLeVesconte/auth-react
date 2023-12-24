@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation} from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import {
   BaseSubmissionResult,
@@ -48,15 +48,15 @@ const GameArena = () => {
   const { player } = useContext(PlayerContext) as PlayerContextType;
   const toast = useToast();
 
-  /// TBD TBD TBD make page recover from no match in location
   useEffect(() => {
-    updateOnConfirmAction(executeAction);
+    watchForLatestTurnForMatchId(location?.state?.match?.id, handleTurnupdate);
+  }, [pendingAction]);
 
-    //updatPendingAction(null);
-    watchForLatestTurnForMatchId(location.state.match.id, handleTurnupdate);
-  }, [pendingAction, location.state.match.id]);
+  const handleTurnupdate = (latestTurn: Turn|null) => {
+    if (!latestTurn) {
+      return;
+    }
 
-  const handleTurnupdate = (latestTurn: Turn) => {
     if (!player?.id) {
       return;
     }
@@ -144,8 +144,13 @@ const GameArena = () => {
       });
     }
   };
+  updateOnConfirmAction(executeAction);
+  if ((!player?.id) || (!location?.state?.match?.id)) {
+    return <Navigate to="/" />;
+  }
 
-  if (turn?.id)
+
+if (turn?.id)
     return (
       <>
         <Grid className={styles.arenaGridContainer}>
