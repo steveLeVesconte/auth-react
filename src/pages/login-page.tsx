@@ -10,6 +10,7 @@ import {
   List,
   ListItem,
   CardHeader,
+  Flex,
 } from "@chakra-ui/react";
 import LoginCard from "./login-card";
 import goGameImage from "../assets/igo.jpg";
@@ -19,42 +20,45 @@ const Login = () => {
     <Grid marginTop={10} gap={10} className="landing-grid" marginLeft="auto">
       <GridItem className="landing-grid-intro" gridArea="intro">
         <Card h="100%">
+          <CardHeader>
+            <Heading>Welcome to React Go Game Kata</Heading>
+          </CardHeader>
           <CardBody>
-            <SimpleGrid gap={3}>
-              <Heading>Welcome to React Go Game Kata</Heading>
+            <Flex flexDirection="column" height="100%">
               <p>
                 One purpose of the project is to provide an adequately rich
                 domain for the exploration of multiple technologies. In my
                 experience, many learning projects are too simple to challenge a
                 developer to deeply exercise a technology.{" "}
               </p>
-              <Card h="100%">
-                <CardHeader>
-                  <Heading size="md" paddingTop={0}>
-                    Technologies Employed:
-                  </Heading>
-                </CardHeader>
-                <CardBody>
-                  <div className="tech-grid">
-                    <div>React</div>
-                    <div>Typescript</div>
 
-                    <div>
-                      Firebase Realtime Database - cloud-hosted NoSQL database
-                    </div>
+              <Heading
+                marginTop="20px"
+                marginBottom="20px"
+                size="md"
+                paddingTop={0}
+              >
+                Technologies Employed:
+              </Heading>
 
-                    <div>Chakra UI - component library</div>
+              <div className="tech-grid">
+                <div>React</div>
+                <div>Typescript</div>
 
-                    <div>React Context API</div>
+                <div>
+                  Firebase Realtime Database - cloud-hosted NoSQL database
+                </div>
 
-                    <div>React Hook Form</div>
-                    <div>Firebase Authentication Service from Google</div>
+                <div>Chakra UI - component library</div>
 
-                    <div>Vite - for project setup, building and packing</div>
-                  </div>
-                </CardBody>
-              </Card>
-            </SimpleGrid>
+                <div>React Context API & Zustand - state management</div>
+
+                <div>React Hook Form</div>
+                <div>Firebase Authentication Service from Google</div>
+
+                <div>Vite - for project setup, building and packing</div>
+              </div>
+            </Flex>
           </CardBody>
         </Card>
       </GridItem>
@@ -72,9 +76,11 @@ const Login = () => {
       </GridItem>
       <GridItem className="landing-grid-special" gridArea="special">
         <Card h="100%">
+          <CardHeader>
+            <Heading>Special Secret Login Bypass</Heading>
+          </CardHeader>
           <CardBody>
             <SimpleGrid gap={3}>
-              <Heading>Special Secret Login Bypass</Heading>
               <p>
                 Another purpose of this website is to allow interested persons
                 to easily see my work. To facilitate this, I have provided two
