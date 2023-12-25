@@ -9,7 +9,6 @@ import UpdateProfile from "../pages/update-profile";
 import PlayerProfile from "../pages/player-profile";
 import PlayerContextProvider from "../contexts/PlayerContext";
 import CreateMatch from "../pages/create-match-page";
-import MatchList from "./features/match-list/match-list";
 import MainLayout from "../layouts/main-layout";
 import AuthLayout from "../layouts/auth-layout";
 import Signup from "../pages/signup-page";
@@ -29,7 +28,6 @@ function App() {
                   <Route element={<UpdateProfile />} path="update-profile" />
                   <Route element={<PlayerProfile />} path="player-profile" />
                   <Route element={<CreateMatch />} path="create-match" />
-                  <Route element={<MatchList />} path="match-list" />
                 </Route>
                 <Route element={<GameArenaLayout />} path="/go-board">
                   <Route element={<GameArena />} index />
