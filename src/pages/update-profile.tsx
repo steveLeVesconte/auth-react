@@ -1,97 +1,125 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import {
   Alert,
   Button,
   Card,
   CardBody,
   FormControl,
+  FormErrorMessage,
   FormLabel,
+  Heading,
   Input,
+  SimpleGrid,
+  Link as ChakraLink,
+  Box,
+  CardHeader,
 } from "@chakra-ui/react";
+import { FirebaseError } from "firebase/app";
+
+interface FormData {
+  password: string;
+  confirmPassword: string;
+}
 
 const UpdateProfile = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const confirmRef = useRef<HTMLInputElement>(null);
-  const { updatePassword, updateEmail, currentUser } = useAuth(); //from AuthContext
+  const { updatePassword } = useAuth(); //from AuthContext
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<FormData>();
+  const pwd = watch("password");
 
-  function handleSubmit(e: { preventDefault: () => void }) {
-    e.preventDefault();
-
-    if (passwordRef.current?.value !== confirmRef.current?.value) {
-      return setError("Passwords do not match");
-    }
-    const promises = [];
-    setLoading(true);
+  async function handleFormSubmit(values: FormData) {
     setError("");
-
-    if (emailRef?.current?.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef?.current?.value));
+    try {
+      await updatePassword(values.password);
+      navigate("/");
+    } catch (error: unknown) {
+      let errorMessage = "Failed to change password. ";
+      if (error instanceof FirebaseError) {
+        console.error(error.message);
+        errorMessage += " - " + error.message;
+      }
+      setError(errorMessage);
     }
-    if (passwordRef?.current?.value) {
-      promises.push(updatePassword(passwordRef?.current?.value));
-    }
-
-    Promise.all(promises)
-      .then(() => {
-        navigate("/");
-      })
-      .catch(() => {
-        setError("Failed to update account");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   }
 
   return (
     <>
-      <Card>
-        <CardBody>
-          <h2 className="text-center mb-4">Update Profile</h2>
-          <div>{currentUser?.email}</div>
-          {/*  currentUser starts as undefined and is then set. */}
+      <Card className="sign-up-card">
+        <CardHeader>
+          <Heading marginBottom={6}>Update Profile</Heading>
           {error && <Alert status="error">{error}</Alert>}
-          <form onSubmit={handleSubmit}>
-            <FormControl id="emial">
-              <FormLabel>Email</FormLabel>
-              <Input
-                type="email"
-                ref={emailRef}
-                required
-                defaultValue={currentUser.email}
-              ></Input>
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input
-                type="password"
-                ref={passwordRef}
-                placeholder="Leave blank to keep the same"
-              ></Input>
-            </FormControl>
-            <FormControl id="password-confirm">
-              <FormLabel>Confirm Password</FormLabel>
-              <Input
-                type="password"
-                ref={confirmRef}
-                placeholder="Leave blank to keep the same"
-              ></Input>
-            </FormControl>
-            <Button disabled={loading} className="w-100 mt-4" type="submit">
-              Update
-            </Button>
+        </CardHeader>
+        <CardBody>
+          <form
+            onSubmit={handleSubmit((data) => handleFormSubmit(data))}
+            onChange={() => {
+              setError("");
+            }}
+          >
+            <SimpleGrid columns={1} spacing={10}>
+              <FormControl id="password" isInvalid={!!errors?.password}>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  {...register("password", {
+                    required: "Password is required.",
+                  })}
+                  type="password"
+                ></Input>
+                <FormErrorMessage>
+                  {errors.password && errors.password.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl
+                id="password-confirm"
+                isInvalid={!!errors?.confirmPassword}
+              >
+                <FormLabel>Confirm Password</FormLabel>
+                <Input
+                  {...register("confirmPassword", {
+                    required: "Confirm Password is required.",
+                    validate: (value) =>
+                      value === pwd || "The passwords do not match",
+                  })}
+                  type="password"
+                ></Input>
+                <FormErrorMessage>
+                  {errors.confirmPassword && errors.confirmPassword.message}
+                </FormErrorMessage>
+              </FormControl>
+              <Button
+                isLoading={isSubmitting}
+                disabled={!isValid}
+                type="submit"
+                colorScheme="orange"
+              >
+                Update
+              </Button>
+              <SimpleGrid templateColumns="50% 50%">
+                <div></div>
+                <Box textAlign="right">
+                  <ChakraLink
+                    as={ReactRouterLink}
+                    id="c"
+                    color="orange.300"
+                    to="/"
+                  >
+                    Cancel
+                  </ChakraLink>
+                </Box>
+              </SimpleGrid>
+            </SimpleGrid>
           </form>
         </CardBody>
       </Card>
-      <div className="w-100 text-center mt-2">
-        <Link to="/">Cancel</Link>
-      </div>
     </>
   );
 };
