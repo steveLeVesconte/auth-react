@@ -33,7 +33,7 @@ const GameCard = ({ match, userId }: Props) => {
           <Text align="left">
             Turn Of: {match.nextTurnPlayer === STONE_BLACK ? "Black" : "White"}{" "}
           </Text>
-          <Text align="left">Move: {match.turnNumber} </Text>
+          <Text align="left">Turn Number: {match.turnNumber} </Text>
           <Text align="left">
             Start Date: {match.createDate.substring(0, 10)}{" "}
           </Text>

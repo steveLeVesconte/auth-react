@@ -1,34 +1,24 @@
-import { useContext, useEffect, useState } from "react";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { PlayerContext, PlayerContextType } from "../../../contexts/PlayerContext";
+import {
+  PlayerContext,
+  PlayerContextType,
+} from "../../../contexts/PlayerContext";
 import GameCard from "../game-card/game-card";
 import { SimpleGrid } from "@chakra-ui/react";
-import { Match, getActiveMatchesForPlayerId } from "../../../services/data/match-service";
+import { Match } from "../../../services/data/match-service";
 import { useGameStateStore } from "../../../stores/game-state-store";
 
-export default function MatchList() {
-  const [matches, setMatches] = useState<Match[] | null>([]);
-  const { currentUser } = useAuth(); //from AuthContext
+interface Props {
+  matches: Match[] | null;
+}
+
+export default function MatchList(props: Props) {
   const navigate = useNavigate();
   const { player } = useContext(PlayerContext) as PlayerContextType;
-  const updatePendingAction = useGameStateStore(state=>state.updatePendingAction);
-  const updateLastAction = useGameStateStore(state=>state.updateLastAction);
-   
-  useEffect(() => {
-    updatePendingAction(null);
-    updateLastAction(null);
-    async function getData() {
-      if (currentUser) {
-        const myActiveMatches = await getActiveMatchesForPlayerId(
-          player?.id ?? ""
-        );
-        setMatches(myActiveMatches);
-      }
-    }
-    getData();
-  }, [player]);
-
+  const updatePendingAction = useGameStateStore(
+    (state) => state.updatePendingAction
+  );
   const handleSelect = (selectedMatch: Match) => {
     updatePendingAction(null);
     navigate("/go-board", { state: { match: selectedMatch } });
@@ -41,11 +31,11 @@ export default function MatchList() {
         spacing={6}
         paddingTop="10px"
       >
-        {matches &&
-          matches.map((match) => (
-              <div  key={match.id} onClick={() => handleSelect(match)}>
-                <GameCard match={match} userId={ player?.id ?? ""}></GameCard>
-              </div>
+        {props.matches &&
+          props.matches.map((match) => (
+            <div key={match.id} onClick={() => handleSelect(match)}>
+              <GameCard match={match} userId={player?.id ?? ""}></GameCard>
+            </div>
           ))}
       </SimpleGrid>
     </>

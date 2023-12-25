@@ -1,7 +1,11 @@
 import { BellIcon, CloseIcon, Icon } from "@chakra-ui/icons";
 import { HStack, Text } from "@chakra-ui/react";
 import { Match } from "../../../services/data/match-service";
-import { MATCH_STATUS_ACTIVE, STONE_BLACK, STONE_WHITE } from "../../../constants";
+import {
+  MATCH_STATUS_ACTIVE,
+  STONE_BLACK,
+  STONE_WHITE,
+} from "../../../constants";
 
 interface Props {
   userId: string;
@@ -21,14 +25,14 @@ export const GameStatusIndicator = (props: Props) => {
   if (getIsMyTurnByMatch(props.userId, props.match)) {
     return (
       <HStack>
-        <Text>My Turn!</Text>
+        <Text>Your turn to play!</Text>
         <Icon as={BellIcon} w={6} h={6} color="orange.500" />
       </HStack>
     );
   } else {
     return (
       <HStack>
-        <Text>waiting for opponent</Text>
+        <Text>Waiting for opponent</Text>
       </HStack>
     );
   }
