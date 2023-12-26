@@ -47,7 +47,7 @@ const GameArena = () => {
   const { player } = useContext(PlayerContext) as PlayerContextType;
   const toast = useToast();
 
-  updatePendingAction(null);
+  //updatePendingAction(null);
 
   useEffect(() => {
     watchForLatestTurnForMatchId(location?.state?.match?.id, handleTurnupdate);
