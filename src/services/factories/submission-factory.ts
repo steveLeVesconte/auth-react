@@ -3,7 +3,6 @@ import { Turn } from "../data/turn-service";
 import { StonePlay, Submission } from "../moveProcessor";
 import utilities from "../moveProcessor/UtilityFunctions";
 
-
 function createSubmission(turn: Turn, row:number, col:number): Submission {
   const currentPlayerColor = utilities.getStoneColorOfCurrentTurn( turn);
   const boardArray = utilities.stringBoardToArray(turn.resultState.board);

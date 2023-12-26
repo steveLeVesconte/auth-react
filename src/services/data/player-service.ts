@@ -13,18 +13,20 @@ export interface Player {
     createDate: string;
 }
 
-export function addPlayerProfile(
-    name: string,
-    location: string,
-    rankInfo: string,
-    bio: string,
-    status: string,
-    uid: string,
-    createDate: string) {
-    return addDoc(collection(db, PLAYER_COLLECTION), { name, location, rankInfo, bio, status, uid, createDate })
-}
+export function addPlayerProfile(newPlayer:Player)
+    // name: string,
+    // location: string,
+    // rankInfo: string,
+    // bio: string,
+    // status: string,
+    // uid: string,
+    // createDate: string) 
+    {
+        return addDoc(collection(db, PLAYER_COLLECTION), newPlayer)
+       // return addDoc(collection(db, PLAYER_COLLECTION), { name, location, rankInfo, bio, status, uid, createDate })
+    }
 
-/* for future use
+/* for future use  TBD TBD TBD
     export function setPlayerProfile( name: string, locations:string, rankInfo: string, bio: string, status: string, createDate: string) {
     const docData = {
         name: name,

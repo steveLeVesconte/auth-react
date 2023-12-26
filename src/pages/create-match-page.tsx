@@ -17,9 +17,10 @@ import {
 } from "@chakra-ui/react";
 import { MdArrowDropDown } from "react-icons/md";
 import { FieldValues, useForm } from "react-hook-form";
-import { GameState, Turn, addTurn } from "../services/data/turn-service";
+import { Turn, addTurn } from "../services/data/turn-service";
 import { Match, addMatch } from "../services/data/match-service";
-import { MATCH_STATUS_ACTIVE, STONE_BLACK, STONE_WHITE } from "../constants";
+import { EMPTY_BOARD, EMPTY_GAME_STATE, MATCH_STATUS_ACTIVE, STONE_BLACK, STONE_WHITE } from "../constants";
+import { stoneColorDependentValues } from "../services/utilitities";
 
 
 interface FormData {
@@ -41,22 +42,10 @@ const CreateMatch = () => {
     const playerInfoArray = values.opponentKey.split("_");
     const opponentName = playerInfoArray[1];
     const opponentId = playerInfoArray[0];
-    let playerBlackId = player?.id;
-    let playerBlackName = player?.name;
-    let playerWhiteId = opponentId;
-    let playerWhiteName = opponentName;
-    if (userStoneColor == STONE_WHITE) {
-      playerBlackId = opponentId;
-      playerBlackName = opponentName;
-      playerWhiteId = player?.id ?? "";
-      playerWhiteName = player?.name ?? "";
-    }
+    const {playerBlackId,playerBlackName,playerWhiteId,playerWhiteName}=stoneColorDependentValues(player,userStoneColor,opponentId,opponentName)
     const createDate = new Date().toISOString();
     const newMatch: Match = {
-      board:
-        "___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________" +
-        ",___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________",
-
+      board: EMPTY_BOARD,
       nextTurnPlayer: STONE_WHITE,
       playerBlackId: playerBlackId ?? "",
       playerWhiteId: playerWhiteId,
@@ -72,27 +61,6 @@ const CreateMatch = () => {
     addMatch(newMatch)
       .then((refDoc) => {
         newMatch.id = refDoc.id;
-        const koComareState: GameState = {
-          board:
-            "___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________" +
-            ",___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________",
-          prisonersOfBlack: 0,
-          prisonersOfWhite: 0,
-        };
-        const initialState: GameState = {
-          board:
-            "___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________" +
-            ",___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________",
-          prisonersOfBlack: 0,
-          prisonersOfWhite: 0,
-        };
-        const resultState: GameState = {
-          board:
-            "___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________" +
-            ",___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________,___________________",
-          prisonersOfBlack: 0,
-          prisonersOfWhite: 0,
-        };
         const startTurn: Turn = {
           id: "",
           matchId: refDoc.id,
@@ -102,9 +70,9 @@ const CreateMatch = () => {
           playerWhiteId: playerWhiteId,
           playerBlackName: playerBlackName ?? "missing",
           playerWhiteName: playerWhiteName,
-          koCompareState: koComareState,
-          initialState: initialState,
-          resultState: resultState,
+          koCompareState: EMPTY_GAME_STATE,
+          initialState: EMPTY_GAME_STATE,
+          resultState: EMPTY_GAME_STATE,
           action: { actionType: "start", location: null },
           isValid: true,
           isKo: false,
@@ -115,11 +83,10 @@ const CreateMatch = () => {
 
         addTurn(startTurn).then(() => {
           navigate("/go-board", { state: { match: newMatch } });
-          console.log("yay turn saved");
         });
       })
       .catch(() => {
-        console.log("failed to create match");
+        console.log("failed to create match");//TBD make visible
       })
       .finally(() => {});
   }

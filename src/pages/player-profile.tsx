@@ -53,27 +53,21 @@ const PlayerProfile = () => {
 
     const createDate = new Date().toISOString();
     setError("");
-    addPlayerProfile(
-      values.name,
-      values.location,
-      values.rankInfo,
-      values.bio,
-      "active",
-      currentUser.uid,
-      createDate
-    )
+    const refPlayer: Player = {
+      name: values.name,
+      bio: values.bio,
+      rankInfo: values.rankInfo,
+      location: values.location,
+      id: "",
+      createDate: createDate,
+      status: "active",
+      uid: currentUser.uid,
+    };
+
+    addPlayerProfile(refPlayer)
       .then((refDoc) => {
-        const newPlayer: Player = {
-          name: values.name,
-          bio: values.bio,
-          rankInfo: values.rankInfo,
-          location: values.location,
-          id: refDoc.id,
-          createDate: createDate,
-          status: "active",
-          uid: currentUser.uid,
-        };
-        updatePlayer(newPlayer);
+       // const newPlayer: Player = {...refPlayer,id: refDoc.id};
+        updatePlayer({...refPlayer,id: refDoc.id});
         navigate("/");
       })
       .catch(() => {

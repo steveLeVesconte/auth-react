@@ -40,10 +40,12 @@ const UpdateProfile = () => {
     setError("");
     try {
       await updatePassword(values.password);
-      navigate("/");
+     navigate("/");
     } catch (error: unknown) {
+   
       let errorMessage = "Failed to change password. ";
       if (error instanceof FirebaseError) {
+
         console.error(error.message);
         errorMessage += " - " + error.message;
       }

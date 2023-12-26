@@ -1,0 +1,18 @@
+import { useEffect, useState } from "react";
+import { Match, addMatch, getActiveMatchesForPlayerId} from "./match-service";
+
+const useMatches = (userId: string) => {
+  
+
+    const getActiveMatchesForPlayerId=(playerId:string)=>{
+        return getActiveMatchesForPlayerId(playerId);
+    }
+
+    const addMatch = (match: Match) => {
+        addMatch(match);
+    }
+
+    return { getActiveMatchesForPlayerId, addMatch }
+}
+
+export default useMatches;

@@ -26,7 +26,6 @@ export function watchMessagesForMatchId(matchId: string, onNewMessage: (messages
     });
     onNewMessage(messagesArray);
   });
-
 }
 
 export function addMessage(newMessage: Message) {

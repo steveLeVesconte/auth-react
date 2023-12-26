@@ -3,10 +3,7 @@ import { Alert, AlertIcon, Button, Center, Flex, Heading } from "@chakra-ui/reac
 import MatchList from "../components/features/match-list/match-list";
 import { useContext, useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import {
-  Match,
-  getActiveMatchesForPlayerId,
-} from "../services/data/match-service";
+import {  Match,  getActiveMatchesForPlayerId,} from "../services/data/match-service";
 import { PlayerContext, PlayerContextType } from "../contexts/PlayerContext";
 import { useGameStateStore } from "../stores/game-state-store";
 
@@ -41,7 +38,7 @@ const Dashboard = () => {
         <Center>
         <Button onClick={() => navigate("/create-match")} height="48px" flex="grow">New Match</Button> 
         </Center>
-        <Alert status="info" variant="solid"      marginLeft="20px" flex="grow" >
+        <Alert status="info" variant="solid" marginLeft="20px" flex="grow" >
         <AlertIcon />
         Click on a listed match (if any) or click on 'New Match'.
       </Alert>
