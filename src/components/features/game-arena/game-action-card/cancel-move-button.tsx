@@ -1,5 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import { useGameStateStore } from "../../../../stores/game-state-store";
+import { ACTION_PASS, ACTION_STONE_PLAY } from "../../../../constants";
 
 const CancelMoveButton = () => {
   const isPlayerTurn = useGameStateStore((state) => state.isPlayerTurn);
@@ -8,7 +9,7 @@ const CancelMoveButton = () => {
     (state) => state.updatePendingAction
   );
 
-  if (isPlayerTurn && pendingAction?.actionType == "play") {
+  if (isPlayerTurn && pendingAction?.actionType == ACTION_STONE_PLAY) {
     return (
       <Button
         onClick={() => updatPendingAction(null)}
@@ -21,7 +22,7 @@ const CancelMoveButton = () => {
     );
   }
 
-  if (isPlayerTurn && pendingAction?.actionType == "pass") {
+  if (isPlayerTurn && pendingAction?.actionType == ACTION_PASS) {
     return (
       <Button
         onClick={() => updatPendingAction(null)}

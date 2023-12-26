@@ -4,6 +4,7 @@ import CancelMoveButton from "./cancel-move-button";
 import GameStatusMessage from "./game-status-message";
 import { useGameStateStore } from "../../../../stores/game-state-store";
 import styles from "./game-action-card.module.css";
+import { ACTION_PASS, ACTION_STONE_PLAY } from "../../../../constants";
 
 export const GameActionCard = () => {
   const turnNumber = useGameStateStore((state) => state.turnNumber);
@@ -31,8 +32,8 @@ export const GameActionCard = () => {
       <GridItem>
         <Card h="100%">
           <CardBody p="5px">
-            Last Play: {lastAction?.actionType === "pass" && <span>Pass</span>}
-            {lastAction?.actionType === "play" && (
+            Last Play: {lastAction?.actionType === ACTION_PASS && <span>Pass</span>}
+            {lastAction?.actionType === ACTION_STONE_PLAY && (
               <span>
                 {18 - (lastAction?.location?.row ?? 0)}{" "}
                 {letters[lastAction.location?.col ?? 0]}
