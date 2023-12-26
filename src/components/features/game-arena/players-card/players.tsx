@@ -17,12 +17,10 @@ export const Players = (props: Props) => {
           props.turn
         )}
         playerName={props.player?.name ?? ""}
-        isMyTurn={utilities.getIsMyTurn(props.turn, props.player)}
         prisoners={utilities.getPrisonersOfCurrentPlayer(
           props.player?.id ?? "",
           props.turn
         )}
-        isPlayer={true}
       />
 
       <PlayerCard
@@ -34,12 +32,10 @@ export const Players = (props: Props) => {
           props.player?.id ?? "",
           props.turn
         )}
-        isMyTurn={!utilities.getIsMyTurn(props.turn, props.player)}
         prisoners={utilities.getPrisonersOfOpponent(
           props.player?.id ?? "",
           props.turn
         )}
-        isPlayer={false}
       />
     </>
   );

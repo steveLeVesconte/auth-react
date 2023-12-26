@@ -16,8 +16,6 @@ interface Props {
   stoneColor: string;
   prisoners: number;
   playerName: string;
-  isMyTurn: boolean;
-  isPlayer: boolean;
 }
 
 export const PlayerCard = (props: Props) => {

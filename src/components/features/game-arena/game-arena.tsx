@@ -1,4 +1,4 @@
-import { Navigate, useLocation} from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import {
   BaseSubmissionResult,
@@ -38,21 +38,22 @@ const GameArena = () => {
     (state) => state.updateOnConfirmAction
   );
   const pendingAction = useGameStateStore((state) => state.pendingAction);
-  const updatPendingAction = useGameStateStore(
+  const updatePendingAction = useGameStateStore(
     (state) => state.updatePendingAction
   );
-  const updatLastAction = useGameStateStore((state) => state.updateLastAction);
-
+  const updateLastAction = useGameStateStore((state) => state.updateLastAction);
   const [turn, setTurn] = useState<Turn>({} as Turn);
   const location = useLocation();
   const { player } = useContext(PlayerContext) as PlayerContextType;
   const toast = useToast();
 
+  updatePendingAction(null);
+
   useEffect(() => {
     watchForLatestTurnForMatchId(location?.state?.match?.id, handleTurnupdate);
   }, [pendingAction]);
 
-  const handleTurnupdate = (latestTurn: Turn|null) => {
+  const handleTurnupdate = (latestTurn: Turn | null) => {
     if (!latestTurn) {
       return;
     }
@@ -63,7 +64,7 @@ const GameArena = () => {
     setTurn(latestTurn);
     updateTurnNumber(latestTurn.turnNumber);
     updateIsPlyerTurn(utilities.getIsMyTurn(latestTurn, player));
-    updatLastAction(latestTurn.action);
+    updateLastAction(latestTurn.action);
   };
 
   const handleIllegalPlay = (evaluation: BaseSubmissionResult) => {
@@ -82,7 +83,7 @@ const GameArena = () => {
       isClosable: true,
     });
 
-    updatPendingAction(null);
+    updatePendingAction(null);
   };
 
   const handleLegalPlay = (
@@ -96,8 +97,8 @@ const GameArena = () => {
       updateMatch(location.state.match, newTurn);
       updateTurnNumber(newTurn.turnNumber);
       updateIsPlyerTurn(false);
-      updatLastAction(newTurn.action);
-      updatPendingAction(null);
+      updateLastAction(newTurn.action);
+      updatePendingAction(null);
 
       toast({
         title: "Stone placment processed.",
@@ -132,8 +133,8 @@ const GameArena = () => {
         updateMatch(location.state.match, newTurn);
         updateTurnNumber(newTurn.turnNumber);
         updateIsPlyerTurn(false);
-        updatLastAction(newTurn.action);
-        updatPendingAction(null);
+        updateLastAction(newTurn.action);
+        updatePendingAction(null);
         toast({
           title: "You Passed.",
           description: "Success.",
@@ -145,12 +146,11 @@ const GameArena = () => {
     }
   };
   updateOnConfirmAction(executeAction);
-  if ((!player?.id) || (!location?.state?.match?.id)) {
+  if (!player?.id || !location?.state?.match?.id) {
     return <Navigate to="/" />;
   }
 
-
-if (turn?.id)
+  if (turn?.id)
     return (
       <>
         <Grid className={styles.arenaGridContainer}>
