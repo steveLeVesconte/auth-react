@@ -35,17 +35,6 @@ export async function getActiveMatchesForPlayerId(playerId: string): Promise<Mat
     return matches;
 }
 
-// export function setMatchTurnNumber(match: Match, turnNumber: number) {
-//     const docData = {
-//         ...match, turnNumber: turnNumber, updateDate: (new Date).toISOString()
-//     }
-//     const docRef = doc(db, MATCH_COLLECTION, match.id);
-//     updateDoc(docRef, docData)
-//         .then(docRef => {
-//             console.log("Value of an Existing Document Field has been updated", docRef);
-//         }).catch(error => { console.log(error); })
-// }
-
 export function updateMatch(match: Match, turn: Turn) {
     const docData = {
         ...match,
@@ -59,7 +48,6 @@ export function updateMatch(match: Match, turn: Turn) {
     const docRef = doc(db, MATCH_COLLECTION, match.id);
     updateDoc(docRef, docData)
         .then(() => {
-            // console.log("Value of an Existing Document Field has been updated", docRef);
         }).catch(error => { console.log(error); })
 }
 

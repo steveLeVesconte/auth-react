@@ -83,7 +83,6 @@ const ForgotPassword = () => {
                 Reset Password
               </Button>
               <SimpleGrid templateColumns="50% 50%">
-                <div className="w-100 text-center mt-2">
                   <ChakraLink
                     color="orange.300"
                     as={ReactRouterLink}
@@ -91,7 +90,6 @@ const ForgotPassword = () => {
                   >
                     Login
                   </ChakraLink>
-                </div>
                 <Box textAlign="right">
                   Need to Sign Up?{" "}
                   <ChakraLink

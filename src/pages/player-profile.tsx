@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
-
 import {
   Alert,
   Box,
@@ -66,7 +65,6 @@ const PlayerProfile = () => {
 
     addPlayerProfile(refPlayer)
       .then((refDoc) => {
-       // const newPlayer: Player = {...refPlayer,id: refDoc.id};
         updatePlayer({...refPlayer,id: refDoc.id});
         navigate("/");
       })
@@ -141,7 +139,6 @@ const PlayerProfile = () => {
                   placeholder="optional rank information"
                 ></Input>
               </FormControl>
-
               <Button
                 isLoading={isSubmitting}
                 disabled={!isValid}

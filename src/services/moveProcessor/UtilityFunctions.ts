@@ -1,5 +1,3 @@
-
-
 import { Player } from "../data/player-service";
 import { Turn } from "../data/turn-service";
 import { StoneColor } from "./constants";

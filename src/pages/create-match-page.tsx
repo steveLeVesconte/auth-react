@@ -19,9 +19,14 @@ import { MdArrowDropDown } from "react-icons/md";
 import { FieldValues, useForm } from "react-hook-form";
 import { Turn, addTurn } from "../services/data/turn-service";
 import { Match, addMatch } from "../services/data/match-service";
-import { EMPTY_BOARD, EMPTY_GAME_STATE, MATCH_STATUS_ACTIVE, STONE_BLACK, STONE_WHITE } from "../constants";
+import {
+  EMPTY_BOARD,
+  EMPTY_GAME_STATE,
+  MATCH_STATUS_ACTIVE,
+  STONE_BLACK,
+  STONE_WHITE,
+} from "../constants";
 import { stoneColorDependentValues } from "../services/utilitities";
-
 
 interface FormData {
   stoneColor: string;
@@ -42,7 +47,13 @@ const CreateMatch = () => {
     const playerInfoArray = values.opponentKey.split("_");
     const opponentName = playerInfoArray[1];
     const opponentId = playerInfoArray[0];
-    const {playerBlackId,playerBlackName,playerWhiteId,playerWhiteName}=stoneColorDependentValues(player,userStoneColor,opponentId,opponentName)
+    const { playerBlackId, playerBlackName, playerWhiteId, playerWhiteName } =
+      stoneColorDependentValues(
+        player,
+        userStoneColor,
+        opponentId,
+        opponentName
+      );
     const createDate = new Date().toISOString();
     const newMatch: Match = {
       board: EMPTY_BOARD,
@@ -86,7 +97,7 @@ const CreateMatch = () => {
         });
       })
       .catch(() => {
-        console.log("failed to create match");//TBD make visible
+        console.log("failed to create match"); //TBD make visible
       })
       .finally(() => {});
   }
@@ -108,8 +119,8 @@ const CreateMatch = () => {
                   variant="filled"
                   placeholder="select your stone color"
                 >
-                  <option value={STONE_BLACK} >Black</option>
-                  <option value={STONE_WHITE} >White</option>
+                  <option value={STONE_BLACK}>Black</option>
+                  <option value={STONE_WHITE}>White</option>
                 </Select>
                 <FormErrorMessage>
                   {errors.stoneColor && errors.stoneColor.message}
@@ -136,7 +147,6 @@ const CreateMatch = () => {
                   disabled={!isValid}
                   isLoading={isSubmitting}
                   colorScheme="orange"
-                  className="w-100 mt-4"
                   type="submit"
                 >
                   Save

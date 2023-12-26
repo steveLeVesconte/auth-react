@@ -60,7 +60,6 @@ function createPassTurn(oldTurn: Turn): Turn {
 
 function createStartingTurn(creatingPlayer: Player, opponent: Player, creatorStoneColor: string, matchId: string): Turn {
   const creatorChoseBlack: boolean = creatorStoneColor == STONE_BLACK;
-  //const startState = gameStateFactory.createStartingGameState();
   const dateStamp = new Date().toISOString();
 
   const newTurn: Turn = {

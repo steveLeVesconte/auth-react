@@ -38,8 +38,6 @@ export function addTurn(turn: Turn) {
 }
 
 export function watchForLatestTurnForMatchId(matchId: string, onNewTurn: (latestTrun: Turn|null) => void): void {
-
-
     if(matchId===undefined || matchId===null){
         onNewTurn(null);
         return;
@@ -56,5 +54,4 @@ export function watchForLatestTurnForMatchId(matchId: string, onNewTurn: (latest
             onNewTurn(latestTurn);
         });
     });
-
 }

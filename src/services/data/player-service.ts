@@ -14,13 +14,6 @@ export interface Player {
 }
 
 export function addPlayerProfile(newPlayer:Player)
-    // name: string,
-    // location: string,
-    // rankInfo: string,
-    // bio: string,
-    // status: string,
-    // uid: string,
-    // createDate: string) 
     {
         return addDoc(collection(db, PLAYER_COLLECTION), newPlayer)
        // return addDoc(collection(db, PLAYER_COLLECTION), { name, location, rankInfo, bio, status, uid, createDate })
