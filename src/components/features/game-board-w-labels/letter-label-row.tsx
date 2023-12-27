@@ -3,7 +3,7 @@ import styles from "./game-board-w-labels.module.css";
 
 const LetterLabelRow = () => {
   const content = [];
-  const letters = "ABCDEFGHIJKLMNOPQRS";
+  const letters = "ABCDEFGHJKLMNOPQRST";
   for (let column = 0; column < 19; column++) {
     content.push(
       <div key={column} className={styles.colLetterLabel}>

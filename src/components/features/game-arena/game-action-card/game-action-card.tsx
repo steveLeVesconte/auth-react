@@ -9,7 +9,7 @@ import { ACTION_PASS, ACTION_STONE_PLAY } from "../../../../constants";
 export const GameActionCard = () => {
   const turnNumber = useGameStateStore((state) => state.turnNumber);
   const lastAction = useGameStateStore((state) => state.lastAction);
-  const letters = "ABCDEFGHIJKLMNOPQRS";
+  const letters = "ABCDEFGHJKLMNOPQRST";
   return (
     <SimpleGrid className={styles.gameActionCardGrid}>
       <GridItem>
