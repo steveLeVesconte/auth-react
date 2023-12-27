@@ -13,7 +13,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import LoginCard from "./login-card";
-import goGameImage from "../assets/igo.jpg";
+import goGameImage from "../assets/gameOfTheCentury.png";
 
 const Login = () => {
   return (
