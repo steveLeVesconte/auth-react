@@ -1,7 +1,7 @@
 import { Player } from "../../../../services/data/player-service";
 import { PlayerCard } from "./player-card";
-import utilities from "../../../../services/moveProcessor/UtilityFunctions";
 import { Turn } from "../../../../services/data/turn-service";
+import utilities from "../../../../services/utilitities";
 
 interface Props {
   player: Player | null;

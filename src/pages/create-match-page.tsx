@@ -26,7 +26,7 @@ import {
   STONE_BLACK,
   STONE_WHITE,
 } from "../constants";
-import { stoneColorDependentValues } from "../services/utilitities";
+import utilities from "../services/utilitities";
 
 interface FormData {
   stoneColor: string;
@@ -48,7 +48,7 @@ const CreateMatch = () => {
     const opponentName = playerInfoArray[1];
     const opponentId = playerInfoArray[0];
     const { playerBlackId, playerBlackName, playerWhiteId, playerWhiteName } =
-      stoneColorDependentValues(
+      utilities.stoneColorDependentValues(
         player,
         userStoneColor,
         opponentId,
@@ -166,5 +166,7 @@ const CreateMatch = () => {
     </>
   );
 };
+
+
 
 export default CreateMatch;

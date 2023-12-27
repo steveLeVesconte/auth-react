@@ -1,17 +1,12 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import {
-  BaseSubmissionResult,
-  Submission,
-  evaluateSubmission,
-} from "../../../services/moveProcessor";
+
 import submissionFactory from "../../../services/factories/submission-factory";
 import {
   PlayerContext,
   PlayerContextType,
 } from "../../../contexts/PlayerContext";
 import turnFactory from "../../../services/factories/turn-factory";
-import utilities from "../../../services/moveProcessor/UtilityFunctions";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 import {
@@ -28,6 +23,12 @@ import styles from "./game-arena.module.css";
 import { ACTION_PASS, ACTION_STONE_PLAY } from "../../../constants";
 import { Players } from "./players-card/players";
 import { useGameStateStore } from "../../../stores/game-state-store";
+import {
+  BaseSubmissionResult,
+  Submission,
+  evaluateSubmission,
+} from "@two-way-press/go-game-move-processor";
+import utilities from "../../../services/utilitities";
 
 const GameArena = () => {
   const updateTurnNumber = useGameStateStore((state) => state.updateTurnNumber);
@@ -46,8 +47,6 @@ const GameArena = () => {
   const location = useLocation();
   const { player } = useContext(PlayerContext) as PlayerContextType;
   const toast = useToast();
-
-  //updatePendingAction(null);
 
   useEffect(() => {
     watchForLatestTurnForMatchId(location?.state?.match?.id, handleTurnupdate);

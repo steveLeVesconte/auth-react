@@ -1,7 +1,7 @@
+import { StonePlay, Submission } from "@two-way-press/go-game-move-processor";
 import { ACTION_STONE_PLAY } from "../../constants";
 import { Turn } from "../data/turn-service";
-import { StonePlay, Submission } from "../moveProcessor";
-import utilities from "../moveProcessor/UtilityFunctions";
+import utilities from "../utilitities";
 
 function createSubmission(turn: Turn, row:number, col:number): Submission {
   const currentPlayerColor = utilities.getStoneColorOfCurrentTurn( turn);

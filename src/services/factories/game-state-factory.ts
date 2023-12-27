@@ -1,7 +1,7 @@
+import { BaseSubmissionResult } from "@two-way-press/go-game-move-processor";
 import { GameState, Turn } from "../data/turn-service";
-import { BaseSubmissionResult } from "../moveProcessor";
-import utilities from "../moveProcessor/UtilityFunctions";
-import { StoneColor } from "../moveProcessor/constants";
+import utilities from "../utilitities";
+import { STONE_WHITE } from "../../constants";
 
 function createGameState(evaluation: BaseSubmissionResult, oldTurn: Turn) {
 
@@ -11,7 +11,7 @@ function createGameState(evaluation: BaseSubmissionResult, oldTurn: Turn) {
     let prisonersOfWhite = oldTurn.resultState.prisonersOfWhite;
 
     if (evaluation.capturedStones > 0) {
-        if (oldTurn.turnPlayerColor == StoneColor.White) {
+        if (oldTurn.turnPlayerColor == STONE_WHITE) {
             prisonersOfBlack += evaluation.capturedStones;
         }
         else {

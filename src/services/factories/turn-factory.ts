@@ -1,8 +1,8 @@
 import { Turn } from "../data/turn-service";
 import gameStateFactory from "./game-state-factory";
-import { BaseSubmissionResult, Submission } from "../moveProcessor";
 import { Player } from "../data/player-service";
 import { ACTION_NEW_MATCH, ACTION_PASS, EMPTY_GAME_STATE, STONE_BLACK, STONE_WHITE } from "../../constants";
+import { BaseSubmissionResult, Submission } from "@two-way-press/go-game-move-processor";
 
 function createTurn(oldTurn: Turn, evaluation: BaseSubmissionResult, submission: Submission): Turn {
 
@@ -92,7 +92,6 @@ const turnFactory = {
   createTurn,
   createStartingTurn,
   createPassTurn
-
 };
 
 export default turnFactory;
