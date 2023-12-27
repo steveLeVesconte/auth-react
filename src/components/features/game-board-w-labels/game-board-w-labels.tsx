@@ -36,7 +36,7 @@ const GameBoardWithLabels = (props: Props) => {
 
 const createRowsNumbers = (): JSX.Element[] => {
   const content: JSX.Element[] = [];
-  for (let rowNum = 18; rowNum >= 0; rowNum--) {
+  for (let rowNum = 19; rowNum >= 1; rowNum--) {
     content.push(
       <Box className={styles.rowNumberLabel} key={rowNum}>
         <div>{rowNum}</div>
