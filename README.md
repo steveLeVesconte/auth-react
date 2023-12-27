@@ -10,6 +10,43 @@ This project is an online Go Game powered by React, Typescript and FireStore dat
 
 The purpose of the project is to provide an adequately rich problem domain for practicing multiple technologies. 
 
+### Features:
+
+* Referees each play for compliance to Go rules.
+* Firebase Authentication for user signin.
+* Rsponsive UI (for smart phones etc.)
+* Real time chat in game.
+* Game board automatically updates when opponent moves.
+
+### Not Implimented:
+
+* Handicap Game
+* Games on Smaller Boards
+* Final Scoring of games (this is quite challenging for machines)
+* AI apponent (you can only play against people)
+* Go Tutorial
+
+# Try it right now!
+Online-go provides several resources that allows you to interact with the project to create your own. These resources help to get you started.
+* https://auth-react-dev-29188.web.app/auth/login to access play the game.
+
+Another purpose of this website is to allow interested persons to easily see my work. To facilitate this, I have provided two accounts with easy usernames and passwords so that you can view the site without "signing up". This allows you to quickly access games-in-progress without needing to recruit a friend to play against you. Though, if you want to, you definitely can play against each other using these two credentials.  There is of course the possibility that two of you will log in as the same "test subject".  This could result confusing events.
+
+You are also welcome to sign up. A "real" email is not required as email verification has been turned off.
+
+### Test Accounts for loging in to view the website:
+
+     Test Account email A: roo2@roo2.com
+
+     Test Account password A: 12345678
+
+
+     Test Account email B: roo3@roo3.com 
+
+     Test Account password B: 12345678
+
+Please consider providing any feedback at this email address: twowaypress@gmail.com
+
 
 ### Built With
 
