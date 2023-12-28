@@ -1,4 +1,4 @@
-<h1 align="center"> Setup FireBase Project and Authentication </h1> <br>
+<h1 align="center"> Setup Firebase Project and Authentication </h1> <br>
 
 
 <p align="left">
