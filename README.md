@@ -1,6 +1,6 @@
 # Go Game Web App using React and Typescript
 
-This project is an online Go Game powered by React, Typescript and FireStore database (NO-SQL).
+This project is an online Go Game powered by React, Typescript and Firestore database (NO-SQL).
 
 
 <img width="1119" alt="Screenshot 2023-12-27 060000" src="https://github.com/steveLeVesconte/go-game-webapp-react-typescript/assets/4312647/e7f1c7d8-2957-4462-b32a-254e956262a5">
@@ -21,18 +21,19 @@ The purpose of the project is to provide an adequately rich problem domain for p
 ### Not Implimented:
 
 * Handicap Game
-* Games on Smaller Boards
-* Final Scoring of games (this is quite challenging for machines)
+* Games on Smaller Boards (only 19x19 supported)
+* Final Scoring of games
 * AI apponent (you can only play against people)
-* Go Tutorial
+* Go Game Tutorial
 
 # Try it right now!
-Online-go provides several resources that allows you to interact with the project to create your own. These resources help to get you started.
-* https://auth-react-dev-29188.web.app/auth/login to access play the game.
+Click on the link below to start playing Go.
+
+* https://auth-react-dev-29188.web.app/auth/login   (the online Go Game).
 
 Another purpose of this website is to allow interested persons to easily see my work. To facilitate this, I have provided two accounts with easy usernames and passwords so that you can view the site without "signing up". This allows you to quickly access games-in-progress without needing to recruit a friend to play against you. Though, if you want to, you definitely can play against each other using these two credentials.  There is of course the possibility that two of you will log in as the same "test subject".  This could result confusing events.
 
-You are also welcome to sign up. A "real" email is not required as email verification has been turned off.
+You are also welcome to sign up. A "real" email is not required as email verification has been turned off, but if you use a fake email address, you will not be able to use "forgot password".
 
 ### Test Accounts for loging in to view the website:
 
@@ -101,11 +102,6 @@ This is an example of how to list things you need to use the software and how to
 Note: To find your Firebase secrets, click on the gear in the upper left corne of your "Propject Overview" and choose "Project Settings".
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
