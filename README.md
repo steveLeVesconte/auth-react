@@ -72,8 +72,8 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   npm install npm@latest -g
   ```
-* setup FireBase Authentication TBD Instructions.
-* setup FireBase Realtime Database TBD Instructions.
+* [setup FireBase Authentication.](./docs/getting-started/setup-firebase-authentication.md)
+* [setup FireStore Database.](./docs/getting-started/setup-firestore-database.md)
 
 ### Installation
 
