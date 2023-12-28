@@ -10,7 +10,7 @@ Click on the large "Cloud Firestore" card.
 Use the "Start Collection" link to add the  following four empty collections in Firebase Firestore Database.  (Sorry, Firebase does not provide a way to import this schema, it must be entered manually)
 
 
-go-player { 
+go-player: { 
 
     id: string;
     
@@ -30,7 +30,7 @@ go-player {
     
 }
 
-go-match {
+go-match: {
 
     id: string;
     
@@ -56,7 +56,7 @@ go-match {
     
 }
 
-go-turn {
+go-turn: {
 
     id: string;
     
@@ -132,16 +132,18 @@ go-turn {
     
 }
 
-messages {
+messages: {
 
-  id: string;
+    id: string;
   
-  message: string;
+    message: string;
   
-  matchId: string;
+    matchId: string;
   
-  speakerName: string;
+    speakerName: string;
   
-  createDate: string;
-  
+    createDate: string;
+    
 }
+
+
