@@ -3,7 +3,7 @@
 This project is an online Go Game powered by React, Typescript and Firestore database (NO-SQL).
 
 
-<img width="1119" alt="Screenshot 2023-12-27 060000" src="https://github.com/steveLeVesconte/go-game-webapp-react-typescript/assets/4312647/e7f1c7d8-2957-4462-b32a-254e956262a5">
+<img width="1119" alt="view of website" src="docs/assets/GoBoardForREADME.png">
 
 
 “Go is an abstract strategy board game for two players, in which the aim is to surround more territory than the opponent. The game was invented in China more than 2,500 years ago and is believed to be the oldest board game continuously played to the present day.” Wikipedia
