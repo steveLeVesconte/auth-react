@@ -98,6 +98,8 @@ This is an example of how to list things you need to use the software and how to
 
    ```
 
+Note: To find your Firebase secrets, click on the gear in the upper left corne of your "Propject Overview" and choose "Project Settings".
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
