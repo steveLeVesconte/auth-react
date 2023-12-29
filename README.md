@@ -13,17 +13,17 @@ The purpose of the project is to provide an adequately rich problem domain for p
 ### Features:
 
 * Referees each play for compliance to Go rules.
-* Firebase Authentication for user signin.
-* Rsponsive UI (for smart phones etc.)
+* Firebase Authentication for user sign-in.
+* Responsive UI (for smart phones etc.)
 * Real time chat in game.
 * Game board automatically updates when opponent moves.
 
-### Not Implimented:
+### Not Implemented:
 
 * Handicap Game
 * Games on Smaller Boards (only 19x19 supported)
 * Final Scoring of games
-* AI apponent (you can only play against people)
+* AI opponent (you can only play against people)
 * Go Game Tutorial
 
 # Try it right now!
@@ -35,7 +35,7 @@ Another purpose of this website is to allow interested persons to easily see my 
 
 You are also welcome to sign up. A "real" email is not required as email verification has been turned off, but if you use a fake email address, you will not be able to use "forgot password".
 
-### Test Accounts for loging in to view the website:
+### Test Accounts for logging in to view the website:
 
      Test Account email A: roo2@roo2.com
 
@@ -73,8 +73,8 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   npm install npm@latest -g
   ```
-* [setup FireBase Authentication.](./docs/getting-started/setup-firebase-authentication.md)
-* [setup FireStore Database.](./docs/getting-started/setup-firestore-database.md)
+* [setup Firebase Authentication.](./docs/getting-started/setup-firebase-authentication.md)
+* [setup Firestore Database.](./docs/getting-started/setup-firestore-database.md)
 
 ### Installation
 
