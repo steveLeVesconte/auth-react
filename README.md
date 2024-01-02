@@ -97,7 +97,7 @@ This is an example of how to list things you need to use the software and how to
     messagingSenderId: "[your messagingSenderId: here]",
     appId: "[your appId here]",
     measurementId: "[your measurementId here]",
-};
+     };
 
    ```
 
