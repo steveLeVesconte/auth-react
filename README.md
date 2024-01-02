@@ -87,15 +87,17 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
-3. Enter your FIREBASE secrets in `firestore/firestore.ts`
+3. Enter your FIREBASE secrets in `/firestore.config.ts`
    ```js
-    apiKey: "YOUR FIREBASE API KEY",
-    authDomain: "YOUR FIREBASE DOMAN.firebaseapp.com",
-    projectId:"YOUR FIREBASE PROJECT ID",
-    storageBucket: "YOUR FIREBASE STOREAGE BUCKET.appspot.com",
-    messagingSenderId: "YOUR FIREBASE MESSAGE SENDER ID",
-    appId: "YOUR FIREBASE APP ID",
-    measurementId: "YOUR FIREBASE MEASUREMENT ID"
+    export const firebaseConfig ={
+    apiKey: "[your api key here]",
+    authDomain: "[your authDomain here]",
+    projectId:"[your projectId here]",
+    storageBucket: "[your storageBucket here]",
+    messagingSenderId: "[your messagingSenderId: here]",
+    appId: "[your appId here]",
+    measurementId: "[your measurementId here]",
+};
 
    ```
 
