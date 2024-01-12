@@ -1,6 +1,6 @@
 import { Image, useColorModeValue, Text, Box, Flex } from "@chakra-ui/react";
-import blackStoneImage from "../../../assets/blackStoneTrans.png";
-import whiteStoneImage from "../../../assets/whiteStoneTrans.png";
+import blackStoneImage from "../../../assets/blackStonePic.png";
+import whiteStoneImage from "../../../assets/whiteStonePic.png";
 import { Message } from "../../../services/data/message-service";
 import styles from "./chat.module.css";
 import { STONE_WHITE } from "../../../constants";

@@ -1,6 +1,6 @@
 import styles from "./intersection-background.module.css";
-import blackStone from "../../../../assets/blackStoneTrans.png";
-import whiteStone from "../../../../assets/whiteStoneTrans.png";
+import blackStone from "../../../../assets/blackStonePic.png";
+import whiteStone from "../../../../assets/whiteStonePic.png";
 import { Image } from "@chakra-ui/react";
 import { UpperRightSVG } from "./svg/index";
 import { IntersectionSVG } from "./svg/index";

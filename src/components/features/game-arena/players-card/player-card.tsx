@@ -7,8 +7,8 @@ import {
   HStack,
   Box,
 } from "@chakra-ui/react";
-import whiteStoneImage from "../../../../assets/whiteStoneTrans.png";
-import blackStoneImage from "../../../../assets/blackStoneTrans.png";
+import whiteStoneImage from "../../../../assets/whiteStonePic.png";
+import blackStoneImage from "../../../../assets/blackStonePic.png";
 import styles from "./players-card.module.css";
 import { STONE_BLACK, STONE_WHITE } from "../../../../constants";
 
