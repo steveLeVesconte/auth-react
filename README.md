@@ -6,7 +6,9 @@ This project is an online Go Game powered by React, Typescript and Firestore dat
 
 # Responsive Design - As captured on Samung Galaxy s20 Ultra
 
-<img width="50%" alt="view of website" src="docs/assets/GoGameSamSungS20.jpg">
+<img width="50%" alt="view of website" src="docs/assets/samsung.png">
+
+<!--<img width="50%" alt="view of website" src="docs/assets/GoGameSamSungS20.jpg">-->
 
 <!--![]( width="1119" alt="view of website" src="docs/assets/GoGameSamSungS20.jpg =250x250)-->
 
