@@ -3,6 +3,8 @@
 This project is an online Go Game powered by React, Typescript and Firestore database (NO-SQL).
 <a name="readme-top"></a>
 
+<img width="1119" alt="view of website" src="docs/assets/GoGameSamSungS20.jpg">
+
 <img width="1119" alt="view of website" src="docs/assets/GoBoardForREADME.png">
 
 
