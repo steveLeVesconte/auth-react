@@ -3,8 +3,14 @@
 This project is an online Go Game powered by React, Typescript and Firestore database (NO-SQL).
 <a name="readme-top"></a>
 
-<img width="1119" alt="view of website" src="docs/assets/GoGameSamSungS20.jpg">
 
+# Responsive Design - As captured on Samung Galaxy s20 Ultra
+
+<img width="50%" alt="view of website" src="docs/assets/GoGameSamSungS20.jpg">
+
+<!--![]( width="1119" alt="view of website" src="docs/assets/GoGameSamSungS20.jpg =250x250)-->
+
+# Responsive Design - Dasktop Display
 <img width="1119" alt="view of website" src="docs/assets/GoBoardForREADME.png">
 
 
